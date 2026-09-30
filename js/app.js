@@ -23,15 +23,15 @@ const SLOTS = [
 const SAMPLE_OUTFITS = [
   { id: 'outfit-1', name: 'Default Outfit 1', game: 'Crimson Desert', tags: ['Kliff'],
     notes: 'Select edit outfit, then add armor pieces as needed. Every equipment slot is a text box for you to edit. Feel free to leave slots empty.',
-    slots: { headgear: 'Default helmet', chest: 'Default Armor', cloak: 'Default Cloak', gloves: 'Default Gloves', legs: 'Default Pants', boots: 'Default Boots', weapon1: 'Default Primary Weapon', weapon2: 'Default Secondary Weapon', shieldWeapon3: 'Default Shield' },
+    slots: { headgear: 'Default Helmet', chest: 'Default Armor', cloak: 'Default Cloak', gloves: 'Default Gloves', legs: 'Default Pants', boots: 'Default Boots', weapon1: 'Default Primary Weapon', weapon2: 'Default Secondary Weapon', shieldWeapon3: 'Default Shield' },
     createdAt: 1 },
-  { id: 'outfit-2', name: 'Default Outfit 2', game: 'Crimson Desert', tags: ['Oongka'],
+  { id: 'outfit-2', name: 'Default Outfit 2', game: 'Crimson Desert', tags: ['Kliff', 'Plate Armor'],
     notes: 'Tags, such as the character who wears an outfit, let you filter your pages. Add several by pressing Enter after each one.',
-    slots: { headgear: 'Default helmet', chest: 'Default Armor', cloak: 'Default Cloak', gloves: 'Default Gloves', legs: 'Default Pants', boots: 'Default Boots', weapon1: 'Default Primary Weapon', weapon2: 'Default Secondary Weapon', shieldWeapon3: '' },
+    slots: { headgear: 'Default Helmet', chest: 'Default Armor', cloak: 'Default Cloak', gloves: 'Default Gloves', legs: 'Default Pants', boots: 'Default Boots', weapon1: 'Default Primary Weapon', weapon2: 'Default Secondary Weapon', shieldWeapon3: '' },
     createdAt: 2 },
-  { id: 'outfit-3', name: 'Default Outfit 3', game: 'Crimson Desert', tags: ['Damiane'],
+  { id: 'outfit-3', name: 'Default Outfit 3', game: 'Crimson Desert', tags: ['Ranger', 'Light Armor'],
     notes: 'Add an image in edit outfit, then crop it to fit the frame beside the name. Empty slots, like this outfit\'s pants and shield, are left off the page.',
-    slots: { headgear: 'Default helmet', chest: 'Default Armor', cloak: 'Default Cloak', gloves: 'Default Gloves', legs: '', boots: 'Default Boots', weapon1: 'Default Primary Weapon', weapon2: 'Default Secondary Weapon', shieldWeapon3: '' },
+    slots: { headgear: 'Default Helmet', chest: 'Default Armor', cloak: 'Default Cloak', gloves: 'Default Gloves', legs: '', boots: 'Default Boots', weapon1: 'Default Primary Weapon', weapon2: 'Default Secondary Weapon', shieldWeapon3: '' },
     createdAt: 3 },
 ];
 
@@ -617,7 +617,22 @@ function createBook(theme, onChange) {
     render(true); inertPages();
     sheets.forEach(sh => { if (sh.k > 0 && sh.vis) hydratePortraits(sh.el); });
     hydratePortraits(base);
+    fitNotes();
   };
+
+  // Notes sit just under the gear list. Show as many whole lines as fit above the page number,
+  // ending with an ellipsis if the note is longer.
+  function fitNotes() {
+    const notes = [...bookEl.querySelectorAll('.pg .notes')];
+    if (!notes.length || !dims.w || !bookEl.offsetWidth) return;   // hidden (e.g. Grid Gallery showing): fit later
+    const fits = notes.map(n => {
+      const pg = n.parentElement, cs = getComputedStyle(n), ps = getComputedStyle(pg);
+      const room = pg.clientHeight - parseFloat(ps.paddingBottom) - n.offsetTop - parseFloat(cs.paddingTop);
+      return Math.max(1, Math.floor(room / parseFloat(cs.lineHeight)));
+    });
+    notes.forEach((n, i) => { n.style.webkitLineClamp = fits[i]; n.style.lineClamp = fits[i]; });
+  }
+  api.fitNotes = fitNotes;
 
   api.layout = urgent => {
     Object.assign(bookEl.style, {
@@ -628,6 +643,7 @@ function createBook(theme, onChange) {
     });
     if (!dims.narrow) focusTarget = focus = 0;
     render(true);
+    fitNotes();
     paintCover(urgent);
   };
 
@@ -1018,6 +1034,7 @@ function sizeTome(force) {
   place();
 }
 new ResizeObserver(sizeTome).observe($('tome'));
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => books.forEach(b => b.fitNotes()));
 
 // narrow screens read one page at a time: the first tap pans across the spread, the next turns the leaf
 function forward(book) {
@@ -1152,7 +1169,7 @@ function refresh() {
   $('tome').hidden = state.view !== 'tome';
   $('gallery').hidden = state.view !== 'grid' || shown === 0;
   showEmpty(shown === 0);
-  if (state.view === 'tome' && shown && !sized) requestAnimationFrame(sizeTome);
+  if (state.view === 'tome' && shown) requestAnimationFrame(() => { if (!sized) sizeTome(); books.forEach(b => b.fitNotes()); });
   if (pendingShow) {
     const p = pendingShow; pendingShow = null;
     const o = store.outfits.find(x => x.id === p.id);
