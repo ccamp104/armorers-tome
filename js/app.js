@@ -1,0 +1,1133 @@
+(() => {
+'use strict';
+/* =====================================================================
+   Icons, slots and sample data
+   ===================================================================== */
+const ICONS = {"axe": "<path d=\"m14 12-8.5 8.5a2.12 2.12 0 1 1-3-3L11 9\" /> <path d=\"M15 13 9 7l4-4 6 6h3a8 8 0 0 1-7 7z\" />", "book-open": "<path d=\"M12 7v14\" /> <path d=\"M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z\" />", "copy": "<rect width=\"14\" height=\"14\" x=\"8\" y=\"8\" rx=\"2\" ry=\"2\" /> <path d=\"M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2\" />", "crown": "<path d=\"M11.562 3.266a.5.5 0 0 1 .876 0L15.39 8.87a1 1 0 0 0 1.516.294L21.183 5.5a.5.5 0 0 1 .798.519l-2.834 10.246a1 1 0 0 1-.956.734H5.81a1 1 0 0 1-.957-.734L2.02 6.02a.5.5 0 0 1 .798-.519l4.276 3.664a1 1 0 0 0 1.516-.294z\" /> <path d=\"M5 21h14\" />", "download": "<path d=\"M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4\" /> <polyline points=\"7 10 12 15 17 10\" /> <line x1=\"12\" x2=\"12\" y1=\"15\" y2=\"3\" />", "feather": "<path d=\"M12.67 19a2 2 0 0 0 1.416-.588l6.154-6.172a6 6 0 0 0-8.49-8.49L5.586 9.914A2 2 0 0 0 5 11.328V18a1 1 0 0 0 1 1z\" /> <path d=\"M16 8 2 22\" /> <path d=\"M17.5 15H9\" />", "footprints": "<path d=\"M4 16v-2.38C4 11.5 2.97 10.5 3 8c.03-2.72 1.49-6 4.5-6C9.37 2 10 3.8 10 5.5c0 3.11-2 5.66-2 8.68V16a2 2 0 1 1-4 0Z\" /> <path d=\"M20 20v-2.38c0-2.12 1.03-3.12 1-5.62-.03-2.72-1.49-6-4.5-6C14.63 6 14 7.8 14 9.5c0 3.11 2 5.66 2 8.68V20a2 2 0 1 0 4 0Z\" /> <path d=\"M16 17h4\" /> <path d=\"M4 13h4\" />", "hammer": "<path d=\"m15 12-8.373 8.373a1 1 0 1 1-3-3L12 9\" /> <path d=\"m18 15 4-4\" /> <path d=\"m21.5 11.5-1.914-1.914A2 2 0 0 1 19 8.172V7l-2.26-2.26a6 6 0 0 0-4.202-1.756L9 2.96l.92.82A6.18 6.18 0 0 1 12 8.4V10l2 2h1.172a2 2 0 0 1 1.414.586L18.5 14.5\" />", "hand": "<path d=\"M18 11V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2\" /> <path d=\"M14 10V4a2 2 0 0 0-2-2a2 2 0 0 0-2 2v2\" /> <path d=\"M10 10.5V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2v8\" /> <path d=\"M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15\" />", "layout-grid": "<rect width=\"7\" height=\"7\" x=\"3\" y=\"3\" rx=\"1\" /> <rect width=\"7\" height=\"7\" x=\"14\" y=\"3\" rx=\"1\" /> <rect width=\"7\" height=\"7\" x=\"14\" y=\"14\" rx=\"1\" /> <rect width=\"7\" height=\"7\" x=\"3\" y=\"14\" rx=\"1\" />", "pencil": "<path d=\"M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z\" /> <path d=\"m15 5 4 4\" />", "plus": "<path d=\"M5 12h14\" /> <path d=\"M12 5v14\" />", "scroll": "<path d=\"M19 17V5a2 2 0 0 0-2-2H4\" /> <path d=\"M8 21h12a2 2 0 0 0 2-2v-1a1 1 0 0 0-1-1H11a1 1 0 0 0-1 1v1a2 2 0 1 1-4 0V5a2 2 0 1 0-4 0v2a1 1 0 0 0 1 1h3\" />", "search": "<circle cx=\"11\" cy=\"11\" r=\"8\" /> <path d=\"m21 21-4.3-4.3\" />", "shield-half": "<path d=\"M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z\" /> <path d=\"M12 22V2\" />", "shield": "<path d=\"M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z\" />", "shirt": "<path d=\"M20.38 3.46 16 2a4 4 0 0 1-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.47a1 1 0 0 0 .99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 0 0 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.47a2 2 0 0 0-1.34-2.23z\" />", "sword": "<polyline points=\"14.5 17.5 3 6 3 3 6 3 17.5 14.5\" /> <line x1=\"13\" x2=\"19\" y1=\"19\" y2=\"13\" /> <line x1=\"16\" x2=\"20\" y1=\"16\" y2=\"20\" /> <line x1=\"19\" x2=\"21\" y1=\"21\" y2=\"19\" />", "trash-2": "<path d=\"M3 6h18\" /> <path d=\"M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6\" /> <path d=\"M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2\" /> <line x1=\"10\" x2=\"10\" y1=\"11\" y2=\"17\" /> <line x1=\"14\" x2=\"14\" y1=\"11\" y2=\"17\" />", "upload": "<path d=\"M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4\" /> <polyline points=\"17 8 12 3 7 8\" /> <line x1=\"12\" x2=\"12\" y1=\"3\" y2=\"15\" />", "x": "<path d=\"M18 6 6 18\" /> <path d=\"m6 6 12 12\" />"};
+const icon = n => `<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICONS[n] || ''}</svg>`;
+document.querySelectorAll('[data-icon]').forEach(el => el.insertAdjacentHTML('afterbegin', icon(el.dataset.icon)));
+
+const SLOTS = [
+  { key: 'headgear',      icon: 'crown',       label: 'Head',       group: 'armour',  hint: 'Helm, cap, hood…' },
+  { key: 'chest',         icon: 'shirt',       label: 'Chest',      group: 'armour',  hint: 'Chestplate, tunic…' },
+  { key: 'cloak',         icon: 'feather',     label: 'Cloak',      group: 'armour',  hint: 'Cape, fur mantle, scarf…' },
+  { key: 'gloves',        icon: 'hand',        label: 'Gloves',     group: 'armour',  hint: 'Gauntlets, wraps, bracers…' },
+  { key: 'legs',          icon: 'shield',      label: 'Legs',       group: 'armour',  hint: 'Greaves, leggings, trousers…' },
+  { key: 'boots',         icon: 'footprints',  label: 'Boots',      group: 'armour',  hint: 'Boots, sabatons, shoes…' },
+  { key: 'weapon1',       icon: 'sword',       label: 'Main hand',  group: 'weapons', hint: 'Sword, spear, bow…' },
+  { key: 'weapon2',       icon: 'axe',         label: 'Off hand',   group: 'weapons', hint: 'Dagger, shield, tome…' },
+  { key: 'shieldWeapon3', icon: 'shield-half', label: 'Accessory',  group: 'weapons', hint: 'Amulet, quiver, relic…' },
+];
+
+// shown the first time the logbook opens in a browser with no saved outfits
+const SAMPLE_OUTFITS = [
+  { id: 'outfit-1', name: 'Frostforged Duskwarden', game: 'Crimson Desert', tag: 'Kliff',
+    notes: 'Starter outfit with Salamander helm and Chain-draped Kuku Ice plate armour',
+    slots: { headgear: "Unyielding Hero's Plate Helm", chest: 'Kuku Ice-Resistant Armor', cloak: 'Bedure Chain Cloak', gloves: 'Plate Gloves of the Shadows', legs: '', boots: 'Plate Boots of the Shadows', weapon1: 'Soul Spear', weapon2: 'Hollow Visage', shieldWeapon3: 'Red Needle' },
+    createdAt: 1 },
+  { id: 'outfit-2', name: 'The Static Wyvernbane', game: 'Crimson Desert', tag: 'Oongka',
+    notes: 'Stormbound lizard tracker and wyvern hunter',
+    slots: { headgear: 'Lizard Leather Helm', chest: 'Valortread Plate Armor', cloak: 'Frostcursed Plate Cloak', gloves: "Champion's Plate Gloves", legs: '', boots: 'Valortread Plate Boots', weapon1: 'Sigremon Greataxe', weapon2: 'Unarmed Combat', shieldWeapon3: '' },
+    createdAt: 2 },
+  { id: 'outfit-3', name: 'Regal Radiant Ranger', game: 'Crimson Desert', tag: 'Damiane',
+    notes: 'Light agile scout with Light of the Battlefield armour',
+    slots: { headgear: "Wanderer of Faith's Plate Helm", chest: 'Light of the Battlefield Plate Armor', cloak: 'Wanderer of Faith Leather Cloak', gloves: 'Demenissian Uniform Leather Gloves', legs: '', boots: "Wanderer of Faith's Leather Boots", weapon1: 'Sword of Starlight', weapon2: 'Arben Greatsword', shieldWeapon3: 'Demenissian Gold-Decorated Shield' },
+    createdAt: 3 },
+];
+
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const norm = s => String(s || '').trim().toLowerCase();
+const rng = seed => { seed = (Math.abs(seed) % 2147483646) + 1; return () => (seed = (seed * 16807) % 2147483647) / 2147483647; };
+const hash = s => { let h = 7; for (const c of String(s)) h = (h * 31 + c.charCodeAt(0)) | 0; return Math.abs(h); };
+const newId = () => 'o_' + Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
+
+function normalizeOutfit(o) {
+  const s = (o && o.slots) || {};
+  const slots = {};
+  SLOTS.forEach(({ key }) => { slots[key] = typeof s[key] === 'string' ? s[key] : ''; });
+  return {
+    id: /^[A-Za-z0-9_.~:@+-]{1,120}$/.test(String(o.id || '')) && o.id !== 'meta' ? String(o.id) : newId(),
+    name: String(o.name || 'Untitled outfit').slice(0, 140),
+    game: String(o.game || 'Crimson Desert').trim().slice(0, 80) || 'Crimson Desert',
+    tag: String(o.tag || '').trim().slice(0, 60),
+    notes: String(o.notes || '').slice(0, 1200),
+    slots,
+    createdAt: Number(o.createdAt) || Date.now(),
+  };
+}
+
+/* =====================================================================
+   Book themes: two hand-made covers, plus a palette for custom games
+   ===================================================================== */
+const hx = h => [1, 3, 5].map(i => parseInt(h.slice(i, i + 2), 16));
+const toHex = a => '#' + a.map(v => Math.round(Math.max(0, Math.min(255, v))).toString(16).padStart(2, '0')).join('');
+const mix = (a, b, t) => { const A = hx(a), B = hx(b); return toHex(A.map((v, i) => v + (B[i] - v) * t)); };
+const star = (cx, cy, r) => { const i = r * 0.28; return `M${cx} ${cy - r}L${cx + i} ${cy - i}L${cx + r} ${cy}L${cx + i} ${cy + i}L${cx} ${cy + r}L${cx - i} ${cy + i}L${cx - r} ${cy}L${cx - i} ${cy - i}Z`; };
+const COVER_FONT = "'Cormorant Garamond', Georgia, serif";
+const titleText = (y, size, text) => `<text x="376" y="${y}" text-anchor="middle" font-family="${COVER_FONT}" font-weight="700" font-size="${size}" letter-spacing="2">${esc(text)}</text>`;
+
+// fit any game title into at most three gilt lines on the cover
+function autoTitle(name) {
+  const words = name.trim().split(/\s+/);
+  let lines = [name.trim()];
+  if (name.length > 11 && words.length > 1) {
+    let best = null;
+    for (let i = 1; i < words.length; i++) {
+      const a = words.slice(0, i).join(' '), b = words.slice(i).join(' ');
+      const score = Math.max(a.length, b.length);
+      if (!best || score < best.score) best = { score, lines: [a, b] };
+    }
+    lines = best.lines;
+    if (best.score > 16 && words.length > 2) {
+      const n = words.length, t1 = Math.round(n / 3), t2 = Math.round(2 * n / 3);
+      lines = [words.slice(0, t1).join(' '), words.slice(t1, t2).join(' '), words.slice(t2).join(' ')].filter(Boolean);
+    }
+  }
+  const longest = Math.max(...lines.map(l => l.length));
+  const n = lines.length;
+  let size = Math.max(40, Math.min(112, 500 / (longest * 0.5)));
+  if (n === 1) return titleText(Math.round(300 + size * 0.3), Math.round(size), lines[0]);
+  size = Math.min(size, 228 / (1 + (n - 1) * 0.98));   // keep the last line clear of the divider at y=410
+  const lh = size * 0.98, top = 150 + size;
+  return lines.map((l, i) => titleText(Math.round(top + i * lh), Math.round(size), l)).join('');
+}
+
+const sunRays = (() => {
+  let s = '';
+  for (let a = 195; a <= 345; a += 15) {
+    const t = a * Math.PI / 180, r2 = a % 30 ? 76 : 88;
+    s += `<line x1="${(376 + Math.cos(t) * 62).toFixed(1)}" y1="${(662 + Math.sin(t) * 62).toFixed(1)}" x2="${(376 + Math.cos(t) * r2).toFixed(1)}" y2="${(662 + Math.sin(t) * r2).toFixed(1)}"/>`;
+  }
+  return s;
+})();
+const pines = [[258, 34], [282, 52], [306, 40], [330, 26], [448, 46], [474, 60], [500, 36]].map(([x, hgt]) => {
+  const t = hgt / 3, wd = hgt * 0.34;
+  return `<path d="M${x} ${690 - hgt}L${x + wd * .6} ${690 - 2 * t}H${x + wd * .3}L${x + wd * .85} ${690 - t}H${x + wd * .5}L${x + wd} 690H${x - wd}L${x - wd * .5} ${690 - t}H${x - wd * .85}L${x - wd * .3} ${690 - 2 * t}H${x - wd * .6}Z"/>`;
+}).join('');
+
+const BUILTIN = [
+  {
+    name: 'Crimson Desert', key: 'cd',
+    leather: ['#7c2c30', '#5a1c22', '#3d1218'], board: '#3b1117', button: '#3a111b',
+    fade: '#d99a7a', rub: ['#c49473', '#9b6450'], scratch: '#f0c9b0', edge: '#b07e62',
+    mottle: [.78, .5, .42], stain: '#1c0608', endpaper: '#3b4a40', accent: '#7c2c30',
+    title: titleText(258, 116, 'Crimson') + titleText(370, 116, 'Desert'),
+    emblemDefs: '',
+    emblemStroke: `<g stroke-width="3" stroke-linecap="round">${sunRays}</g><line x1="236" y1="662" x2="516" y2="662" stroke-width="2"/>
+      <g stroke-width="2.2" stroke-linecap="round"><path d="M246 700Q306 676 372 696T506 692"/><path d="M268 736Q330 714 392 732T486 730"/><path d="M306 770Q350 756 396 768T444 768"/></g>`,
+    emblemFill: `<path d="M322 662A54 54 0 0 1 430 662Z"/>`,
+  },
+  {
+    name: 'Enshrouded', key: 'en',
+    leather: ['#35597f', '#223d60', '#142540'], board: '#15253f', button: '#15253f',
+    fade: '#a9c3de', rub: ['#9fb6c9', '#627d96'], scratch: '#d3e2f0', edge: '#7f97ad',
+    mottle: [.62, .72, .84], stain: '#050d18', endpaper: '#4b3a33', accent: '#2d4f7a',
+    title: titleText(322, 100, 'Enshrouded'),
+    emblemDefs: `<mask id="moon"><rect width="720" height="1000" fill="#000"/><circle cx="338" cy="596" r="36" fill="#fff"/><circle cx="354" cy="584" r="31" fill="#000"/></mask>`,
+    emblemStroke: `<line x1="236" y1="690" x2="516" y2="690" stroke-width="2"/>
+      <g stroke-width="2.2" stroke-linecap="round" stroke-dasharray="46 16"><path d="M252 720Q316 704 380 716T500 714"/><path d="M280 752Q334 740 390 750T470 750"/><path d="M314 782Q352 774 396 780"/></g>`,
+    emblemFill: `${pines}<path d="M396 690V632L406 608L416 632V690Z"/><rect width="720" height="1000" mask="url(#moon)"/><path d="${star(456, 590, 8)}"/><path d="${star(292, 628, 6)}"/><path d="${star(420, 566, 5)}"/>`,
+  },
+];
+
+const PALETTE = ['#2f5e45', '#5b2d55', '#7a5820', '#3d4c5c', '#1e5b5d', '#6a3b24', '#4b5a26', '#4a2f6b'];
+// a heraldic shield over crossed swords, for any game without a hand-made cover
+const GENERIC_STROKE = `
+  <path d="M376 540L452 566V648Q452 716 376 756Q300 716 300 648V566Z" stroke-width="2.4"/>
+  <path d="M376 558L436 578V646Q436 700 376 734Q316 700 316 646V578Z" stroke-width="1.1"/>
+  <path d="M316 690L376 664L436 690" stroke-width="1.6"/>`;
+const GENERIC_FILL = `<path d="${star(376, 622, 26)}"/><path d="${star(262, 648, 8)}"/><path d="${star(490, 648, 8)}"/>`;
+
+function makeTheme(name, colorIndex) {
+  const base = PALETTE[colorIndex % PALETTE.length];
+  const m = hx(mix(base, '#ffffff', .5)).map(v => +(v / 255).toFixed(2));
+  return {
+    name, key: 'g' + colorIndex + '-' + hash(name).toString(36),
+    leather: [mix(base, '#ffffff', .12), base, mix(base, '#000000', .34)],
+    board: mix(base, '#000000', .45), button: mix(base, '#000000', .42),
+    fade: mix(base, '#ffffff', .55), rub: [mix(base, '#d9c3a5', .62), mix(base, '#d9c3a5', .35)],
+    scratch: mix(base, '#ffffff', .75), edge: mix(base, '#c9b397', .5),
+    mottle: m, stain: mix(base, '#000000', .85), endpaper: '#4a3c2e', accent: mix(base, '#000000', .1),
+    title: autoTitle(name), emblemDefs: '', emblemStroke: GENERIC_STROKE, emblemFill: GENERIC_FILL,
+  };
+}
+
+/* ---------------- cover artwork (shared with the sample books) ---------------- */
+const corners = [[124, 98, 1, 1], [628, 98, -1, 1], [124, 902, 1, -1], [628, 902, -1, -1]]
+  .map(([x, y, sx, sy]) => `<g transform="translate(${x} ${y}) scale(${sx} ${sy})"><path d="M0 64Q0 0 64 0" stroke-width="1.6"/><path d="M0 36Q9 9 36 0" stroke-width="1"/><circle cx="15" cy="15" r="4" fill="url(#gold)" stroke="none"/></g>`).join('');
+const scratches = color => {
+  const r = rng(42); let s = '';
+  for (let i = 0; i < 70; i++) {
+    const x = 60 + r() * 650, y = r() * 1000, len = 8 + r() * 60, a = r() * Math.PI;
+    s += `<path d="M${x.toFixed(1)} ${y.toFixed(1)}q${(Math.cos(a) * len / 2).toFixed(1)} ${(r() * 6 - 3).toFixed(1)} ${(Math.cos(a) * len).toFixed(1)} ${(Math.sin(a) * len).toFixed(1)}" stroke-width="${(0.6 + r() * 1.2).toFixed(2)}" stroke-opacity="${(0.06 + r() * 0.14).toFixed(2)}"/>`;
+  }
+  return `<g fill="none" stroke="${color}" stroke-linecap="round">${s}</g>`;
+};
+
+const coverFront = b => `
+<svg viewBox="0 0 720 1000" preserveAspectRatio="none" aria-hidden="true">
+  <defs>
+    <linearGradient id="lea" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="${b.leather[0]}"/><stop offset=".5" stop-color="${b.leather[1]}"/><stop offset="1" stop-color="${b.leather[2]}"/></linearGradient>
+    <radialGradient id="sunfade" cx=".78" cy=".22" r=".6"><stop offset="0" stop-color="${b.fade}" stop-opacity=".16"/><stop offset="1" stop-color="${b.fade}" stop-opacity="0"/></radialGradient>
+    <radialGradient id="rub"><stop offset="0" stop-color="${b.rub[0]}" stop-opacity=".85"/><stop offset=".55" stop-color="${b.rub[1]}" stop-opacity=".35"/><stop offset="1" stop-color="${b.rub[1]}" stop-opacity="0"/></radialGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ecd48f"/><stop offset=".5" stop-color="#a8802f"/><stop offset="1" stop-color="#d9ba6a"/></linearGradient>
+    <filter id="grain" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency=".85" numOctaves="2" stitchTiles="stitch"/><feColorMatrix values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 .6 0"/></filter>
+    <filter id="mottle" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency=".012 .02" numOctaves="3" seed="3"/><feColorMatrix values="0 0 0 0 ${b.mottle[0]}  0 0 0 0 ${b.mottle[1]}  0 0 0 0 ${b.mottle[2]}  2.4 0 0 0 -1.15"/></filter>
+    <filter id="rough" x="-10%" y="-10%" width="120%" height="120%"><feTurbulence type="fractalNoise" baseFrequency=".06" numOctaves="3" seed="8" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="22" xChannelSelector="R" yChannelSelector="G" result="d"/><feGaussianBlur in="d" stdDeviation="1.2"/></filter>
+    <filter id="soft" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="14"/></filter>
+    <filter id="emboss" x="-5%" y="-5%" width="110%" height="110%"><feDropShadow dx="0" dy="1.6" stdDeviation="1" flood-color="#000" flood-opacity=".55"/></filter>
+    <filter id="wearNoise" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency=".03" numOctaves="3" seed="4" result="a"/><feColorMatrix in="a" values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  5 0 0 0 -1.55" result="ma"/>
+      <feTurbulence type="fractalNoise" baseFrequency=".8" numOctaves="1" seed="9" result="b"/><feColorMatrix in="b" values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  4.5 0 0 0 -1" result="mb"/>
+      <feComposite in="ma" in2="mb" operator="in"/>
+    </filter>
+    <mask id="wear" maskUnits="userSpaceOnUse" x="0" y="0" width="720" height="1000"><rect width="720" height="1000" filter="url(#wearNoise)"/></mask>
+    ${b.emblemDefs}
+  </defs>
+  <rect width="720" height="1000" fill="url(#lea)"/>
+  <rect width="720" height="1000" filter="url(#mottle)" opacity=".26"/>
+  <rect width="720" height="1000" fill="url(#sunfade)"/>
+  <rect width="720" height="1000" filter="url(#grain)" opacity=".55"/>
+  <g filter="url(#soft)" fill="${b.stain}"><ellipse cx="210" cy="820" rx="120" ry="80" opacity=".35"/><ellipse cx="610" cy="180" rx="70" ry="110" opacity=".22"/></g>
+  <ellipse cx="548" cy="826" rx="64" ry="52" fill="none" stroke="${b.stain}" stroke-width="5" opacity=".38" filter="url(#rough)"/>
+  <ellipse cx="548" cy="826" rx="56" ry="45" fill="${b.stain}" opacity=".08" filter="url(#rough)"/>
+  ${scratches(b.scratch)}
+  <rect width="46" height="1000" fill="#000" opacity=".32"/>
+  <line x1="52" y1="0" x2="52" y2="1000" stroke="#000" stroke-opacity=".5" stroke-width="3"/>
+  <line x1="56" y1="0" x2="56" y2="1000" stroke="${b.scratch}" stroke-opacity=".1" stroke-width="2"/>
+  <g fill="none" stroke="${b.rub[0]}" stroke-opacity=".35" stroke-width="1.2"><path d="M50 120l6 14-4 10 5 12"/><path d="M51 430l-4 16 6 9"/><path d="M50 760l5 12-3 15 4 8"/></g>
+  <path d="M40 6H712V994H40" fill="none" stroke="${b.edge}" stroke-width="16" opacity=".5" filter="url(#rough)"/>
+  <g filter="url(#rough)"><circle cx="716" cy="4" r="84" fill="url(#rub)"/><circle cx="716" cy="996" r="104" fill="url(#rub)"/><circle cx="30" cy="998" r="60" fill="url(#rub)" opacity=".7"/><circle cx="30" cy="2" r="50" fill="url(#rub)" opacity=".6"/></g>
+  <path d="M560 1000Q640 930 720 900" fill="none" stroke="#000" stroke-opacity=".28" stroke-width="3"/>
+  <path d="M562 996Q641 928 720 896" fill="none" stroke="${b.scratch}" stroke-opacity=".12" stroke-width="1.5"/>
+  <g mask="url(#wear)" opacity=".92">
+    <g filter="url(#emboss)" fill="none" stroke="url(#gold)">
+      <rect x="96" y="70" width="560" height="860" rx="6" stroke-width="3"/><rect x="110" y="84" width="532" height="832" rx="3" stroke-width="1.2"/>
+      ${corners}
+      <path d="M246 410H346M406 410H506" stroke-width="1.2"/>
+      <circle cx="376" cy="662" r="150" stroke-width="2"/><circle cx="376" cy="662" r="138" stroke-width="1.1" stroke-dasharray="1.5 7" stroke-linecap="round"/>
+      ${b.emblemStroke}
+      <path d="M296 862H346M406 862H456" stroke-width="1.2"/>
+    </g>
+    <g filter="url(#emboss)" fill="url(#gold)">
+      ${b.emblemFill}
+      <path d="${star(376, 410, 10)}"/><path d="${star(376, 862, 9)}"/>
+      ${b.title}
+    </g>
+  </g>
+</svg>`;
+
+const coverBack = b => `
+<svg viewBox="0 0 720 1000" preserveAspectRatio="none" aria-hidden="true">
+  <defs>
+    <pattern id="ep" width="44" height="44" patternUnits="userSpaceOnUse"><rect width="44" height="44" fill="${b.endpaper}"/><path d="M22 5L39 22L22 39L5 22Z" fill="none" stroke="#c9a85a" stroke-opacity=".28"/><circle cx="22" cy="22" r="3" fill="#c9a85a" fill-opacity=".38"/></pattern>
+    <linearGradient id="epShade" x1="1" x2="0"><stop offset="0" stop-color="#000" stop-opacity=".5"/><stop offset=".14" stop-color="#000" stop-opacity="0"/></linearGradient>
+    <filter id="epAge" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency=".015" numOctaves="3" seed="12"/><feColorMatrix values="0 0 0 0 .55  0 0 0 0 .45  0 0 0 0 .3  2 0 0 0 -.9"/></filter>
+  </defs>
+  <rect width="720" height="1000" fill="${b.board}"/>
+  <rect x="18" y="16" width="702" height="968" fill="url(#ep)"/>
+  <rect x="18" y="16" width="702" height="968" filter="url(#epAge)" opacity=".4"/>
+  <rect x="18" y="16" width="702" height="968" fill="url(#epShade)"/>
+</svg>`;
+
+/* =====================================================================
+   Page content (book pages and gallery cards share this markup)
+   ===================================================================== */
+const RULE = `<svg class="rule" viewBox="0 0 200 12" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><path d="M0 6H84M116 6H200" stroke="currentColor" stroke-width="1"/><path d="${star(100, 6, 5.5)}" fill="currentColor"/></svg>`;
+
+function foxStyle(seed) {
+  const r = rng(seed); const spots = [];
+  for (let i = 0; i < 5; i++) {
+    const x = (r() * 100).toFixed(0), y = (r() * 100).toFixed(0), s = (0.4 + r() * 1.3).toFixed(2);
+    spots.push(`radial-gradient(circle at ${x}% ${y}%, rgba(154,106,58,.13) 0, rgba(154,106,58,0) ${s}em)`);
+  }
+  return `background:${spots.join(',')}`;
+}
+
+function actionsHTML(id, name) {
+  const n = esc(name);
+  return `<div class="acts">
+    <button type="button" class="act" data-act="download" data-id="${esc(id)}" title="Download as JSON" aria-label="Download ${n}">${icon('download')}</button>
+    <button type="button" class="act" data-act="duplicate" data-id="${esc(id)}" title="Duplicate" aria-label="Duplicate ${n}">${icon('copy')}</button>
+    <button type="button" class="act" data-act="edit" data-id="${esc(id)}" title="Edit" aria-label="Edit ${n}">${icon('pencil')}</button>
+    <button type="button" class="act del" data-act="delete" data-id="${esc(id)}" title="Delete" aria-label="Delete ${n}">${icon('trash-2')}</button>
+  </div>`;
+}
+
+function outfitBody(o, num, { showGame = false, theme } = {}) {
+  const filled = SLOTS.filter(s => o.slots[s.key] && o.slots[s.key].trim());
+  const list = g => filled.filter(s => s.group === g).map(s =>
+    `<li>${icon(s.icon)}<span class="lbl">${s.label}</span><span class="val">${esc(o.slots[s.key])}</span></li>`).join('');
+  const armour = list('armour'), weapons = list('weapons');
+  const meta = `${showGame ? `<span class="card-game">${esc(theme ? theme.name : o.game)}</span>` : ''}${o.tag ? `<span class="chip">${esc(o.tag)}</span>` : ''}`;
+  return `
+    <div class="fox" style="${foxStyle(hash(o.id))}"></div>
+    <div class="pg-top"><div class="card-meta">${meta}</div>${actionsHTML(o.id, o.name)}</div>
+    <h3 class="pg-title">${esc(o.name)}</h3>
+    ${RULE}
+    ${armour ? `<div class="grp">Armour and apparel</div><ul class="slots">${armour}</ul>` : ''}
+    ${weapons ? `<div class="grp">Weapons and auxiliaries</div><ul class="slots">${weapons}</ul>` : ''}
+    ${filled.length ? '' : '<p class="none">No gear recorded on this page yet.</p>'}
+    ${o.notes ? `<p class="notes">${esc(o.notes)}</p>` : ''}
+    <div class="pg-num">${showGame ? `${filled.length} of ${SLOTS.length} slots filled` : num}</div>`;
+}
+const titleBody = (theme, total, shown) => `
+  <div class="fox" style="${foxStyle(hash(theme.name) + 5)}"></div>
+  <div class="tp">
+    ${RULE}
+    <div class="tp-kicker">The outfit logbook of</div>
+    <div class="tp-title">${esc(theme.name)}</div>
+    ${RULE}
+    <div class="tp-count">${total === 0 ? 'No outfits recorded yet' : `${total} ${total === 1 ? 'outfit' : 'outfits'} recorded`}${shown !== total ? `, ${shown} matching your filters` : ''}</div>
+  </div>`;
+const addBody = theme => `
+  <div class="fox" style="${foxStyle(hash(theme.name) + 9)}"></div>
+  <button type="button" class="addpage" data-act="add" data-game="${esc(theme.name)}">
+    ${icon('plus')}<span class="a1">Forge a new outfit</span><span class="a2">It becomes the next page of this book.</span>
+  </button>`;
+const blankBody = seed => `<div class="fox" style="${foxStyle(seed)}"></div><svg class="blank" viewBox="0 0 200 12" aria-hidden="true"><path d="${star(100, 6, 5.5)}" fill="#3b2a1e"/></svg>`;
+
+/* =====================================================================
+   Storage: this browser's local storage
+   (same key as the original logbook page, so existing outfits carry over
+   when both are served from the same site)
+   ===================================================================== */
+const LS_OUTFITS = 'armorer_outfits_v2', LS_META = 'armorer_meta_v1';
+const store = {
+  outfits: [], meta: { games: [] }, onData: null,
+  async init(onData) { this.onData = onData; this.load(); },
+  load() {
+    let list = null, meta = null;
+    try { list = JSON.parse(localStorage.getItem(LS_OUTFITS) || 'null'); } catch (e) {}
+    try { meta = JSON.parse(localStorage.getItem(LS_META) || 'null'); } catch (e) {}
+    this.outfits = Array.isArray(list) ? list.map(normalizeOutfit) : SAMPLE_OUTFITS.map(normalizeOutfit);
+    this.meta = meta && Array.isArray(meta.games) ? meta : { games: [] };
+    this.persistLocal();
+    this.onData();
+  },
+  persistLocal() {
+    try { localStorage.setItem(LS_OUTFITS, JSON.stringify(this.outfits)); localStorage.setItem(LS_META, JSON.stringify(this.meta)); } catch (e) {}
+  },
+  async put(o) {
+    o = normalizeOutfit(o);
+    const i = this.outfits.findIndex(x => x.id === o.id);
+    if (i >= 0) this.outfits[i] = o; else this.outfits.push(o);
+    this.persistLocal(); this.onData();
+  },
+  async remove(id) {
+    this.outfits = this.outfits.filter(o => o.id !== id);
+    this.persistLocal(); this.onData();
+  },
+  async putMeta(meta) {
+    this.meta = meta;
+    this.persistLocal(); this.onData();
+  },
+};
+
+/* =====================================================================
+   Book: a cover plus one leaf per two pages; page p[i] sits on
+   leaf ceil(i/2); spread s shows p[2s-1] on the left and p[2s] on the right
+   ===================================================================== */
+const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const TURN = reduced ? 380 : 1400;
+const STAGGER = reduced ? 90 : 380;
+const clamp = v => Math.min(1, Math.max(0, v));
+const ease = x => x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2;
+const dims = { w: 0, h: 0, closedScale: 1, openScale: 1, narrow: false };
+
+function createBook(theme, onChange) {
+  const scope = html => html.replace(/id="([^"]+)"/g, `id="${theme.key}-$1"`).replace(/url\(#([^)]+)\)/g, `url(#${theme.key}-$1)`);
+  const slide = document.createElement('div');
+  slide.className = 'slide';
+  slide.setAttribute('role', 'group');
+  slide.setAttribute('aria-roledescription', 'slide');
+  slide.setAttribute('aria-label', theme.name);
+  slide.innerHTML = `<div class="book" style="--accent:${theme.accent}"><div class="board" style="background:${theme.board}"></div><div class="base"></div></div>`;
+  const bookEl = slide.querySelector('.book');
+  const base = slide.querySelector('.base');
+
+  const face = (cls, inner) => `<div class="face ${cls}">${inner}<div class="cast"></div><div class="shade"></div></div>`;
+  const wrap = (side, inner) => `<div class="pg ${side}">${inner}</div>`;
+  const mkSheet = (el, k) => ({
+    el, k, t: 0, target: 0, delay: 0,
+    faces: [el.querySelector('.front'), el.querySelector('.back')],
+    shade: [el.querySelector('.front .shade'), el.querySelector('.back .shade')],
+    cast: [el.querySelector('.front .cast'), el.querySelector('.back .cast')],
+  });
+
+  const coverEl = document.createElement('div');
+  coverEl.className = 'cover';
+  coverEl.innerHTML = scope(face('front', coverFront(theme)) + face('back', coverBack(theme)));
+  bookEl.appendChild(coverEl);
+  let sheets = [mkSheet(coverEl, 0)];
+  let baseCast = null, signature = '';
+
+  let running = false, last = 0, waiters = [];
+  let focus = 0, focusTarget = 0;
+  const api = { theme, slide, spread: 0, leaves: 0, pages: [], get busy() { return running; } };
+
+  // pages: [{html, id?}] with an odd count; the last one lives on the base board
+  api.setPages = (pages, keepSpread = api.spread) => {
+    const sig = pages.map(p => p.html).join('\u0001');
+    api.pages = pages;
+    if (sig === signature) return;
+    signature = sig;
+    sheets.slice(1).forEach(sh => sh.el.remove());
+    sheets = [sheets[0]];
+    const L = (pages.length - 1) / 2;
+    for (let j = 1; j <= L; j++) {
+      const el = document.createElement('div');
+      el.className = 'leaf';
+      el.innerHTML = face('front', wrap('right', pages[2 * j - 2].html)) + face('back', wrap('left', pages[2 * j - 1].html));
+      bookEl.appendChild(el);
+      sheets.push(mkSheet(el, j));
+    }
+    base.innerHTML = wrap('right', pages[pages.length - 1].html) + '<div class="cast"></div>';
+    baseCast = base.querySelector('.cast');
+    // thicker page block for fuller books
+    const layers = Math.min(9, 2 + Math.ceil(L / 3));
+    const tones = ['#ddcfae', '#cfbf9b', '#c0ae88'];
+    base.style.boxShadow = Array.from({ length: layers }, (_, i) => `${(i + 1) * 1.6}px ${i * .5}px 0 ${tones[i % 3]}`).join(',');
+    api.leaves = L;
+    const s = Math.max(0, Math.min(keepSpread, L));
+    api.spread = s;
+    sheets.forEach(sh => { sh.t = sh.target = (s > 0 && sh.k <= s) ? 1 : 0; sh.delay = 0; });
+    render(); inertPages();
+  };
+
+  api.layout = () => {
+    Object.assign(bookEl.style, {
+      width: dims.w + 'px', height: dims.h + 'px',
+      marginTop: -dims.h / 2 - 26 + 'px',
+      perspective: dims.w * 3.4 + 'px', perspectiveOrigin: '0px 50%',
+      fontSize: (dims.w * 0.0345).toFixed(2) + 'px',
+    });
+    if (!dims.narrow) focusTarget = focus = 0;
+    render();
+  };
+
+  function render() {
+    const { w, h } = dims;
+    const bp = ease(sheets[0].t);
+    const s = dims.closedScale + (dims.openScale - dims.closedScale) * bp;
+    const f = (1 - bp) + bp * focus;           // 1 = right half centred, 0 = spine centred, -1 = left half centred
+    bookEl.style.transform = `translate(${-s * w / 2 * f}px, 0) scale(${s})`;
+    const ps = sheets.map(sh => ease(sh.t));
+    const casts = new Map();
+    const addCast = (el, v) => el && casts.set(el, Math.max(casts.get(el) || 0, v));
+    sheets.forEach((sh, k) => {
+      const p = ps[k], angle = -180 * p, arc = Math.sin(p * Math.PI);
+      sh.el.style.transform = `translateY(${-arc * h * 0.03}px) translateZ(${arc * w * 0.06}px) rotateY(${angle}deg)`;
+      sh.el.style.zIndex = angle > -90 ? 1000 - k : 10 + k;
+      sh.shade[0].style.opacity = Math.min(1, p * 2) * 0.6;
+      sh.shade[1].style.opacity = clamp((1 - p) * 1.2) * 0.6;
+      if (p > 0 && p < 1) {
+        const strength = arc * 0.85;
+        if (p < 0.5) {
+          const j = ps.findIndex((q, i) => i > k && q < 0.5);
+          addCast(j > 0 ? sheets[j].cast[0] : baseCast, strength);
+        } else {
+          let j = -1; for (let i = k - 1; i >= 0; i--) if (ps[i] >= 0.5) { j = i; break; }
+          if (j >= 0) addCast(sheets[j].cast[1], strength);
+        }
+      }
+    });
+    [baseCast, ...sheets.flatMap(sh => sh.cast)].forEach(el => { if (el) el.style.opacity = casts.get(el) || 0; });
+  }
+
+  // only the two visible pages take pointer and keyboard focus
+  function inertPages() {
+    const s = api.spread;
+    sheets.forEach((sh, k) => {
+      sh.faces[0].inert = !(k > 0 && s === k - 1 && s > 0);
+      sh.faces[1].inert = !(k > 0 && s === k);
+    });
+    sheets[0].faces[0].inert = sheets[0].faces[1].inert = true;
+    base.inert = !(s > 0 && s === api.leaves);
+  }
+
+  function frame(now) {
+    const dt = Math.min(64, now - last); last = now;
+    let busy = false;
+    for (const sh of sheets) {
+      if (sh.delay > 0) { sh.delay -= dt; busy = true; continue; }
+      if (sh.t !== sh.target) {
+        sh.t = sh.target > sh.t ? Math.min(sh.target, sh.t + dt / TURN) : Math.max(sh.target, sh.t - dt / TURN);
+        busy = true;
+      }
+    }
+    if (Math.abs(focusTarget - focus) > 0.001) {
+      focus += (focusTarget - focus) * Math.min(1, dt / (reduced ? 40 : 140));
+      busy = true;
+    } else focus = focusTarget;
+    render();
+    if (busy) requestAnimationFrame(frame);
+    else { running = false; inertPages(); onChange(); waiters.splice(0).forEach(fn => fn()); }
+  }
+  function run() {
+    inertPages();
+    if (!running) { running = true; last = performance.now(); requestAnimationFrame(frame); }
+    onChange();
+    return new Promise(res => waiters.push(res));
+  }
+
+  api.goTo = target => {
+    target = Math.max(0, Math.min(api.leaves, target));
+    const from = api.spread;
+    if (target === from) return run();
+    const moving = [];
+    if (target > from) for (let k = from === 0 ? 0 : from + 1; k <= target; k++) moving.push([k, 1]);
+    else for (let k = from; k >= (target === 0 ? 0 : target + 1); k--) moving.push([k, 0]);
+    const gap = Math.min(STAGGER, 1500 / Math.max(1, moving.length));
+    moving.forEach(([k, t], i) => { sheets[k].target = t; sheets[k].delay = i * gap; });
+    api.spread = target;
+    return run();
+  };
+  api.setFocus = f => { focusTarget = dims.narrow ? f : 0; return run(); };
+  api.focusSide = () => focusTarget;
+  api.canNext = () => api.spread > 0 && api.spread < api.leaves;
+  api.canPrev = () => api.spread > 1;
+  api.hit = (x, y) => {
+    const r = bookEl.getBoundingClientRect();
+    const left = api.spread > 0 ? r.left - r.width : r.left;
+    return y >= r.top && y <= r.bottom && x >= left && x <= r.right;
+  };
+  // wide screens: which page was tapped; narrow screens (one page on view): which half of the screen
+  api.sideAt = (x, y) => {
+    if (!api.hit(x, y)) return 0;
+    const mid = dims.narrow ? slide.getBoundingClientRect().left + slide.getBoundingClientRect().width / 2 : bookEl.getBoundingClientRect().left;
+    return x < mid ? -1 : 1;
+  };
+  // which pages are showing, as indexes into api.pages
+  api.visiblePages = () => {
+    const s = api.spread;
+    if (s === 0) return [];
+    if (dims.narrow) return [focusTarget < 0 ? 2 * s - 1 : 2 * s];
+    return [2 * s - 1, 2 * s];
+  };
+  return api;
+}
+
+/* =====================================================================
+   App state
+   ===================================================================== */
+const state = { view: 'tome', search: '', game: 'all', tag: 'all', ready: false };
+const $ = id => document.getElementById(id);
+
+function gameList() {
+  const names = [];
+  const seen = new Set();
+  const add = n => { const k = norm(n); if (n && !seen.has(k)) { seen.add(k); names.push(n); } };
+  BUILTIN.forEach(b => add(b.name));
+  store.meta.games.forEach(g => add(g.name));
+  store.outfits.slice().sort((a, b) => a.createdAt - b.createdAt).forEach(o => add(o.game));
+  return names;
+}
+const themeCache = new Map();
+function themeFor(name) {
+  const k = norm(name);
+  const b = BUILTIN.find(x => norm(x.name) === k);
+  if (b) return b;
+  const g = store.meta.games.find(x => norm(x.name) === k);
+  const idx = g ? g.color : nextColor();
+  const ck = k + '|' + idx;
+  if (!themeCache.has(ck)) themeCache.set(ck, makeTheme(name, idx));
+  return themeCache.get(ck);
+}
+function nextColor() {
+  const used = store.meta.games.map(g => g.color);
+  for (let i = 0; i < PALETTE.length; i++) if (!used.includes(i)) return i;
+  return used.length;
+}
+// give every custom game a lasting palette colour the first time it appears
+async function ensureGameColors() {
+  const missing = gameList().filter(n => !BUILTIN.some(b => norm(b.name) === norm(n)) && !store.meta.games.some(g => norm(g.name) === norm(n)));
+  if (!missing.length) return false;
+  const games = store.meta.games.slice();
+  missing.forEach(name => {
+    const used = games.map(g => g.color);
+    let c = 0; while (used.includes(c) && c < PALETTE.length) c++;
+    if (c >= PALETTE.length) c = games.length;
+    games.push({ name, color: c });
+  });
+  try { await store.putMeta({ games }); } catch (e) { store.meta = { games }; }
+  return true;
+}
+
+const tagMatch = o => state.tag === 'all' || norm(o.tag) === norm(state.tag);
+function searchMatch(o) {
+  const q = norm(state.search);
+  if (!q) return true;
+  return [o.name, o.game, o.tag, o.notes, ...Object.values(o.slots)].some(v => norm(v).includes(q));
+}
+const byGame = name => store.outfits.filter(o => norm(o.game) === norm(name)).sort((a, b) => a.createdAt - b.createdAt);
+const narrowing = () => !!norm(state.search) || state.tag !== 'all';
+
+/* =====================================================================
+   Filters
+   ===================================================================== */
+function renderFilters() {
+  const games = gameList();
+  const sel = $('gameFilter');
+  if (state.game !== 'all' && !games.some(g => norm(g) === norm(state.game))) state.game = 'all';
+  sel.innerHTML = `<option value="all">All games</option>` + games.map(g => `<option value="${esc(g)}"${norm(g) === norm(state.game) ? ' selected' : ''}>${esc(g)}</option>`).join('');
+  const pool = state.game === 'all' ? store.outfits : byGame(state.game);
+  const tags = [];
+  pool.forEach(o => { if (o.tag && !tags.some(t => norm(t) === norm(o.tag))) tags.push(o.tag); });
+  tags.sort((a, b) => a.localeCompare(b));
+  if (state.tag !== 'all' && !tags.some(t => norm(t) === norm(state.tag))) state.tag = 'all';
+  $('tags').innerHTML = tags.length ? `<span class="tags-label">Character</span>` +
+    [['all', 'All'], ...tags.map(t => [t, t])].map(([v, l]) =>
+      `<button type="button" class="chip-btn" data-tag="${esc(v)}" aria-pressed="${norm(v) === norm(state.tag)}">${esc(l)}</button>`).join('') : '';
+  $('clearSearch').hidden = !state.search;
+}
+$('search').addEventListener('input', e => { state.search = e.target.value; refresh(); });
+$('clearSearch').addEventListener('click', () => { state.search = ''; $('search').value = ''; refresh(); $('search').focus(); });
+$('gameFilter').addEventListener('change', e => {
+  state.game = e.target.value;
+  refresh();
+  if (state.view === 'tome' && state.game !== 'all') showBook(state.game);
+});
+$('tags').addEventListener('click', e => {
+  const b = e.target.closest('[data-tag]');
+  if (!b) return;
+  state.tag = b.dataset.tag;
+  refresh();
+});
+
+/* =====================================================================
+   Tome mode: a carousel of books
+   ===================================================================== */
+const stage = $('stage'), tnav = $('tnav'), dotsEl = $('dots');
+let books = [], index = 0, dragDx = 0, gap = 1;
+const bookMap = new Map();
+const active = () => books[index];
+const browsing = () => !!active() && active().spread === 0 && !active().busy;
+
+function pagesForBook(theme) {
+  const all = byGame(theme.name);
+  const list = all.filter(o => tagMatch(o) && searchMatch(o));
+  const pages = [{ html: titleBody(theme, all.length, list.length) }];
+  list.forEach((o, i) => pages.push({ html: outfitBody(o, i + 1, { theme }), id: o.id, n: i + 1 }));
+  pages.push({ html: addBody(theme), add: true });
+  if (pages.length % 2 === 0) pages.push({ html: blankBody(hash(theme.name) + pages.length) });
+  return { pages, count: list.length };
+}
+
+function syncBooks() {
+  const prevGame = active() ? norm(active().theme.name) : null;
+  const wanted = gameList().map(themeFor).map(theme => ({ theme, ...pagesForBook(theme) }))
+    .filter(x => !narrowing() || x.count > 0);
+  const next = [];
+  wanted.forEach(({ theme, pages }) => {
+    const k = norm(theme.name);
+    let book = bookMap.get(k);
+    if (book && book.theme !== theme) { book.slide.remove(); bookMap.delete(k); book = null; }
+    if (!book) {
+      book = createBook(theme, updateTome);
+      bookMap.set(k, book);
+      book.layout();
+    }
+    book.setPages(pages);
+    next.push(book);
+  });
+  // drop books that are no longer shown
+  bookMap.forEach((book, k) => { if (!next.includes(book)) { book.slide.remove(); bookMap.delete(k); } });
+  books = next;
+  books.forEach(b => { if (b.slide.parentNode !== stage) stage.appendChild(b.slide); });
+  const keep = books.findIndex(b => norm(b.theme.name) === prevGame);
+  index = keep >= 0 ? keep : Math.min(index, Math.max(0, books.length - 1));
+  dotsEl.innerHTML = books.map((b, i) => `<button type="button" data-i="${i}" style="--dot:${b.theme.leather[0]}" aria-label="Show ${esc(b.theme.name)}"></button>`).join('');
+  updateTome();
+  return books.length;
+}
+dotsEl.addEventListener('click', e => { const b = e.target.closest('[data-i]'); if (b) goToBook(+b.dataset.i); });
+
+function place() {
+  const lock = !browsing();
+  books.forEach((book, i) => {
+    const rel = i - index + dragDx / gap;
+    const dist = Math.min(1, Math.abs(rel));
+    book.slide.style.transform = `translateX(${rel * gap}px) scale(${1 - 0.14 * dist})`;
+    book.slide.style.opacity = i === index ? 1 : lock ? 0 : 1 - 0.45 * dist;
+    book.slide.classList.toggle('active', i === index);
+    book.slide.inert = i !== index;
+  });
+  [...dotsEl.children].forEach((d, i) => d.setAttribute('aria-current', String(i === index)));
+}
+
+function updateTome() {
+  const book = active();
+  const open = !!book && book.spread > 0;
+  tnav.classList.toggle('open', open);
+  if (book) {
+    $('closeBook').style.background = `linear-gradient(${mix(book.theme.button, '#ffffff', .12)}, ${book.theme.button})`;
+    const nums = book.visiblePages().map(i => book.pages[i]).filter(p => p && p.n).map(p => p.n);
+    const total = book.pages.filter(p => p.n).length;
+    $('where').textContent = !open ? '' : nums.length
+      ? `${nums.length > 1 ? 'Outfits' : 'Outfit'} ${nums.join(' and ')} of ${total}`
+      : total ? `End of the book, ${total} ${total === 1 ? 'outfit' : 'outfits'}` : 'This book is still empty';
+    stage.setAttribute('aria-label', open
+      ? `${book.theme.name}. ${$('where').textContent}. Use the arrow keys to turn pages.`
+      : `${book.theme.name}. Press Enter to open, or the arrow keys for another book.`);
+  }
+  place();
+}
+
+function goToBook(i) {
+  if (!browsing()) return false;
+  index = Math.max(0, Math.min(books.length - 1, i));
+  dragDx = 0;
+  updateTome();
+  return true;
+}
+const wait = ms => new Promise(r => setTimeout(r, ms));
+async function showBook(game) {
+  const i = books.findIndex(b => norm(b.theme.name) === norm(game));
+  if (i < 0) return null;
+  if (i !== index) {
+    if (active() && active().spread > 0) await active().goTo(0);
+    index = i; dragDx = 0; updateTome();
+    await wait(reduced ? 0 : 420);
+  }
+  return books[i];
+}
+async function showOutfit(game, id) {
+  const book = await showBook(game);
+  if (!book) return;
+  const p = book.pages.findIndex(pg => pg.id === id);
+  if (p < 0) return;
+  book.setFocus(p % 2 ? -1 : 1);
+  await book.goTo(Math.ceil(p / 2));
+}
+
+function sizeTome() {
+  const W = $('tome').clientWidth, H = $('tome').clientHeight - 64;
+  if (!W || H <= 0) return;
+  dims.narrow = W < 700 && W < H * 1.15;
+  if (dims.narrow) {
+    dims.h = Math.min(H * 0.94, (W * 0.84) / 0.72);
+    dims.w = dims.h * 0.72;
+    dims.closedScale = 1;
+    dims.openScale = Math.min((W * 0.95) / dims.w, (H * 0.97) / dims.h);
+  } else {
+    dims.h = Math.min(H * 0.95, (W * 0.95) / 2 / 0.72);
+    dims.w = dims.h * 0.72;
+    dims.closedScale = 1;
+    dims.openScale = 1;
+  }
+  gap = dims.w * 1.3;
+  books.forEach(b => b.layout());
+  place();
+}
+new ResizeObserver(sizeTome).observe($('tome'));
+
+// narrow screens read one page at a time: the first tap pans across the spread, the next turns the leaf
+function forward(book) {
+  if (dims.narrow && book.spread > 0 && book.focusSide() < 0) return book.setFocus(1);
+  if (!book.canNext()) return;
+  if (dims.narrow) book.setFocus(-1);
+  book.goTo(book.spread + 1);
+}
+function backward(book) {
+  if (dims.narrow && book.spread > 0 && book.focusSide() > 0) return book.setFocus(-1);
+  if (!book.canPrev()) return;
+  if (dims.narrow) book.setFocus(1);
+  book.goTo(book.spread - 1);
+}
+function openBook(book) {
+  if (!book || book.spread > 0 || book.busy) return;
+  book.setFocus(-1);
+  book.goTo(1);
+}
+$('closeBook').addEventListener('click', () => active() && active().goTo(0));
+
+/* pointer: swipe between closed covers, tap a cover to open, tap a page to turn */
+let start = null;
+const onControl = t => t.closest('button, a, input, select, textarea, label');
+stage.addEventListener('pointerdown', e => {
+  if (e.button !== 0 || onControl(e.target)) return;
+  start = { x: e.clientX, y: e.clientY, t: performance.now(), drag: false };
+  stage.setPointerCapture(e.pointerId);
+});
+stage.addEventListener('pointermove', e => {
+  const book = active();
+  if (!book) return;
+  if (!start) {
+    if (onControl(e.target)) { stage.style.cursor = ''; return; }
+    const hot = book.spread === 0
+      ? book.hit(e.clientX, e.clientY) || (browsing() && books.some(o => o !== book && o.hit(e.clientX, e.clientY)))
+      : (() => { const s = book.sideAt(e.clientX, e.clientY); return s === 1 ? book.canNext() || (dims.narrow && book.focusSide() < 0) : s === -1 ? book.canPrev() || (dims.narrow && book.focusSide() > 0) : false; })();
+    stage.style.cursor = hot ? 'pointer' : 'default';
+    return;
+  }
+  const dx = e.clientX - start.x;
+  if (!start.drag && Math.abs(dx) > 8 && browsing() && books.length > 1) { start.drag = true; stage.classList.add('dragging'); stage.style.cursor = 'grabbing'; }
+  if (start.drag) {
+    const edge = (index === 0 && dx > 0) || (index === books.length - 1 && dx < 0);
+    dragDx = edge ? dx * 0.3 : dx;
+    place();
+  }
+});
+function endPointer(e, cancelled) {
+  if (!start) return;
+  const s = start; start = null;
+  stage.classList.remove('dragging');
+  stage.style.cursor = 'default';
+  if (s.drag) {
+    const dx = e.clientX - s.x;
+    const fast = Math.abs(dx) / (performance.now() - s.t) > 0.5;
+    const to = (dx < -gap * 0.18 || (fast && dx < -30)) ? index + 1 : (dx > gap * 0.18 || (fast && dx > 30)) ? index - 1 : index;
+    dragDx = 0;
+    goToBook(to);
+    return;
+  }
+  if (cancelled) return;
+  const book = active(), x = e.clientX, y = e.clientY;
+  if (!book) return;
+  if (book.spread === 0) {
+    if (book.hit(x, y)) return openBook(book);
+    const other = books.findIndex(o => o !== book && o.hit(x, y));
+    if (other >= 0) goToBook(other);
+    return;
+  }
+  const side = book.sideAt(x, y);
+  if (side === 1) forward(book);
+  if (side === -1) backward(book);
+}
+stage.addEventListener('pointerup', e => endPointer(e, false));
+stage.addEventListener('pointercancel', e => endPointer(e, true));
+
+addEventListener('keydown', e => {
+  if (state.view !== 'tome' || document.querySelector('.overlay')) return;
+  if (e.target.closest && e.target.closest('input, select, textarea')) return;
+  const book = active();
+  if (!book) return;
+  if (e.key === 'ArrowRight') { e.preventDefault(); book.spread ? forward(book) : goToBook(index + 1); }
+  else if (e.key === 'ArrowLeft') { e.preventDefault(); book.spread ? backward(book) : goToBook(index - 1); }
+  else if (e.key === 'Escape') book.goTo(0);
+  else if ((e.key === 'Enter' || e.key === ' ') && document.activeElement === stage) {
+    e.preventDefault();
+    book.spread ? forward(book) : openBook(book);
+  }
+});
+
+/* =====================================================================
+   Grid gallery
+   ===================================================================== */
+function renderGallery() {
+  const games = gameList();
+  const list = store.outfits
+    .filter(o => (state.game === 'all' || norm(o.game) === norm(state.game)) && tagMatch(o) && searchMatch(o))
+    .sort((a, b) => games.findIndex(g => norm(g) === norm(a.game)) - games.findIndex(g => norm(g) === norm(b.game)) || a.createdAt - b.createdAt);
+  $('gal').innerHTML = list.map(o => {
+    const theme = themeFor(o.game);
+    return `<article class="card" data-card="${esc(o.id)}" style="--accent:${theme.accent}"><div class="pg right">${outfitBody(o, 0, { showGame: true, theme })}</div></article>`;
+  }).join('');
+  return list.length;
+}
+
+/* =====================================================================
+   Rendering
+   ===================================================================== */
+let pendingShow = null;
+function refresh() {
+  if (!state.ready) return;
+  renderFilters();
+  let shown;
+  if (state.view === 'tome') shown = syncBooks();
+  else shown = renderGallery();
+  $('tome').hidden = state.view !== 'tome';
+  $('gallery').hidden = state.view !== 'grid' || shown === 0;
+  showEmpty(shown === 0);
+  if (state.view === 'tome' && shown) requestAnimationFrame(sizeTome);
+  if (pendingShow) {
+    const p = pendingShow; pendingShow = null;
+    const o = store.outfits.find(x => x.id === p.id);
+    if (o && !(tagMatch(o) && searchMatch(o) && (state.view === 'tome' || state.game === 'all' || norm(state.game) === norm(o.game)))) {
+      state.search = ''; $('search').value = ''; state.tag = 'all';
+      if (state.view === 'grid') state.game = 'all';
+      pendingShow = p; return refresh();
+    }
+    if (state.view === 'tome') showOutfit(p.game, p.id);
+    else requestAnimationFrame(() => {
+      const card = document.querySelector(`[data-card="${CSS.escape(p.id)}"]`);
+      if (card) { card.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'center' }); card.classList.remove('flash'); void card.offsetWidth; card.classList.add('flash'); }
+    });
+  }
+}
+function showEmpty(on) {
+  $('empty').hidden = !on;
+  if (!on) return;
+  const filtered = narrowing() || (state.view === 'grid' && state.game !== 'all');
+  $('emptyTitle').textContent = filtered ? 'Nothing matches' : 'The logbook is empty';
+  $('emptyText').textContent = filtered
+    ? 'No outfits match your search or filters. Clear them to see every page again.'
+    : 'Forge your first outfit, or import a JSON file from an earlier logbook.';
+  $('emptyActions').innerHTML = (filtered ? `<button type="button" class="btn ink" data-empty="clear">${icon('x')}Clear filters</button>` : '')
+    + `<button type="button" class="btn solid" data-empty="forge">${icon('hammer')}Forge outfit</button>`
+    + `<button type="button" class="btn ink" data-empty="import">${icon('upload')}Import JSON</button>`;
+}
+$('emptyActions').addEventListener('click', e => {
+  const b = e.target.closest('[data-empty]');
+  if (!b) return;
+  if (b.dataset.empty === 'clear') { state.search = ''; $('search').value = ''; state.tag = 'all'; state.game = 'all'; refresh(); }
+  if (b.dataset.empty === 'forge') openForm();
+  if (b.dataset.empty === 'import') $('fileInput').click();
+});
+
+document.querySelectorAll('.seg [data-view]').forEach(b => b.addEventListener('click', () => {
+  state.view = b.dataset.view;
+  document.querySelectorAll('.seg [data-view]').forEach(x => x.setAttribute('aria-pressed', String(x === b)));
+  refresh();
+}));
+
+/* =====================================================================
+   Page actions: download, duplicate, edit, delete, add
+   ===================================================================== */
+document.addEventListener('click', e => {
+  const b = e.target.closest('[data-act]');
+  if (!b) return;
+  e.stopPropagation();
+  const id = b.dataset.id, o = store.outfits.find(x => x.id === id);
+  switch (b.dataset.act) {
+    case 'download': if (o) saveJSON(`outfit-${slug(o.name)}.json`, o, `Downloaded "${o.name}"`); break;
+    case 'duplicate': if (o) duplicate(o); break;
+    case 'edit': if (o) openForm(o); break;
+    case 'delete': if (o) confirmDelete(o); break;
+    case 'add': openForm(null, b.dataset.game); break;
+  }
+});
+const slug = s => norm(s).replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') || 'outfit';
+
+async function duplicate(o) {
+  const copy = { ...o, slots: { ...o.slots }, id: newId(), name: `${o.name} (copy)`, createdAt: Date.now() };
+  pendingShow = { game: copy.game, id: copy.id };
+  try { await store.put(copy); toast(`Duplicated "${o.name}" onto a new page`); }
+  catch (err) { pendingShow = null; toast('Could not save the copy. Try again in a moment.', true); }
+}
+async function confirmDelete(o) {
+  const ok = await dialog({
+    title: 'Tear out this page?',
+    body: `<p>"${esc(o.name)}" will be removed from the ${esc(o.game)} book. This can't be undone.</p>`,
+    actions: [{ label: 'Keep it', value: false }, { label: 'Delete outfit', value: true, cls: 'warn' }],
+  });
+  if (!ok) return;
+  try { await store.remove(o.id); toast(`Deleted "${o.name}"`); }
+  catch (err) { toast('Could not delete that outfit. Try again in a moment.', true); }
+}
+
+/* =====================================================================
+   Toast and dialogs
+   ===================================================================== */
+let toastTimer;
+function toast(msg, err = false) {
+  const t = $('toast');
+  t.textContent = msg;
+  t.classList.toggle('err', err);
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove('show'), 3200);
+}
+
+function overlay(html, onKey) {
+  const ov = document.createElement('div');
+  ov.className = 'overlay';
+  ov.innerHTML = html;
+  document.body.appendChild(ov);
+  const prev = document.activeElement;
+  const close = () => { ov.remove(); document.removeEventListener('keydown', key, true); if (prev && prev.focus) prev.focus(); };
+  const key = e => {
+    if (e.key === 'Escape') { e.stopPropagation(); onKey && onKey('escape'); }
+    if (e.key === 'Tab') {   // keep focus inside the dialog
+      const f = [...ov.querySelectorAll('button, input, select, textarea')].filter(el => !el.disabled && el.offsetParent);
+      if (!f.length) return;
+      if (e.shiftKey && document.activeElement === f[0]) { e.preventDefault(); f[f.length - 1].focus(); }
+      else if (!e.shiftKey && document.activeElement === f[f.length - 1]) { e.preventDefault(); f[0].focus(); }
+    }
+  };
+  document.addEventListener('keydown', key, true);
+  ov.addEventListener('pointerdown', e => { if (e.target === ov) onKey && onKey('backdrop'); });
+  return { ov, close };
+}
+
+function dialog({ title, body, actions, choices }) {
+  return new Promise(resolve => {
+    let o;
+    const done = v => { o.close(); resolve(v); };
+    o = overlay(`
+      <div class="sheet dlg" role="dialog" aria-modal="true" aria-labelledby="dlgTitle">
+        <div class="sheet-head"><h2 id="dlgTitle">${esc(title)}</h2><button type="button" class="icon-btn" data-v="__x" aria-label="Close">${icon('x')}</button></div>
+        <div class="sheet-body">${body || ''}${choices ? `<div class="choice">${choices.map((c, i) => `<button type="button" data-c="${i}"><b>${esc(c.label)}</b><i>${esc(c.detail)}</i></button>`).join('')}</div>` : ''}</div>
+        <div class="sheet-foot">${actions.map((a, i) => `<button type="button" class="btn ${a.cls || 'ink'}" data-a="${i}">${esc(a.label)}</button>`).join('')}</div>
+      </div>`, () => done(null));
+    o.ov.addEventListener('click', e => {
+      const a = e.target.closest('[data-a]'), c = e.target.closest('[data-c]');
+      if (e.target.closest('[data-v="__x"]')) done(null);
+      else if (a) done(actions[+a.dataset.a].value);
+      else if (c) done(choices[+c.dataset.c].value);
+    });
+    const first = o.ov.querySelector('[data-c], .sheet-foot .btn:last-child');
+    if (first) first.focus();
+  });
+}
+
+/* =====================================================================
+   Forge / edit form
+   ===================================================================== */
+function openForm(existing = null, presetGame = null) {
+  const games = gameList();
+  const current = existing ? existing.game : presetGame || (state.view === 'tome' && active() ? active().theme.name : state.game !== 'all' ? state.game : games[0]);
+  const slotField = s => `
+    <label class="field"><span>${icon(s.icon)}${s.label}</span>
+      <input name="slot_${s.key}" value="${esc(existing ? existing.slots[s.key] : '')}" placeholder="${esc(s.hint)}" maxlength="120"></label>`;
+  let o;
+  const close = () => o.close();
+  o = overlay(`
+    <form class="sheet" role="dialog" aria-modal="true" aria-labelledby="formTitle" novalidate>
+      <div class="sheet-head">
+        <h2 id="formTitle">${icon('hammer')}${existing ? 'Edit outfit record' : 'Forge outfit record'}</h2>
+        <button type="button" class="icon-btn" data-close aria-label="Close">${icon('x')}</button>
+      </div>
+      <div class="sheet-body">
+        <div class="fields">
+          <label class="field"><span>Book</span>
+            <select name="game">
+              ${games.map(g => `<option value="${esc(g)}"${norm(g) === norm(current) ? ' selected' : ''}>${esc(g)}</option>`).join('')}
+              <option value="__new">New game…</option>
+            </select></label>
+          <label class="field" data-newgame hidden><span>New game title</span><input name="newgame" placeholder="e.g. Elden Ring" maxlength="60"></label>
+          <label class="field" data-name><span>Outfit name</span><input name="name" required maxlength="140" value="${esc(existing ? existing.name : '')}" placeholder="e.g. Pywel Warrior Gear"></label>
+          <label class="field"><span>Character or tag</span><input name="tag" maxlength="60" value="${esc(existing ? existing.tag : '')}" placeholder="e.g. Kliff, Oongka, Damiane"></label>
+        </div>
+        <p class="formnote">Fill in whichever slots this outfit uses; empty slots are left off the page.</p>
+        <div class="formgrp">Armour and apparel</div>
+        <div class="fields">${SLOTS.filter(s => s.group === 'armour').map(slotField).join('')}</div>
+        <div class="formgrp">Weapons and auxiliaries</div>
+        <div class="fields">${SLOTS.filter(s => s.group === 'weapons').map(slotField).join('')}</div>
+        <div class="fields" style="margin-top:16px">
+          <label class="field wide"><span>Notes and special perks</span><textarea name="notes" rows="2" maxlength="1200" placeholder="e.g. Built for mobility and heavy combat">${esc(existing ? existing.notes : '')}</textarea></label>
+        </div>
+      </div>
+      <div class="sheet-foot">
+        <button type="button" class="btn ink" data-close>Cancel</button>
+        <button type="submit" class="btn solid">${existing ? 'Save changes' : 'Add page to book'}</button>
+      </div>
+    </form>`, close);
+  const form = o.ov.querySelector('form');
+  const gameSel = form.elements.game, newWrap = form.querySelector('[data-newgame]');
+  const toggleNew = () => { newWrap.hidden = gameSel.value !== '__new'; if (!newWrap.hidden) form.elements.newgame.focus(); };
+  gameSel.addEventListener('change', toggleNew);
+  form.addEventListener('click', e => { if (e.target.closest('[data-close]')) close(); });
+  (existing ? form.elements.name : form.elements.name).focus();
+
+  form.addEventListener('submit', async e => {
+    e.preventDefault();
+    const f = form.elements;
+    let game = f.game.value === '__new' ? f.newgame.value.trim() : f.game.value;
+    const name = f.name.value.trim();
+    form.querySelectorAll('.field').forEach(x => x.classList.remove('bad'));
+    if (!name) { form.querySelector('[data-name]').classList.add('bad'); f.name.focus(); toast('Give the outfit a name first.', true); return; }
+    if (!game) { newWrap.classList.add('bad'); f.newgame.focus(); toast('Name the new game first.', true); return; }
+    const match = gameList().find(g => norm(g) === norm(game));
+    if (match) game = match;
+    const slots = {};
+    SLOTS.forEach(s => { slots[s.key] = f['slot_' + s.key].value.trim(); });
+    const outfit = normalizeOutfit({
+      id: existing ? existing.id : newId(), name, game, tag: f.tag.value.trim(), notes: f.notes.value.trim(), slots,
+      createdAt: existing && norm(existing.game) === norm(game) ? existing.createdAt : Date.now(),
+    });
+    const submit = form.querySelector('[type="submit"]');
+    submit.disabled = true;
+    try {
+      if (!match) await ensureNewGame(game);
+      if (!existing || norm(existing.game) !== norm(game)) pendingShow = { game, id: outfit.id };
+      await store.put(outfit);
+      close();
+      toast(existing ? `Saved changes to "${name}"` : `Added "${name}" to the ${game} book`);
+    } catch (err) {
+      pendingShow = null; submit.disabled = false;
+      toast('Could not save this outfit. Try again in a moment.', true);
+    }
+  });
+}
+async function ensureNewGame(name) {
+  if (BUILTIN.some(b => norm(b.name) === norm(name)) || store.meta.games.some(g => norm(g.name) === norm(name))) return;
+  await store.putMeta({ games: [...store.meta.games, { name, color: nextColor() }] });
+}
+$('forgeBtn').addEventListener('click', () => openForm());
+
+/* =====================================================================
+   Import and export
+   ===================================================================== */
+function saveJSON(filename, data, done) {
+  const text = JSON.stringify(data, null, 2);
+  const url = URL.createObjectURL(new Blob([text], { type: 'application/json' }));
+  const a = document.createElement('a');
+  a.href = url; a.download = filename;
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 2000);
+  toast(done);
+}
+$('exportAll').addEventListener('click', () => {
+  if (!store.outfits.length) return toast('There are no outfits to export yet.', true);
+  saveJSON('armory-logbook-all.json', {
+    app: 'ArmorersTome', version: '3.0', exportedAt: new Date().toISOString(),
+    outfitsCount: store.outfits.length, games: store.meta.games, outfits: store.outfits,
+  }, `Exported ${store.outfits.length} ${store.outfits.length === 1 ? 'outfit' : 'outfits'}`);
+});
+$('importAll').addEventListener('click', () => $('fileInput').click());
+$('fileInput').addEventListener('change', e => {
+  const file = e.target.files[0];
+  e.target.value = '';
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = async () => {
+    let list = [];
+    try {
+      const parsed = JSON.parse(reader.result);
+      list = Array.isArray(parsed) ? parsed : parsed && Array.isArray(parsed.outfits) ? parsed.outfits : parsed && parsed.name && parsed.slots ? [parsed] : null;
+      if (!list) throw new Error('format');
+    } catch (err) { return toast('That file is not an Armorer\u2019s Tome JSON export.', true); }
+    const valid = list.filter(x => x && typeof x.name === 'string' && x.name.trim()).map(normalizeOutfit);
+    if (!valid.length) return toast('No outfits were found in that file.', true);
+    const mode = await dialog({
+      title: 'Import outfits',
+      body: `<p>Found ${valid.length} ${valid.length === 1 ? 'outfit' : 'outfits'} in <i>${esc(file.name)}</i>. How should they join your logbook?</p>`,
+      choices: [
+        { label: 'Add to my books', detail: 'Keeps every current page and adds the imported ones after them.', value: 'merge' },
+        { label: 'Replace everything', detail: 'Removes every current outfit, then adds the imported ones.', value: 'replace' },
+      ],
+      actions: [{ label: 'Cancel', value: null }],
+    });
+    if (!mode) return;
+    try {
+      if (mode === 'replace') for (const o of store.outfits.slice()) await store.remove(o.id);
+      const ids = new Set(mode === 'replace' ? [] : store.outfits.map(o => o.id));
+      const now = Date.now();
+      for (const [i, o] of valid.entries()) {
+        if (ids.has(o.id)) o.id = newId();
+        ids.add(o.id);
+        if (mode === 'merge') o.createdAt = now + i;   // imported pages go after existing ones
+        await store.put(o);
+      }
+      await ensureGameColors();
+      toast(mode === 'replace' ? `Replaced the logbook with ${valid.length} imported ${valid.length === 1 ? 'outfit' : 'outfits'}` : `Added ${valid.length} imported ${valid.length === 1 ? 'outfit' : 'outfits'}`);
+    } catch (err) { toast('The import stopped partway. Some outfits may not have been added.', true); }
+  };
+  reader.readAsText(file);
+});
+
+/* =====================================================================
+   Start
+   ===================================================================== */
+showEmpty(true);
+$('emptyTitle').textContent = 'Opening the tome…';
+$('emptyText').textContent = '';
+$('emptyActions').innerHTML = '';
+store.init(async () => {
+  state.ready = true;
+  await ensureGameColors();
+  refresh();
+});
+})();
