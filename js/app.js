@@ -60,7 +60,7 @@ function normalizeOutfit(o) {
     game: String(o.game || 'Crimson Desert').trim().slice(0, 80) || 'Crimson Desert',
     // older saves and exports have a single "tag"; they become a one-item list
     tags: normTags(Array.isArray(o.tags) ? o.tags : typeof o.tag === 'string' ? o.tag.split(',') : []),
-    notes: String(o.notes || '').slice(0, 1200),
+    notes: String(o.notes || '').replace(/\r\n?/g, '\n').slice(0, 4000),
     slots,
     createdAt: Number(o.createdAt) || Date.now(),
     // the picture itself lives in IndexedDB; the outfit only remembers which version to show
@@ -165,6 +165,12 @@ function fitTitles(root) {
     t.textContent = t.textContent.replace(/\S{10,}/g, w => w.slice(0, 2) + w.slice(2, -2).split('').join('\u00AD') + '\u00AD' + w.slice(-2));
     t.classList.add('hyphenate');
   });
+}
+function markLongNotes(root) {
+  if (!root) return;
+  const notes = [...root.querySelectorAll('.card .notes')];
+  const cut = notes.map(n => n.scrollHeight > n.clientHeight + 1);
+  notes.forEach((n, i) => { const m = n.nextElementSibling; if (m && m.classList.contains('see-more')) m.hidden = !cut[i]; });
 }
 const portraitHTML = o => !o.image ? '' :
   `<button type="button" class="portrait" data-act="view" data-id="${esc(o.id)}" title="Enlarge image" aria-label="Enlarge the image of ${esc(o.name)}"><img alt="" data-pid="${esc(o.id)}" data-v="${o.image.v}" decoding="async"></button>`;
@@ -481,12 +487,12 @@ function outfitBody(o, num, { showGame = false, theme } = {}) {
   return `
     <div class="fox" style="${foxStyle(hash(o.id))}"></div>
     <div class="pg-top"><div class="card-meta">${meta}</div>${actionsHTML(o.id, o.name)}</div>
-    <div class="pg-head"><h3 class="pg-title">${esc(o.name)}</h3>${portraitHTML(o)}</div>
+    <div class="pg-head${o.image ? ' has-portrait' : ''}"><h3 class="pg-title">${esc(o.name)}</h3>${portraitHTML(o)}</div>
     ${RULE}
     ${armour ? `<div class="grp">Armour and apparel</div><ul class="slots">${armour}</ul>` : ''}
     ${weapons ? `<div class="grp">Weapons and auxiliaries</div><ul class="slots">${weapons}</ul>` : ''}
     ${filled.length ? '' : '<p class="none">No gear recorded on this page yet.</p>'}
-    ${o.notes ? `<p class="notes">${esc(o.notes)}</p>` : ''}
+    ${o.notes ? `<p class="notes">${esc(o.notes)}</p><button type="button" class="see-more" data-act="notes" data-id="${esc(o.id)}" hidden>See more…</button>` : ''}
     <div class="pg-num">${showGame ? `${filled.length} of ${SLOTS.length} slots filled` : num}</div>`;
 }
 const titleBody = (theme, total, shown) => `
@@ -657,6 +663,13 @@ function createBook(theme, onChange) {
       return Math.max(1, Math.floor(room / parseFloat(cs.lineHeight)));
     });
     notes.forEach((n, i) => { n.style.webkitLineClamp = fits[i]; n.style.lineClamp = fits[i]; });
+    // a note that still doesn't fit gives up its last line to a "See more…" link
+    const cut = notes.map(n => n.scrollHeight > n.clientHeight + 1);
+    notes.forEach((n, i) => {
+      const more = n.nextElementSibling;
+      if (cut[i] && fits[i] > 1) { n.style.webkitLineClamp = fits[i] - 1; n.style.lineClamp = fits[i] - 1; }
+      if (more && more.classList.contains('see-more')) more.hidden = !cut[i];
+    });
   }
   api.fitNotes = fitNotes;
 
@@ -1060,7 +1073,7 @@ function sizeTome(force) {
   place();
 }
 new ResizeObserver(sizeTome).observe($('tome'));
-if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { books.forEach(b => b.fitNotes()); fitTitles($('gal')); });
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { books.forEach(b => b.fitNotes()); fitTitles($('gal')); markLongNotes($('gal')); });
 
 // narrow screens read one page at a time: the first tap pans across the spread, the next turns the leaf
 function forward(book) {
@@ -1175,9 +1188,9 @@ function renderGallery() {
 let galleryWatch = null;
 function watchGallery() {
   if (galleryWatch) galleryWatch.disconnect();
-  if (!('IntersectionObserver' in window)) { hydratePortraits($('gal')); return fitTitles($('gal')); }
+  if (!('IntersectionObserver' in window)) { hydratePortraits($('gal')); fitTitles($('gal')); return markLongNotes($('gal')); }
   galleryWatch = new IntersectionObserver(entries => entries.forEach(en => {
-    if (en.isIntersecting) { hydratePortraits(en.target); fitTitles(en.target); galleryWatch.unobserve(en.target); }
+    if (en.isIntersecting) { hydratePortraits(en.target); fitTitles(en.target); markLongNotes(en.target); galleryWatch.unobserve(en.target); }
   }), { root: $('gallery'), rootMargin: '400px 0px' });
   $('gal').querySelectorAll('.card').forEach(c => galleryWatch.observe(c));
 }
@@ -1248,6 +1261,7 @@ document.addEventListener('click', e => {
   switch (b.dataset.act) {
     case 'download': if (o) outfitForExport(o).then(data => saveJSON(`outfit-${slug(o.name)}.json`, data, `Downloaded "${o.name}"`)); break;
     case 'view': if (o) viewImage(o); break;
+    case 'notes': if (o) readNotes(o); break;
     case 'duplicate': if (o) duplicate(o); break;
     case 'edit': if (o) openForm(o); break;
     case 'delete': if (o) confirmDelete(o); break;
@@ -1335,6 +1349,17 @@ function dialog({ title, body, actions, choices }) {
     const first = o.ov.querySelector('[data-c], .sheet-foot .btn:last-child');
     if (first) first.focus();
   });
+}
+
+/* =====================================================================
+   Full notes, opened from "See more…"
+   ===================================================================== */
+function readNotes(o) {
+  dialog({
+    title: o.name,
+    body: `<p class="notes-full">${esc(o.notes)}</p>`,
+    actions: [{ label: 'Edit outfit', value: 'edit' }, { label: 'Close', value: true, cls: 'solid' }],
+  }).then(v => { if (v === 'edit') openForm(o); });
 }
 
 /* =====================================================================
@@ -1579,7 +1604,8 @@ function openForm(existing = null, presetGame = null) {
         <div class="formgrp">Weapons and auxiliaries</div>
         <div class="fields">${SLOTS.filter(s => s.group === 'weapons').map(slotField).join('')}</div>
         <div class="fields" style="margin-top:16px">
-          <label class="field wide"><span>Notes and special perks</span><textarea name="notes" rows="2" maxlength="1200" placeholder="e.g. Built for mobility and heavy combat">${esc(existing ? existing.notes : '')}</textarea></label>
+          <label class="field wide"><span>Notes and special perks</span><textarea name="notes" rows="3" maxlength="4000" placeholder="e.g. Built for mobility and heavy combat">${esc(existing ? existing.notes : '')}</textarea>
+            <small class="fieldhint">Press Enter or Shift + Enter for a new line. Long notes get a "See more…" link on the page.</small></label>
         </div>
       </div>
       <div class="sheet-foot">
