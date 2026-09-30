@@ -1254,7 +1254,35 @@ $('fileInput').addEventListener('change', e => {
   };
   reader.readAsText(file);
 });
-
+/* =====================================================================
+   Welcome popup: shown on a visitor's first visit, and from the ? button
+   ===================================================================== */
+const WELCOME_KEY = 'armorer_welcome_seen_v1';
+function showWelcome() {
+  const tip = (ic, html) => `<li>${icon(ic)}<span>${html}</span></li>`;
+  return dialog({
+    title: "Welcome to Armorer's Tome",
+    body: `<p>A logbook for your game outfits, with one book per game.</p>
+      <ul class="welcome">
+        ${tip('book-open', '<b>Browse the books.</b> Swipe or use the arrow keys to move between games, then tap a cover to open it.')}
+        ${tip('scroll', '<b>Turn the pages.</b> Tap the right page to go forward and the left page to go back. Going back from the first page closes the book.')}
+        ${tip('hammer', '<b>Forge an outfit.</b> It becomes a new page in its game\'s book. Pick "New game…" to start a new book.')}
+        ${tip('pencil', '<b>Manage each page</b> with its buttons in the top corner: download, duplicate, edit and delete.')}
+        ${tip('layout-grid', '<b>Grid Gallery</b> shows every outfit at once. Search and the character filters work in both views.')}
+        ${tip('download', '<b>Back up your outfits.</b> Export all saves a copy as a JSON file, and Import brings it back, on this browser or another one.')}
+      </ul>
+      <p class="formnote"><b>Good to know:</b> this logbook is saved only in this browser, so each browser and device keeps its own. The three Crimson Desert outfits are examples, so edit, duplicate or delete them as you like.</p>`,
+    actions: [{ label: 'Start browsing', value: true, cls: 'solid' }],
+  });
+}
+$('helpBtn').addEventListener('click', showWelcome);
+(() => {
+  let seen = false;
+  try { seen = localStorage.getItem(WELCOME_KEY) === '1'; } catch (e) {}
+  if (seen) return;
+  try { localStorage.setItem(WELCOME_KEY, '1'); } catch (e) {}
+  setTimeout(showWelcome, 500);
+})();
 /* =====================================================================
    Start
    ===================================================================== */
