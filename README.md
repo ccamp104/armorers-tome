@@ -8,6 +8,7 @@ An outfit logbook for games, where each game gets its own leather-bound book. De
 - **Grid Gallery.** Every outfit appears as a parchment card, and a colour strip shows which book it belongs to.
 - **Forge Outfit.** Saving an outfit adds a new page to the right book, then opens that book and turns to the new page. Choosing "New game…" creates a new book with its own cover colour.
 - **Outfit images.** Each outfit can have an optional image, cropped to a 3:4 portrait when it's added. It appears in a small frame beside the outfit name; tap the frame to enlarge it.
+- **Notes.** Notes can run to several paragraphs, and the line breaks you type are kept. When a note is longer than the space on its page, a *See more…* link opens the whole note.
 - **Page actions.** Each page has download (JSON), duplicate, edit and delete buttons.
 - **Characters and tags.** Each outfit can have several tags, such as the characters who wear it. Type a name and press Enter to add it.
 - **Filters.** You can search, filter by game, and filter by character or tag.
