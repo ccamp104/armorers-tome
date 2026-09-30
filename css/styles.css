@@ -278,7 +278,10 @@
     letter-spacing: .02em;
     color: var(--ink);
     display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;
+    overflow-wrap: normal;
   }
+  /* last resort for a very long word: split it across lines with a hyphen */
+  .pg-title.hyphenate { hyphens: auto; -webkit-hyphens: auto; }
   /* same height with or without a portrait, so the gear lists on facing pages line up */
   .pg-head { display: flex; align-items: flex-start; gap: .8em; min-height: 8.7em; }
   .pg-head .pg-title { flex: 1; min-width: 0; }
