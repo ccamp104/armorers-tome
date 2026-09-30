@@ -399,7 +399,7 @@ function createBook(theme, onChange) {
   let baseCast = null, signature = '', coverKey = '';
 
   let running = false, last = 0, waiters = [];
-  let focus = 0, focusTarget = 0, bookKey = '';
+  let focus = 0, focusTarget = 0, bookKey = '', focusAfter = null;
   const api = { theme, slide, spread: 0, leaves: 0, pages: [], get busy() { return running; } };
 
   function paintCover(urgent) {
@@ -538,6 +538,10 @@ function createBook(theme, onChange) {
         busy = true;
       }
     }
+    // on phones the book pans to the new page only once the turning leaf has nearly landed
+    if (focusAfter !== null && sheets.every(sh => sh.delay <= 0 && Math.abs(sh.t - sh.target) < 0.1)) {
+      focusTarget = focusAfter; focusAfter = null; busy = true;
+    }
     if (Math.abs(focusTarget - focus) > 0.001) {
       focus += (focusTarget - focus) * Math.min(1, dt / (reduced ? 40 : 140));
       busy = true;
@@ -553,9 +557,11 @@ function createBook(theme, onChange) {
     return new Promise(res => waiters.push(res));
   }
 
-  api.goTo = target => {
+  // thenFocus: which page (-1 left, 1 right) to pan to after the turn, on narrow screens
+  api.goTo = (target, thenFocus) => {
     target = Math.max(0, Math.min(api.leaves, target));
     const from = api.spread;
+    if (thenFocus !== undefined && dims.narrow) focusAfter = thenFocus;
     if (target === from) return run();
     const list = [];
     if (target > from) for (let k = from === 0 ? 0 : from + 1; k <= target; k++) list.push([k, 1]);
@@ -730,10 +736,31 @@ function syncBooks() {
 }
 dotsEl.addEventListener('click', e => { const b = e.target.closest('[data-i]'); if (b) goToBook(+b.dataset.i); });
 
+// The carousel loops: each book sits at its shortest distance around the ring from the one on show.
+// With exactly two books the other one sits on whichever side you are swiping towards.
+let lastDir = 0;
+function ringOffset(d, n, tie) {
+  d = ((d % n) + n) % n;
+  if (d * 2 > n) d -= n;
+  else if (d * 2 === n) d *= tie;
+  return d;
+}
 function place() {
   const lock = !browsing();
+  const n = books.length;
+  const tie = start && start.drag ? (dragDx < 0 ? 1 : -1) : (lastDir > 0 ? -1 : 1);
   books.forEach((book, i) => {
-    const rel = i - index + dragDx / gap;
+    const slot = n > 1 ? ringOffset(i - index, n, tie) : 0;
+    // a book wrapping round the ring jumps to its new side unseen, then fades in
+    if (book._slot !== undefined && Math.abs(slot - book._slot) > 1.5) {
+      book.slide.style.transition = 'none';
+      setStyle(book.slide, 'opacity', '0');
+      setStyle(book.slide, 'transform', `translateX(${(slot * gap).toFixed(1)}px) scale(0.86)`);
+      void book.slide.offsetWidth;
+      book.slide.style.transition = '';
+    }
+    book._slot = slot;
+    const rel = slot + dragDx / gap;
     const dist = Math.min(1, Math.abs(rel));
     const op = i === index ? 1 : lock ? 0 : 1 - 0.45 * dist;
     setStyle(book.slide, 'transform', `translateX(${(rel * gap).toFixed(1)}px) scale(${(1 - 0.14 * dist).toFixed(4)})`);
@@ -767,9 +794,11 @@ function updateTome() {
   place();
 }
 
-function goToBook(i) {
-  if (!browsing()) return false;
-  index = Math.max(0, Math.min(books.length - 1, i));
+function goToBook(i, dir) {
+  if (!browsing() || !books.length) return false;
+  const n = books.length, to = ((i % n) + n) % n;
+  if (to !== index) lastDir = dir || (ringOffset(to - index, n, 1) > 0 ? 1 : -1);
+  index = to;
   dragDx = 0;
   updateTome();
   return true;
@@ -780,6 +809,7 @@ async function showBook(game) {
   if (i < 0) return null;
   if (i !== index) {
     if (active() && active().spread > 0) await active().goTo(0);
+    lastDir = ringOffset(i - index, books.length, 1) > 0 ? 1 : -1;
     index = i; dragDx = 0; updateTome();
     await wait(reduced ? 0 : 420);
   }
@@ -790,8 +820,9 @@ async function showOutfit(game, id) {
   if (!book) return;
   const p = book.pages.findIndex(pg => pg.id === id);
   if (p < 0) return;
-  book.setFocus(p % 2 ? -1 : 1);
-  await book.goTo(Math.ceil(p / 2));
+  const side = p % 2 ? -1 : 1;
+  if (book.spread === 0) { book.setFocus(side); await book.goTo(Math.ceil(p / 2)); }
+  else await book.goTo(Math.ceil(p / 2), side);
 }
 
 let sized = null;
@@ -827,14 +858,13 @@ new ResizeObserver(sizeTome).observe($('tome'));
 function forward(book) {
   if (dims.narrow && book.spread > 0 && book.focusSide() < 0) return book.setFocus(1);
   if (!book.canNext()) return;
-  if (dims.narrow) book.setFocus(-1);
-  book.goTo(book.spread + 1);
+  book.goTo(book.spread + 1, -1);   // turn the leaf, then pan to the new left-hand page
 }
 function backward(book) {
   if (dims.narrow && book.spread > 0 && book.focusSide() > 0) return book.setFocus(-1);
+  if (book.spread === 1) return book.goTo(0);   // going back from the first page closes the book
   if (!book.canPrev()) return;
-  if (dims.narrow) book.setFocus(1);
-  book.goTo(book.spread - 1);
+  book.goTo(book.spread - 1, 1);    // turn back, then pan to the right-hand page
 }
 function openBook(book) {
   if (!book || book.spread > 0 || book.busy) return;
@@ -860,7 +890,7 @@ function updateHover() {
   if (onControl(e.target)) return setCursor('');
   const hot = book.spread === 0
     ? book.hit(e.clientX, e.clientY) || (browsing() && books.some(o => o !== book && o.hit(e.clientX, e.clientY)))
-    : (() => { const s = book.sideAt(e.clientX, e.clientY); return s === 1 ? book.canNext() || (dims.narrow && book.focusSide() < 0) : s === -1 ? book.canPrev() || (dims.narrow && book.focusSide() > 0) : false; })();
+    : (() => { const s = book.sideAt(e.clientX, e.clientY); return s === 1 ? book.canNext() || (dims.narrow && book.focusSide() < 0) : s === -1 ? book.spread > 0 : false; })();
   setCursor(hot ? 'pointer' : 'default');
 }
 stage.addEventListener('pointermove', e => {
@@ -872,8 +902,7 @@ stage.addEventListener('pointermove', e => {
   const dx = e.clientX - start.x;
   if (!start.drag && Math.abs(dx) > 8 && browsing() && books.length > 1) { start.drag = true; stage.classList.add('dragging'); setCursor('grabbing'); }
   if (start.drag) {
-    const edge = (index === 0 && dx > 0) || (index === books.length - 1 && dx < 0);
-    dragDx = edge ? dx * 0.3 : dx;
+    dragDx = dx;
     place();
   }
 });
@@ -885,9 +914,9 @@ function endPointer(e, cancelled) {
   if (s.drag) {
     const dx = e.clientX - s.x;
     const fast = Math.abs(dx) / (performance.now() - s.t) > 0.5;
-    const to = (dx < -gap * 0.18 || (fast && dx < -30)) ? index + 1 : (dx > gap * 0.18 || (fast && dx > 30)) ? index - 1 : index;
+    const dir = (dx < -gap * 0.18 || (fast && dx < -30)) ? 1 : (dx > gap * 0.18 || (fast && dx > 30)) ? -1 : 0;
     dragDx = 0;
-    goToBook(to);
+    if (dir) goToBook(index + dir, dir); else place();
     return;
   }
   if (cancelled) return;
@@ -896,7 +925,7 @@ function endPointer(e, cancelled) {
   if (book.spread === 0) {
     if (book.hit(x, y)) return openBook(book);
     const other = books.findIndex(o => o !== book && o.hit(x, y));
-    if (other >= 0) goToBook(other);
+    if (other >= 0) goToBook(other, books[other]._slot > 0 ? 1 : -1);
     return;
   }
   const side = book.sideAt(x, y);
@@ -911,8 +940,8 @@ addEventListener('keydown', e => {
   if (e.target.closest && e.target.closest('input, select, textarea')) return;
   const book = active();
   if (!book) return;
-  if (e.key === 'ArrowRight') { e.preventDefault(); book.spread ? forward(book) : goToBook(index + 1); }
-  else if (e.key === 'ArrowLeft') { e.preventDefault(); book.spread ? backward(book) : goToBook(index - 1); }
+  if (e.key === 'ArrowRight') { e.preventDefault(); book.spread ? forward(book) : goToBook(index + 1, 1); }
+  else if (e.key === 'ArrowLeft') { e.preventDefault(); book.spread ? backward(book) : goToBook(index - 1, -1); }
   else if (e.key === 'Escape') book.goTo(0);
   else if ((e.key === 'Enter' || e.key === ' ') && document.activeElement === stage) {
     e.preventDefault();
