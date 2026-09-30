@@ -282,8 +282,9 @@
   }
   /* last resort for a very long word: split it across lines with a hyphen */
   .pg-title.hyphenate { hyphens: auto; -webkit-hyphens: auto; }
-  /* same height with or without a portrait, so the gear lists on facing pages line up */
-  .pg-head { display: flex; align-items: flex-start; gap: .8em; min-height: 8.7em; }
+  /* with a portrait, the heading makes room for it; without one, the gear list moves up under the title */
+  .pg-head { display: flex; align-items: flex-start; gap: .8em; }
+  .pg-head.has-portrait { min-height: 8.7em; }
   .pg-head .pg-title { flex: 1; min-width: 0; }
   /* framed portrait beside the outfit name; tap to enlarge */
   .portrait {
@@ -322,7 +323,21 @@
     color: rgba(59, 42, 30, .82);
     display: -webkit-box; -webkit-line-clamp: 5; -webkit-box-orient: vertical; overflow: hidden;
   }
+  .notes { white-space: pre-line; }   /* keep the line breaks typed in the form */
   .notes::before { content: "\201C"; } .notes::after { content: "\201D"; }
+  .see-more {
+    align-self: flex-start;
+    margin: .15em 0 0; padding: 0;
+    border: 0; background: none;
+    color: var(--accent);
+    font: italic 600 .86em/1.3 var(--serif);
+    cursor: pointer;
+    text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: .18em;
+  }
+  .see-more:hover { text-decoration-thickness: 2px; }
+  .see-more:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 2px; }
+  .notes-full { margin: 0; white-space: pre-line; font-style: italic; font-size: 18px; line-height: 1.5; color: var(--ink); overflow-wrap: break-word; }
+  .fieldhint { font-style: italic; font-size: 14px; color: var(--ink-soft); }
   .pg-num { position: absolute; left: 0; right: 0; bottom: 2.6%; text-align: center; font-style: italic; font-size: .82em; color: var(--ink-soft); }
 
   .tp { margin: auto 0; text-align: center; display: grid; justify-items: center; gap: .5em; }
