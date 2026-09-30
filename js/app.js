@@ -3,7 +3,7 @@
 /* =====================================================================
    Icons, slots and sample data
    ===================================================================== */
-const ICONS = {"axe": "<path d=\"m14 12-8.5 8.5a2.12 2.12 0 1 1-3-3L11 9\" /> <path d=\"M15 13 9 7l4-4 6 6h3a8 8 0 0 1-7 7z\" />", "book-open": "<path d=\"M12 7v14\" /> <path d=\"M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z\" />", "copy": "<rect width=\"14\" height=\"14\" x=\"8\" y=\"8\" rx=\"2\" ry=\"2\" /> <path d=\"M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2\" />", "crown": "<path d=\"M11.562 3.266a.5.5 0 0 1 .876 0L15.39 8.87a1 1 0 0 0 1.516.294L21.183 5.5a.5.5 0 0 1 .798.519l-2.834 10.246a1 1 0 0 1-.956.734H5.81a1 1 0 0 1-.957-.734L2.02 6.02a.5.5 0 0 1 .798-.519l4.276 3.664a1 1 0 0 0 1.516-.294z\" /> <path d=\"M5 21h14\" />", "download": "<path d=\"M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4\" /> <polyline points=\"7 10 12 15 17 10\" /> <line x1=\"12\" x2=\"12\" y1=\"15\" y2=\"3\" />", "feather": "<path d=\"M12.67 19a2 2 0 0 0 1.416-.588l6.154-6.172a6 6 0 0 0-8.49-8.49L5.586 9.914A2 2 0 0 0 5 11.328V18a1 1 0 0 0 1 1z\" /> <path d=\"M16 8 2 22\" /> <path d=\"M17.5 15H9\" />", "footprints": "<path d=\"M4 16v-2.38C4 11.5 2.97 10.5 3 8c.03-2.72 1.49-6 4.5-6C9.37 2 10 3.8 10 5.5c0 3.11-2 5.66-2 8.68V16a2 2 0 1 1-4 0Z\" /> <path d=\"M20 20v-2.38c0-2.12 1.03-3.12 1-5.62-.03-2.72-1.49-6-4.5-6C14.63 6 14 7.8 14 9.5c0 3.11 2 5.66 2 8.68V20a2 2 0 1 0 4 0Z\" /> <path d=\"M16 17h4\" /> <path d=\"M4 13h4\" />", "hammer": "<path d=\"m15 12-8.373 8.373a1 1 0 1 1-3-3L12 9\" /> <path d=\"m18 15 4-4\" /> <path d=\"m21.5 11.5-1.914-1.914A2 2 0 0 1 19 8.172V7l-2.26-2.26a6 6 0 0 0-4.202-1.756L9 2.96l.92.82A6.18 6.18 0 0 1 12 8.4V10l2 2h1.172a2 2 0 0 1 1.414.586L18.5 14.5\" />", "hand": "<path d=\"M18 11V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2\" /> <path d=\"M14 10V4a2 2 0 0 0-2-2a2 2 0 0 0-2 2v2\" /> <path d=\"M10 10.5V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2v8\" /> <path d=\"M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15\" />", "layout-grid": "<rect width=\"7\" height=\"7\" x=\"3\" y=\"3\" rx=\"1\" /> <rect width=\"7\" height=\"7\" x=\"14\" y=\"3\" rx=\"1\" /> <rect width=\"7\" height=\"7\" x=\"14\" y=\"14\" rx=\"1\" /> <rect width=\"7\" height=\"7\" x=\"3\" y=\"14\" rx=\"1\" />", "pencil": "<path d=\"M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z\" /> <path d=\"m15 5 4 4\" />", "plus": "<path d=\"M5 12h14\" /> <path d=\"M12 5v14\" />", "scroll": "<path d=\"M19 17V5a2 2 0 0 0-2-2H4\" /> <path d=\"M8 21h12a2 2 0 0 0 2-2v-1a1 1 0 0 0-1-1H11a1 1 0 0 0-1 1v1a2 2 0 1 1-4 0V5a2 2 0 1 0-4 0v2a1 1 0 0 0 1 1h3\" />", "search": "<circle cx=\"11\" cy=\"11\" r=\"8\" /> <path d=\"m21 21-4.3-4.3\" />", "shield-half": "<path d=\"M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z\" /> <path d=\"M12 22V2\" />", "shield": "<path d=\"M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z\" />", "shirt": "<path d=\"M20.38 3.46 16 2a4 4 0 0 1-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.47a1 1 0 0 0 .99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 0 0 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.47a2 2 0 0 0-1.34-2.23z\" />", "sword": "<polyline points=\"14.5 17.5 3 6 3 3 6 3 17.5 14.5\" /> <line x1=\"13\" x2=\"19\" y1=\"19\" y2=\"13\" /> <line x1=\"16\" x2=\"20\" y1=\"16\" y2=\"20\" /> <line x1=\"19\" x2=\"21\" y1=\"21\" y2=\"19\" />", "trash-2": "<path d=\"M3 6h18\" /> <path d=\"M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6\" /> <path d=\"M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2\" /> <line x1=\"10\" x2=\"10\" y1=\"11\" y2=\"17\" /> <line x1=\"14\" x2=\"14\" y1=\"11\" y2=\"17\" />", "upload": "<path d=\"M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4\" /> <polyline points=\"17 8 12 3 7 8\" /> <line x1=\"12\" x2=\"12\" y1=\"3\" y2=\"15\" />", "x": "<path d=\"M18 6 6 18\" /> <path d=\"m6 6 12 12\" />"};
+const ICONS = {"axe": "<path d=\"m14 12-8.5 8.5a2.12 2.12 0 1 1-3-3L11 9\" /> <path d=\"M15 13 9 7l4-4 6 6h3a8 8 0 0 1-7 7z\" />", "book-open": "<path d=\"M12 7v14\" /> <path d=\"M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z\" />", "copy": "<rect width=\"14\" height=\"14\" x=\"8\" y=\"8\" rx=\"2\" ry=\"2\" /> <path d=\"M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2\" />", "crown": "<path d=\"M11.562 3.266a.5.5 0 0 1 .876 0L15.39 8.87a1 1 0 0 0 1.516.294L21.183 5.5a.5.5 0 0 1 .798.519l-2.834 10.246a1 1 0 0 1-.956.734H5.81a1 1 0 0 1-.957-.734L2.02 6.02a.5.5 0 0 1 .798-.519l4.276 3.664a1 1 0 0 0 1.516-.294z\" /> <path d=\"M5 21h14\" />", "download": "<path d=\"M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4\" /> <polyline points=\"7 10 12 15 17 10\" /> <line x1=\"12\" x2=\"12\" y1=\"15\" y2=\"3\" />", "feather": "<path d=\"M12.67 19a2 2 0 0 0 1.416-.588l6.154-6.172a6 6 0 0 0-8.49-8.49L5.586 9.914A2 2 0 0 0 5 11.328V18a1 1 0 0 0 1 1z\" /> <path d=\"M16 8 2 22\" /> <path d=\"M17.5 15H9\" />", "footprints": "<path d=\"M4 16v-2.38C4 11.5 2.97 10.5 3 8c.03-2.72 1.49-6 4.5-6C9.37 2 10 3.8 10 5.5c0 3.11-2 5.66-2 8.68V16a2 2 0 1 1-4 0Z\" /> <path d=\"M20 20v-2.38c0-2.12 1.03-3.12 1-5.62-.03-2.72-1.49-6-4.5-6C14.63 6 14 7.8 14 9.5c0 3.11 2 5.66 2 8.68V20a2 2 0 1 0 4 0Z\" /> <path d=\"M16 17h4\" /> <path d=\"M4 13h4\" />", "hammer": "<path d=\"m15 12-8.373 8.373a1 1 0 1 1-3-3L12 9\" /> <path d=\"m18 15 4-4\" /> <path d=\"m21.5 11.5-1.914-1.914A2 2 0 0 1 19 8.172V7l-2.26-2.26a6 6 0 0 0-4.202-1.756L9 2.96l.92.82A6.18 6.18 0 0 1 12 8.4V10l2 2h1.172a2 2 0 0 1 1.414.586L18.5 14.5\" />", "hand": "<path d=\"M18 11V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2\" /> <path d=\"M14 10V4a2 2 0 0 0-2-2a2 2 0 0 0-2 2v2\" /> <path d=\"M10 10.5V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2v8\" /> <path d=\"M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15\" />", "layout-grid": "<rect width=\"7\" height=\"7\" x=\"3\" y=\"3\" rx=\"1\" /> <rect width=\"7\" height=\"7\" x=\"14\" y=\"3\" rx=\"1\" /> <rect width=\"7\" height=\"7\" x=\"14\" y=\"14\" rx=\"1\" /> <rect width=\"7\" height=\"7\" x=\"3\" y=\"14\" rx=\"1\" />", "pencil": "<path d=\"M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z\" /> <path d=\"m15 5 4 4\" />", "plus": "<path d=\"M5 12h14\" /> <path d=\"M12 5v14\" />", "scroll": "<path d=\"M19 17V5a2 2 0 0 0-2-2H4\" /> <path d=\"M8 21h12a2 2 0 0 0 2-2v-1a1 1 0 0 0-1-1H11a1 1 0 0 0-1 1v1a2 2 0 1 1-4 0V5a2 2 0 1 0-4 0v2a1 1 0 0 0 1 1h3\" />", "search": "<circle cx=\"11\" cy=\"11\" r=\"8\" /> <path d=\"m21 21-4.3-4.3\" />", "shield-half": "<path d=\"M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z\" /> <path d=\"M12 22V2\" />", "shield": "<path d=\"M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z\" />", "shirt": "<path d=\"M20.38 3.46 16 2a4 4 0 0 1-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.47a1 1 0 0 0 .99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 0 0 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.47a2 2 0 0 0-1.34-2.23z\" />", "sword": "<polyline points=\"14.5 17.5 3 6 3 3 6 3 17.5 14.5\" /> <line x1=\"13\" x2=\"19\" y1=\"19\" y2=\"13\" /> <line x1=\"16\" x2=\"20\" y1=\"16\" y2=\"20\" /> <line x1=\"19\" x2=\"21\" y1=\"21\" y2=\"19\" />", "trash-2": "<path d=\"M3 6h18\" /> <path d=\"M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6\" /> <path d=\"M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2\" /> <line x1=\"10\" x2=\"10\" y1=\"11\" y2=\"17\" /> <line x1=\"14\" x2=\"14\" y1=\"11\" y2=\"17\" />", "upload": "<path d=\"M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4\" /> <polyline points=\"17 8 12 3 7 8\" /> <line x1=\"12\" x2=\"12\" y1=\"3\" y2=\"15\" />", "x": "<path d=\"M18 6 6 18\" /> <path d=\"m6 6 12 12\" />", "image-plus": "<path d=\"M16 5h6\" /> <path d=\"M19 2v6\" /> <path d=\"M21 11.5V19a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7.5\" /> <path d=\"m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21\" /> <circle cx=\"9\" cy=\"9\" r=\"2\" />", "zoom-in": "<circle cx=\"11\" cy=\"11\" r=\"8\" /> <line x1=\"21\" x2=\"16.65\" y1=\"21\" y2=\"16.65\" /> <line x1=\"11\" x2=\"11\" y1=\"8\" y2=\"14\" /> <line x1=\"8\" x2=\"14\" y1=\"11\" y2=\"11\" />", "zoom-out": "<circle cx=\"11\" cy=\"11\" r=\"8\" /> <line x1=\"21\" x2=\"16.65\" y1=\"21\" y2=\"16.65\" /> <line x1=\"8\" x2=\"14\" y1=\"11\" y2=\"11\" />", "image": "<rect width=\"18\" height=\"18\" x=\"3\" y=\"3\" rx=\"2\" ry=\"2\" /> <circle cx=\"9\" cy=\"9\" r=\"2\" /> <path d=\"m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21\" />"};
 const icon = n => `<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICONS[n] || ''}</svg>`;
 document.querySelectorAll('[data-icon]').forEach(el => el.insertAdjacentHTML('afterbegin', icon(el.dataset.icon)));
 
@@ -21,17 +21,17 @@ const SLOTS = [
 
 // shown the first time the logbook opens in a browser with no saved outfits
 const SAMPLE_OUTFITS = [
-  { id: 'outfit-1', name: 'Frostforged Duskwarden', game: 'Crimson Desert', tag: 'Kliff',
-    notes: 'Starter outfit with Salamander helm and Chain-draped Kuku Ice plate armour',
-    slots: { headgear: "Unyielding Hero's Plate Helm", chest: 'Kuku Ice-Resistant Armor', cloak: 'Bedure Chain Cloak', gloves: 'Plate Gloves of the Shadows', legs: '', boots: 'Plate Boots of the Shadows', weapon1: 'Soul Spear', weapon2: 'Hollow Visage', shieldWeapon3: 'Red Needle' },
+  { id: 'outfit-1', name: 'Default Outfit 1', game: 'Crimson Desert', tags: ['Kliff'],
+    notes: 'Select edit outfit, then add armor pieces as needed. Every equipment slot is a text box for you to edit. Feel free to leave slots empty.',
+    slots: { headgear: 'Default helmet', chest: 'Default Armor', cloak: 'Default Cloak', gloves: 'Default Gloves', legs: 'Default Pants', boots: 'Default Boots', weapon1: 'Default Primary Weapon', weapon2: 'Default Secondary Weapon', shieldWeapon3: 'Default Shield' },
     createdAt: 1 },
-  { id: 'outfit-2', name: 'The Static Wyvernbane', game: 'Crimson Desert', tag: 'Oongka',
-    notes: 'Stormbound lizard tracker and wyvern hunter',
-    slots: { headgear: 'Lizard Leather Helm', chest: 'Valortread Plate Armor', cloak: 'Frostcursed Plate Cloak', gloves: "Champion's Plate Gloves", legs: '', boots: 'Valortread Plate Boots', weapon1: 'Sigremon Greataxe', weapon2: 'Unarmed Combat', shieldWeapon3: '' },
+  { id: 'outfit-2', name: 'Default Outfit 2', game: 'Crimson Desert', tags: ['Oongka'],
+    notes: 'Tags, such as the character who wears an outfit, let you filter your pages. Add several by pressing Enter after each one.',
+    slots: { headgear: 'Default helmet', chest: 'Default Armor', cloak: 'Default Cloak', gloves: 'Default Gloves', legs: 'Default Pants', boots: 'Default Boots', weapon1: 'Default Primary Weapon', weapon2: 'Default Secondary Weapon', shieldWeapon3: '' },
     createdAt: 2 },
-  { id: 'outfit-3', name: 'Regal Radiant Ranger', game: 'Crimson Desert', tag: 'Damiane',
-    notes: 'Light agile scout with Light of the Battlefield armour',
-    slots: { headgear: "Wanderer of Faith's Plate Helm", chest: 'Light of the Battlefield Plate Armor', cloak: 'Wanderer of Faith Leather Cloak', gloves: 'Demenissian Uniform Leather Gloves', legs: '', boots: "Wanderer of Faith's Leather Boots", weapon1: 'Sword of Starlight', weapon2: 'Arben Greatsword', shieldWeapon3: 'Demenissian Gold-Decorated Shield' },
+  { id: 'outfit-3', name: 'Default Outfit 3', game: 'Crimson Desert', tags: ['Damiane'],
+    notes: 'Add an image in edit outfit, then crop it to fit the frame beside the name. Empty slots, like this outfit\'s pants and shield, are left off the page.',
+    slots: { headgear: 'Default helmet', chest: 'Default Armor', cloak: 'Default Cloak', gloves: 'Default Gloves', legs: '', boots: 'Default Boots', weapon1: 'Default Primary Weapon', weapon2: 'Default Secondary Weapon', shieldWeapon3: '' },
     createdAt: 3 },
 ];
 
@@ -41,6 +41,15 @@ const rng = seed => { seed = (Math.abs(seed) % 2147483646) + 1; return () => (se
 const hash = s => { let h = 7; for (const c of String(s)) h = (h * 31 + c.charCodeAt(0)) | 0; return Math.abs(h); };
 const newId = () => 'o_' + Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
 
+// tidy a list of tags: trimmed, no blanks, no repeats (ignoring case), at most 12
+function normTags(list) {
+  const out = [];
+  (list || []).forEach(t => {
+    t = String(t || '').trim().slice(0, 40);
+    if (t && !out.some(x => x.toLowerCase() === t.toLowerCase()) && out.length < 12) out.push(t);
+  });
+  return out;
+}
 function normalizeOutfit(o) {
   const s = (o && o.slots) || {};
   const slots = {};
@@ -49,11 +58,162 @@ function normalizeOutfit(o) {
     id: /^[A-Za-z0-9_.~:@+-]{1,120}$/.test(String(o.id || '')) && o.id !== 'meta' ? String(o.id) : newId(),
     name: String(o.name || 'Untitled outfit').slice(0, 140),
     game: String(o.game || 'Crimson Desert').trim().slice(0, 80) || 'Crimson Desert',
-    tag: String(o.tag || '').trim().slice(0, 60),
+    // older saves and exports have a single "tag"; they become a one-item list
+    tags: normTags(Array.isArray(o.tags) ? o.tags : typeof o.tag === 'string' ? o.tag.split(',') : []),
     notes: String(o.notes || '').slice(0, 1200),
     slots,
     createdAt: Number(o.createdAt) || Date.now(),
+    // the picture itself lives in IndexedDB; the outfit only remembers which version to show
+    image: o.image && Number(o.image.v) ? { v: Number(o.image.v) } : null,
   };
+}
+
+/* =====================================================================
+   Outfit images
+   Each image is cropped to 3:4 when it is added and saved twice in the
+   browser's IndexedDB: a 450 x 600 copy for the enlarged view and a
+   180 x 240 thumbnail for the page. Nothing loads until it is on screen.
+   ===================================================================== */
+const IMG_FULL_W = 450, IMG_THUMB_W = 180;
+const IMG_MAX_UPLOAD = 5 * 1024 * 1024;   // largest photo you can pick (5 MB); it's shrunk well below this when saved
+const images = {
+  dbp: null,
+  open() {
+    if (!this.dbp) this.dbp = new Promise((resolve, reject) => {
+      if (!window.indexedDB) return reject(new Error('IndexedDB unavailable'));
+      const req = indexedDB.open('armorer_images_v1', 1);
+      req.onupgradeneeded = () => req.result.createObjectStore('images');
+      req.onsuccess = () => resolve(req.result);
+      req.onerror = () => reject(req.error);
+    });
+    return this.dbp;
+  },
+  async run(mode, fn) {
+    const db = await this.open();
+    return new Promise((resolve, reject) => {
+      const tx = db.transaction('images', mode);
+      const req = fn(tx.objectStore('images'));
+      tx.oncomplete = () => resolve(req ? req.result : undefined);
+      tx.onerror = tx.onabort = () => reject(tx.error);
+    });
+  },
+  // Pictures are stored as raw bytes rather than Blobs: Safari refuses to store Blobs in some modes, such as private browsing.
+  async get(id) {
+    const r = await this.run('readonly', st => st.get(id));
+    if (!r) return r;
+    const blob = v => v instanceof Blob ? v : v && v.data ? new Blob([v.data], { type: v.type }) : null;
+    return { full: blob(r.full), thumb: blob(r.thumb) };
+  },
+  async put(id, rec) {
+    const raw = async b => ({ type: b.type, data: await b.arrayBuffer() });
+    const stored = { full: await raw(rec.full), thumb: await raw(rec.thumb) };
+    return this.run('readwrite', st => st.put(stored, id));
+  },
+  del(id) { return this.run('readwrite', st => st.delete(id)); },
+  clear() { return this.run('readwrite', st => st.clear()); },
+};
+let imagesAvailable = true;
+images.open().catch(() => { imagesAvailable = false; });
+let persistAsked = false;
+function keepStorage() {   // ask the browser not to clear stored images when space runs low
+  if (persistAsked) return;
+  persistAsked = true;
+  try { navigator.storage && navigator.storage.persist && navigator.storage.persist().catch(() => {}); } catch (e) {}
+}
+
+const thumbURLs = new Map();   // "id:version" -> Promise of an object URL
+function thumbURL(id, v) {
+  const k = id + ':' + v;
+  if (!thumbURLs.has(k)) thumbURLs.set(k, images.get(id).then(r => r && r.thumb ? URL.createObjectURL(r.thumb) : null, () => null));
+  return thumbURLs.get(k);
+}
+function forgetImage(id) {
+  for (const [k, p] of thumbURLs) if (k.startsWith(id + ':')) { p.then(u => u && URL.revokeObjectURL(u)); thumbURLs.delete(k); }
+}
+// fill in any portraits inside root that have not been loaded yet
+function hydratePortraits(root) {
+  if (!root) return;
+  root.querySelectorAll('img[data-pid]:not([data-loading])').forEach(img => {
+    img.dataset.loading = '1';
+    thumbURL(img.dataset.pid, img.dataset.v).then(u => {
+      if (!u) { const f = img.closest('.portrait'); if (f) f.classList.add('missing'); return; }
+      img.onload = () => img.classList.add('ready');
+      img.src = u;
+    });
+  });
+}
+const portraitHTML = o => !o.image ? '' :
+  `<button type="button" class="portrait" data-act="view" data-id="${esc(o.id)}" title="Enlarge image" aria-label="Enlarge the image of ${esc(o.name)}"><img alt="" data-pid="${esc(o.id)}" data-v="${o.image.v}" decoding="async"></button>`;
+
+function loadImage(blob) {
+  return new Promise((resolve, reject) => {
+    const url = URL.createObjectURL(blob);
+    const img = new Image();
+    img.onload = () => resolve({ img, url });
+    img.onerror = () => { URL.revokeObjectURL(url); reject(new Error('unreadable image')); };
+    img.src = url;
+  });
+}
+const canvasBlob = c => new Promise(resolve => c.toBlob(b => {
+  if (b && b.type === 'image/webp') resolve(b);
+  else c.toBlob(j => resolve(j), 'image/jpeg', 0.84);   // browsers that cannot write WebP fall back to JPEG
+}, 'image/webp', 0.8));
+// scale a region of src down to w x h, halving in steps so large photos stay crisp
+function drawRegion(src, sx, sy, sw, sh, w, h) {
+  let cur = src, cx = sx, cy = sy, cw = sw, ch = sh;
+  while (cw / w > 2.2) {
+    const t = document.createElement('canvas');
+    t.width = Math.round(cw / 2); t.height = Math.round(ch / 2);
+    const g = t.getContext('2d'); g.imageSmoothingQuality = 'high';
+    g.drawImage(cur, cx, cy, cw, ch, 0, 0, t.width, t.height);
+    cur = t; cx = 0; cy = 0; cw = t.width; ch = t.height;
+  }
+  const c = document.createElement('canvas');
+  c.width = w; c.height = h;
+  const g = c.getContext('2d'); g.imageSmoothingQuality = 'high';
+  g.drawImage(cur, cx, cy, cw, ch, 0, 0, w, h);
+  return c;
+}
+async function makeImageRecord(src, r) {
+  const fw = Math.max(30, Math.min(IMG_FULL_W, Math.round(r.sw))), tw = Math.min(IMG_THUMB_W, fw);
+  const [full, thumb] = await Promise.all([
+    canvasBlob(drawRegion(src, r.sx, r.sy, r.sw, r.sh, fw, Math.round(fw * 4 / 3))),
+    canvasBlob(drawRegion(src, r.sx, r.sy, r.sw, r.sh, tw, Math.round(tw * 4 / 3))),
+  ]);
+  if (!full || !thumb) throw new Error('encode failed');
+  return { full, thumb };
+}
+// the largest centred 3:4 area of a w x h picture
+function centreCrop(w, h) {
+  const sw = Math.min(w, h * 0.75), sh = sw * 4 / 3;
+  return { sx: (w - sw) / 2, sy: (h - sh) / 2, sw, sh };
+}
+const blobToDataURL = blob => new Promise((resolve, reject) => {
+  const fr = new FileReader();
+  fr.onload = () => resolve(fr.result);
+  fr.onerror = () => reject(fr.error);
+  fr.readAsDataURL(blob);
+});
+async function recordFromDataURL(dataURL) {
+  const blob = await (await fetch(dataURL)).blob();
+  const { img, url } = await loadImage(blob);
+  try {
+    const w = img.naturalWidth, h = img.naturalHeight;
+    const r = centreCrop(w, h);
+    const rec = await makeImageRecord(img, r);
+    // an image this app exported is already the right size, so keep it as it is
+    if (w <= IMG_FULL_W && h <= IMG_FULL_W * 4 / 3 + 1 && Math.abs(w / h - 0.75) < 0.01) rec.full = blob;
+    return rec;
+  } finally { URL.revokeObjectURL(url); }
+}
+// an outfit as it goes into a JSON file, with its image written out as a data URL
+async function outfitForExport(o) {
+  const out = { ...o, slots: { ...o.slots } };
+  delete out.image;
+  if (o.image) {
+    try { const rec = await images.get(o.id); if (rec && rec.full) out.image = await blobToDataURL(rec.full); } catch (e) {}
+  }
+  return out;
 }
 
 /* =====================================================================
@@ -290,11 +450,14 @@ function outfitBody(o, num, { showGame = false, theme } = {}) {
   const list = g => filled.filter(s => s.group === g).map(s =>
     `<li>${icon(s.icon)}<span class="lbl">${s.label}</span><span class="val">${esc(o.slots[s.key])}</span></li>`).join('');
   const armour = list('armour'), weapons = list('weapons');
-  const meta = `${showGame ? `<span class="card-game">${esc(theme ? theme.name : o.game)}</span>` : ''}${o.tag ? `<span class="chip">${esc(o.tag)}</span>` : ''}`;
+  const shown = o.tags.slice(0, 3), rest = o.tags.slice(3);
+  const chips = shown.map(t => `<span class="chip">${esc(t)}</span>`).join('') +
+    (rest.length ? `<span class="chip more" title="${esc(rest.join(', '))}">+${rest.length}</span>` : '');
+  const meta = `${showGame ? `<span class="card-game">${esc(theme ? theme.name : o.game)}</span>` : ''}${chips}`;
   return `
     <div class="fox" style="${foxStyle(hash(o.id))}"></div>
     <div class="pg-top"><div class="card-meta">${meta}</div>${actionsHTML(o.id, o.name)}</div>
-    <h3 class="pg-title">${esc(o.name)}</h3>
+    <div class="pg-head"><h3 class="pg-title">${esc(o.name)}</h3>${portraitHTML(o)}</div>
     ${RULE}
     ${armour ? `<div class="grp">Armour and apparel</div><ul class="slots">${armour}</ul>` : ''}
     ${weapons ? `<div class="grp">Weapons and auxiliaries</div><ul class="slots">${weapons}</ul>` : ''}
@@ -452,6 +615,8 @@ function createBook(theme, onChange) {
     sheets.forEach(sh => { sh.t = sh.target = (s > 0 && sh.k <= s) ? 1 : 0; sh.delay = 0; });
     sheets[0].drawn = NaN;
     render(true); inertPages();
+    sheets.forEach(sh => { if (sh.k > 0 && sh.vis) hydratePortraits(sh.el); });
+    hydratePortraits(base);
   };
 
   api.layout = urgent => {
@@ -486,7 +651,7 @@ function createBook(theme, onChange) {
       // leaves buried under the stacks are hidden; only the open spread and pages next to a turning leaf are drawn
       if (k > 0) {
         const vis = move[k] || move[k - 1] || !!move[k + 1] || (sp > 0 && (k === sp || k === sp + 1));
-        if (vis !== sh.vis) { sh.vis = vis; sh.el.style.visibility = vis ? '' : 'hidden'; }
+        if (vis !== sh.vis) { sh.vis = vis; sh.el.style.visibility = vis ? '' : 'hidden'; if (vis) hydratePortraits(sh.el); }
       }
       const p = ps[k];
       if (p > 0 && p < 1) anyTurning = true;
@@ -641,11 +806,11 @@ async function ensureGameColors() {
   return true;
 }
 
-const tagMatch = o => state.tag === 'all' || norm(o.tag) === norm(state.tag);
+const tagMatch = o => state.tag === 'all' || o.tags.some(t => norm(t) === norm(state.tag));
 function searchMatch(o) {
   const q = norm(state.search);
   if (!q) return true;
-  return [o.name, o.game, o.tag, o.notes, ...Object.values(o.slots)].some(v => norm(v).includes(q));
+  return [o.name, o.game, ...o.tags, o.notes, ...Object.values(o.slots)].some(v => norm(v).includes(q));
 }
 const byGame = name => store.outfits.filter(o => norm(o.game) === norm(name)).sort((a, b) => a.createdAt - b.createdAt);
 const narrowing = () => !!norm(state.search) || state.tag !== 'all';
@@ -660,7 +825,7 @@ function renderFilters() {
   sel.innerHTML = `<option value="all">All games</option>` + games.map(g => `<option value="${esc(g)}"${norm(g) === norm(state.game) ? ' selected' : ''}>${esc(g)}</option>`).join('');
   const pool = state.game === 'all' ? store.outfits : byGame(state.game);
   const tags = [];
-  pool.forEach(o => { if (o.tag && !tags.some(t => norm(t) === norm(o.tag))) tags.push(o.tag); });
+  pool.forEach(o => o.tags.forEach(tg => { if (!tags.some(t => norm(t) === norm(tg))) tags.push(tg); }));
   tags.sort((a, b) => a.localeCompare(b));
   if (state.tag !== 'all' && !tags.some(t => norm(t) === norm(state.tag))) state.tag = 'all';
   $('tags').innerHTML = tags.length ? `<span class="tags-label">Character</span>` +
@@ -961,7 +1126,17 @@ function renderGallery() {
     const theme = themeFor(o.game);
     return `<article class="card" data-card="${esc(o.id)}" style="--accent:${theme.accent}"><div class="pg right">${outfitBody(o, 0, { showGame: true, theme })}</div></article>`;
   }).join('');
+  watchGallery();
   return list.length;
+}
+let galleryWatch = null;
+function watchGallery() {
+  if (galleryWatch) galleryWatch.disconnect();
+  if (!('IntersectionObserver' in window)) return hydratePortraits($('gal'));
+  galleryWatch = new IntersectionObserver(entries => entries.forEach(en => {
+    if (en.isIntersecting) { hydratePortraits(en.target); galleryWatch.unobserve(en.target); }
+  }), { root: $('gallery'), rootMargin: '400px 0px' });
+  $('gal').querySelectorAll('.card').forEach(c => { if (c.querySelector('img[data-pid]')) galleryWatch.observe(c); });
 }
 
 /* =====================================================================
@@ -1028,7 +1203,8 @@ document.addEventListener('click', e => {
   e.stopPropagation();
   const id = b.dataset.id, o = store.outfits.find(x => x.id === id);
   switch (b.dataset.act) {
-    case 'download': if (o) saveJSON(`outfit-${slug(o.name)}.json`, o, `Downloaded "${o.name}"`); break;
+    case 'download': if (o) outfitForExport(o).then(data => saveJSON(`outfit-${slug(o.name)}.json`, data, `Downloaded "${o.name}"`)); break;
+    case 'view': if (o) viewImage(o); break;
     case 'duplicate': if (o) duplicate(o); break;
     case 'edit': if (o) openForm(o); break;
     case 'delete': if (o) confirmDelete(o); break;
@@ -1038,7 +1214,10 @@ document.addEventListener('click', e => {
 const slug = s => norm(s).replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') || 'outfit';
 
 async function duplicate(o) {
-  const copy = { ...o, slots: { ...o.slots }, id: newId(), name: `${o.name} (copy)`, createdAt: Date.now() };
+  const copy = { ...o, slots: { ...o.slots }, id: newId(), name: `${o.name} (copy)`, createdAt: Date.now(), image: null };
+  if (o.image) {   // the copy gets its own copy of the image
+    try { const rec = await images.get(o.id); if (rec) { await images.put(copy.id, rec); copy.image = { v: Date.now() }; } } catch (e) {}
+  }
   pendingShow = { game: copy.game, id: copy.id };
   try { await store.put(copy); toast(`Duplicated "${o.name}" onto a new page`); }
   catch (err) { pendingShow = null; toast('Could not save the copy. Try again in a moment.', true); }
@@ -1050,7 +1229,11 @@ async function confirmDelete(o) {
     actions: [{ label: 'Keep it', value: false }, { label: 'Delete outfit', value: true, cls: 'warn' }],
   });
   if (!ok) return;
-  try { await store.remove(o.id); toast(`Deleted "${o.name}"`); }
+  try {
+    await store.remove(o.id);
+    if (o.image) { forgetImage(o.id); images.del(o.id).catch(() => {}); }
+    toast(`Deleted "${o.name}"`);
+  }
   catch (err) { toast('Could not delete that outfit. Try again in a moment.', true); }
 }
 
@@ -1075,6 +1258,8 @@ function overlay(html, onKey) {
   const prev = document.activeElement;
   const close = () => { ov.remove(); document.removeEventListener('keydown', key, true); if (prev && prev.focus) prev.focus(); };
   const key = e => {
+    const all = document.querySelectorAll('.overlay');
+    if (all[all.length - 1] !== ov) return;   // a dialog opened on top of this one handles the key
     if (e.key === 'Escape') { e.stopPropagation(); onKey && onKey('escape'); }
     if (e.key === 'Tab') {   // keep focus inside the dialog
       const f = [...ov.querySelectorAll('button, input, select, textarea')].filter(el => !el.disabled && el.offsetParent);
@@ -1110,6 +1295,206 @@ function dialog({ title, body, actions, choices }) {
 }
 
 /* =====================================================================
+   Enlarged image viewer
+   ===================================================================== */
+async function viewImage(o) {
+  let rec = null;
+  try { rec = await images.get(o.id); } catch (e) {}
+  if (!rec || !rec.full) return toast('This image is not saved in this browser.', true);
+  const url = URL.createObjectURL(rec.full);
+  let v, closed = false;
+  const close = () => { if (closed) return; closed = true; v.close(); URL.revokeObjectURL(url); };
+  v = overlay(`
+    <figure class="viewer" role="dialog" aria-modal="true" aria-label="${esc(o.name)}">
+      <img src="${url}" alt="${esc(o.name)}">
+      <figcaption><span>${esc(o.name)}</span><button type="button" class="icon-btn" data-close aria-label="Close">${icon('x')}</button></figcaption>
+    </figure>`, close);
+  v.ov.addEventListener('click', e => { if (e.target === v.ov || e.target.closest('[data-close]') || e.target.tagName === 'IMG') close(); });
+  v.ov.querySelector('[data-close]').focus();
+}
+
+/* =====================================================================
+   Image field in the forge / edit form: pick, drag to crop, zoom
+   ===================================================================== */
+function tooLarge(file) {
+  const mb = (file.size / 1024 / 1024).toFixed(1);
+  return dialog({
+    title: 'That image is too large',
+    body: `<div class="warnbox"><p><i>${esc(file.name)}</i> is ${mb} MB. Images can be up to 5 MB.</p></div>
+      <p class="formnote" style="margin-top:12px">To make it smaller, take a screenshot of the picture instead, or save it as a JPEG. Any image under 5 MB is resized and compressed when it's added, so the size saved in your logbook is always small.</p>`,
+    actions: [{ label: 'Cancel', value: false }, { label: 'Choose another image', value: true, cls: 'solid' }],
+  });
+}
+function imageEditor(root, existing) {
+  const wrap = root.querySelector('.imgwrap'), input = root.querySelector('input[type="file"]');
+  let src = null, srcURL = null, dirty = false, removed = false;
+  let cx = 0.5, cy = 0.5, z = 1;            // frame centre (0–1 of the picture) and zoom
+  let box = null, drag = null, ro = null;
+
+  function clear() { if (srcURL) URL.revokeObjectURL(srcURL); src = srcURL = null; if (ro) { ro.disconnect(); ro = null; } }
+  function showEmpty() {
+    clear();
+    wrap.innerHTML = imagesAvailable
+      ? `<button type="button" class="dropzone" data-pick>${icon('image-plus')}<b>Add an image</b><span>Drop a screenshot here or choose a file, up to 5 MB. You'll crop it to fit the page.</span></button>`
+      : `<p class="formnote">Images can't be saved in this browser, so this outfit will be text only.</p>`;
+  }
+  function showEditor() {
+    wrap.innerHTML = `
+      <div class="crop">
+        <div class="cropper"><img src="${srcURL}" alt="" draggable="false"><div class="crop-frame" tabindex="0" role="group" aria-label="Crop frame. Drag it, or use the arrow keys to move it and plus or minus to zoom."></div></div>
+        <div class="crop-side">
+          <div class="portrait preview" style="--accent:#7c2c30"><canvas width="${IMG_THUMB_W}" height="${IMG_THUMB_W * 4 / 3}"></canvas></div>
+          <div class="crop-btns">
+            <button type="button" class="btn ink small" data-pick>${icon('upload')}Replace</button>
+            <button type="button" class="btn ink small" data-remove>${icon('trash-2')}Remove</button>
+          </div>
+        </div>
+      </div>
+      <label class="crop-zoom">${icon('zoom-out')}<input type="range" min="100" max="400" step="1" value="${Math.round(z * 100)}" aria-label="Zoom">${icon('zoom-in')}</label>`;
+    const cropper = wrap.querySelector('.cropper'), frame = wrap.querySelector('.crop-frame');
+    const preview = wrap.querySelector('canvas'), range = wrap.querySelector('input[type="range"]');
+    const nw = src.naturalWidth, nh = src.naturalHeight;
+
+    function layout() {
+      const avail = wrap.clientWidth < 520 ? wrap.clientWidth : wrap.clientWidth - 140;
+      const maxH = Math.min(320, Math.max(180, window.innerHeight * 0.38));
+      const k = Math.min(avail / nw, maxH / nh);
+      const w = Math.round(nw * k), h = Math.round(nh * k);
+      cropper.style.width = w + 'px'; cropper.style.height = h + 'px';
+      const fh = Math.min(h, w * 4 / 3) / z, fw = fh * 0.75;
+      const x = Math.max(0, Math.min(w - fw, cx * w - fw / 2)), y = Math.max(0, Math.min(h - fh, cy * h - fh / 2));
+      cx = (x + fw / 2) / w; cy = (y + fh / 2) / h;
+      Object.assign(frame.style, { left: x + 'px', top: y + 'px', width: fw + 'px', height: fh + 'px' });
+      box = { w, h, sx: x / w * nw, sy: y / h * nh, sw: fw / w * nw, sh: fh / h * nh };
+      const g = preview.getContext('2d');
+      g.imageSmoothingQuality = 'high';
+      g.clearRect(0, 0, preview.width, preview.height);
+      g.drawImage(src, box.sx, box.sy, box.sw, box.sh, 0, 0, preview.width, preview.height);
+    }
+    const moveTo = (px, py) => { cx = px / box.w; cy = py / box.h; dirty = true; layout(); };
+    cropper.addEventListener('pointerdown', e => {
+      const r = cropper.getBoundingClientRect();
+      const px = e.clientX - r.left, py = e.clientY - r.top;
+      const fr = frame.getBoundingClientRect();
+      const inside = e.clientX >= fr.left && e.clientX <= fr.right && e.clientY >= fr.top && e.clientY <= fr.bottom;
+      if (!inside) moveTo(px, py);           // tap outside the frame to jump it there
+      drag = { x: e.clientX, y: e.clientY, cx, cy };
+      cropper.setPointerCapture(e.pointerId);
+      frame.classList.add('dragging');
+      e.preventDefault();
+    });
+    cropper.addEventListener('pointermove', e => {
+      if (!drag) return;
+      cx = drag.cx + (e.clientX - drag.x) / box.w; cy = drag.cy + (e.clientY - drag.y) / box.h;
+      dirty = true; layout();
+    });
+    const end = () => { drag = null; frame.classList.remove('dragging'); };
+    cropper.addEventListener('pointerup', end);
+    cropper.addEventListener('pointercancel', end);
+    frame.addEventListener('keydown', e => {
+      const d = 0.02;
+      if (e.key === 'ArrowLeft') cx -= d; else if (e.key === 'ArrowRight') cx += d;
+      else if (e.key === 'ArrowUp') cy -= d; else if (e.key === 'ArrowDown') cy += d;
+      else if (e.key === '+' || e.key === '=') { z = Math.min(4, z + 0.1); range.value = Math.round(z * 100); }
+      else if (e.key === '-' || e.key === '_') { z = Math.max(1, z - 0.1); range.value = Math.round(z * 100); }
+      else return;
+      e.preventDefault(); dirty = true; layout();
+    });
+    range.addEventListener('input', () => { z = range.value / 100; dirty = true; layout(); });
+    ro = new ResizeObserver(layout);
+    ro.observe(wrap);
+    layout();
+  }
+  async function useBlob(blob, isNew) {
+    try {
+      const { img, url } = await loadImage(blob);
+      clear();
+      src = img; srcURL = url;
+      cx = cy = 0.5; z = 1;
+      dirty = isNew; removed = false;
+      showEditor();
+    } catch (e) { toast('That file could not be read as an image.', true); }
+  }
+  function pickFile(file) {
+    if (!file) return;
+    if (!/^image\//.test(file.type) && !/\.(jpe?g|png|webp|gif|bmp|avif|heic|heif)$/i.test(file.name)) return toast('Choose an image file, like a JPEG, PNG or WebP.', true);
+    if (file.size > IMG_MAX_UPLOAD) return tooLarge(file).then(again => { if (again) input.click(); });
+    useBlob(file, true);
+  }
+
+  root.addEventListener('click', e => {
+    if (e.target.closest('[data-pick]')) input.click();
+    if (e.target.closest('[data-remove]')) { removed = !!(existing && existing.image); dirty = false; showEmpty(); }
+  });
+  input.addEventListener('change', () => { pickFile(input.files[0]); input.value = ''; });
+  root.addEventListener('dragover', e => { if (!imagesAvailable) return; e.preventDefault(); root.classList.add('over'); });
+  root.addEventListener('dragleave', e => { if (!root.contains(e.relatedTarget)) root.classList.remove('over'); });
+  root.addEventListener('drop', e => {
+    if (!imagesAvailable) return;
+    e.preventDefault(); root.classList.remove('over');
+    pickFile(e.dataTransfer && e.dataTransfer.files[0]);
+  });
+
+  showEmpty();
+  if (existing && existing.image && imagesAvailable) {
+    images.get(existing.id).then(rec => { if (rec && rec.full && !src && !removed) useBlob(rec.full, false); }).catch(() => {});
+  }
+
+  return {
+    // what the form should do with the image when it is saved
+    async result() {
+      if (removed) return { removed: true };
+      if (!src || !dirty) return { keep: true };
+      return { rec: await makeImageRecord(src, box) };
+    },
+    dispose: clear,
+  };
+}
+
+/* =====================================================================
+   Tag box: type a name and press Enter (or a comma) to add it
+   ===================================================================== */
+function allTags() {
+  const out = [];
+  store.outfits.forEach(o => o.tags.forEach(t => { if (!out.some(x => norm(x) === norm(t))) out.push(t); }));
+  return out.sort((a, b) => a.localeCompare(b));
+}
+function tagInput(root, initial) {
+  const box = root.querySelector('.tagbox'), input = box.querySelector('input');
+  let tags = normTags(initial);
+  function draw() {
+    box.querySelectorAll('.tagchip').forEach(c => c.remove());
+    tags.forEach((t, i) => input.insertAdjacentHTML('beforebegin',
+      `<span class="tagchip">${esc(t)}<button type="button" data-untag="${i}" aria-label="Remove ${esc(t)}">${icon('x')}</button></span>`));
+    input.placeholder = tags.length ? 'Add another' : 'Type a name, press Enter';
+  }
+  function add(text) {
+    const before = tags.length;
+    tags = normTags([...tags, ...String(text).split(',')]);
+    input.value = '';
+    if (tags.length !== before) draw();
+  }
+  input.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ',') {
+      e.preventDefault();          // Enter adds a tag rather than saving the form
+      if (input.value.trim()) add(input.value);
+    } else if (e.key === 'Backspace' && !input.value && tags.length) {
+      tags.pop(); draw();
+    }
+  });
+  input.addEventListener('input', () => { if (input.value.includes(',')) add(input.value); });
+  input.addEventListener('change', () => { if (input.value.trim()) add(input.value); });   // picked from the suggestions
+  input.addEventListener('blur', () => { if (input.value.trim()) add(input.value); });
+  box.addEventListener('click', e => {
+    const x = e.target.closest('[data-untag]');
+    if (x) { tags.splice(+x.dataset.untag, 1); draw(); input.focus(); }
+    else if (e.target === box) input.focus();
+  });
+  draw();
+  return { value: () => normTags([...tags, input.value]) };
+}
+
+/* =====================================================================
    Forge / edit form
    ===================================================================== */
 function openForm(existing = null, presetGame = null) {
@@ -1118,8 +1503,8 @@ function openForm(existing = null, presetGame = null) {
   const slotField = s => `
     <label class="field"><span>${icon(s.icon)}${s.label}</span>
       <input name="slot_${s.key}" value="${esc(existing ? existing.slots[s.key] : '')}" placeholder="${esc(s.hint)}" maxlength="120"></label>`;
-  let o;
-  const close = () => o.close();
+  let o, editor;
+  const close = () => { o.close(); if (editor) editor.dispose(); };
   o = overlay(`
     <form class="sheet" role="dialog" aria-modal="true" aria-labelledby="formTitle" novalidate>
       <div class="sheet-head">
@@ -1127,6 +1512,11 @@ function openForm(existing = null, presetGame = null) {
         <button type="button" class="icon-btn" data-close aria-label="Close">${icon('x')}</button>
       </div>
       <div class="sheet-body">
+        <div class="imgfield">
+          <div class="flabel">${icon('image')}Outfit image <i>(optional)</i></div>
+          <div class="imgwrap"></div>
+          <input type="file" accept="image/*" hidden>
+        </div>
         <div class="fields">
           <label class="field"><span>Book</span>
             <select name="game">
@@ -1135,7 +1525,10 @@ function openForm(existing = null, presetGame = null) {
             </select></label>
           <label class="field" data-newgame hidden><span>New game title</span><input name="newgame" placeholder="e.g. Elden Ring" maxlength="60"></label>
           <label class="field" data-name><span>Outfit name</span><input name="name" required maxlength="140" value="${esc(existing ? existing.name : '')}" placeholder="e.g. Pywel Warrior Gear"></label>
-          <label class="field"><span>Character or tag</span><input name="tag" maxlength="60" value="${esc(existing ? existing.tag : '')}" placeholder="e.g. Kliff, Oongka, Damiane"></label>
+          <div class="field" data-tags><span>Characters or tags</span>
+            <div class="tagbox"><input maxlength="40" list="tagSuggest" autocomplete="off" aria-label="Add a character or tag" placeholder="Type a name, press Enter"></div>
+            <datalist id="tagSuggest">${allTags().map(t => `<option value="${esc(t)}">`).join('')}</datalist>
+          </div>
         </div>
         <p class="formnote">Fill in whichever slots this outfit uses; empty slots are left off the page.</p>
         <div class="formgrp">Armour and apparel</div>
@@ -1152,6 +1545,8 @@ function openForm(existing = null, presetGame = null) {
       </div>
     </form>`, close);
   const form = o.ov.querySelector('form');
+  editor = imageEditor(form.querySelector('.imgfield'), existing);
+  const tagger = tagInput(form.querySelector('[data-tags]'), existing ? existing.tags : []);
   const gameSel = form.elements.game, newWrap = form.querySelector('[data-newgame]');
   const toggleNew = () => { newWrap.hidden = gameSel.value !== '__new'; if (!newWrap.hidden) form.elements.newgame.focus(); };
   gameSel.addEventListener('change', toggleNew);
@@ -1171,15 +1566,30 @@ function openForm(existing = null, presetGame = null) {
     const slots = {};
     SLOTS.forEach(s => { slots[s.key] = f['slot_' + s.key].value.trim(); });
     const outfit = normalizeOutfit({
-      id: existing ? existing.id : newId(), name, game, tag: f.tag.value.trim(), notes: f.notes.value.trim(), slots,
+      id: existing ? existing.id : newId(), name, game, tags: tagger.value(), notes: f.notes.value.trim(), slots,
       createdAt: existing && norm(existing.game) === norm(game) ? existing.createdAt : Date.now(),
     });
     const submit = form.querySelector('[type="submit"]');
     submit.disabled = true;
+    let pic;
+    try { pic = await editor.result(); }
+    catch (err) { submit.disabled = false; return toast('Could not prepare that image. Try another one.', true); }
+    try {
+      if (pic.rec) {
+        await images.put(outfit.id, pic.rec);
+        forgetImage(outfit.id);
+        outfit.image = { v: Date.now() };
+        keepStorage();
+      } else outfit.image = pic.removed ? null : existing ? existing.image : null;
+    } catch (err) {
+      submit.disabled = false;
+      return toast('Could not save the image. The browser may be out of storage space.', true);
+    }
     try {
       if (!match) await ensureNewGame(game);
       if (!existing || norm(existing.game) !== norm(game)) pendingShow = { game, id: outfit.id };
       await store.put(outfit);
+      if (pic.removed) { forgetImage(outfit.id); images.del(outfit.id).catch(() => {}); }
       close();
       toast(existing ? `Saved changes to "${name}"` : `Added "${name}" to the ${game} book`);
     } catch (err) {
@@ -1206,13 +1616,22 @@ function saveJSON(filename, data, done) {
   setTimeout(() => URL.revokeObjectURL(url), 2000);
   toast(done);
 }
-$('exportAll').addEventListener('click', () => {
+$('exportAll').addEventListener('click', () => exportAllOutfits());
+async function exportAllOutfits() {
   if (!store.outfits.length) return toast('There are no outfits to export yet.', true);
-  saveJSON('armory-logbook-all.json', {
-    app: 'ArmorersTome', version: '3.0', exportedAt: new Date().toISOString(),
-    outfitsCount: store.outfits.length, games: store.meta.games, outfits: store.outfits,
-  }, `Exported ${store.outfits.length} ${store.outfits.length === 1 ? 'outfit' : 'outfits'}`);
-});
+  const n = store.outfits.length;
+  if (store.outfits.some(o => o.image)) toast('Preparing your export…');
+  const outfits = [];
+  for (const o of store.outfits) outfits.push(await outfitForExport(o));
+  const now = new Date(), pad = x => String(x).padStart(2, '0');
+  const stamp = `${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(now.getDate())}_${pad(now.getHours())}-${pad(now.getMinutes())}`;
+  saveJSON(`armory-logbook-${stamp}.json`, {
+    app: 'ArmorersTome', version: '3.2',
+    exportedAt: now.toISOString(),                                   // exact moment, in UTC
+    exportedAtLocal: now.toLocaleString(undefined, { dateStyle: 'full', timeStyle: 'short' }),   // your local date and time
+    outfitsCount: n, games: store.meta.games, outfits,
+  }, `Exported ${n} ${n === 1 ? 'outfit' : 'outfits'}`);
+}
 $('importAll').addEventListener('click', () => $('fileInput').click());
 $('fileInput').addEventListener('change', e => {
   const file = e.target.files[0];
@@ -1226,7 +1645,11 @@ $('fileInput').addEventListener('change', e => {
       list = Array.isArray(parsed) ? parsed : parsed && Array.isArray(parsed.outfits) ? parsed.outfits : parsed && parsed.name && parsed.slots ? [parsed] : null;
       if (!list) throw new Error('format');
     } catch (err) { return toast('That file is not an Armorer\u2019s Tome JSON export.', true); }
-    const valid = list.filter(x => x && typeof x.name === 'string' && x.name.trim()).map(normalizeOutfit);
+    const rows = list.filter(x => x && typeof x.name === 'string' && x.name.trim()).map(x => ({
+      o: normalizeOutfit({ ...x, image: null }),
+      pic: typeof x.image === 'string' && x.image.startsWith('data:image/') ? x.image : null,
+    }));
+    const valid = rows.map(r => r.o);
     if (!valid.length) return toast('No outfits were found in that file.', true);
     const mode = await dialog({
       title: 'Import outfits',
@@ -1239,15 +1662,24 @@ $('fileInput').addEventListener('change', e => {
     });
     if (!mode) return;
     try {
-      if (mode === 'replace') for (const o of store.outfits.slice()) await store.remove(o.id);
+      if (mode === 'replace') for (const o of store.outfits.slice()) {
+        await store.remove(o.id);
+        if (o.image) { forgetImage(o.id); await images.del(o.id).catch(() => {}); }
+      }
       const ids = new Set(mode === 'replace' ? [] : store.outfits.map(o => o.id));
       const now = Date.now();
-      for (const [i, o] of valid.entries()) {
+      let lostPics = 0;
+      for (const [i, { o, pic }] of rows.entries()) {
         if (ids.has(o.id)) o.id = newId();
         ids.add(o.id);
         if (mode === 'merge') o.createdAt = now + i;   // imported pages go after existing ones
+        if (pic && imagesAvailable) {
+          try { await images.put(o.id, await recordFromDataURL(pic)); forgetImage(o.id); o.image = { v: now + i }; keepStorage(); }
+          catch (e) { lostPics++; }
+        } else if (pic) lostPics++;
         await store.put(o);
       }
+      if (lostPics) setTimeout(() => toast(`${lostPics} ${lostPics === 1 ? 'image' : 'images'} could not be imported.`, true), 3400);
       await ensureGameColors();
       toast(mode === 'replace' ? `Replaced the logbook with ${valid.length} imported ${valid.length === 1 ? 'outfit' : 'outfits'}` : `Added ${valid.length} imported ${valid.length === 1 ? 'outfit' : 'outfits'}`);
     } catch (err) { toast('The import stopped partway. Some outfits may not have been added.', true); }
@@ -1258,7 +1690,7 @@ $('fileInput').addEventListener('change', e => {
    Welcome popup: shown on a visitor's first visit, and from the ? button
    ===================================================================== */
 const WELCOME_KEY = 'armorer_welcome_seen_v1';
-function showWelcome() {
+function showWelcome(fromHelp) {
   const tip = (ic, html) => `<li>${icon(ic)}<span>${html}</span></li>`;
   return dialog({
     title: "Welcome to Armorer's Tome",
@@ -1266,16 +1698,63 @@ function showWelcome() {
       <ul class="welcome">
         ${tip('book-open', '<b>Browse the books.</b> Swipe or use the arrow keys to move between games, then tap a cover to open it.')}
         ${tip('scroll', '<b>Turn the pages.</b> Tap the right page to go forward and the left page to go back. Going back from the first page closes the book.')}
-        ${tip('hammer', '<b>Forge an outfit.</b> It becomes a new page in its game\'s book. Pick "New game…" to start a new book.')}
+        ${tip('hammer', '<b>Forge an outfit.</b> It becomes a new page in its game\'s book, with an optional image you crop to fit. Pick "New game…" to start a new book.')}
         ${tip('pencil', '<b>Manage each page</b> with its buttons in the top corner: download, duplicate, edit and delete.')}
         ${tip('layout-grid', '<b>Grid Gallery</b> shows every outfit at once. Search and the character filters work in both views.')}
-        ${tip('download', '<b>Back up your outfits.</b> Export all saves a copy as a JSON file, and Import brings it back, on this browser or another one.')}
+        ${tip('download', '<b>Back up your outfits.</b> Export all saves your outfits and their images as a JSON file, and Import brings them back, on this browser or another one.')}
       </ul>
       <p class="formnote"><b>Good to know:</b> this logbook is saved only in this browser, so each browser and device keeps its own. The three Crimson Desert outfits are examples, so edit, duplicate or delete them as you like.</p>`,
-    actions: [{ label: 'Start browsing', value: true, cls: 'solid' }],
-  });
+    actions: [
+      ...(fromHelp === true ? [{ label: 'Reset logbook…', value: 'reset', cls: 'reset-link' }] : []),
+      { label: 'Start browsing', value: true, cls: 'solid' },
+    ],
+  }).then(v => { if (v === 'reset') confirmReset(); });
 }
-$('helpBtn').addEventListener('click', showWelcome);
+$('helpBtn').addEventListener('click', () => showWelcome(true));
+
+/* =====================================================================
+   Reset: wipes every outfit, image and custom book in this browser,
+   then starts again with the example outfits
+   ===================================================================== */
+const RESET_NOTE_KEY = 'armorer_reset_note';
+function confirmReset() {
+  const n = store.outfits.length, pics = store.outfits.filter(o => o.image).length;
+  let o;
+  const close = () => o.close();
+  o = overlay(`
+    <div class="sheet dlg danger" role="alertdialog" aria-modal="true" aria-labelledby="resetTitle" aria-describedby="resetWarn">
+      <div class="sheet-head"><h2 id="resetTitle">${icon('trash-2')}Reset the logbook?</h2><button type="button" class="icon-btn" data-close aria-label="Close">${icon('x')}</button></div>
+      <div class="sheet-body">
+        <div class="warnbox" id="resetWarn">
+          <p><b>This permanently deletes every outfit saved in this browser</b>: ${n} ${n === 1 ? 'outfit' : 'outfits'}${pics ? `, ${pics} ${pics === 1 ? 'image' : 'images'}` : ''}, and any books you've added.</p>
+          <p>It can't be undone. The logbook then starts again with the three example outfits.</p>
+        </div>
+        <p class="formnote">If you might want these outfits later, export a backup first. You can bring it back with Import.</p>
+        <button type="button" class="btn ink" data-backup>${icon('download')}Export a backup first</button>
+        <button type="button" class="btn big-danger" data-reset>${icon('trash-2')}Delete everything and reset</button>
+      </div>
+      <div class="sheet-foot"><button type="button" class="btn ink" data-close>Cancel</button></div>
+    </div>`, close);
+  o.ov.addEventListener('click', async e => {
+    if (e.target.closest('[data-close]')) return close();
+    if (e.target.closest('[data-backup]')) return exportAllOutfits();
+    const btn = e.target.closest('[data-reset]');
+    if (!btn) return;
+    btn.disabled = true;
+    btn.lastChild.textContent = 'Resetting…';
+    try { localStorage.removeItem(LS_OUTFITS); localStorage.removeItem(LS_META); } catch (err) {}
+    try { await images.clear(); } catch (err) {}
+    try { sessionStorage.setItem(RESET_NOTE_KEY, '1'); } catch (err) {}
+    location.reload();   // start fresh, exactly like a first visit (minus the welcome popup)
+  });
+  o.ov.querySelector('.sheet-foot [data-close]').focus();   // the safe choice has focus
+}
+try {
+  if (sessionStorage.getItem(RESET_NOTE_KEY)) {
+    sessionStorage.removeItem(RESET_NOTE_KEY);
+    setTimeout(() => toast('The logbook has been reset.'), 600);
+  }
+} catch (e) {}
 (() => {
   let seen = false;
   try { seen = localStorage.getItem(WELCOME_KEY) === '1'; } catch (e) {}
