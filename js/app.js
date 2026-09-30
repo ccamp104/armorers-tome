@@ -142,6 +142,30 @@ function hydratePortraits(root) {
     });
   });
 }
+// Titles that don't fit (a word too long for the space beside the portrait, or more than three lines)
+// step down in size; if even the smallest size doesn't fit, long words are hyphenated onto the next line.
+const TITLE_STEPS = [1, 0.92, 0.85, 0.78, 0.72];
+function fitTitles(root) {
+  if (!root) return;
+  const titles = [...root.querySelectorAll('.pg-title')];
+  titles.forEach(t => {
+    t.style.fontSize = ''; t.classList.remove('hyphenate');
+    if (t.dataset.full) { t.textContent = t.dataset.full; delete t.dataset.full; }
+  });
+  const fits = t => t.scrollWidth <= t.clientWidth + 1 && t.scrollHeight <= t.clientHeight + 1;
+  const tooBig = titles.filter(t => t.clientWidth && !fits(t));   // one layout pass for all titles
+  tooBig.forEach(t => {
+    for (const k of TITLE_STEPS.slice(1)) {
+      t.style.fontSize = (1.62 * k).toFixed(3) + 'em';
+      if (fits(t)) return;
+    }
+    // Allow a break (shown with a hyphen) anywhere inside very long words. Browsers that know
+    // English hyphenation still prefer natural break points; the rest can at least split cleanly.
+    t.dataset.full = t.textContent;
+    t.textContent = t.textContent.replace(/\S{10,}/g, w => w.slice(0, 2) + w.slice(2, -2).split('').join('\u00AD') + '\u00AD' + w.slice(-2));
+    t.classList.add('hyphenate');
+  });
+}
 const portraitHTML = o => !o.image ? '' :
   `<button type="button" class="portrait" data-act="view" data-id="${esc(o.id)}" title="Enlarge image" aria-label="Enlarge the image of ${esc(o.name)}"><img alt="" data-pid="${esc(o.id)}" data-v="${o.image.v}" decoding="async"></button>`;
 
@@ -623,8 +647,10 @@ function createBook(theme, onChange) {
   // Notes sit just under the gear list. Show as many whole lines as fit above the page number,
   // ending with an ellipsis if the note is longer.
   function fitNotes() {
+    if (!dims.w || !bookEl.offsetWidth) return;   // hidden (e.g. Grid Gallery showing): fit later
+    fitTitles(bookEl);                              // titles first, since their height moves the notes
     const notes = [...bookEl.querySelectorAll('.pg .notes')];
-    if (!notes.length || !dims.w || !bookEl.offsetWidth) return;   // hidden (e.g. Grid Gallery showing): fit later
+    if (!notes.length) return;
     const fits = notes.map(n => {
       const pg = n.parentElement, cs = getComputedStyle(n), ps = getComputedStyle(pg);
       const room = pg.clientHeight - parseFloat(ps.paddingBottom) - n.offsetTop - parseFloat(cs.paddingTop);
@@ -1034,7 +1060,7 @@ function sizeTome(force) {
   place();
 }
 new ResizeObserver(sizeTome).observe($('tome'));
-if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => books.forEach(b => b.fitNotes()));
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { books.forEach(b => b.fitNotes()); fitTitles($('gal')); });
 
 // narrow screens read one page at a time: the first tap pans across the spread, the next turns the leaf
 function forward(book) {
@@ -1149,11 +1175,11 @@ function renderGallery() {
 let galleryWatch = null;
 function watchGallery() {
   if (galleryWatch) galleryWatch.disconnect();
-  if (!('IntersectionObserver' in window)) return hydratePortraits($('gal'));
+  if (!('IntersectionObserver' in window)) { hydratePortraits($('gal')); return fitTitles($('gal')); }
   galleryWatch = new IntersectionObserver(entries => entries.forEach(en => {
-    if (en.isIntersecting) { hydratePortraits(en.target); galleryWatch.unobserve(en.target); }
+    if (en.isIntersecting) { hydratePortraits(en.target); fitTitles(en.target); galleryWatch.unobserve(en.target); }
   }), { root: $('gallery'), rootMargin: '400px 0px' });
-  $('gal').querySelectorAll('.card').forEach(c => { if (c.querySelector('img[data-pid]')) galleryWatch.observe(c); });
+  $('gal').querySelectorAll('.card').forEach(c => galleryWatch.observe(c));
 }
 
 /* =====================================================================
