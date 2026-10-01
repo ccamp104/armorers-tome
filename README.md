@@ -2,6 +2,8 @@
 
 An outfit logbook for games, where each game gets its own leather-bound book. Designed for games that do not have outfit loadouts and/or transmog options, for example Crimson Desert or Enshrouded.
 
+This is a fan-made site, not affiliated with any game developer. All intellectual property and assets related to the games belong to their respective owners. It is non-commercial and is shared with friends under Pearl Abyss's [Fan Content Guidelines](https://crimsondesert.pearlabyss.com/en-US/Policy?_policyNo=130).
+
 ## Features
 
 - **Tome Mode.** Every game is a book in a swipeable carousel. Tap a cover to open it and tap a page to turn it. Each page holds one outfit, so you see two per spread, or one at a time on phones.
@@ -9,7 +11,7 @@ An outfit logbook for games, where each game gets its own leather-bound book. De
 - **Forge Outfit.** Saving an outfit adds a new page to the right book, then opens that book and turns to the new page. Choosing "New game…" creates a new book with its own cover colour.
 - **Outfit images.** Each outfit can have an optional image, cropped to a 3:4 portrait when it's added. It appears in a small frame beside the outfit name; tap the frame to enlarge it.
 - **Notes.** Notes can run to several paragraphs, and the line breaks you type are kept. When a note is longer than the space on its page, a *See more…* link opens the whole note.
-- **Equipment suggestions (optional).** Turn on *Equipment suggestions* in the Forge or Edit form, and for games with an equipment list in the `data` folder (currently Crimson Desert) the gear fields suggest matching items as you type. Pick one with a tap or the arrow keys and Enter, or keep typing anything you like. Picking a Plate, Leather, Chain or Cloth armour piece also adds a tag such as *Plate Armor*. The switch is off by default, is remembered in each browser, and is switched off again by Reset logbook.
+- **Equipment suggestions (optional).** Turn on *Equipment suggestions* in the Forge or Edit form, and for games with an equipment list in the `data` folder (currently Crimson Desert) the gear fields suggest matching items as you type. Pick one with a tap or the arrow keys and Enter, or keep typing anything you like. Picking a Plate, Leather, Chain or Cloth armour piece also adds a tag such as *Plate Armor*, and any armour with Kuku in its name adds *Kuku Gear*. Weapons don't add tags. The switch is off by default, is remembered in each browser, and is switched off again by Reset logbook. To tag outfits saved before you turned it on, open the **?** popup and choose *Add armour tags…*. It checks every outfit's armour against the list and, after showing what it will add, tags the matches.
 - **Page actions.** Each page has download (JSON), duplicate, edit and delete buttons.
 - **Characters and tags.** Each outfit can have several tags, such as the characters who wear it. Type a name and press Enter to add it.
 - **Filters.** You can search, filter by game, and filter by character or tag.
@@ -31,6 +33,16 @@ Export all writes each image into the JSON file as a data URL, so a backup is co
 The `data` folder holds optional equipment lists, one per game, named after the game in lowercase with hyphens: `data/crimson-desert.json` for Crimson Desert. A list only downloads once someone has turned on equipment suggestions and opens the Forge or Edit form for that game, and games without one work exactly as before. Suggestions need the site to be served from a web address, such as GitHub Pages or a local server, not opened straight from a file.
 
 A list can be a JSON file or a CSV spreadsheet (`data/<game>.csv`). In a spreadsheet, use three columns with the headings `slot`, `name` and `type`, one item per row. The slot is one of `headgear`, `chest`, `cloak`, `gloves`, `legs`, `boots` or `weapons`; the weapons list feeds the main hand, off hand and accessory fields. `type` is optional and shows as a small label, such as Plate or Bow. If both files exist, the JSON one is used.
+
+### Item icons
+
+Every suggestion has a small square on the left showing the item's icon. The Crimson Desert icons are in `data/icons/crimson-desert/`: 1,043 images at 64 × 64 px, about 2 KB each and 2.1 MB in total. They come from the same fan database as the item names and are used under Pearl Abyss's Fan Content Guidelines. If an icon is missing, the square shows the slot's own symbol instead, such as a crown for head or a sword for weapons. To add icons for another game, or replace these:
+
+1. Put the icon images in `data/icons/crimson-desert/`. Small square images work best, ideally 64 × 64 px WebP files of a few KB each.
+2. Name each file as listed in the third column of `crimson-desert.json`, for example `itemicon_prefab_cd_phm_00_hel_0028_index02.webp` for Alpha Wolf Helm. These are the items' in-game icon file names, so icons taken from the game files already have the right names.
+3. In `crimson-desert.json`, change `"icons": { "enabled": false` to `"icons": { "enabled": true`.
+
+Icons load only as their rows appear in the dropdown, at most eight at a time, so the full set never downloads at once. Any item whose icon file is missing keeps showing the slot symbol. For a CSV list, add an `icon` column with the file names; icons then load from `data/icons/<game>/`. The item icons belong to Pearl Abyss.
 
 `crimson-desert.csv` is a spreadsheet copy of the same list, for viewing or editing. If you edit the CSV, delete or rename `crimson-desert.json` so the page reads your spreadsheet instead.
 
