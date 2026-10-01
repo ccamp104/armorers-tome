@@ -1317,6 +1317,7 @@ function overlay(html, onKey) {
   const key = e => {
     const all = document.querySelectorAll('.overlay');
     if (all[all.length - 1] !== ov) return;   // a dialog opened on top of this one handles the key
+    if (e.key === 'Escape' && e.target && e.target.getAttribute && e.target.getAttribute('aria-expanded') === 'true') return;   // a field's suggestion list closes first
     if (e.key === 'Escape') { e.stopPropagation(); onKey && onKey('escape'); }
     if (e.key === 'Tab') {   // keep focus inside the dialog
       const f = [...ov.querySelectorAll('button, input, select, textarea')].filter(el => !el.disabled && el.offsetParent);
@@ -1543,6 +1544,189 @@ function imageEditor(root, existing) {
 }
 
 /* =====================================================================
+   Equipment lists: an optional file per game in the data folder, named
+   after the game (data/crimson-desert.json, or .csv). When one exists,
+   the gear fields suggest matching items as you type.
+   ===================================================================== */
+const LIST_FOR_SLOT = { headgear: 'headgear', chest: 'chest', cloak: 'cloak', gloves: 'gloves', legs: 'legs', boots: 'boots',
+  weapon1: 'weapons', weapon2: 'weapons', shieldWeapon3: 'weapons' };
+const LIST_ALIASES = { head: 'headgear', helm: 'headgear', helmet: 'headgear', armor: 'chest', armour: 'chest', body: 'chest', cape: 'cloak',
+  footwear: 'boots', shoes: 'boots', pants: 'legs', weapon: 'weapons' };
+// Suggestions are off until someone turns them on in the form; the choice is saved in this browser.
+const SUGGEST_KEY = 'armorer_suggestions_v1';
+const suggestionsOn = () => { try { return localStorage.getItem(SUGGEST_KEY) === 'on'; } catch (e) { return false; } };
+const setSuggestions = on => { try { on ? localStorage.setItem(SUGGEST_KEY, 'on') : localStorage.removeItem(SUGGEST_KEY); } catch (e) {} };
+// armour types that become a tag when a piece of that type is picked, e.g. Plate -> "Plate Armor"
+const TYPE_TAGS = { Plate: 'Plate Armor', Leather: 'Leather Armor', Chain: 'Chain Armor', Cloth: 'Cloth Armor', Fur: 'Fur Armor', Silk: 'Silk Armor' };
+const equipmentLists = new Map();   // game -> Promise of { game, slots: { list: [{ name, type, lc }] } } or null
+const gameSlug = name => norm(name).replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+function addEquipment(slots, list, name, type) {
+  list = norm(list); list = LIST_ALIASES[list] || list;
+  name = String(name || '').trim();
+  if (!list || !name) return;
+  const arr = slots[list] || (slots[list] = []);
+  if (!arr.some(x => x.lc === name.toLowerCase())) arr.push({ name, type: String(type || '').trim(), lc: name.toLowerCase() });
+}
+function parseEquipmentJSON(text) {
+  const d = JSON.parse(text), slots = {};
+  Object.entries(d.slots || {}).forEach(([list, rows]) => (rows || []).forEach(r =>
+    Array.isArray(r) ? addEquipment(slots, list, r[0], r[1]) : r && addEquipment(slots, list, r.name, r.type)));
+  return { game: d.game || '', slots };
+}
+// a simple CSV reader: a header row with slot, name and (optionally) type, then one item per row
+function parseEquipmentCSV(text) {
+  const rows = []; let row = [], cell = '', q = false;
+  for (let i = 0; i < text.length; i++) {
+    const c = text[i];
+    if (q) { if (c === '"') { if (text[i + 1] === '"') { cell += '"'; i++; } else q = false; } else cell += c; }
+    else if (c === '"') q = true;
+    else if (c === ',') { row.push(cell); cell = ''; }
+    else if (c === '\n' || c === '\r') { if (c === '\r' && text[i + 1] === '\n') i++; row.push(cell); rows.push(row); row = []; cell = ''; }
+    else cell += c;
+  }
+  if (cell || row.length) { row.push(cell); rows.push(row); }
+  const head = (rows.shift() || []).map(h => norm(h));
+  const at = k => head.indexOf(k);
+  const iS = at('slot'), iN = at('name'), iT = at('type');
+  const slots = {};
+  if (iS < 0 || iN < 0) return { game: '', slots };
+  rows.forEach(r => addEquipment(slots, r[iS], r[iN], iT >= 0 ? r[iT] : ''));
+  return { game: '', slots };
+}
+function loadEquipment(game) {
+  const k = gameSlug(game);
+  if (!k || location.protocol === 'file:') return Promise.resolve(null);
+  if (!equipmentLists.has(k)) equipmentLists.set(k, (async () => {
+    for (const ext of ['json', 'csv']) {
+      try {
+        // no-cache: the browser checks for a newer list each visit (a quick "not modified" when unchanged)
+        const r = await fetch(`data/${k}.${ext}`, { cache: 'no-cache' });
+        if (!r.ok) continue;
+        const db = ext === 'json' ? parseEquipmentJSON(await r.text()) : parseEquipmentCSV(await r.text());
+        if (Object.keys(db.slots).length) { db.game = db.game || game; return db; }
+      } catch (e) {}
+    }
+    return null;
+  })());
+  return equipmentLists.get(k);
+}
+
+// suggestions under a gear field, filtered as you type
+function rankMatches(list, text, limit = 8) {
+  const q = norm(text);
+  if (!q) return [];
+  const words = q.split(/\s+/).filter(Boolean);
+  const scored = [];
+  for (const it of list) {
+    if (it.lc === q) continue;   // already chosen
+    let score;
+    if (it.lc.startsWith(q)) score = 0;
+    else if ((' ' + it.lc).includes(' ' + q)) score = 1;
+    else if (it.lc.includes(q)) score = 2;
+    else if (words.length > 1 && words.every(w => it.lc.includes(w))) score = 3;
+    else continue;
+    scored.push([score, it]);
+  }
+  scored.sort((a, b) => a[0] - b[0] || a[1].lc.localeCompare(b[1].lc));
+  return scored.slice(0, limit).map(x => x[1]);
+}
+function markMatch(name, text) {
+  const q = norm(text), i = name.toLowerCase().indexOf(q);
+  if (!q || i < 0) return esc(name);
+  return esc(name.slice(0, i)) + '<b>' + esc(name.slice(i, i + q.length)) + '</b>' + esc(name.slice(i + q.length));
+}
+let suggestSeq = 0;
+function gearSuggestions(form, onPick) {
+  let db = null;
+  const note = form.querySelector('[data-eqnote]');
+  const fields = SLOTS.map(s => ({ s, input: form.elements['slot_' + s.key] })).filter(f => f.input);
+  fields.forEach(f => {
+    const { s, input } = f;
+    const id = 'sg' + (++suggestSeq);
+    const box = document.createElement('div');
+    box.className = 'sg-list'; box.id = id; box.hidden = true;
+    box.setAttribute('role', 'listbox');
+    box.setAttribute('aria-label', s.label + ' suggestions');
+    input.insertAdjacentElement('afterend', box);
+    input.setAttribute('autocomplete', 'off');
+    let matches = [], active = -1;
+    const listFor = () => db && (db.slots[s.key] || db.slots[LIST_FOR_SLOT[s.key]]);
+    function close() {
+      box.hidden = true; matches = []; active = -1;
+      input.removeAttribute('aria-activedescendant');
+      if (input.getAttribute('role')) input.setAttribute('aria-expanded', 'false');
+    }
+    function open() {
+      const list = listFor();
+      matches = list ? rankMatches(list, input.value) : [];
+      if (!matches.length) return close();
+      active = Math.min(active, matches.length - 1);
+      box.innerHTML = matches.map((it, i) =>
+        `<div class="sg-opt" role="option" id="${id}-${i}" aria-selected="${i === active}" data-i="${i}"><span class="sg-name">${markMatch(it.name, input.value)}</span>${it.type ? `<span class="sg-type">${esc(it.type)}</span>` : ''}</div>`).join('');
+      // open upwards when there isn't room below inside the form
+      const body = form.querySelector('.sheet-body').getBoundingClientRect(), r = input.getBoundingClientRect();
+      const up = body.bottom - r.bottom < 240 && r.top - body.top > body.bottom - r.bottom;
+      const field = input.closest('.field').getBoundingClientRect();
+      box.style.top = up ? 'auto' : '';
+      box.style.bottom = up ? (field.bottom - r.top + 4) + 'px' : '';
+      box.hidden = false;
+      input.setAttribute('aria-expanded', 'true');
+      if (active >= 0) { input.setAttribute('aria-activedescendant', `${id}-${active}`); box.children[active].scrollIntoView({ block: 'nearest' }); }
+      else input.removeAttribute('aria-activedescendant');
+    }
+    function choose(i) {
+      const it = matches[i];
+      if (!it) return;
+      input.value = it.name;
+      close();
+      if (onPick) onPick(s, it);
+    }
+    input.addEventListener('input', () => { active = -1; open(); });
+    input.addEventListener('keydown', e => {
+      if (!listFor()) return;
+      const shown = !box.hidden;
+      if (e.key === 'ArrowDown') { e.preventDefault(); if (!shown) { active = 0; open(); } else { active = (active + 1) % matches.length; open(); } }
+      else if (e.key === 'ArrowUp' && shown) { e.preventDefault(); active = active <= 0 ? matches.length - 1 : active - 1; open(); }
+      else if (e.key === 'Enter' && shown) { e.preventDefault(); if (active >= 0) choose(active); else close(); }   // never saves the form while the list is open
+      else if (e.key === 'Escape' && shown) { e.preventDefault(); close(); }
+      else if (e.key === 'Tab') close();
+    });
+    input.addEventListener('blur', () => setTimeout(close, 120));
+    box.addEventListener('pointerdown', e => e.preventDefault());   // keep focus in the field while tapping a suggestion
+    box.addEventListener('click', e => { const o = e.target.closest('.sg-opt'); if (o) choose(+o.dataset.i); });
+    f.close = close;
+    f.sync = () => {
+      if (listFor()) { input.setAttribute('role', 'combobox'); input.setAttribute('aria-controls', id); input.setAttribute('aria-autocomplete', 'list'); input.setAttribute('aria-expanded', 'false'); }
+      else { ['role', 'aria-controls', 'aria-autocomplete', 'aria-expanded', 'aria-activedescendant'].forEach(a => input.removeAttribute(a)); }
+    };
+  });
+  let want = '';
+  return {
+    // switch to the equipment list for this game (or none)
+    use(game) {
+      want = suggestionsOn() ? gameSlug(game) : '';   // nothing downloads while suggestions are off
+      db = null;
+      fields.forEach(f => { f.close(); f.sync(); });
+      if (note) note.hidden = true;
+      if (!want) return;
+      const asked = want;
+      if (note) { note.textContent = 'Loading the equipment list…'; note.hidden = false; }
+      loadEquipment(game).then(d => {
+        if (asked !== want) return;
+        db = d;
+        fields.forEach(f => f.sync());
+        if (!note) return;
+        note.textContent = d
+          ? `Suggestions from the ${d.game} equipment list appear as you type. Picking a Plate, Leather, Chain or Cloth piece also adds a matching tag.`
+          : location.protocol === 'file:'
+            ? 'Suggestions need the page to be opened from a web address, such as GitHub Pages.'
+            : `There's no equipment list for ${String(game).trim() || 'this game'} yet, so type the gear as usual.`;
+      });
+    },
+  };
+}
+
+/* =====================================================================
    Tag box: type a name and press Enter (or a comma) to add it
    ===================================================================== */
 function allTags() {
@@ -1553,6 +1737,7 @@ function allTags() {
 function tagInput(root, initial) {
   const box = root.querySelector('.tagbox'), input = box.querySelector('input');
   let tags = normTags(initial);
+  const removed = new Set();
   function draw() {
     box.querySelectorAll('.tagchip').forEach(c => c.remove());
     tags.forEach((t, i) => input.insertAdjacentHTML('beforebegin',
@@ -1570,7 +1755,7 @@ function tagInput(root, initial) {
       e.preventDefault();          // Enter adds a tag rather than saving the form
       if (input.value.trim()) add(input.value);
     } else if (e.key === 'Backspace' && !input.value && tags.length) {
-      tags.pop(); draw();
+      removed.add(norm(tags.pop())); draw();
     }
   });
   input.addEventListener('input', () => { if (input.value.includes(',')) add(input.value); });
@@ -1578,11 +1763,15 @@ function tagInput(root, initial) {
   input.addEventListener('blur', () => { if (input.value.trim()) add(input.value); });
   box.addEventListener('click', e => {
     const x = e.target.closest('[data-untag]');
-    if (x) { tags.splice(+x.dataset.untag, 1); draw(); input.focus(); }
+    if (x) { removed.add(norm(tags.splice(+x.dataset.untag, 1)[0])); draw(); input.focus(); }
     else if (e.target === box) input.focus();
   });
   draw();
-  return { value: () => normTags([...tags, input.value]) };
+  return {
+    value: () => normTags([...tags, input.value]),
+    // add a tag suggested by the form, unless it was already removed by hand in this form
+    suggest(t) { if (!removed.has(norm(t)) && !tags.some(x => norm(x) === norm(t))) { tags = normTags([...tags, t]); draw(); return true; } return false; },
+  };
 }
 
 /* =====================================================================
@@ -1622,6 +1811,9 @@ function openForm(existing = null, presetGame = null) {
           </div>
         </div>
         <p class="formnote">Fill in whichever slots this outfit uses; empty slots are left off the page.</p>
+        <label class="switch"><input type="checkbox" data-suggest${suggestionsOn() ? ' checked' : ''}><span class="track" aria-hidden="true"></span>
+          <span class="switch-text"><b>Equipment suggestions</b><i>Suggest gear names from the game's equipment list as you type. Saved in this browser.</i></span></label>
+        <p class="formnote eqnote" data-eqnote hidden></p>
         <div class="formgrp">Armour and apparel</div>
         <div class="fields">${SLOTS.filter(s => s.group === 'armour').map(slotField).join('')}</div>
         <div class="formgrp">Weapons and auxiliaries</div>
@@ -1640,8 +1832,17 @@ function openForm(existing = null, presetGame = null) {
   editor = imageEditor(form.querySelector('.imgfield'), existing);
   const tagger = tagInput(form.querySelector('[data-tags]'), existing ? existing.tags : []);
   const gameSel = form.elements.game, newWrap = form.querySelector('[data-newgame]');
-  const toggleNew = () => { newWrap.hidden = gameSel.value !== '__new'; if (!newWrap.hidden) form.elements.newgame.focus(); };
+  const gear = gearSuggestions(form, (slot, item) => {
+    const tag = slot.group === 'armour' && TYPE_TAGS[item.type];
+    if (tag && tagger.suggest(tag)) toast(`Added the tag "${tag}"`);
+  });
+  form.querySelector('[data-suggest]').addEventListener('change', e => { setSuggestions(e.target.checked); gear.use(pickedGame()); });
+  const pickedGame = () => gameSel.value === '__new' ? form.elements.newgame.value : gameSel.value;
+  const toggleNew = () => { newWrap.hidden = gameSel.value !== '__new'; if (!newWrap.hidden) form.elements.newgame.focus(); gear.use(pickedGame()); };
   gameSel.addEventListener('change', toggleNew);
+  let newGameTimer;
+  form.elements.newgame.addEventListener('input', () => { clearTimeout(newGameTimer); newGameTimer = setTimeout(() => gear.use(pickedGame()), 400); });
+  gear.use(pickedGame());
   form.addEventListener('click', e => { if (e.target.closest('[data-close]')) close(); });
   (existing ? form.elements.name : form.elements.name).focus();
 
@@ -1790,7 +1991,7 @@ function showWelcome(fromHelp) {
       <ul class="welcome">
         ${tip('book-open', '<b>Browse the books.</b> Swipe or use the arrow keys to move between games, then tap a cover to open it.')}
         ${tip('scroll', '<b>Turn the pages.</b> Tap the right page to go forward and the left page to go back. Going back from the first page closes the book.')}
-        ${tip('hammer', '<b>Forge an outfit.</b> It becomes a new page in its game\'s book, with an optional image you crop to fit. Pick "New game…" to start a new book.')}
+        ${tip('hammer', '<b>Forge an outfit.</b> It becomes a new page in its game\'s book, with an optional image you crop to fit. Pick "New game…" to start a new book, or turn on equipment suggestions to pick gear from a list.')}
         ${tip('pencil', '<b>Manage each page</b> with its buttons in the top corner: download, duplicate, edit and delete.')}
         ${tip('layout-grid', '<b>Grid Gallery</b> shows every outfit at once. Search and the character filters work in both views.')}
         ${tip('download', '<b>Back up your outfits.</b> Export all saves your outfits and their images as a JSON file, and Import brings them back, on this browser or another one.')}
@@ -1819,7 +2020,7 @@ function confirmReset() {
       <div class="sheet-body">
         <div class="warnbox" id="resetWarn">
           <p><b>This permanently deletes every outfit saved in this browser</b>: ${n} ${n === 1 ? 'outfit' : 'outfits'}${pics ? `, ${pics} ${pics === 1 ? 'image' : 'images'}` : ''}, and any books you've added.</p>
-          <p>It can't be undone. The logbook then starts again with the three example outfits.</p>
+          <p>Settings such as equipment suggestions are switched off again. It can't be undone. The logbook then starts again with the three example outfits.</p>
         </div>
         <p class="formnote">If you might want these outfits later, export a backup first. You can bring it back with Import.</p>
         <button type="button" class="btn ink" data-backup>${icon('download')}Export a backup first</button>
@@ -1834,7 +2035,7 @@ function confirmReset() {
     if (!btn) return;
     btn.disabled = true;
     btn.lastChild.textContent = 'Resetting…';
-    try { localStorage.removeItem(LS_OUTFITS); localStorage.removeItem(LS_META); } catch (err) {}
+    try { [LS_OUTFITS, LS_META, SUGGEST_KEY, NOTES_SIZE_KEY].forEach(k => localStorage.removeItem(k)); } catch (err) {}
     try { await images.clear(); } catch (err) {}
     try { sessionStorage.setItem(RESET_NOTE_KEY, '1'); } catch (err) {}
     location.reload();   // start fresh, exactly like a first visit (minus the welcome popup)
