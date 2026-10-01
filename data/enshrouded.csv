@@ -1,0 +1,765 @@
+slot,name,type
+headgear,Adventurer Helmet,
+headgear,Alchemist Apprentice Hat,
+headgear,Alpine Antler Hood,
+headgear,Archer Helmet,
+headgear,Archmage Hat,
+headgear,Assassin Hood,
+headgear,Blackguard Helmet,
+headgear,Blacksmith Hat,
+headgear,Blood Rose Mail Coif,
+headgear,Bloodfeather Helmet,
+headgear,Brazen Bull Helmet,
+headgear,Circlet Of Lightning,
+headgear,Cyan Party Hat,
+headgear,Deadeye Hood,
+headgear,Deerstalker Hood,
+headgear,Diving Helmet,
+headgear,Eagle Eye Helmet,
+headgear,Efflorescent Hope Flower Crown,
+headgear,Elder Hat,
+headgear,Elite Hollow Helmet,
+headgear,Exclusive Hollow Helmet,
+headgear,Explorer Helmet,
+headgear,Farmer Hat,
+headgear,Flame Pact Hat,
+headgear,Fluffy Hood,
+headgear,Fowler Helmet,
+headgear,Frostbite Slasher Hood,
+headgear,Fur Hood,
+headgear,Gloom Monarch Helmet,
+headgear,Golden Bulwark Helmet,
+headgear,Gravedigger Hat,
+headgear,Guard of the North Helmet,
+headgear,Guardian Helmet,
+headgear,Hailcaster Hat,
+headgear,Hawk Helmet,
+headgear,Headscarf,
+headgear,Healer Headwrap,
+headgear,Herbalist Headwrap,
+headgear,Hollow's Eve Hood,
+headgear,Hunter Headband,
+headgear,Hunter Hood,
+headgear,Jester Hat,
+headgear,Knight Helmet,
+headgear,Lumberer Hat,
+headgear,Mage Hat,
+headgear,Magician Hat,
+headgear,Maid Hat,
+headgear,Marksman Hood,
+headgear,Mercenary Helmet,
+headgear,Milkmaid Hat,
+headgear,Miner Helmet,
+headgear,Minstrel Hat,
+headgear,Mountain's Shadow Helmet,
+headgear,Mystic Hat,
+headgear,Noble Diadem,
+headgear,Omen Helmet,
+headgear,Pearlfrost Mentor Hat,
+headgear,Plaguebringer Hood,
+headgear,Quetzal Hunter Helmet,
+headgear,Radiant Paladin Helmet,
+headgear,Ranger Hood,
+headgear,Red Party Hat,
+headgear,Rising Fighter Helmet,
+headgear,Rogue Helmet,
+headgear,Royal Crown,
+headgear,Sage Headwrap,
+headgear,Scholar Of The Empyrean Helmet,
+headgear,Scholar of the Young Flame Helmet,
+headgear,Scout Hood,
+headgear,Serpent Warrior Helmet,
+headgear,Sharpshooter Hood,
+headgear,Siren Seeker Headband,
+headgear,Skull Stalker Helmet,
+headgear,Soldier Helmet,
+headgear,Spellbreaker Hat,
+headgear,Summer Games Headband,
+headgear,Sunpiercer Helmet,
+headgear,Tank Helmet,
+headgear,Thaumaturge Hat,
+headgear,Tidecaller Headpiece,
+headgear,Trader Hat,
+headgear,Trailblazer Hood,
+headgear,Tricorn,
+headgear,Warden Helmet,
+headgear,Warlock Helmet,
+headgear,Warrior Helmet,
+headgear,Waveborne Ritualist Helmet,
+headgear,Winterly Hat,
+headgear,Wizard Hat,
+headgear,Wolf's Fang Hood,
+chest,Adventurer Chest,
+chest,Alchemist Apprentice Chest,
+chest,Alpine Antler Chest,
+chest,Archer Chest,
+chest,Archmage Chest,
+chest,Assassin Chest,
+chest,Blackguard Chest,
+chest,Blacksmith Garb,
+chest,Blood Rose Chestplate,
+chest,Bloodfeather Chest,
+chest,Brazen Bull Chest,
+chest,Captain's Coat,
+chest,Deadeye Vest,
+chest,Deerstalker Chest,
+chest,Eagle Eye Chest,
+chest,Efflorescent Hope Chest,
+chest,Elder Chest,
+chest,Elite Hollow Chest Plate,
+chest,Exclusive Hollow Chestplate,
+chest,Explorer Coat,
+chest,Farmer Garb,
+chest,Flame Pact Vest,
+chest,Fluffy Tunic,
+chest,Fowler Chest,
+chest,Frostbite Slasher Chest,
+chest,Fur Chest,
+chest,Gloom Monarch Chestplate,
+chest,Golden Bulwark Chest Plate,
+chest,Gravedigger Garb,
+chest,Guard of the North Chestplate,
+chest,Guardian Chestplate,
+chest,Hailcaster Chest,
+chest,Hawk Chest,
+chest,Healer Tunic,
+chest,Herbalist Tunic,
+chest,Hollow's Eve Chest,
+chest,Hunter Garb,
+chest,Hunter Vest,
+chest,Knight Chestplate,
+chest,Lumberer Coat,
+chest,Mage Chest,
+chest,Magician Chest,
+chest,Maid Garb,
+chest,Marksman Vest,
+chest,Mercenary Chest,
+chest,Milkmaid Garb,
+chest,Mountain's Shadow Chest,
+chest,Mystic Chest,
+chest,Noble Dress,
+chest,Omen Chest,
+chest,Pearlfrost Mentor Chest,
+chest,Plaguebringer Chest,
+chest,Quetzal Hunter Chest,
+chest,Radiant Paladin Chestplate,
+chest,Ragged Shirt,
+chest,Ranger Vest,
+chest,Rising Fighter Chest,
+chest,Rogue Chestplate,
+chest,Royal Doublet,
+chest,Sage Tunic,
+chest,Scholar Of The Empyrean Cloak,
+chest,Scholar of the Young Flame Cloak,
+chest,Scout Chest,
+chest,Serpent Warrior Chest,
+chest,Sharpshooter Vest,
+chest,Siren Seeker Chest,
+chest,Skull Stalker Chest,
+chest,Soldier Chestplate,
+chest,Spellbreaker Chest,
+chest,Summer Games Cropped Top,
+chest,Sunny Loungewear Garb,
+chest,Sunpiercer Chestplate,
+chest,Tank Chestplate,
+chest,Thaumaturge Chest,
+chest,Tidecaller Tunic,
+chest,Trailblazer Chest,
+chest,Warden Chestplate,
+chest,Warlock Shirt,
+chest,Warrior Chest,
+chest,Waveborne Ritualist Tunic,
+chest,Winterly Chest,
+chest,Wizard Chest,
+chest,Wolf's Fang Chest,
+gloves,Adventurer Gloves,
+gloves,Alchemist Apprentice Gloves,
+gloves,Alpine Antler Gloves,
+gloves,Archer Gloves,
+gloves,Archmage Gloves,
+gloves,Assassin Gloves,
+gloves,Blackguard Gloves,
+gloves,Blood Rose Gloves,
+gloves,Bloodfeather Gloves,
+gloves,Brazen Bull Gloves,
+gloves,Deadeye Gloves,
+gloves,Deerstalker Gloves,
+gloves,Eagle Eye Gloves,
+gloves,Efflorescent Hope Gloves,
+gloves,Elder Gloves,
+gloves,Elite Hollow Gloves,
+gloves,Exclusive Hollow Gloves,
+gloves,Explorer Gloves,
+gloves,Flame Pact Gloves,
+gloves,Flaming Gauntlets,
+gloves,Fluffy Mittens,
+gloves,Fowler Gloves,
+gloves,Frostbite Slasher Gloves,
+gloves,Frozen Gauntlets,
+gloves,Fur Gloves,
+gloves,Gloom Monarch Gloves,
+gloves,Golden Bulwark Gloves,
+gloves,Greatsword Gauntlets,
+gloves,Guard of the North Gloves,
+gloves,Guardian Gloves,
+gloves,Hailcaster Gloves,
+gloves,Hawk Gloves,
+gloves,Healer Gloves,
+gloves,Herbalist Gloves,
+gloves,Hollow's Eve Gloves,
+gloves,Hunter Gloves,
+gloves,Knight Gloves,
+gloves,Lumberer Gloves,
+gloves,Mage Gloves,
+gloves,Magician Gloves,
+gloves,Marksman Gloves,
+gloves,Mercenary Gloves,
+gloves,Mountain's Shadow Gloves,
+gloves,Mystic Gloves,
+gloves,Noble Gloves,
+gloves,Omen Gloves,
+gloves,Pearlfrost Mentor Gloves,
+gloves,Plaguebringer Gloves,
+gloves,Quetzal Hunter Gloves,
+gloves,Radiant Paladin Gloves,
+gloves,Ranger Gloves,
+gloves,Rising Fighter Gloves,
+gloves,Rogue Gloves,
+gloves,Royal Gloves,
+gloves,Sage Gloves,
+gloves,Scholar Of The Empyrean Gloves,
+gloves,Scholar of the Young Flame Gloves,
+gloves,Scout Gloves,
+gloves,Serpent Warrior Gloves,
+gloves,Sharpshooter Gloves,
+gloves,Siren Seeker Gloves,
+gloves,Skull Stalker Gloves,
+gloves,Soldier Gloves,
+gloves,Spellbreaker Gloves,
+gloves,Summer Games Bangles,
+gloves,Sunpiercer Gloves,
+gloves,Tank Gloves,
+gloves,Thaumaturge Gloves,
+gloves,Tidecaller Gloves,
+gloves,Trailblazer Gloves,
+gloves,Warden Gloves,
+gloves,Warlock Gloves,
+gloves,Warrior Arms,
+gloves,Waveborne Ritualist Gloves,
+gloves,Winterly Gloves,
+gloves,Wizard Gloves,
+gloves,Wolf's Fang Gloves,
+legs,Adventurer Trousers,
+legs,Alchemist Apprentice Trousers,
+legs,Alpine Antler Trousers,
+legs,Archer Trousers,
+legs,Archmage Trousers,
+legs,Assassin Trousers,
+legs,Blackguard Trousers,
+legs,Blacksmith Pants,
+legs,Blood Rose Pants,
+legs,Bloodfeather Pants,
+legs,Brazen Bull Trousers,
+legs,Deadeye Trousers,
+legs,Deerstalker Trousers,
+legs,Eagle Eye Trousers,
+legs,Efflorescent Hope Pants,
+legs,Elder Trousers,
+legs,Elite Hollow Pants,
+legs,Exclusive Hollow Pants,
+legs,Explorer Pants,
+legs,Farmer Pants,
+legs,Flame Pact Pants,
+legs,Fluffy Pants,
+legs,Fowler Trousers,
+legs,Frostbite Slasher Trousers,
+legs,Fur Trousers,
+legs,Gloom Monarch Trousers,
+legs,Golden Bulwark Pants,
+legs,Gravedigger Pants,
+legs,Guard of the North Pants,
+legs,Guardian Trousers,
+legs,Hailcaster Pants,
+legs,Hawk Trousers,
+legs,Healer Pants,
+legs,Herbalist Pants,
+legs,Hollow's Eve Pants,
+legs,Hunter Pants,
+legs,Hunter Trousers,
+legs,Knight Trousers,
+legs,Lumberer Pants,
+legs,Mage Trousers,
+legs,Magician Trousers,
+legs,Marksman Trousers,
+legs,Mercenary Trousers,
+legs,Mountain's Shadow Trousers,
+legs,Mystic Pants,
+legs,Noble Pants,
+legs,Omen Trousers,
+legs,Pearlfrost Mentor Pants,
+legs,Plaguebringer Trousers,
+legs,Quetzal Hunter Pants,
+legs,Radiant Paladin Trousers,
+legs,Ragged Pants,
+legs,Ranger Trousers,
+legs,Rising Fighter Trousers,
+legs,Rogue Trousers,
+legs,Royal Pants,
+legs,Sage Pants,
+legs,Scholar Of The Empyrean Pants,
+legs,Scholar of the Young Flame Pants,
+legs,Scout Pants,
+legs,Serpent Warrior Pants,
+legs,Sharpshooter Trousers,
+legs,Siren Seeker Pants,
+legs,Skull Stalker Pants,
+legs,Soldier Trousers,
+legs,Spellbreaker Pants,
+legs,Summer Games Pants,
+legs,Sunny Loungewear Pants,
+legs,Sunpiercer Pants,
+legs,Tank Trousers,
+legs,Thaumaturge Pants,
+legs,Threadbare Pants,
+legs,Tidecaller Pants,
+legs,Trailblazer Trousers,
+legs,Warden Trousers,
+legs,Warlock Pants,
+legs,Warrior Trousers,
+legs,Waveborne Ritualist Pants,
+legs,Wayfarer Pants,
+legs,Winterly Pants,
+legs,Wizard Pants,
+legs,Wolf's Fang Trousers,
+boots,Adventurer Boots,
+boots,Alchemist Apprentice Boots,
+boots,Alpine Antler Boots,
+boots,Archer Boots,
+boots,Archmage Boots,
+boots,Assassin Boots,
+boots,Blackguard Boots,
+boots,Blacksmith Boots,
+boots,Blood Rose Boots,
+boots,Bloodfeather Shoes,
+boots,Brazen Bull Boots,
+boots,Deadeye Boots,
+boots,Deerstalker Boots,
+boots,Drakian Boots,
+boots,Eagle Eye Boots,
+boots,Efflorescent Hope Boots,
+boots,Elder Boots,
+boots,Elite Hollow Boots,
+boots,Exclusive Hollow Boots,
+boots,Explorer Boots,
+boots,Farmer Boots,
+boots,Flame Pact Boots,
+boots,Fluffy Boots,
+boots,Fowler Boots,
+boots,Frostbite Slasher Boots,
+boots,Fur Boots,
+boots,Gloom Monarch Boots,
+boots,Golden Bulwark Boots,
+boots,Gravedigger Boots,
+boots,Guard of the North Boots,
+boots,Guardian Boots,
+boots,Hailcaster Boots,
+boots,Hawk Boots,
+boots,Healer Boots,
+boots,Herbalist Boots,
+boots,Hollow's Eve Boots,
+boots,Hunter Boots,
+boots,Knight Boots,
+boots,Lumberer Boots,
+boots,Mage Boots,
+boots,Magician Boots,
+boots,Marksman Boots,
+boots,Mercenary Boots,
+boots,Milkmaid Boots,
+boots,Mountain's Shadow Boots,
+boots,Mystic Boots,
+boots,Noble Boots,
+boots,Omen Boots,
+boots,Pearlfrost Mentor Boots,
+boots,Plaguebringer Boots,
+boots,Quetzal Hunter Shoes,
+boots,Radiant Paladin Boots,
+boots,Ragged Boots,
+boots,Ranger Boots,
+boots,Rising Fighter Boots,
+boots,Rogue Boots,
+boots,Royal Boots,
+boots,Sage Boots,
+boots,Scholar Of The Empyrean Boots,
+boots,Scholar of the Young Flame Boots,
+boots,Scout Boots,
+boots,Serpent Warrior Boots,
+boots,Sharpshooter Boots,
+boots,Siren Seeker Sandals,
+boots,Skull Stalker Shoes,
+boots,Soldier Boots,
+boots,Spellbreaker Boots,
+boots,Summer Games Boots,
+boots,Sunny Loungewear Boots,
+boots,Sunpiercer Shoes,
+boots,Swimfins,
+boots,Tank Boots,
+boots,Thaumaturge Boots,
+boots,Tidecaller Shoes,
+boots,Trailblazer Boots,
+boots,Wanderer's Boots,
+boots,Warden Boots,
+boots,Warlock Boots,
+boots,Warrior Boots,
+boots,Waveborne Ritualist Boots,
+boots,Winterly Boots,
+boots,Wizard Boots,
+boots,Wolf's Fang Boots,
+weapons,Abyssal Wing Axe,Two-handed axe
+weapons,Abysswalker,Hammer
+weapons,Acid Cleaver,Sword
+weapons,Adorned Drakling Daggers,Daggers
+weapons,Aerostriker,Hammer
+weapons,Alchemist's Ring,Ring
+weapons,Amber Bow,Bow
+weapons,Ancestral Star,Two-handed club
+weapons,Ancient Drak Wand,Wand
+weapons,Antler Bow,Bow
+weapons,Apex Machete,Sword
+weapons,Apprentice Wand,Wand
+weapons,Arsonist's Bow,Bow
+weapons,Aurora Sword,Sword
+weapons,Avalanche Starter,Bow
+weapons,Banebringer,Bow
+weapons,Barbarian Greatsword,Greatsword
+weapons,Bare Fists,Unarmed
+weapons,Baroness Daggers,Daggers
+weapons,Battering Ram Hammer,Hammer
+weapons,Batwing Axe,Axe
+weapons,Blackened Staff,Staff
+weapons,Blazing Wand,Wand
+weapons,Blessed Club,Hammer
+weapons,Blink Daggers,Daggers
+weapons,Blizzard Wand,Wand
+weapons,Blood Omen Axe,Two-handed axe
+weapons,Blunt Knives,Daggers
+weapons,Bonebreaker,Axe
+weapons,Bonescourge Mace,Club
+weapons,Boreal Axe,Two-handed axe
+weapons,Bow,Bow
+weapons,Bow Of The Serpent,Bow
+weapons,Brazen Bull Shield,Shield
+weapons,Bright Morningstar,Club
+weapons,Brisk Bow,Bow
+weapons,Bronze Sword,Sword
+weapons,Bronze-engraved Greatsword,Greatsword
+weapons,Broodmother’s Eye,Daggers
+weapons,Celestial Axe,Axe
+weapons,Champion's Axe,Two-handed axe
+weapons,Chief Drak'Dal Axe,Axe
+weapons,Chieftain's Hammer,Hammer
+weapons,Chimerical Greatsword,Greatsword
+weapons,Circus Knives,Daggers
+weapons,Clearwater Staff,Staff
+weapons,Club,Club
+weapons,Club of Defiance,Two-handed club
+weapons,Coalescent Wand,Wand
+weapons,Commander's Ring,Ring
+weapons,Composite Bow,Bow
+weapons,Copperblade Greatsword,Greatsword
+weapons,Corrosive Daggers,Daggers
+weapons,Crackling Wand,Wand
+weapons,Crown Crusher,Club
+weapons,Cryptic Wand,Wand
+weapons,Crystal Knives,Daggers
+weapons,Crystalwater Staff,Staff
+weapons,Curse Bringer Axe,Two-handed axe
+weapons,Cyclone Axe,Two-handed axe
+weapons,Daggers,Daggers
+weapons,Dark Cleaver,Axe
+weapons,Dark Morningstar,Club
+weapons,Dark Staff,Staff
+weapons,Darkwood Axe,Two-handed axe
+weapons,Darya's Staff,Staff
+weapons,Darya's Wand,Wand
+weapons,Death Gazer Axe,Axe
+weapons,Deceiving Staff,Staff
+weapons,Deeproot Axe,Two-handed axe
+weapons,Devilish Bow,Bow
+weapons,Dimweald Axe,Axe
+weapons,Dimweald Hammer,Club
+weapons,Draconian Bow,Bow
+weapons,Dragon Sword,Sword
+weapons,Dragon's Wing,Bow
+weapons,Dragonsbane,Axe
+weapons,Drak Whistle Bow,Bow
+weapons,Drak'Dal Spine,Sword
+weapons,Drakling Daggers,Daggers
+weapons,Dreadbane,Hammer
+weapons,Eclipsed Blade,Sword
+weapons,Elder's Staff,Staff
+weapons,Enflamed Sword,Sword
+weapons,Enhanced Spiked Club,Club
+weapons,Enshrouded Axe,Axe
+weapons,Ethereal Plane,Shield
+weapons,Exceptional Ring of Health,Ring
+weapons,Exceptional Ring of Mana,Ring
+weapons,Exceptional Ring of Stamina,Ring
+weapons,Executioner's Axe,Two-handed axe
+weapons,Explorer's Machete,Sword
+weapons,Extinguished Sword,Sword
+weapons,Falk Fall Daggers,Daggers
+weapons,Fallen Wing Axe,Two-handed axe
+weapons,Fang Blade,Sword
+weapons,Fearsome Club,Club
+weapons,Feathered Mace,Club
+weapons,Fell Broad Sword,Sword
+weapons,Fell Commander Bow,Bow
+weapons,Fell Impaler Bow,Bow
+weapons,Fell Shield,Shield
+weapons,Fell Thunderbrute Greatsword,Greatsword
+weapons,Fenrig's Axe,Axe
+weapons,Final Gambit,Axe
+weapons,Fine Copperblade Greatsword,Greatsword
+weapons,Fleshgrinder,Club
+weapons,Fool's Demise,Greatsword
+weapons,Fool's Errand,Greatsword
+weapons,Forest Longbow,Bow
+weapons,Forked Tongue,Greatsword
+weapons,Forsaken,Bow
+weapons,Freshblood Mace,Club
+weapons,Frost Smasher,Hammer
+weapons,Frost Wand,Wand
+weapons,Frostwing Axe,Axe
+weapons,Frozen Core Wand,Wand
+weapons,Gemini Ring,Ring
+weapons,Ghostly Shield,Shield
+weapons,Gleaming Staff,Staff
+weapons,Goat Hammer,Hammer
+weapons,Golden Bulwark Shield,Shield
+weapons,Golden Recruit Axe,Two-handed axe
+weapons,Golden War Hero Axe,Two-handed axe
+weapons,Goldlaced Greatsword,Greatsword
+weapons,Gorestriker,Club
+weapons,Graven Idol Axe,Axe
+weapons,Great Mace,Two-handed club
+weapons,Greater Golden Twinflame Sword,Sword
+weapons,Greater Ring of Health,Ring
+weapons,Greater Ring of Mana,Ring
+weapons,Greater Ring of Stamina,Ring
+weapons,Greater Thunderblast Axe,Two-handed axe
+weapons,Greatsword Of Rivalry,Greatsword
+weapons,Greatsword Of The Old Order,Greatsword
+weapons,Grey Blades,Daggers
+weapons,Guard Of The North Sword,Greatsword
+weapons,Guardian Shield,Shield
+weapons,Guillotine,Two-handed axe
+weapons,Hailscourge,Sword
+weapons,Hair Splitter,Axe
+weapons,Half-Light Halos,Daggers
+weapons,Hammer Of The Piercing Gaze,Hammer
+weapons,Hatchet,Axe
+weapons,Head Pounder,Hammer
+weapons,Helix,Wand
+weapons,Hero's Shield,Shield
+weapons,Hopeful Glimmer,Staff
+weapons,Horn Daggers,Daggers
+weapons,Horned Beast Bow,Bow
+weapons,Horned Greatsword,Greatsword
+weapons,Hunter's Bow,Bow
+weapons,Hunter's Ring,Ring
+weapons,Ice Beam Wand,Wand
+weapons,Ice Blade,Sword
+weapons,Ice-Coated Daggers,Daggers
+weapons,Icicle Sword,Sword
+weapons,Ignited Bow,Bow
+weapons,Ignited Hammer,Hammer
+weapons,Infernal Wand,Wand
+weapons,Invisible Barrier,Shield
+weapons,Iron Claw Club,Club
+weapons,Ironheart Greatsword,Greatsword
+weapons,Jagged Obsidian Axe,Axe
+weapons,Jezmina's Apotheosis,Axe
+weapons,Lesser Golden Twinflame Sword,Sword
+weapons,Lesser Ring of Health,Ring
+weapons,Lesser Ring of Mana,Ring
+weapons,Lesser Ring of Stamina,Ring
+weapons,Lightforged Axe,Axe
+weapons,Lightforged Daggers,Daggers
+weapons,Lumenshade Axe,Axe
+weapons,Luminous Wand,Wand
+weapons,Lupa's Scalper,Axe
+weapons,Mace of Denial,Club
+weapons,Mace of Wrath,Club
+weapons,Mace-like Club,Club
+weapons,Major Arcana,Sword
+weapons,Makeshift Daggers,Daggers
+weapons,Mandible Crusher,Hammer
+weapons,Massive Hammer,Hammer
+weapons,Masterful Mace,Two-handed club
+weapons,Meat Chopper,Club
+weapons,Megalodon Greatsword,Greatsword
+weapons,Mercenary Shield,Shield
+weapons,Metalstar Mace,Club
+weapons,Minor Arcana,Sword
+weapons,Mirage,Staff
+weapons,Misfortune Mace,Two-handed club
+weapons,Moon Rock Greatsword,Greatsword
+weapons,Morningdew Greatsword,Greatsword
+weapons,Mother's Eye,Ring
+weapons,Mountain's Shadow Shield,Shield
+weapons,Mythic Wand,Wand
+weapons,New Moon Greatsword,Greatsword
+weapons,Nightfall,Daggers
+weapons,Nightnebula,Daggers
+weapons,Nightwind Bow,Bow
+weapons,Noble Sword,Sword
+weapons,Nova,Sword
+weapons,Oath Breaker,Daggers
+weapons,Oracle's Everblue,Staff
+weapons,Ornate Greatsword,Greatsword
+weapons,Ornate Wood Bow,Bow
+weapons,Parade Daggers,Daggers
+weapons,Pikemead's Bulwark,Shield
+weapons,Pine Shortbow,Bow
+weapons,Polymath's Wand,Wand
+weapons,Princely Greatsword,Greatsword
+weapons,Prismatic Ward,Shield
+weapons,Protector Greatsword,Greatsword
+weapons,Proud Daggers,Daggers
+weapons,Provisional Scythe,Axe
+weapons,Pyreblade,Sword
+weapons,Rattlesnake Bow,Bow
+weapons,Reaper's Wand,Wand
+weapons,Recent Drak Wand,Wand
+weapons,Resin Torch,Torch
+weapons,Ring of Endless Life,Ring
+weapons,Ring of Frost,Ring
+weapons,Ring of Health,Ring
+weapons,Ring of Mana,Ring
+weapons,Ring Of Rapacity,Ring
+weapons,Ring of Stamina,Ring
+weapons,Ring of the Ancients,Ring
+weapons,Ring Of The Burning Light,Ring
+weapons,Ring of the Flame,Ring
+weapons,Ring of the Heir,Ring
+weapons,Ring of Thundersnow,Ring
+weapons,Riptide,Shield
+weapons,Rising Fighter Shield,Shield
+weapons,Ritual Tempest Wand,Wand
+weapons,Rogue Shield,Shield
+weapons,Root Staff,Staff
+weapons,Rotblood,Hammer
+weapons,Ruffian's Axe,Two-handed axe
+weapons,Rune Apprentice's Sword,Sword
+weapons,Rune Master's Sword,Sword
+weapons,Rusty Greatsword,Greatsword
+weapons,Rusty Short Sword,Sword
+weapons,Rusty Sword,Sword
+weapons,Sacrificial Vukah Dagger,Daggers
+weapons,Sacrilegious Steelsword,Sword
+weapons,Sandstorm Swiftblades,Daggers
+weapons,Scavenger Miner Axe,Axe
+weapons,Scholar's Wand,Wand
+weapons,Scorching Wand,Wand
+weapons,Scrappy Greatsword,Greatsword
+weapons,Scrappy Sword,Sword
+weapons,Shadowbane,Bow
+weapons,Sharktooth Greatsword,Greatsword
+weapons,Sharpened Broadsword,Sword
+weapons,Shellbreaker Daggers,Daggers
+weapons,Shepherd's Lightning,Staff
+weapons,Shepherd's Staff,Staff
+weapons,Shield,Shield
+weapons,Shield of Light,Shield
+weapons,Shivering Skeans,Daggers
+weapons,Shivs,Daggers
+weapons,Shocking Ice Wand,Wand
+weapons,Short Sword,Sword
+weapons,Shroud Corrupted Hammer,Hammer
+weapons,Shroud Weaver,Staff
+weapons,Shroudbinder Wand,Wand
+weapons,Sickle Greatsword,Greatsword
+weapons,Sigil Ring of the Elder Guard,Ring
+weapons,Silver Storm,Wand
+weapons,Silvernight Greatsword,Greatsword
+weapons,Silvershot Bow,Bow
+weapons,Sinister Crescent Staff,Staff
+weapons,Skull Splitter Axe,Axe
+weapons,Sleek Daggers,Daggers
+weapons,Snakespine Wand,Wand
+weapons,Snowflake Splicer,Bow
+weapons,Soldier Shield,Shield
+weapons,Soothsayer,Hammer
+weapons,Spectral Ward,Shield
+weapons,Spiked Club,Club
+weapons,Spiked Greatsword,Greatsword
+weapons,Spine Of Dalszul,Sword
+weapons,Spine Splinter,Two-handed club
+weapons,Spinechill Axe,Two-handed axe
+weapons,Spiritual Cane,Staff
+weapons,Staff,Staff
+weapons,Staff of Guidance,Staff
+weapons,Staff Of Reeds,Staff
+weapons,Staff Of The Moor,Staff
+weapons,Staff of the Ram,Staff
+weapons,Staff Of The Serpent,Staff
+weapons,Staff of the Taurus,Staff
+weapons,Steel Moon Axe,Axe
+weapons,Stonewrought Sword,Sword
+weapons,Stormbound Staff,Staff
+weapons,Summit Greatsword,Greatsword
+weapons,Sun Axe,Axe
+weapons,Sun Hammer,Two-handed club
+weapons,Sunbeam,Sword
+weapons,Sunpiercer Shield,Shield
+weapons,Superior Ring of Health,Ring
+weapons,Superior Ring of Mana,Ring
+weapons,Superior Ring of Stamina,Ring
+weapons,Sword of Radiance,Sword
+weapons,Sword Of The Serpent,Sword
+weapons,Tainted Axe,Axe
+weapons,Talion's Bow,Bow
+weapons,Tarred Bow,Bow
+weapons,Temple Keeper's Bow,Bow
+weapons,The Needles,Daggers
+weapons,Thunderbolt Axe,Axe
+weapons,Tomb Raider's Bow,Bow
+weapons,Torch,Torch
+weapons,Torchlight Staff,Staff
+weapons,Totem Wand,Wand
+weapons,Totemhead Mace,Club
+weapons,Totempole Mace,Club
+weapons,Traitor's Bow,Bow
+weapons,Transcendental Screen,Shield
+weapons,Tribal Hammer,Hammer
+weapons,Twin Soul Mace,Club
+weapons,Twisting Wand,Wand
+weapons,Ultimate Ring of Health,Ring
+weapons,Ultimate Ring of Mana,Ring
+weapons,Ultimate Ring of Stamina,Ring
+weapons,Undergrowth Staff,Staff
+weapons,Valiant Shield,Shield
+weapons,Valor Heart Daggers,Daggers
+weapons,Vaporous Staff,Staff
+weapons,Veilrift Axe,Axe
+weapons,Venomkiss,Daggers
+weapons,Vesztah's Mace,Club
+weapons,Violet Storm,Staff
+weapons,Voidcaller,Wand
+weapons,Wailing Blade,Sword
+weapons,Wand,Wand
+weapons,Wand Of Bloodflow,Wand
+weapons,Wax Torch,Torch
+weapons,White Wolf Sword,Sword
+weapons,Wildheart Seekers,Daggers
+weapons,Wildwood Shortbow,Bow
+weapons,Winged Shadow,Bow
+weapons,Wolf Daggers,Daggers
+weapons,Wolf Pack Axe,Axe
+weapons,Wolf's Claw,Axe
+weapons,Wolf's Fang Shield,Shield
+weapons,Wolf's Hydra,Club
+weapons,Wolf's Maw,Sword
+weapons,Wolf's Snarl Longbow,Bow
+weapons,Wooden Shield,Shield
+weapons,Wooden Tooth,Hammer
