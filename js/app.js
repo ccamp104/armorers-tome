@@ -3,7 +3,7 @@
 /* =====================================================================
    Icons, slots and sample data
    ===================================================================== */
-const ICONS = {"axe": "<path d=\"m14 12-8.5 8.5a2.12 2.12 0 1 1-3-3L11 9\" /> <path d=\"M15 13 9 7l4-4 6 6h3a8 8 0 0 1-7 7z\" />", "book-open": "<path d=\"M12 7v14\" /> <path d=\"M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z\" />", "copy": "<rect width=\"14\" height=\"14\" x=\"8\" y=\"8\" rx=\"2\" ry=\"2\" /> <path d=\"M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2\" />", "crown": "<path d=\"M11.562 3.266a.5.5 0 0 1 .876 0L15.39 8.87a1 1 0 0 0 1.516.294L21.183 5.5a.5.5 0 0 1 .798.519l-2.834 10.246a1 1 0 0 1-.956.734H5.81a1 1 0 0 1-.957-.734L2.02 6.02a.5.5 0 0 1 .798-.519l4.276 3.664a1 1 0 0 0 1.516-.294z\" /> <path d=\"M5 21h14\" />", "download": "<path d=\"M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4\" /> <polyline points=\"7 10 12 15 17 10\" /> <line x1=\"12\" x2=\"12\" y1=\"15\" y2=\"3\" />", "feather": "<path d=\"M12.67 19a2 2 0 0 0 1.416-.588l6.154-6.172a6 6 0 0 0-8.49-8.49L5.586 9.914A2 2 0 0 0 5 11.328V18a1 1 0 0 0 1 1z\" /> <path d=\"M16 8 2 22\" /> <path d=\"M17.5 15H9\" />", "footprints": "<path d=\"M4 16v-2.38C4 11.5 2.97 10.5 3 8c.03-2.72 1.49-6 4.5-6C9.37 2 10 3.8 10 5.5c0 3.11-2 5.66-2 8.68V16a2 2 0 1 1-4 0Z\" /> <path d=\"M20 20v-2.38c0-2.12 1.03-3.12 1-5.62-.03-2.72-1.49-6-4.5-6C14.63 6 14 7.8 14 9.5c0 3.11 2 5.66 2 8.68V20a2 2 0 1 0 4 0Z\" /> <path d=\"M16 17h4\" /> <path d=\"M4 13h4\" />", "hammer": "<path d=\"m15 12-8.373 8.373a1 1 0 1 1-3-3L12 9\" /> <path d=\"m18 15 4-4\" /> <path d=\"m21.5 11.5-1.914-1.914A2 2 0 0 1 19 8.172V7l-2.26-2.26a6 6 0 0 0-4.202-1.756L9 2.96l.92.82A6.18 6.18 0 0 1 12 8.4V10l2 2h1.172a2 2 0 0 1 1.414.586L18.5 14.5\" />", "hand": "<path d=\"M18 11V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2\" /> <path d=\"M14 10V4a2 2 0 0 0-2-2a2 2 0 0 0-2 2v2\" /> <path d=\"M10 10.5V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2v8\" /> <path d=\"M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15\" />", "layout-grid": "<rect width=\"7\" height=\"7\" x=\"3\" y=\"3\" rx=\"1\" /> <rect width=\"7\" height=\"7\" x=\"14\" y=\"3\" rx=\"1\" /> <rect width=\"7\" height=\"7\" x=\"14\" y=\"14\" rx=\"1\" /> <rect width=\"7\" height=\"7\" x=\"3\" y=\"14\" rx=\"1\" />", "pencil": "<path d=\"M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z\" /> <path d=\"m15 5 4 4\" />", "plus": "<path d=\"M5 12h14\" /> <path d=\"M12 5v14\" />", "scroll": "<path d=\"M19 17V5a2 2 0 0 0-2-2H4\" /> <path d=\"M8 21h12a2 2 0 0 0 2-2v-1a1 1 0 0 0-1-1H11a1 1 0 0 0-1 1v1a2 2 0 1 1-4 0V5a2 2 0 1 0-4 0v2a1 1 0 0 0 1 1h3\" />", "search": "<circle cx=\"11\" cy=\"11\" r=\"8\" /> <path d=\"m21 21-4.3-4.3\" />", "shield-half": "<path d=\"M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z\" /> <path d=\"M12 22V2\" />", "shield": "<path d=\"M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z\" />", "shirt": "<path d=\"M20.38 3.46 16 2a4 4 0 0 1-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.47a1 1 0 0 0 .99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 0 0 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.47a2 2 0 0 0-1.34-2.23z\" />", "sword": "<polyline points=\"14.5 17.5 3 6 3 3 6 3 17.5 14.5\" /> <line x1=\"13\" x2=\"19\" y1=\"19\" y2=\"13\" /> <line x1=\"16\" x2=\"20\" y1=\"16\" y2=\"20\" /> <line x1=\"19\" x2=\"21\" y1=\"21\" y2=\"19\" />", "trash-2": "<path d=\"M3 6h18\" /> <path d=\"M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6\" /> <path d=\"M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2\" /> <line x1=\"10\" x2=\"10\" y1=\"11\" y2=\"17\" /> <line x1=\"14\" x2=\"14\" y1=\"11\" y2=\"17\" />", "upload": "<path d=\"M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4\" /> <polyline points=\"17 8 12 3 7 8\" /> <line x1=\"12\" x2=\"12\" y1=\"3\" y2=\"15\" />", "x": "<path d=\"M18 6 6 18\" /> <path d=\"m6 6 12 12\" />", "image-plus": "<path d=\"M16 5h6\" /> <path d=\"M19 2v6\" /> <path d=\"M21 11.5V19a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7.5\" /> <path d=\"m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21\" /> <circle cx=\"9\" cy=\"9\" r=\"2\" />", "zoom-in": "<circle cx=\"11\" cy=\"11\" r=\"8\" /> <line x1=\"21\" x2=\"16.65\" y1=\"21\" y2=\"16.65\" /> <line x1=\"11\" x2=\"11\" y1=\"8\" y2=\"14\" /> <line x1=\"8\" x2=\"14\" y1=\"11\" y2=\"11\" />", "zoom-out": "<circle cx=\"11\" cy=\"11\" r=\"8\" /> <line x1=\"21\" x2=\"16.65\" y1=\"21\" y2=\"16.65\" /> <line x1=\"8\" x2=\"14\" y1=\"11\" y2=\"11\" />", "image": "<rect width=\"18\" height=\"18\" x=\"3\" y=\"3\" rx=\"2\" ry=\"2\" /> <circle cx=\"9\" cy=\"9\" r=\"2\" /> <path d=\"m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21\" />", "circle-help": "<circle cx=\"12\" cy=\"12\" r=\"10\" /> <path d=\"M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3\" /> <path d=\"M12 17h.01\" />", "more-vertical": "<circle cx=\"12\" cy=\"12\" r=\"1\" /> <circle cx=\"12\" cy=\"5\" r=\"1\" /> <circle cx=\"12\" cy=\"19\" r=\"1\" />"};
+const ICONS = {"axe": "<path d=\"m14 12-8.5 8.5a2.12 2.12 0 1 1-3-3L11 9\" /> <path d=\"M15 13 9 7l4-4 6 6h3a8 8 0 0 1-7 7z\" />", "book-open": "<path d=\"M12 7v14\" /> <path d=\"M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z\" />", "copy": "<rect width=\"14\" height=\"14\" x=\"8\" y=\"8\" rx=\"2\" ry=\"2\" /> <path d=\"M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2\" />", "crown": "<path d=\"M11.562 3.266a.5.5 0 0 1 .876 0L15.39 8.87a1 1 0 0 0 1.516.294L21.183 5.5a.5.5 0 0 1 .798.519l-2.834 10.246a1 1 0 0 1-.956.734H5.81a1 1 0 0 1-.957-.734L2.02 6.02a.5.5 0 0 1 .798-.519l4.276 3.664a1 1 0 0 0 1.516-.294z\" /> <path d=\"M5 21h14\" />", "download": "<path d=\"M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4\" /> <polyline points=\"7 10 12 15 17 10\" /> <line x1=\"12\" x2=\"12\" y1=\"15\" y2=\"3\" />", "feather": "<path d=\"M12.67 19a2 2 0 0 0 1.416-.588l6.154-6.172a6 6 0 0 0-8.49-8.49L5.586 9.914A2 2 0 0 0 5 11.328V18a1 1 0 0 0 1 1z\" /> <path d=\"M16 8 2 22\" /> <path d=\"M17.5 15H9\" />", "footprints": "<path d=\"M4 16v-2.38C4 11.5 2.97 10.5 3 8c.03-2.72 1.49-6 4.5-6C9.37 2 10 3.8 10 5.5c0 3.11-2 5.66-2 8.68V16a2 2 0 1 1-4 0Z\" /> <path d=\"M20 20v-2.38c0-2.12 1.03-3.12 1-5.62-.03-2.72-1.49-6-4.5-6C14.63 6 14 7.8 14 9.5c0 3.11 2 5.66 2 8.68V20a2 2 0 1 0 4 0Z\" /> <path d=\"M16 17h4\" /> <path d=\"M4 13h4\" />", "hammer": "<path d=\"m15 12-8.373 8.373a1 1 0 1 1-3-3L12 9\" /> <path d=\"m18 15 4-4\" /> <path d=\"m21.5 11.5-1.914-1.914A2 2 0 0 1 19 8.172V7l-2.26-2.26a6 6 0 0 0-4.202-1.756L9 2.96l.92.82A6.18 6.18 0 0 1 12 8.4V10l2 2h1.172a2 2 0 0 1 1.414.586L18.5 14.5\" />", "hand": "<path d=\"M18 11V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2\" /> <path d=\"M14 10V4a2 2 0 0 0-2-2a2 2 0 0 0-2 2v2\" /> <path d=\"M10 10.5V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2v8\" /> <path d=\"M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15\" />", "layout-grid": "<rect width=\"7\" height=\"7\" x=\"3\" y=\"3\" rx=\"1\" /> <rect width=\"7\" height=\"7\" x=\"14\" y=\"3\" rx=\"1\" /> <rect width=\"7\" height=\"7\" x=\"14\" y=\"14\" rx=\"1\" /> <rect width=\"7\" height=\"7\" x=\"3\" y=\"14\" rx=\"1\" />", "pencil": "<path d=\"M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z\" /> <path d=\"m15 5 4 4\" />", "plus": "<path d=\"M5 12h14\" /> <path d=\"M12 5v14\" />", "scroll": "<path d=\"M19 17V5a2 2 0 0 0-2-2H4\" /> <path d=\"M8 21h12a2 2 0 0 0 2-2v-1a1 1 0 0 0-1-1H11a1 1 0 0 0-1 1v1a2 2 0 1 1-4 0V5a2 2 0 1 0-4 0v2a1 1 0 0 0 1 1h3\" />", "search": "<circle cx=\"11\" cy=\"11\" r=\"8\" /> <path d=\"m21 21-4.3-4.3\" />", "shield-half": "<path d=\"M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z\" /> <path d=\"M12 22V2\" />", "shield": "<path d=\"M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z\" />", "shirt": "<path d=\"M20.38 3.46 16 2a4 4 0 0 1-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.47a1 1 0 0 0 .99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 0 0 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.47a2 2 0 0 0-1.34-2.23z\" />", "sword": "<polyline points=\"14.5 17.5 3 6 3 3 6 3 17.5 14.5\" /> <line x1=\"13\" x2=\"19\" y1=\"19\" y2=\"13\" /> <line x1=\"16\" x2=\"20\" y1=\"16\" y2=\"20\" /> <line x1=\"19\" x2=\"21\" y1=\"21\" y2=\"19\" />", "trash-2": "<path d=\"M3 6h18\" /> <path d=\"M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6\" /> <path d=\"M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2\" /> <line x1=\"10\" x2=\"10\" y1=\"11\" y2=\"17\" /> <line x1=\"14\" x2=\"14\" y1=\"11\" y2=\"17\" />", "upload": "<path d=\"M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4\" /> <polyline points=\"17 8 12 3 7 8\" /> <line x1=\"12\" x2=\"12\" y1=\"3\" y2=\"15\" />", "x": "<path d=\"M18 6 6 18\" /> <path d=\"m6 6 12 12\" />", "image-plus": "<path d=\"M16 5h6\" /> <path d=\"M19 2v6\" /> <path d=\"M21 11.5V19a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7.5\" /> <path d=\"m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21\" /> <circle cx=\"9\" cy=\"9\" r=\"2\" />", "zoom-in": "<circle cx=\"11\" cy=\"11\" r=\"8\" /> <line x1=\"21\" x2=\"16.65\" y1=\"21\" y2=\"16.65\" /> <line x1=\"11\" x2=\"11\" y1=\"8\" y2=\"14\" /> <line x1=\"8\" x2=\"14\" y1=\"11\" y2=\"11\" />", "zoom-out": "<circle cx=\"11\" cy=\"11\" r=\"8\" /> <line x1=\"21\" x2=\"16.65\" y1=\"21\" y2=\"16.65\" /> <line x1=\"8\" x2=\"14\" y1=\"11\" y2=\"11\" />", "image": "<rect width=\"18\" height=\"18\" x=\"3\" y=\"3\" rx=\"2\" ry=\"2\" /> <circle cx=\"9\" cy=\"9\" r=\"2\" /> <path d=\"m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21\" />", "circle-help": "<circle cx=\"12\" cy=\"12\" r=\"10\" /> <path d=\"M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3\" /> <path d=\"M12 17h.01\" />", "more-vertical": "<circle cx=\"12\" cy=\"12\" r=\"1\" /> <circle cx=\"12\" cy=\"5\" r=\"1\" /> <circle cx=\"12\" cy=\"19\" r=\"1\" />", "chevron-down": "<path d=\"m6 9 6 6 6-6\" />", "tags": "<path d=\"m15 5 6.3 6.3a2.4 2.4 0 0 1 0 3.4L17 19\" /> <path d=\"M9.586 5.586A2 2 0 0 0 8.172 5H3a1 1 0 0 0-1 1v5.172a2 2 0 0 0 .586 1.414L8.29 18.29a2.426 2.426 0 0 0 3.42 0l3.58-3.58a2.426 2.426 0 0 0 0-3.42z\" /> <circle cx=\"6.5\" cy=\"9.5\" r=\".5\" fill=\"currentColor\" />", "settings": "<path d=\"M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z\" /> <circle cx=\"12\" cy=\"12\" r=\"3\" />", "compass": "<path d=\"m16.24 7.76-1.804 5.411a2 2 0 0 1-1.265 1.265L7.76 16.24l1.804-5.411a2 2 0 0 1 1.265-1.265z\" /> <circle cx=\"12\" cy=\"12\" r=\"10\" />", "sparkles": "<path d=\"M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z\" /> <path d=\"M20 3v4\" /> <path d=\"M22 5h-4\" /> <path d=\"M4 17v2\" /> <path d=\"M5 18H3\" />", "save": "<path d=\"M15.2 3a2 2 0 0 1 1.4.6l3.8 3.8a2 2 0 0 1 .6 1.4V19a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z\" /> <path d=\"M17 21v-7a1 1 0 0 0-1-1H8a1 1 0 0 0-1 1v7\" /> <path d=\"M7 3v4a1 1 0 0 0 1 1h7\" />"};
 const icon = n => `<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICONS[n] || ''}</svg>`;
 document.querySelectorAll('[data-icon]').forEach(el => el.insertAdjacentHTML('afterbegin', icon(el.dataset.icon)));
 
@@ -1588,9 +1588,35 @@ const LIST_FOR_SLOT = { headgear: 'headgear', chest: 'chest', cloak: 'cloak', gl
 const LIST_ALIASES = { head: 'headgear', helm: 'headgear', helmet: 'headgear', armor: 'chest', armour: 'chest', body: 'chest', cape: 'cloak',
   footwear: 'boots', shoes: 'boots', pants: 'legs', weapon: 'weapons' };
 // Suggestions are off until someone turns them on in the form; the choice is saved in this browser.
-const SUGGEST_KEY = 'armorer_suggestions_v1';
-const suggestionsOn = () => { try { return localStorage.getItem(SUGGEST_KEY) === 'on'; } catch (e) { return false; } };
-const setSuggestions = on => { try { on ? localStorage.setItem(SUGGEST_KEY, 'on') : localStorage.removeItem(SUGGEST_KEY); } catch (e) {} };
+// On by default for every game that has an equipment list; switching one off in the settings is
+// saved per game, e.g. { "crimson-desert": false }.
+const SUGGEST_KEY = 'armorer_suggestions_v1', SUGGEST_GAMES_KEY = 'armorer_suggestions_v2';
+function suggestMap() { try { return JSON.parse(localStorage.getItem(SUGGEST_GAMES_KEY) || '{}') || {}; } catch (e) { return {}; } }
+function suggestionsOn(game) {
+  const m = suggestMap(), k = gameSlug(game || '');
+  return !(k && k in m) || !!m[k];
+}
+function setSuggestions(game, on) {
+  const k = gameSlug(game || '');
+  if (!k) return;
+  const m = suggestMap(); m[k] = !!on;
+  try { localStorage.setItem(SUGGEST_GAMES_KEY, JSON.stringify(m)); } catch (e) {}
+}
+// The old opt-in setting is no longer needed now that suggestions are on by default.
+function migrateSuggestSetting() { try { localStorage.removeItem(SUGGEST_KEY); } catch (e) {} }
+// Which games have an equipment list, checked with a header-only request so nothing is downloaded
+const listChecks = new Map();
+function hasEquipmentList(game) {
+  const k = gameSlug(game);
+  if (!k || location.protocol === 'file:') return Promise.resolve(false);
+  if (!listChecks.has(k)) listChecks.set(k, (async () => {
+    for (const ext of ['json', 'csv']) {
+      try { const r = await fetch(`data/${k}.${ext}`, { method: 'HEAD', cache: 'no-cache' }); if (r.ok) return true; } catch (e) {}
+    }
+    return false;
+  })());
+  return listChecks.get(k);
+}
 // armour types that become a tag when a piece of that type is picked, e.g. Plate -> "Plate Armor"
 const TYPE_TAGS = { Plate: 'Plate Armor', Leather: 'Leather Armor', Chain: 'Chain Armor', Cloth: 'Cloth Armor', Fur: 'Fur Armor', Silk: 'Silk Armor', Kuku: 'Kuku Gear' };
 // tags an armour piece brings with it: its type, plus "Kuku Gear" for anything with Kuku in the name
@@ -1781,23 +1807,19 @@ function gearSuggestions(form, onPick) {
   return {
     // switch to the equipment list for this game (or none)
     use(game) {
-      want = suggestionsOn() ? gameSlug(game) : '';   // nothing downloads while suggestions are off
+      want = suggestionsOn(game) ? gameSlug(game) : '';   // nothing downloads while suggestions are off for this game
       db = null;
       fields.forEach(f => { f.close(); f.sync(); });
       if (note) note.hidden = true;
       if (!want) return;
       const asked = want;
-      if (note) { note.textContent = 'Loading the equipment list…'; note.hidden = false; }
       loadEquipment(game).then(d => {
         if (asked !== want) return;
         db = d;
         fields.forEach(f => f.sync());
-        if (!note) return;
-        note.textContent = d
-          ? `Suggestions from the ${d.game} equipment list appear as you type. Picking a Plate, Leather, Chain or Cloth piece, or any Kuku gear, also adds a matching tag.`
-          : location.protocol === 'file:'
-            ? 'Suggestions need the page to be opened from a web address, such as GitHub Pages.'
-            : `There's no equipment list for ${String(game).trim() || 'this game'} yet, so type the gear as usual.`;
+        if (!note || !d) return;   // games without a list stay plain text boxes, with no note
+        note.textContent = `Suggestions from the ${d.game} equipment list appear as you type, and Plate, Leather, Chain, Cloth or Kuku armour adds a matching tag. You can switch them off in the ? settings.`;
+        note.hidden = false;
       });
     },
   };
@@ -1888,8 +1910,6 @@ function openForm(existing = null, presetGame = null) {
           </div>
         </div>
         <p class="formnote">Fill in whichever slots this outfit uses; empty slots are left off the page.</p>
-        <label class="switch"><input type="checkbox" data-suggest${suggestionsOn() ? ' checked' : ''}><span class="track" aria-hidden="true"></span>
-          <span class="switch-text"><b>Equipment suggestions</b><i>Suggest gear names from the game's equipment list as you type. Saved in this browser.</i></span></label>
         <p class="formnote eqnote" data-eqnote hidden></p>
         <div class="formgrp">Armour and apparel</div>
         <div class="fields">${SLOTS.filter(s => s.group === 'armour').map(slotField).join('')}</div>
@@ -1914,7 +1934,7 @@ function openForm(existing = null, presetGame = null) {
     const added = gearTags(item.name, item.type).filter(t => tagger.suggest(t));
     if (added.length) toast(`Added the ${added.length === 1 ? 'tag' : 'tags'} ${added.map(t => `"${t}"`).join(' and ')}`);
   });
-  form.querySelector('[data-suggest]').addEventListener('change', e => { setSuggestions(e.target.checked); gear.use(pickedGame()); });
+
   const pickedGame = () => gameSel.value === '__new' ? form.elements.newgame.value : gameSel.value;
   const toggleNew = () => { newWrap.hidden = gameSel.value !== '__new'; if (!newWrap.hidden) form.elements.newgame.focus(); gear.use(pickedGame()); };
   gameSel.addEventListener('change', toggleNew);
@@ -2061,27 +2081,98 @@ $('fileInput').addEventListener('change', e => {
    Welcome popup: shown on a visitor's first visit, and from the ? button
    ===================================================================== */
 const WELCOME_KEY = 'armorer_welcome_seen_v1';
+// The ? popup: a guide in folding sections and, when opened from the ? button, the settings.
 function showWelcome(fromHelp) {
+  const help = fromHelp === true;
   const tip = (ic, html) => `<li>${icon(ic)}<span>${html}</span></li>`;
-  return dialog({
-    title: "Welcome to Armorer's Tome",
-    body: `<p>A logbook for your game outfits, with one book per game.</p>
-      <ul class="welcome">
-        ${tip('book-open', '<b>Browse the books.</b> Swipe or use the arrow keys to move between games, then tap a cover to open it.')}
-        ${tip('scroll', '<b>Turn the pages.</b> Tap the right page to go forward and the left page to go back. Going back from the first page closes the book.')}
-        ${tip('hammer', '<b>Forge an outfit.</b> It becomes a new page in its game\'s book, with an optional image you crop to fit. Pick "New game…" to start a new book, or turn on equipment suggestions to pick gear from a list.')}
-        ${tip('pencil', '<b>Manage each page</b> with its buttons in the top corner: download, duplicate, edit and delete.')}
-        ${tip('layout-grid', '<b>Grid Gallery</b> shows every outfit at once. Search and the character filters work in both views.')}
-        ${tip('download', '<b>Back up your outfits.</b> Export all saves your outfits and their images as a JSON file, and Import brings them back, on this browser or another one.')}
-      </ul>
-      <p class="formnote"><b>Good to know:</b> this logbook is saved only in this browser, so each browser and device keeps its own. The three Crimson Desert outfits are examples, so edit, duplicate or delete them as you like.</p>
-      <p class="formnote fan-line">This is a fan-made site, not affiliated with any game developer. All intellectual property and assets related to the games belong to their respective owners.</p>`,
-    actions: [
-      ...(fromHelp === true ? [{ label: 'Reset logbook…', value: 'reset', cls: 'reset-link' }] : []),
-      ...(fromHelp === true && suggestionsOn() ? [{ label: 'Add armour tags…', value: 'tags', cls: 'reset-link tool-link' }] : []),
-      { label: 'Start browsing', value: true, cls: 'solid' },
-    ],
-  }).then(v => { if (v === 'reset') confirmReset(); if (v === 'tags') tagExistingOutfits(); });
+  const sec = (ic, title, tips, open) =>
+    `<details class="help-sec"${open ? ' open' : ''}><summary>${icon(ic)}<span>${title}</span>${icon('chevron-down')}</summary><ul class="welcome">${tips.join('')}</ul></details>`;
+  const guide = [
+    sec('book-open', 'Browsing the books', [
+      tip('book-open', '<b>One book per game.</b> Swipe, or use the arrow keys, to move between books. The row of books loops round.'),
+      tip('scroll', '<b>Turn the pages.</b> Tap a cover to open it, the right page to go forward and the left page to go back. Going back from the first page closes the book, and so does Back to cover.'),
+      tip('compass', '<b>On phones</b> you read one page at a time: tap the right side of the screen to move on and the left side to go back.'),
+    ], !help),
+    sec('hammer', 'Forging outfits', [
+      tip('hammer', '<b>Forge Outfit</b> adds a new page to the game\'s book and turns to it. Pick "New game…" to start a new book with its own cover colour.'),
+      tip('image', '<b>Add an image</b> of up to 5 MB, then drag the frame to crop it. Tap the portrait on the page to see it larger.'),
+      tip('tags', '<b>Add several tags</b>, such as the characters who wear an outfit, by pressing Enter after each one.'),
+      tip('pencil', '<b>Notes</b> keep the line breaks you type. Long notes get a See more… link on the page.'),
+    ]),
+    sec('sparkles', 'Equipment suggestions', [
+      tip('search', '<b>Pick gear from a list.</b> When suggestions are on for a game, the gear fields suggest items from its equipment list as you type, with icons. The top match is shown larger.'),
+      tip('tags', '<b>Automatic tags.</b> Picking a Plate, Leather, Chain or Cloth piece adds a matching tag, and Kuku armour adds Kuku Gear.'),
+      tip('settings', '<b>On for every game with a list</b>, which so far is Crimson Desert. You can switch them off for a game in the settings' + (help ? ' below' : ', in the ? menu') + '.'),
+    ]),
+    sec('layout-grid', 'Pages, gallery and filters', [
+      tip('pencil', '<b>Each page\'s buttons</b>, in its top corner: download, duplicate, edit and delete.'),
+      tip('layout-grid', '<b>Grid Gallery</b> shows every outfit at once.'),
+      tip('search', '<b>Search, game and tag filters</b> work in both views. On phones they open from the magnifying glass, which shows a dot while a filter is on.'),
+    ]),
+    sec('save', 'Saving and backups', [
+      tip('save', '<b>Saved in this browser.</b> Each browser and device keeps its own logbook. The three Crimson Desert outfits are examples, so edit, duplicate or delete them as you like.'),
+      tip('download', '<b>Export all</b> saves your outfits and their images in a JSON file named with the date and time. <b>Import</b> adds a file\'s outfits to your books, or replaces everything.'),
+    ]),
+  ].join('');
+  const settings = !help ? '' : `
+    <section class="settings" aria-labelledby="setTitle">
+      <h3 id="setTitle">${icon('settings')}Settings</h3>
+      <div class="set-group">
+        <div class="set-head"><b>Equipment suggestions</b><i>Suggest gear from a game's equipment list as you type in the outfit form. On by default; your choice is saved in this browser.</i></div>
+        <div class="set-games" data-setgames><p class="formnote">Checking which games have an equipment list…</p></div>
+      </div>
+      <div class="set-group">
+        <div class="set-head"><b>Armour tags</b><i>Tag outfits saved before you used suggestions, using the equipment lists.</i></div>
+        <button type="button" class="btn ink small" data-settool="tags">${icon('tags')}Add armour tags…</button>
+      </div>
+      <div class="set-group warn-group">
+        <div class="set-head"><b>Reset logbook</b><i>Delete every outfit, image and added book in this browser, and return settings to their defaults.</i></div>
+        <button type="button" class="btn small reset-btn" data-settool="reset">${icon('trash-2')}Reset logbook…</button>
+      </div>
+    </section>`;
+  return new Promise(resolve => {
+    let o;
+    const done = v => { o.close(); resolve(v); };
+    o = overlay(`
+      <div class="sheet dlg helpdlg" role="dialog" aria-modal="true" aria-labelledby="helpTitle">
+        <div class="sheet-head"><h2 id="helpTitle">${help ? 'How Armorer\'s Tome works' : 'Welcome to Armorer\'s Tome'}</h2><button type="button" class="icon-btn" data-done aria-label="Close">${icon('x')}</button></div>
+        <div class="sheet-body">
+          <p class="help-intro">A logbook for your game outfits, with one book per game. Open a section to read more.</p>
+          ${guide}
+          ${settings}
+          <p class="formnote fan-line">This is a fan-made site, not affiliated with any game developer. All intellectual property and assets related to the games belong to their respective owners.</p>
+        </div>
+        <div class="sheet-foot"><button type="button" class="btn solid" data-done>${help ? 'Done' : 'Start browsing'}</button></div>
+      </div>`, () => done(null));
+    o.ov.addEventListener('click', e => {
+      if (e.target.closest('[data-done]')) return done(true);
+      const t = e.target.closest('[data-settool]');
+      if (t) { done(null); t.dataset.settool === 'tags' ? tagExistingOutfits() : confirmReset(); }
+    });
+    o.ov.querySelector('.sheet-foot [data-done]').focus();
+    if (!help) return;
+    // one switch per game that has an equipment list
+    const box = o.ov.querySelector('[data-setgames]');
+    const games = gameList();
+    Promise.all(games.map(g => hasEquipmentList(g))).then(has => {
+      const listed = games.filter((g, i) => has[i]);
+      if (!listed.length) {
+        box.innerHTML = `<p class="formnote">${location.protocol === 'file:' ? 'Equipment lists need the site to be opened from a web address, such as GitHub Pages.' : 'None of your games has an equipment list yet.'}</p>`;
+        return;
+      }
+      const others = games.length - listed.length;
+      box.innerHTML = listed.map(g => `
+        <label class="switch compact"><input type="checkbox" data-sgame="${esc(g)}"${suggestionsOn(g) ? ' checked' : ''}><span class="track" aria-hidden="true"></span>
+          <span class="switch-text"><b>${esc(g)}</b></span></label>`).join('')
+        + (others ? `<p class="formnote">${others === 1 ? 'Your other game doesn\'t' : `Your other ${others} games don't`} have an equipment list yet.</p>` : '');
+      box.addEventListener('change', e => {
+        const c = e.target.closest('[data-sgame]');
+        if (!c) return;
+        setSuggestions(c.dataset.sgame, c.checked);
+        toast(`Equipment suggestions ${c.checked ? 'on' : 'off'} for ${c.dataset.sgame}`);
+      });
+    });
+  });
 }
 $('helpBtn').addEventListener('click', () => showWelcome(true));
 
@@ -2153,7 +2244,7 @@ function confirmReset() {
       <div class="sheet-body">
         <div class="warnbox" id="resetWarn">
           <p><b>This permanently deletes every outfit saved in this browser</b>: ${n} ${n === 1 ? 'outfit' : 'outfits'}${pics ? `, ${pics} ${pics === 1 ? 'image' : 'images'}` : ''}, and any books you've added.</p>
-          <p>Settings such as equipment suggestions are switched off again. It can't be undone. The logbook then starts again with the three example outfits.</p>
+          <p>Settings such as equipment suggestions go back to their defaults. It can't be undone. The logbook then starts again with the three example outfits.</p>
         </div>
         <p class="formnote">If you might want these outfits later, export a backup first. You can bring it back with Import.</p>
         <button type="button" class="btn ink" data-backup>${icon('download')}Export a backup first</button>
@@ -2168,7 +2259,7 @@ function confirmReset() {
     if (!btn) return;
     btn.disabled = true;
     btn.lastChild.textContent = 'Resetting…';
-    try { [LS_OUTFITS, LS_META, SUGGEST_KEY, NOTES_SIZE_KEY].forEach(k => localStorage.removeItem(k)); } catch (err) {}
+    try { [LS_OUTFITS, LS_META, SUGGEST_KEY, SUGGEST_GAMES_KEY, NOTES_SIZE_KEY].forEach(k => localStorage.removeItem(k)); } catch (err) {}
     try { await images.clear(); } catch (err) {}
     try { sessionStorage.setItem(RESET_NOTE_KEY, '1'); } catch (err) {}
     location.reload();   // start fresh, exactly like a first visit (minus the welcome popup)
@@ -2196,6 +2287,7 @@ $('emptyTitle').textContent = 'Opening the tome…';
 $('emptyText').textContent = '';
 $('emptyActions').innerHTML = '';
 store.init(async () => {
+  if (!state.ready) setTimeout(migrateSuggestSetting, 1500);
   state.ready = true;
   await ensureGameColors();
   refresh();
