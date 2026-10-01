@@ -125,6 +125,7 @@
     .brand-sub { display: none; }
   }
 
+
   /* ---------------- filters ---------------- */
   .filters {
     display: flex;
@@ -689,3 +690,50 @@
     .slide, .card, .toast { transition-duration: .01ms; }
     .overlay, .sheet { animation: none; }
   }
+
+  /* ---------------- phones: one slim header row, filters fold away ---------------- */
+  .phone-only, .foot-short, .fan-line { display: none; }
+  .btn .badge { position: absolute; top: 5px; right: 5px; width: 8px; height: 8px; border-radius: 50%; background: var(--gilt); box-shadow: 0 0 0 2px var(--bar-2); }
+  #filterBtn { position: relative; }
+  .more { position: relative; }
+  .menu {
+    position: absolute; right: 0; top: calc(100% + 6px); z-index: 40;
+    min-width: 190px; padding: 6px;
+    border-radius: 10px; border: 1px solid var(--gilt-line);
+    background: var(--bar-2);
+    box-shadow: 0 14px 30px rgba(0, 0, 0, .5);
+    display: grid; gap: 2px;
+  }
+  .menu button { display: flex; align-items: center; gap: 10px; padding: 10px 12px; border: 0; border-radius: 7px; background: none; color: var(--parch); font-size: 17px; font-weight: 600; text-align: left; cursor: pointer; }
+  .menu button:hover, .menu button:focus-visible { background: rgba(227, 199, 127, .12); outline: none; }
+  .menu .ic { color: var(--gilt); }
+  @media (max-width: 640px) {
+    .bar { flex-wrap: nowrap; gap: 6px; padding: 6px 8px 6px 10px; }
+    .brand { gap: 8px; flex: 1; min-width: 0; }
+    .brand > div:last-child { min-width: 0; }
+    .brand-mark { width: 32px; height: 32px; }
+    .brand-mark .ic { width: 16px; height: 16px; }
+    .wordmark { font-size: 13px; letter-spacing: .02em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .controls { flex-wrap: nowrap; gap: 4px; }
+    .controls .btn, .seg button { height: 36px; padding: 0 9px; }
+    .seg { padding: 2px; }
+    .seg button { height: 32px; padding: 0 7px; }
+    .btn.primary .lbl { display: none; }
+    #helpBtn, #exportAll, #importAll { display: none; }
+    .phone-only { display: inline-flex; }
+    .more.phone-only { display: block; }
+    /* the filter panel floats over the books while it's open */
+    .filters { display: none; position: fixed; left: 0; right: 0; top: var(--bar-h, 50px); z-index: 30; padding: 10px 12px 12px; background: linear-gradient(var(--bar-2), #1a100c); border-bottom: 1px solid var(--gilt-line); box-shadow: 0 16px 30px rgba(0, 0, 0, .5); }
+    .filters.open { display: flex; }
+    .search { flex-basis: 100%; max-width: none; }
+    .tnav { bottom: 4px; }
+    .browse { gap: 2px; }
+    .hint { font-size: 14px; }
+    .reading { grid-auto-flow: column; align-items: center; gap: 12px; }
+    .reading .btn { height: 36px; }
+    .site-foot { padding: 3px 10px 4px; font-size: 11px; }
+    .foot-long { display: none; }
+    .foot-short, .fan-line { display: inline; }
+    .fan-line { display: block; }
+  }
+  @media (max-width: 366px) { .wordmark { display: none; } }
