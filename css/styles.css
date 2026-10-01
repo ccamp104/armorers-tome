@@ -228,6 +228,8 @@
   .cover .face.back > svg, .cover .face.back > canvas { border-radius: inherit; }
   .face > svg, .face > canvas { display: block; width: 100%; height: 100%; }
   .shade, .cast { position: absolute; inset: 0; opacity: 0; pointer-events: none; }
+  /* the page-turn shading fades on its own compositor layer, so the page under it isn't repainted every frame */
+  .leaf .shade, .leaf .cast, .cover .shade, .base .cast { will-change: opacity; backface-visibility: hidden; -webkit-backface-visibility: hidden; }
   .shade { background: linear-gradient(to right, rgba(20, 8, 4, .75), rgba(20, 8, 4, .25)); }
   .face.back .shade { background: linear-gradient(to left, rgba(20, 8, 4, .75), rgba(20, 8, 4, .25)); }
   .cast { background: linear-gradient(to right, rgba(45, 22, 10, .6), rgba(45, 22, 10, .18) 45%, rgba(45, 22, 10, 0) 85%); }
