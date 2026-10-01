@@ -1818,7 +1818,9 @@ function gearSuggestions(form, onPick) {
         db = d;
         fields.forEach(f => f.sync());
         if (!note || !d) return;   // games without a list stay plain text boxes, with no note
-        note.textContent = `Suggestions from the ${d.game} equipment list appear as you type, and Plate, Leather, Chain, Cloth or Kuku armour adds a matching tag. You can switch them off in the ? settings.`;
+        // only mention the automatic tags for lists that have tagged armour types (Crimson Desert does; Enshrouded doesn't)
+        const tags = ['headgear', 'chest', 'cloak', 'gloves', 'legs', 'boots'].some(k => (d.slots[k] || []).some(it => gearTags(it.name, it.type).length));
+        note.textContent = `Suggestions from the ${d.game} equipment list appear as you type${tags ? ', and Plate, Leather, Chain, Cloth or Kuku armour adds a matching tag' : ''}. You can switch them off in the ? settings.`;
         note.hidden = false;
       });
     },
@@ -2102,7 +2104,7 @@ function showWelcome(fromHelp) {
     sec('sparkles', 'Equipment suggestions', [
       tip('search', '<b>Pick gear from a list.</b> When suggestions are on for a game, the gear fields suggest items from its equipment list as you type, with icons. The top match is shown larger.'),
       tip('tags', '<b>Automatic tags.</b> Picking a Plate, Leather, Chain or Cloth piece adds a matching tag, and Kuku armour adds Kuku Gear.'),
-      tip('settings', '<b>On for every game with a list</b>, which so far is Crimson Desert. You can switch them off for a game in the settings' + (help ? ' below' : ', in the ? menu') + '.'),
+      tip('settings', '<b>On for every game with a list</b>, which so far is Crimson Desert and Enshrouded. You can switch them off for a game in the settings' + (help ? ' below' : ', in the ? menu') + '.'),
     ]),
     sec('layout-grid', 'Pages, gallery and filters', [
       tip('pencil', '<b>Each page\'s buttons</b>, in its top corner: download, duplicate, edit and delete.'),
