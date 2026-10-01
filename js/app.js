@@ -1557,24 +1557,35 @@ const SUGGEST_KEY = 'armorer_suggestions_v1';
 const suggestionsOn = () => { try { return localStorage.getItem(SUGGEST_KEY) === 'on'; } catch (e) { return false; } };
 const setSuggestions = on => { try { on ? localStorage.setItem(SUGGEST_KEY, 'on') : localStorage.removeItem(SUGGEST_KEY); } catch (e) {} };
 // armour types that become a tag when a piece of that type is picked, e.g. Plate -> "Plate Armor"
-const TYPE_TAGS = { Plate: 'Plate Armor', Leather: 'Leather Armor', Chain: 'Chain Armor', Cloth: 'Cloth Armor', Fur: 'Fur Armor', Silk: 'Silk Armor' };
+const TYPE_TAGS = { Plate: 'Plate Armor', Leather: 'Leather Armor', Chain: 'Chain Armor', Cloth: 'Cloth Armor', Fur: 'Fur Armor', Silk: 'Silk Armor', Kuku: 'Kuku Gear' };
+// tags an armour piece brings with it: its type, plus "Kuku Gear" for anything with Kuku in the name
+function gearTags(name, type) {
+  const out = [];
+  if (TYPE_TAGS[type]) out.push(TYPE_TAGS[type]);
+  if (/\bkuku\b/i.test(name || '') && !out.includes('Kuku Gear')) out.push('Kuku Gear');
+  return out;
+}
 const equipmentLists = new Map();   // game -> Promise of { game, slots: { list: [{ name, type, lc }] } } or null
 const gameSlug = name => norm(name).replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
-function addEquipment(slots, list, name, type) {
+function addEquipment(slots, list, name, type, icon) {
   list = norm(list); list = LIST_ALIASES[list] || list;
   name = String(name || '').trim();
   if (!list || !name) return;
   const arr = slots[list] || (slots[list] = []);
-  if (!arr.some(x => x.lc === name.toLowerCase())) arr.push({ name, type: String(type || '').trim(), lc: name.toLowerCase() });
+  if (!arr.some(x => x.lc === name.toLowerCase())) arr.push({ name, type: String(type || '').trim(), icon: String(icon || '').trim(), lc: name.toLowerCase() });
 }
-function parseEquipmentJSON(text) {
+// Icons are optional. They load from data/<folder>/<icon> only when the list turns them on
+// ("icons": { "enabled": true } in JSON, or an icon column in a CSV); otherwise each slot's own symbol is shown.
+function parseEquipmentJSON(text, slug) {
   const d = JSON.parse(text), slots = {};
   Object.entries(d.slots || {}).forEach(([list, rows]) => (rows || []).forEach(r =>
-    Array.isArray(r) ? addEquipment(slots, list, r[0], r[1]) : r && addEquipment(slots, list, r.name, r.type)));
-  return { game: d.game || '', slots };
+    Array.isArray(r) ? addEquipment(slots, list, r[0], r[1], r[2]) : r && addEquipment(slots, list, r.name, r.type, r.icon)));
+  const ic = d.icons || {};
+  return { game: d.game || '', slots, icons: { enabled: ic.enabled === true, folder: iconFolder(ic.folder, slug) } };
 }
+const iconFolder = (f, slug) => { f = String(f || `icons/${slug}/`).replace(/^\/+/, ''); return f.endsWith('/') ? f : f + '/'; };
 // a simple CSV reader: a header row with slot, name and (optionally) type, then one item per row
-function parseEquipmentCSV(text) {
+function parseEquipmentCSV(text, slug) {
   const rows = []; let row = [], cell = '', q = false;
   for (let i = 0; i < text.length; i++) {
     const c = text[i];
@@ -1587,11 +1598,13 @@ function parseEquipmentCSV(text) {
   if (cell || row.length) { row.push(cell); rows.push(row); }
   const head = (rows.shift() || []).map(h => norm(h));
   const at = k => head.indexOf(k);
-  const iS = at('slot'), iN = at('name'), iT = at('type');
+  const iS = at('slot'), iN = at('name'), iT = at('type'), iI = at('icon');
   const slots = {};
-  if (iS < 0 || iN < 0) return { game: '', slots };
-  rows.forEach(r => addEquipment(slots, r[iS], r[iN], iT >= 0 ? r[iT] : ''));
-  return { game: '', slots };
+  const icons = { enabled: false, folder: iconFolder('', slug) };
+  if (iS < 0 || iN < 0) return { game: '', slots, icons };
+  rows.forEach(r => addEquipment(slots, r[iS], r[iN], iT >= 0 ? r[iT] : '', iI >= 0 ? r[iI] : ''));
+  icons.enabled = iI >= 0 && rows.some(r => (r[iI] || '').trim());
+  return { game: '', slots, icons };
 }
 function loadEquipment(game) {
   const k = gameSlug(game);
@@ -1602,7 +1615,7 @@ function loadEquipment(game) {
         // no-cache: the browser checks for a newer list each visit (a quick "not modified" when unchanged)
         const r = await fetch(`data/${k}.${ext}`, { cache: 'no-cache' });
         if (!r.ok) continue;
-        const db = ext === 'json' ? parseEquipmentJSON(await r.text()) : parseEquipmentCSV(await r.text());
+        const db = ext === 'json' ? parseEquipmentJSON(await r.text(), k) : parseEquipmentCSV(await r.text(), k);
         if (Object.keys(db.slots).length) { db.game = db.game || game; return db; }
       } catch (e) {}
     }
@@ -1636,6 +1649,7 @@ function markMatch(name, text) {
   return esc(name.slice(0, i)) + '<b>' + esc(name.slice(i, i + q.length)) + '</b>' + esc(name.slice(i + q.length));
 }
 let suggestSeq = 0;
+const missingIcons = new Set();   // icon files that failed to load, so they aren't asked for again
 function gearSuggestions(form, onPick) {
   let db = null;
   const note = form.querySelector('[data-eqnote]');
@@ -1651,6 +1665,11 @@ function gearSuggestions(form, onPick) {
     input.setAttribute('autocomplete', 'off');
     let matches = [], active = -1;
     const listFor = () => db && (db.slots[s.key] || db.slots[LIST_FOR_SLOT[s.key]]);
+    // the item's icon when the list has icons, drawn over the slot's own symbol (which shows if the icon is missing)
+    const thumbHTML = it => {
+      const src = db && db.icons && db.icons.enabled && it.icon ? 'data/' + db.icons.folder + encodeURIComponent(it.icon) : '';
+      return `<span class="sg-ic" aria-hidden="true">${icon(s.icon)}${src && !missingIcons.has(src) ? `<img src="${esc(src)}" alt="" loading="lazy" decoding="async">` : ''}</span>`;
+    };
     function close() {
       box.hidden = true; matches = []; active = -1;
       input.removeAttribute('aria-activedescendant');
@@ -1662,12 +1681,18 @@ function gearSuggestions(form, onPick) {
       if (!matches.length) return close();
       active = Math.min(active, matches.length - 1);
       box.innerHTML = matches.map((it, i) =>
-        `<div class="sg-opt" role="option" id="${id}-${i}" aria-selected="${i === active}" data-i="${i}"><span class="sg-name">${markMatch(it.name, input.value)}</span>${it.type ? `<span class="sg-type">${esc(it.type)}</span>` : ''}</div>`).join('');
+        `<div class="sg-opt" role="option" id="${id}-${i}" aria-selected="${i === active}" data-i="${i}">${thumbHTML(it)}<span class="sg-name">${markMatch(it.name, input.value)}</span>${it.type ? `<span class="sg-type">${esc(it.type)}</span>` : ''}</div>`).join('');
       // open upwards when there isn't room below inside the form
       const body = form.querySelector('.sheet-body').getBoundingClientRect(), r = input.getBoundingClientRect();
       const up = body.bottom - r.bottom < 240 && r.top - body.top > body.bottom - r.bottom;
       const field = input.closest('.field').getBoundingClientRect();
       box.style.top = up ? 'auto' : '';
+      // a little wider than narrow fields, kept inside the form
+      const wide = Math.min(Math.max(field.width, 320), body.width - 24);
+      box.style.width = wide + 'px';
+      const flip = field.left + wide > body.right - 12;
+      box.style.left = flip ? 'auto' : '0';
+      box.style.right = flip ? '0' : 'auto';
       box.style.bottom = up ? (field.bottom - r.top + 4) + 'px' : '';
       box.hidden = false;
       input.setAttribute('aria-expanded', 'true');
@@ -1693,6 +1718,7 @@ function gearSuggestions(form, onPick) {
     });
     input.addEventListener('blur', () => setTimeout(close, 120));
     box.addEventListener('pointerdown', e => e.preventDefault());   // keep focus in the field while tapping a suggestion
+    box.addEventListener('error', e => { if (e.target.tagName === 'IMG') { missingIcons.add(e.target.getAttribute('src')); e.target.remove(); } }, true);
     box.addEventListener('click', e => { const o = e.target.closest('.sg-opt'); if (o) choose(+o.dataset.i); });
     f.close = close;
     f.sync = () => {
@@ -1717,7 +1743,7 @@ function gearSuggestions(form, onPick) {
         fields.forEach(f => f.sync());
         if (!note) return;
         note.textContent = d
-          ? `Suggestions from the ${d.game} equipment list appear as you type. Picking a Plate, Leather, Chain or Cloth piece also adds a matching tag.`
+          ? `Suggestions from the ${d.game} equipment list appear as you type. Picking a Plate, Leather, Chain or Cloth piece, or any Kuku gear, also adds a matching tag.`
           : location.protocol === 'file:'
             ? 'Suggestions need the page to be opened from a web address, such as GitHub Pages.'
             : `There's no equipment list for ${String(game).trim() || 'this game'} yet, so type the gear as usual.`;
@@ -1833,8 +1859,9 @@ function openForm(existing = null, presetGame = null) {
   const tagger = tagInput(form.querySelector('[data-tags]'), existing ? existing.tags : []);
   const gameSel = form.elements.game, newWrap = form.querySelector('[data-newgame]');
   const gear = gearSuggestions(form, (slot, item) => {
-    const tag = slot.group === 'armour' && TYPE_TAGS[item.type];
-    if (tag && tagger.suggest(tag)) toast(`Added the tag "${tag}"`);
+    if (slot.group !== 'armour') return;   // weapons don't add tags
+    const added = gearTags(item.name, item.type).filter(t => tagger.suggest(t));
+    if (added.length) toast(`Added the ${added.length === 1 ? 'tag' : 'tags'} ${added.map(t => `"${t}"`).join(' and ')}`);
   });
   form.querySelector('[data-suggest]').addEventListener('change', e => { setSuggestions(e.target.checked); gear.use(pickedGame()); });
   const pickedGame = () => gameSel.value === '__new' ? form.elements.newgame.value : gameSel.value;
@@ -1999,11 +2026,65 @@ function showWelcome(fromHelp) {
       <p class="formnote"><b>Good to know:</b> this logbook is saved only in this browser, so each browser and device keeps its own. The three Crimson Desert outfits are examples, so edit, duplicate or delete them as you like.</p>`,
     actions: [
       ...(fromHelp === true ? [{ label: 'Reset logbook…', value: 'reset', cls: 'reset-link' }] : []),
+      ...(fromHelp === true && suggestionsOn() ? [{ label: 'Add armour tags…', value: 'tags', cls: 'reset-link tool-link' }] : []),
       { label: 'Start browsing', value: true, cls: 'solid' },
     ],
-  }).then(v => { if (v === 'reset') confirmReset(); });
+  }).then(v => { if (v === 'reset') confirmReset(); if (v === 'tags') tagExistingOutfits(); });
 }
 $('helpBtn').addEventListener('click', () => showWelcome(true));
+
+/* =====================================================================
+   Add armour-type tags to outfits saved before the equipment lists existed:
+   any armour piece whose name exactly matches a Plate, Leather, Chain or
+   Cloth item in its game's list gives the outfit that tag
+   ===================================================================== */
+async function findArmourTags() {
+  const changes = [];
+  const games = [...new Set(store.outfits.map(o => o.game))];
+  for (const g of games) {
+    const db = await loadEquipment(g);   // games without a list can still pick up "Kuku Gear" from the name
+    const types = new Map();
+    if (db) ['headgear', 'chest', 'cloak', 'gloves', 'legs', 'boots'].forEach(k => (db.slots[k] || []).forEach(it => { if (!types.has(it.lc)) types.set(it.lc, it.type); }));
+    store.outfits.filter(o => norm(o.game) === norm(g)).forEach(o => {
+      const add = [];
+      SLOTS.filter(sl => sl.group === 'armour').forEach(sl => {
+        const name = o.slots[sl.key];
+        gearTags(name, types.get(norm(name))).forEach(tag => {
+          if (!o.tags.some(t => norm(t) === norm(tag)) && !add.includes(tag)) add.push(tag);
+        });
+      });
+      if (add.length) changes.push({ o, add });
+    });
+  }
+  return changes;
+}
+async function tagExistingOutfits() {
+  toast('Checking your outfits against the equipment lists…');
+  let changes;
+  try { changes = await findArmourTags(); } catch (e) { return toast('Could not read the equipment lists. Try again in a moment.', true); }
+  if (!changes.length) {
+    return dialog({
+      title: 'No tags to add',
+      body: `<p>None of your outfits need new armour tags. Either they already have them, or their gear names don't exactly match an item in the game's equipment list. Any armour with "Kuku" in its name gets the Kuku Gear tag.</p>`,
+      actions: [{ label: 'OK', value: true, cls: 'solid' }],
+    });
+  }
+  const counts = {};
+  changes.forEach(c => c.add.forEach(t => { counts[t] = (counts[t] || 0) + 1; }));
+  const n = changes.length;
+  const ok = await dialog({
+    title: 'Add armour tags?',
+    body: `<p>${n} ${n === 1 ? 'outfit has' : 'outfits have'} armour that matches the equipment list. This adds:</p>
+      <ul class="tagplan">${Object.entries(counts).map(([t, c]) => `<li><span class="tagchip">${esc(t)}</span> to ${c} ${c === 1 ? 'outfit' : 'outfits'}</li>`).join('')}</ul>
+      <p class="formnote">Existing tags are kept. Armour type tags need gear names that exactly match the list; Kuku Gear goes to any armour with "Kuku" in its name. You can remove any tag later in Edit.</p>`,
+    actions: [{ label: 'Cancel', value: false }, { label: `Add tags to ${n} ${n === 1 ? 'outfit' : 'outfits'}`, value: true, cls: 'solid' }],
+  });
+  if (!ok) return;
+  try {
+    for (const { o, add } of changes) await store.put({ ...o, tags: [...o.tags, ...add] });
+    toast(`Added armour tags to ${n} ${n === 1 ? 'outfit' : 'outfits'}`);
+  } catch (e) { toast('Some tags could not be saved. Try again in a moment.', true); }
+}
 
 /* =====================================================================
    Reset: wipes every outfit, image and custom book in this browser,
