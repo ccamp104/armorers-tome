@@ -1692,7 +1692,11 @@ function gearSuggestions(form, onPick) {
     box.setAttribute('aria-label', s.label + ' suggestions');
     input.insertAdjacentElement('afterend', box);
     input.setAttribute('autocomplete', 'off');
-    let matches = [], active = -1;
+    let matches = [], active = -1, hover = -1, lastMove = null;
+    // One row is shown large with a big icon: the one under the mouse (desktop), else the one picked
+    // with the arrow keys, else the top match.
+    const featured = () => hover >= 0 ? hover : active >= 0 ? active : 0;
+    const setFeatured = () => { const f = featured(); [...box.children].forEach((c, k) => c.classList.toggle('big', k === f)); };
     const listFor = () => db && (db.slots[s.key] || db.slots[LIST_FOR_SLOT[s.key]]);
     // the item's icon when the list has icons, drawn over the slot's own symbol (which shows if the icon is missing)
     const thumbHTML = it => {
@@ -1725,6 +1729,7 @@ function gearSuggestions(form, onPick) {
       box.style.bottom = up ? (field.bottom - r.top + 4) + 'px' : '';
       box.hidden = false;
       input.setAttribute('aria-expanded', 'true');
+      setFeatured();
       if (active >= 0) { input.setAttribute('aria-activedescendant', `${id}-${active}`); box.children[active].scrollIntoView({ block: 'nearest' }); }
       else input.removeAttribute('aria-activedescendant');
     }
@@ -1735,8 +1740,9 @@ function gearSuggestions(form, onPick) {
       close();
       if (onPick) onPick(s, it);
     }
-    input.addEventListener('input', () => { active = -1; open(); });
+    input.addEventListener('input', () => { active = -1; hover = -1; open(); });
     input.addEventListener('keydown', e => {
+      if (e.key === 'ArrowDown' || e.key === 'ArrowUp') hover = -1;   // the keyboard takes over from the mouse
       if (!listFor()) return;
       const shown = !box.hidden;
       if (e.key === 'ArrowDown') { e.preventDefault(); if (!shown) { active = 0; open(); } else { active = (active + 1) % matches.length; open(); } }
@@ -1747,6 +1753,16 @@ function gearSuggestions(form, onPick) {
     });
     input.addEventListener('blur', () => setTimeout(close, 120));
     box.addEventListener('pointerdown', e => e.preventDefault());   // keep focus in the field while tapping a suggestion
+    // Hovering enlarges a row on devices with a mouse. Only real mouse movement counts, so rows
+    // shifting as one grows and another shrinks don't keep swapping the enlarged row on their own.
+    box.addEventListener('pointermove', e => {
+      if (e.pointerType !== 'mouse') return;
+      if (lastMove && Math.abs(e.clientX - lastMove[0]) + Math.abs(e.clientY - lastMove[1]) < 4) return;
+      lastMove = [e.clientX, e.clientY];
+      const o = e.target.closest('.sg-opt');
+      if (o && +o.dataset.i !== hover) { hover = +o.dataset.i; setFeatured(); }
+    });
+    box.addEventListener('pointerleave', () => { hover = -1; lastMove = null; setFeatured(); });
     box.addEventListener('error', e => { if (e.target.tagName === 'IMG') { missingIcons.add(e.target.getAttribute('src')); e.target.remove(); } }, true);
     box.addEventListener('click', e => { const o = e.target.closest('.sg-opt'); if (o) choose(+o.dataset.i); });
     f.close = close;
