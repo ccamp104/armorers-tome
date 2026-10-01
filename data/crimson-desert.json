@@ -4,7 +4,7 @@
   "source": "Item names compiled from the fan-made Crimson Desert Database (crimsondesert.gaming.tools), game version 2.0.0, last updated 25 August 2026.",
   "compiled": "2026-10-01",
   "note": "Each slot lists [name, type, icon]. \"weapons\" is used for the main hand, off hand and accessory slots. Crimson Desert has no separate leg armour, so there is no \"legs\" list. The icon is the item's in-game icon file name.",
-  "icons": { "enabled": false, "folder": "icons/crimson-desert/" },
+  "icons": { "enabled": true, "folder": "icons/crimson-desert/" },
   "slots": {
     "headgear": [
       ["Alpha Wolf Helm", "", "itemicon_prefab_cd_phm_00_hel_0028_index02.webp"],
