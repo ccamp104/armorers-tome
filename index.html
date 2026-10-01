@@ -27,11 +27,21 @@
     <button type="button" class="btn" id="exportAll" title="Export every outfit as a JSON file"><span data-icon="download"></span><span class="lbl">Export all</span></button>
     <button type="button" class="btn" id="importAll" title="Import outfits from a JSON file"><span data-icon="upload"></span><span class="lbl">Import</span></button>
     <input type="file" id="fileInput" accept=".json,application/json" hidden>
-    <button type="button" class="btn primary" id="forgeBtn"><span data-icon="hammer"></span><span class="lbl">Forge Outfit</span></button>
+    <!-- phones: search and filters fold away behind this button, and help, export and import share a menu -->
+    <button type="button" class="btn phone-only" id="filterBtn" aria-label="Search and filters" aria-expanded="false" aria-controls="filters"><span data-icon="search"></span><span class="badge" hidden></span></button>
+    <button type="button" class="btn primary" id="forgeBtn" aria-label="Forge outfit"><span data-icon="hammer"></span><span class="lbl">Forge Outfit</span></button>
+    <div class="more phone-only">
+      <button type="button" class="btn" id="moreBtn" aria-label="More" aria-haspopup="menu" aria-expanded="false" aria-controls="moreMenu"><span data-icon="more-vertical"></span></button>
+      <div class="menu" id="moreMenu" role="menu" hidden>
+        <button type="button" role="menuitem" data-proxy="helpBtn"><span data-icon="circle-help"></span>How it works</button>
+        <button type="button" role="menuitem" data-proxy="exportAll"><span data-icon="download"></span>Export all</button>
+        <button type="button" role="menuitem" data-proxy="importAll"><span data-icon="upload"></span>Import</button>
+      </div>
+    </div>
   </div>
 </header>
 
-<section class="filters" aria-label="Filters">
+<section class="filters" id="filters" aria-label="Filters">
   <label class="search">
     <span data-icon="search"></span>
     <input id="search" type="text" enterkeyhint="search" placeholder="Search outfits, gear, notes or characters" autocomplete="off">
@@ -71,7 +81,7 @@
 <footer class="site-foot">
   <!-- Replace with the site version and date when versioning is added. -->
   <span class="foot-date">October 2026</span>
-  <span class="foot-note">This is a fan-made site, not affiliated with any game developer. All intellectual property and assets related to the games belong to their respective owners.</span>
+  <span class="foot-note"><span class="foot-long">This is a fan-made site, not affiliated with any game developer. All intellectual property and assets related to the games belong to their respective owners.</span><span class="foot-short">Fan-made site, not affiliated with any game developer.</span></span>
 </footer>
 
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
