@@ -591,6 +591,38 @@
   @media (max-width: 640px) { .site-foot { font-size: 11.5px; } }
 
   /* ---------------- welcome popup ---------------- */
+  .dlg.helpdlg { width: min(100%, 580px); }
+  .help-intro { margin: 0 0 12px; }
+  .help-sec { border: 1px solid rgba(59, 42, 30, .16); border-radius: 8px; background: rgba(255, 255, 255, .22); margin-bottom: 8px; }
+  .help-sec summary {
+    display: flex; align-items: center; gap: 10px;
+    padding: 11px 12px; cursor: pointer; list-style: none;
+    font: 600 16px/1.2 var(--display); letter-spacing: .02em; color: #7c2c30;
+    border-radius: 8px;
+  }
+  .help-sec summary::-webkit-details-marker { display: none; }
+  .help-sec summary > span { flex: 1; }
+  .help-sec summary .ic { width: 18px; height: 18px; }
+  .help-sec summary .ic:last-child { color: var(--ink-soft); transition: transform .2s ease; }
+  .help-sec[open] summary .ic:last-child { transform: rotate(180deg); }
+  .help-sec summary:hover { background: rgba(255, 255, 255, .3); }
+  .help-sec summary:focus-visible { outline: 2px solid #7c2c30; outline-offset: 2px; }
+  .help-sec .welcome { margin: 0; padding: 2px 14px 14px; }
+  /* settings at the bottom of the ? popup */
+  .settings { margin-top: 18px; padding-top: 14px; border-top: 1px solid rgba(59, 42, 30, .2); display: grid; gap: 12px; }
+  .settings h3 { margin: 0; display: flex; align-items: center; gap: 8px; font: 600 17px/1.2 var(--display); letter-spacing: .03em; color: var(--ink); }
+  .settings h3 .ic { color: #7c2c30; }
+  .set-group { display: grid; gap: 8px; padding: 12px; border-radius: 8px; border: 1px solid rgba(59, 42, 30, .16); background: rgba(255, 255, 255, .22); }
+  .set-group > .btn { justify-self: start; }
+  .set-head { display: grid; gap: 2px; }
+  .set-head b { font-weight: 700; }
+  .set-head i { font-size: 15px; color: var(--ink-soft); }
+  .set-games { display: grid; gap: 6px; }
+  .set-games .formnote { margin: 2px 0 0; }
+  .switch.compact { margin: 0; padding: 8px 10px; align-items: center; }
+  .warn-group { border-color: rgba(155, 44, 44, .35); background: rgba(155, 44, 44, .05); }
+  .btn.reset-btn { color: #fff4ea; background: linear-gradient(#a93a3a, #7e2424); border-color: #c95b5b; }
+  .btn.reset-btn:hover { background: linear-gradient(#b94444, #8e2a2a); }
   .welcome { list-style: none; margin: 4px 0 6px; padding: 0; display: grid; gap: 10px; }
   .welcome li { display: grid; grid-template-columns: 22px 1fr; gap: 10px; align-items: start; line-height: 1.35; }
   .welcome .ic { width: 18px; height: 18px; margin-top: 2px; color: #7c2c30; }
