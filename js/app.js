@@ -1330,12 +1330,12 @@ function overlay(html, onKey) {
   return { ov, close };
 }
 
-function dialog({ title, body, actions, choices }) {
+function dialog({ title, body, actions, choices, cls = '' }) {
   return new Promise(resolve => {
     let o;
     const done = v => { o.close(); resolve(v); };
     o = overlay(`
-      <div class="sheet dlg" role="dialog" aria-modal="true" aria-labelledby="dlgTitle">
+      <div class="sheet dlg ${cls}" role="dialog" aria-modal="true" aria-labelledby="dlgTitle">
         <div class="sheet-head"><h2 id="dlgTitle">${esc(title)}</h2><button type="button" class="icon-btn" data-v="__x" aria-label="Close">${icon('x')}</button></div>
         <div class="sheet-body">${body || ''}${choices ? `<div class="choice">${choices.map((c, i) => `<button type="button" data-c="${i}"><b>${esc(c.label)}</b><i>${esc(c.detail)}</i></button>`).join('')}</div>` : ''}</div>
         <div class="sheet-foot">${actions.map((a, i) => `<button type="button" class="btn ${a.cls || 'ink'}" data-a="${i}">${esc(a.label)}</button>`).join('')}</div>
@@ -1354,12 +1354,35 @@ function dialog({ title, body, actions, choices }) {
 /* =====================================================================
    Full notes, opened from "See more…"
    ===================================================================== */
+// On larger screens the reader can be resized by dragging its corner; the size is remembered.
+const NOTES_SIZE_KEY = 'armorer_notes_size';
 function readNotes(o) {
-  dialog({
+  const shown = dialog({
     title: o.name,
     body: `<p class="notes-full">${esc(o.notes)}</p>`,
     actions: [{ label: 'Edit outfit', value: 'edit' }, { label: 'Close', value: true, cls: 'solid' }],
-  }).then(v => { if (v === 'edit') openForm(o); });
+    cls: 'reader',
+  });
+  const sheet = [...document.querySelectorAll('.overlay .dlg.reader')].pop();
+  if (sheet && matchMedia('(pointer: fine) and (min-width: 700px)').matches) {
+    try {
+      const saved = JSON.parse(localStorage.getItem(NOTES_SIZE_KEY) || 'null');
+      if (saved && saved.w) { sheet.style.width = saved.w + 'px'; if (saved.h) sheet.style.height = saved.h + 'px'; }
+    } catch (e) {}
+    let first = true, t;
+    const ro = new ResizeObserver(() => {
+      if (first) { first = false; return; }   // ignore the initial measurement
+      clearTimeout(t);
+      t = setTimeout(() => {
+        // only a size the reader has been dragged to is remembered
+        if (!sheet.style.width && !sheet.style.height) return;
+        try { localStorage.setItem(NOTES_SIZE_KEY, JSON.stringify({ w: Math.round(sheet.offsetWidth), h: sheet.style.height ? Math.round(sheet.offsetHeight) : 0 })); } catch (e) {}
+      }, 250);
+    });
+    ro.observe(sheet);
+    shown.then(() => ro.disconnect());
+  }
+  shown.then(v => { if (v === 'edit') openForm(o); });
 }
 
 /* =====================================================================
