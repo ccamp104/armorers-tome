@@ -516,6 +516,12 @@
   .btn.solid:hover { background: linear-gradient(#7b2a38, #521820); }
   .btn.warn { color: #fff4ea; background: linear-gradient(#a93a3a, #7e2424); border-color: #c95b5b; }
   .dlg { width: min(100%, 460px); }
+  /* the notes reader opens wider, and on larger screens can be resized from its bottom-right corner */
+  .dlg.reader { width: min(100%, 640px); }
+  .dlg.reader .sheet-body { flex: 1; }
+  @media (pointer: fine) and (min-width: 700px) {
+    .dlg.reader { resize: both; min-width: 380px; min-height: 220px; max-width: calc(100vw - 32px); max-height: calc(100vh - 32px); }
+  }
   .dlg .sheet-body p { margin: 0 0 10px; }
   .choice { display: grid; gap: 10px; margin: 6px 0 4px; }
   .choice button { text-align: left; display: grid; gap: 2px; padding: 12px 14px; border-radius: 6px; border: 1px solid rgba(59, 42, 30, .25); background: rgba(255, 255, 255, .35); color: var(--ink); cursor: pointer; }
