@@ -208,6 +208,8 @@
     transition: transform .55s cubic-bezier(.2, .8, .2, 1), opacity .45s ease, visibility .45s;
   }
   .stage.dragging .slide { transition: none; }
+  /* each book is drawn once and then just moved and resized while swiping, instead of being redrawn every frame */
+  .slide { will-change: transform; }
   .book {
     position: absolute;
     left: 50%;
