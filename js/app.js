@@ -42,8 +42,8 @@ const hash = s => { let h = 7; for (const c of String(s)) h = (h * 31 + c.charCo
 const newId = () => 'o_' + Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
 
 // extra slots an outfit can add under Weapons and auxiliaries
-const EXTRA_KINDS = ['Weapon', 'Accessory', 'Ring', 'Amulet'];
-const EXTRA_ICONS = { Weapon: 'sword', Accessory: 'shield-half', Ring: 'circle-dot', Amulet: 'gem' };
+const EXTRA_KINDS = ['Weapon', 'Accessory'];
+const EXTRA_ICONS = { Weapon: 'sword', Accessory: 'shield-half' };
 const MAX_EXTRA = 3;
 // labels as shown on a page: a second Accessory (after the built-in one) becomes "Accessory 2", and so on
 function extraLabels(extra) {
@@ -72,7 +72,7 @@ function normalizeOutfit(o) {
     notes: String(o.notes || '').replace(/\r\n?/g, '\n').slice(0, 4000),
     slots,
     createdAt: Number(o.createdAt) || Date.now(),
-    // extra slots added in the form: [{ kind: 'Weapon' | 'Accessory' | 'Ring' | 'Amulet', value }]
+    // extra slots added in the form: [{ kind: 'Weapon' | 'Accessory', value }]; anything else counts as an accessory
     extra: (Array.isArray(o.extra) ? o.extra : [])
       .map(x => ({ kind: EXTRA_KINDS.includes(x && x.kind) ? x.kind : 'Accessory', value: String((x && x.value) || '').trim().slice(0, 120) }))
       .filter(x => x.value).slice(0, MAX_EXTRA),
@@ -1951,7 +1951,7 @@ function openForm(existing = null, presetGame = null) {
   const form = o.ov.querySelector('form');
   editor = imageEditor(form.querySelector('.imgfield'), existing);
   const tagger = tagInput(form.querySelector('[data-tags]'), existing ? existing.tags : []);
-  // extra slots: up to three rows, each with a kind (Weapon, Accessory, Ring, Amulet) and a text box
+  // extra slots: up to three rows, each a Weapon or Accessory with a text box
   const extrasEl = form.querySelector('[data-extras]'), addSlot = form.querySelector('[data-addslot]');
   const extraRow = (x = { kind: 'Accessory', value: '' }) => {
     const row = document.createElement('div');
