@@ -3,7 +3,7 @@
 /* =====================================================================
    Icons, slots and sample data
    ===================================================================== */
-const ICONS = {"axe": "<path d=\"m14 12-8.5 8.5a2.12 2.12 0 1 1-3-3L11 9\" /> <path d=\"M15 13 9 7l4-4 6 6h3a8 8 0 0 1-7 7z\" />", "book-open": "<path d=\"M12 7v14\" /> <path d=\"M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z\" />", "copy": "<rect width=\"14\" height=\"14\" x=\"8\" y=\"8\" rx=\"2\" ry=\"2\" /> <path d=\"M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2\" />", "crown": "<path d=\"M11.562 3.266a.5.5 0 0 1 .876 0L15.39 8.87a1 1 0 0 0 1.516.294L21.183 5.5a.5.5 0 0 1 .798.519l-2.834 10.246a1 1 0 0 1-.956.734H5.81a1 1 0 0 1-.957-.734L2.02 6.02a.5.5 0 0 1 .798-.519l4.276 3.664a1 1 0 0 0 1.516-.294z\" /> <path d=\"M5 21h14\" />", "download": "<path d=\"M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4\" /> <polyline points=\"7 10 12 15 17 10\" /> <line x1=\"12\" x2=\"12\" y1=\"15\" y2=\"3\" />", "feather": "<path d=\"M12.67 19a2 2 0 0 0 1.416-.588l6.154-6.172a6 6 0 0 0-8.49-8.49L5.586 9.914A2 2 0 0 0 5 11.328V18a1 1 0 0 0 1 1z\" /> <path d=\"M16 8 2 22\" /> <path d=\"M17.5 15H9\" />", "footprints": "<path d=\"M4 16v-2.38C4 11.5 2.97 10.5 3 8c.03-2.72 1.49-6 4.5-6C9.37 2 10 3.8 10 5.5c0 3.11-2 5.66-2 8.68V16a2 2 0 1 1-4 0Z\" /> <path d=\"M20 20v-2.38c0-2.12 1.03-3.12 1-5.62-.03-2.72-1.49-6-4.5-6C14.63 6 14 7.8 14 9.5c0 3.11 2 5.66 2 8.68V20a2 2 0 1 0 4 0Z\" /> <path d=\"M16 17h4\" /> <path d=\"M4 13h4\" />", "hammer": "<path d=\"m15 12-8.373 8.373a1 1 0 1 1-3-3L12 9\" /> <path d=\"m18 15 4-4\" /> <path d=\"m21.5 11.5-1.914-1.914A2 2 0 0 1 19 8.172V7l-2.26-2.26a6 6 0 0 0-4.202-1.756L9 2.96l.92.82A6.18 6.18 0 0 1 12 8.4V10l2 2h1.172a2 2 0 0 1 1.414.586L18.5 14.5\" />", "hand": "<path d=\"M18 11V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2\" /> <path d=\"M14 10V4a2 2 0 0 0-2-2a2 2 0 0 0-2 2v2\" /> <path d=\"M10 10.5V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2v8\" /> <path d=\"M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15\" />", "layout-grid": "<rect width=\"7\" height=\"7\" x=\"3\" y=\"3\" rx=\"1\" /> <rect width=\"7\" height=\"7\" x=\"14\" y=\"3\" rx=\"1\" /> <rect width=\"7\" height=\"7\" x=\"14\" y=\"14\" rx=\"1\" /> <rect width=\"7\" height=\"7\" x=\"3\" y=\"14\" rx=\"1\" />", "pencil": "<path d=\"M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z\" /> <path d=\"m15 5 4 4\" />", "plus": "<path d=\"M5 12h14\" /> <path d=\"M12 5v14\" />", "scroll": "<path d=\"M19 17V5a2 2 0 0 0-2-2H4\" /> <path d=\"M8 21h12a2 2 0 0 0 2-2v-1a1 1 0 0 0-1-1H11a1 1 0 0 0-1 1v1a2 2 0 1 1-4 0V5a2 2 0 1 0-4 0v2a1 1 0 0 0 1 1h3\" />", "search": "<circle cx=\"11\" cy=\"11\" r=\"8\" /> <path d=\"m21 21-4.3-4.3\" />", "shield-half": "<path d=\"M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z\" /> <path d=\"M12 22V2\" />", "shield": "<path d=\"M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z\" />", "shirt": "<path d=\"M20.38 3.46 16 2a4 4 0 0 1-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.47a1 1 0 0 0 .99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 0 0 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.47a2 2 0 0 0-1.34-2.23z\" />", "sword": "<polyline points=\"14.5 17.5 3 6 3 3 6 3 17.5 14.5\" /> <line x1=\"13\" x2=\"19\" y1=\"19\" y2=\"13\" /> <line x1=\"16\" x2=\"20\" y1=\"16\" y2=\"20\" /> <line x1=\"19\" x2=\"21\" y1=\"21\" y2=\"19\" />", "trash-2": "<path d=\"M3 6h18\" /> <path d=\"M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6\" /> <path d=\"M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2\" /> <line x1=\"10\" x2=\"10\" y1=\"11\" y2=\"17\" /> <line x1=\"14\" x2=\"14\" y1=\"11\" y2=\"17\" />", "upload": "<path d=\"M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4\" /> <polyline points=\"17 8 12 3 7 8\" /> <line x1=\"12\" x2=\"12\" y1=\"3\" y2=\"15\" />", "x": "<path d=\"M18 6 6 18\" /> <path d=\"m6 6 12 12\" />", "image-plus": "<path d=\"M16 5h6\" /> <path d=\"M19 2v6\" /> <path d=\"M21 11.5V19a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7.5\" /> <path d=\"m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21\" /> <circle cx=\"9\" cy=\"9\" r=\"2\" />", "zoom-in": "<circle cx=\"11\" cy=\"11\" r=\"8\" /> <line x1=\"21\" x2=\"16.65\" y1=\"21\" y2=\"16.65\" /> <line x1=\"11\" x2=\"11\" y1=\"8\" y2=\"14\" /> <line x1=\"8\" x2=\"14\" y1=\"11\" y2=\"11\" />", "zoom-out": "<circle cx=\"11\" cy=\"11\" r=\"8\" /> <line x1=\"21\" x2=\"16.65\" y1=\"21\" y2=\"16.65\" /> <line x1=\"8\" x2=\"14\" y1=\"11\" y2=\"11\" />", "image": "<rect width=\"18\" height=\"18\" x=\"3\" y=\"3\" rx=\"2\" ry=\"2\" /> <circle cx=\"9\" cy=\"9\" r=\"2\" /> <path d=\"m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21\" />", "circle-help": "<circle cx=\"12\" cy=\"12\" r=\"10\" /> <path d=\"M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3\" /> <path d=\"M12 17h.01\" />", "more-vertical": "<circle cx=\"12\" cy=\"12\" r=\"1\" /> <circle cx=\"12\" cy=\"5\" r=\"1\" /> <circle cx=\"12\" cy=\"19\" r=\"1\" />", "chevron-down": "<path d=\"m6 9 6 6 6-6\" />", "tags": "<path d=\"m15 5 6.3 6.3a2.4 2.4 0 0 1 0 3.4L17 19\" /> <path d=\"M9.586 5.586A2 2 0 0 0 8.172 5H3a1 1 0 0 0-1 1v5.172a2 2 0 0 0 .586 1.414L8.29 18.29a2.426 2.426 0 0 0 3.42 0l3.58-3.58a2.426 2.426 0 0 0 0-3.42z\" /> <circle cx=\"6.5\" cy=\"9.5\" r=\".5\" fill=\"currentColor\" />", "settings": "<path d=\"M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z\" /> <circle cx=\"12\" cy=\"12\" r=\"3\" />", "compass": "<path d=\"m16.24 7.76-1.804 5.411a2 2 0 0 1-1.265 1.265L7.76 16.24l1.804-5.411a2 2 0 0 1 1.265-1.265z\" /> <circle cx=\"12\" cy=\"12\" r=\"10\" />", "sparkles": "<path d=\"M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z\" /> <path d=\"M20 3v4\" /> <path d=\"M22 5h-4\" /> <path d=\"M4 17v2\" /> <path d=\"M5 18H3\" />", "save": "<path d=\"M15.2 3a2 2 0 0 1 1.4.6l3.8 3.8a2 2 0 0 1 .6 1.4V19a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z\" /> <path d=\"M17 21v-7a1 1 0 0 0-1-1H8a1 1 0 0 0-1 1v7\" /> <path d=\"M7 3v4a1 1 0 0 0 1 1h7\" />"};
+const ICONS = {"axe": "<path d=\"m14 12-8.5 8.5a2.12 2.12 0 1 1-3-3L11 9\" /> <path d=\"M15 13 9 7l4-4 6 6h3a8 8 0 0 1-7 7z\" />", "book-open": "<path d=\"M12 7v14\" /> <path d=\"M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z\" />", "copy": "<rect width=\"14\" height=\"14\" x=\"8\" y=\"8\" rx=\"2\" ry=\"2\" /> <path d=\"M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2\" />", "crown": "<path d=\"M11.562 3.266a.5.5 0 0 1 .876 0L15.39 8.87a1 1 0 0 0 1.516.294L21.183 5.5a.5.5 0 0 1 .798.519l-2.834 10.246a1 1 0 0 1-.956.734H5.81a1 1 0 0 1-.957-.734L2.02 6.02a.5.5 0 0 1 .798-.519l4.276 3.664a1 1 0 0 0 1.516-.294z\" /> <path d=\"M5 21h14\" />", "download": "<path d=\"M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4\" /> <polyline points=\"7 10 12 15 17 10\" /> <line x1=\"12\" x2=\"12\" y1=\"15\" y2=\"3\" />", "feather": "<path d=\"M12.67 19a2 2 0 0 0 1.416-.588l6.154-6.172a6 6 0 0 0-8.49-8.49L5.586 9.914A2 2 0 0 0 5 11.328V18a1 1 0 0 0 1 1z\" /> <path d=\"M16 8 2 22\" /> <path d=\"M17.5 15H9\" />", "footprints": "<path d=\"M4 16v-2.38C4 11.5 2.97 10.5 3 8c.03-2.72 1.49-6 4.5-6C9.37 2 10 3.8 10 5.5c0 3.11-2 5.66-2 8.68V16a2 2 0 1 1-4 0Z\" /> <path d=\"M20 20v-2.38c0-2.12 1.03-3.12 1-5.62-.03-2.72-1.49-6-4.5-6C14.63 6 14 7.8 14 9.5c0 3.11 2 5.66 2 8.68V20a2 2 0 1 0 4 0Z\" /> <path d=\"M16 17h4\" /> <path d=\"M4 13h4\" />", "hammer": "<path d=\"m15 12-8.373 8.373a1 1 0 1 1-3-3L12 9\" /> <path d=\"m18 15 4-4\" /> <path d=\"m21.5 11.5-1.914-1.914A2 2 0 0 1 19 8.172V7l-2.26-2.26a6 6 0 0 0-4.202-1.756L9 2.96l.92.82A6.18 6.18 0 0 1 12 8.4V10l2 2h1.172a2 2 0 0 1 1.414.586L18.5 14.5\" />", "hand": "<path d=\"M18 11V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2\" /> <path d=\"M14 10V4a2 2 0 0 0-2-2a2 2 0 0 0-2 2v2\" /> <path d=\"M10 10.5V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2v8\" /> <path d=\"M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15\" />", "layout-grid": "<rect width=\"7\" height=\"7\" x=\"3\" y=\"3\" rx=\"1\" /> <rect width=\"7\" height=\"7\" x=\"14\" y=\"3\" rx=\"1\" /> <rect width=\"7\" height=\"7\" x=\"14\" y=\"14\" rx=\"1\" /> <rect width=\"7\" height=\"7\" x=\"3\" y=\"14\" rx=\"1\" />", "pencil": "<path d=\"M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z\" /> <path d=\"m15 5 4 4\" />", "plus": "<path d=\"M5 12h14\" /> <path d=\"M12 5v14\" />", "scroll": "<path d=\"M19 17V5a2 2 0 0 0-2-2H4\" /> <path d=\"M8 21h12a2 2 0 0 0 2-2v-1a1 1 0 0 0-1-1H11a1 1 0 0 0-1 1v1a2 2 0 1 1-4 0V5a2 2 0 1 0-4 0v2a1 1 0 0 0 1 1h3\" />", "search": "<circle cx=\"11\" cy=\"11\" r=\"8\" /> <path d=\"m21 21-4.3-4.3\" />", "shield-half": "<path d=\"M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z\" /> <path d=\"M12 22V2\" />", "shield": "<path d=\"M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z\" />", "shirt": "<path d=\"M20.38 3.46 16 2a4 4 0 0 1-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.47a1 1 0 0 0 .99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 0 0 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.47a2 2 0 0 0-1.34-2.23z\" />", "sword": "<polyline points=\"14.5 17.5 3 6 3 3 6 3 17.5 14.5\" /> <line x1=\"13\" x2=\"19\" y1=\"19\" y2=\"13\" /> <line x1=\"16\" x2=\"20\" y1=\"16\" y2=\"20\" /> <line x1=\"19\" x2=\"21\" y1=\"21\" y2=\"19\" />", "trash-2": "<path d=\"M3 6h18\" /> <path d=\"M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6\" /> <path d=\"M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2\" /> <line x1=\"10\" x2=\"10\" y1=\"11\" y2=\"17\" /> <line x1=\"14\" x2=\"14\" y1=\"11\" y2=\"17\" />", "upload": "<path d=\"M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4\" /> <polyline points=\"17 8 12 3 7 8\" /> <line x1=\"12\" x2=\"12\" y1=\"3\" y2=\"15\" />", "x": "<path d=\"M18 6 6 18\" /> <path d=\"m6 6 12 12\" />", "image-plus": "<path d=\"M16 5h6\" /> <path d=\"M19 2v6\" /> <path d=\"M21 11.5V19a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7.5\" /> <path d=\"m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21\" /> <circle cx=\"9\" cy=\"9\" r=\"2\" />", "zoom-in": "<circle cx=\"11\" cy=\"11\" r=\"8\" /> <line x1=\"21\" x2=\"16.65\" y1=\"21\" y2=\"16.65\" /> <line x1=\"11\" x2=\"11\" y1=\"8\" y2=\"14\" /> <line x1=\"8\" x2=\"14\" y1=\"11\" y2=\"11\" />", "zoom-out": "<circle cx=\"11\" cy=\"11\" r=\"8\" /> <line x1=\"21\" x2=\"16.65\" y1=\"21\" y2=\"16.65\" /> <line x1=\"8\" x2=\"14\" y1=\"11\" y2=\"11\" />", "image": "<rect width=\"18\" height=\"18\" x=\"3\" y=\"3\" rx=\"2\" ry=\"2\" /> <circle cx=\"9\" cy=\"9\" r=\"2\" /> <path d=\"m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21\" />", "circle-help": "<circle cx=\"12\" cy=\"12\" r=\"10\" /> <path d=\"M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3\" /> <path d=\"M12 17h.01\" />", "more-vertical": "<circle cx=\"12\" cy=\"12\" r=\"1\" /> <circle cx=\"12\" cy=\"5\" r=\"1\" /> <circle cx=\"12\" cy=\"19\" r=\"1\" />", "chevron-down": "<path d=\"m6 9 6 6 6-6\" />", "tags": "<path d=\"m15 5 6.3 6.3a2.4 2.4 0 0 1 0 3.4L17 19\" /> <path d=\"M9.586 5.586A2 2 0 0 0 8.172 5H3a1 1 0 0 0-1 1v5.172a2 2 0 0 0 .586 1.414L8.29 18.29a2.426 2.426 0 0 0 3.42 0l3.58-3.58a2.426 2.426 0 0 0 0-3.42z\" /> <circle cx=\"6.5\" cy=\"9.5\" r=\".5\" fill=\"currentColor\" />", "settings": "<path d=\"M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z\" /> <circle cx=\"12\" cy=\"12\" r=\"3\" />", "compass": "<path d=\"m16.24 7.76-1.804 5.411a2 2 0 0 1-1.265 1.265L7.76 16.24l1.804-5.411a2 2 0 0 1 1.265-1.265z\" /> <circle cx=\"12\" cy=\"12\" r=\"10\" />", "sparkles": "<path d=\"M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z\" /> <path d=\"M20 3v4\" /> <path d=\"M22 5h-4\" /> <path d=\"M4 17v2\" /> <path d=\"M5 18H3\" />", "save": "<path d=\"M15.2 3a2 2 0 0 1 1.4.6l3.8 3.8a2 2 0 0 1 .6 1.4V19a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z\" /> <path d=\"M17 21v-7a1 1 0 0 0-1-1H8a1 1 0 0 0-1 1v7\" /> <path d=\"M7 3v4a1 1 0 0 0 1 1h7\" />", "gem": "<path d=\"M6 3h12l4 6-10 13L2 9Z\" /> <path d=\"M11 3 8 9l4 13 4-13-3-6\" /> <path d=\"M2 9h20\" />", "circle-dot": "<circle cx=\"12\" cy=\"12\" r=\"10\" /> <circle cx=\"12\" cy=\"12\" r=\"1\" />"};
 const icon = n => `<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICONS[n] || ''}</svg>`;
 document.querySelectorAll('[data-icon]').forEach(el => el.insertAdjacentHTML('afterbegin', icon(el.dataset.icon)));
 
@@ -41,6 +41,15 @@ const rng = seed => { seed = (Math.abs(seed) % 2147483646) + 1; return () => (se
 const hash = s => { let h = 7; for (const c of String(s)) h = (h * 31 + c.charCodeAt(0)) | 0; return Math.abs(h); };
 const newId = () => 'o_' + Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
 
+// extra slots an outfit can add under Weapons and auxiliaries
+const EXTRA_KINDS = ['Weapon', 'Accessory', 'Ring', 'Amulet'];
+const EXTRA_ICONS = { Weapon: 'sword', Accessory: 'shield-half', Ring: 'circle-dot', Amulet: 'gem' };
+const MAX_EXTRA = 3;
+// labels as shown on a page: a second Accessory (after the built-in one) becomes "Accessory 2", and so on
+function extraLabels(extra) {
+  const seen = { Accessory: 1 };
+  return extra.map(x => { seen[x.kind] = (seen[x.kind] || 0) + 1; return seen[x.kind] > 1 ? `${x.kind} ${seen[x.kind]}` : x.kind; });
+}
 // tidy a list of tags: trimmed, no blanks, no repeats (ignoring case), at most 12
 function normTags(list) {
   const out = [];
@@ -63,6 +72,10 @@ function normalizeOutfit(o) {
     notes: String(o.notes || '').replace(/\r\n?/g, '\n').slice(0, 4000),
     slots,
     createdAt: Number(o.createdAt) || Date.now(),
+    // extra slots added in the form: [{ kind: 'Weapon' | 'Accessory' | 'Ring' | 'Amulet', value }]
+    extra: (Array.isArray(o.extra) ? o.extra : [])
+      .map(x => ({ kind: EXTRA_KINDS.includes(x && x.kind) ? x.kind : 'Accessory', value: String((x && x.value) || '').trim().slice(0, 120) }))
+      .filter(x => x.value).slice(0, MAX_EXTRA),
     // the picture itself lives in IndexedDB; the outfit only remembers which version to show
     image: o.image && Number(o.image.v) ? { v: Number(o.image.v) } : null,
   };
@@ -238,7 +251,7 @@ async function recordFromDataURL(dataURL) {
 }
 // an outfit as it goes into a JSON file, with its image written out as a data URL
 async function outfitForExport(o) {
-  const out = { ...o, slots: { ...o.slots } };
+  const out = { ...o, slots: { ...o.slots }, extra: o.extra.map(x => ({ ...x })) };
   delete out.image;
   if (o.image) {
     try { const rec = await images.get(o.id); if (rec && rec.full) out.image = await blobToDataURL(rec.full); } catch (e) {}
@@ -479,7 +492,9 @@ function outfitBody(o, num, { showGame = false, theme } = {}) {
   const filled = SLOTS.filter(s => o.slots[s.key] && o.slots[s.key].trim());
   const list = g => filled.filter(s => s.group === g).map(s =>
     `<li>${icon(s.icon)}<span class="lbl">${s.label}</span><span class="val">${esc(o.slots[s.key])}</span></li>`).join('');
-  const armour = list('armour'), weapons = list('weapons');
+  const extraLbl = extraLabels(o.extra);
+  const extras = o.extra.map((x, i) => `<li>${icon(EXTRA_ICONS[x.kind])}<span class="lbl">${extraLbl[i]}</span><span class="val">${esc(x.value)}</span></li>`).join('');
+  const armour = list('armour'), weapons = list('weapons') + extras;
   const shown = o.tags.slice(0, 3), rest = o.tags.slice(3);
   const chips = shown.map(t => `<span class="chip">${esc(t)}</span>`).join('') +
     (rest.length ? `<span class="chip more" title="${esc(rest.join(', '))}">+${rest.length}</span>` : '');
@@ -491,9 +506,9 @@ function outfitBody(o, num, { showGame = false, theme } = {}) {
     ${RULE}
     ${armour ? `<div class="grp">Armour and apparel</div><ul class="slots">${armour}</ul>` : ''}
     ${weapons ? `<div class="grp">Weapons and auxiliaries</div><ul class="slots">${weapons}</ul>` : ''}
-    ${filled.length ? '' : '<p class="none">No gear recorded on this page yet.</p>'}
+    ${filled.length || o.extra.length ? '' : '<p class="none">No gear recorded on this page yet.</p>'}
     ${o.notes ? `<p class="notes">${esc(o.notes)}</p><button type="button" class="see-more" data-act="notes" data-id="${esc(o.id)}" hidden>See more…</button>` : ''}
-    <div class="pg-num">${showGame ? `${filled.length} of ${SLOTS.length} slots filled` : num}</div>`;
+    <div class="pg-num">${showGame ? `${filled.length + o.extra.length} of ${SLOTS.length + o.extra.length} slots filled` : num}</div>`;
 }
 const titleBody = (theme, total, shown) => `
   <div class="fox" style="${foxStyle(hash(theme.name) + 5)}"></div>
@@ -865,7 +880,7 @@ const tagMatch = o => state.tag === 'all' || o.tags.some(t => norm(t) === norm(s
 function searchMatch(o) {
   const q = norm(state.search);
   if (!q) return true;
-  return [o.name, o.game, ...o.tags, o.notes, ...Object.values(o.slots)].some(v => norm(v).includes(q));
+  return [o.name, o.game, ...o.tags, o.notes, ...Object.values(o.slots), ...o.extra.map(x => x.value)].some(v => norm(v).includes(q));
 }
 const byGame = name => store.outfits.filter(o => norm(o.game) === norm(name)).sort((a, b) => a.createdAt - b.createdAt);
 const narrowing = () => !!norm(state.search) || state.tag !== 'all';
@@ -1306,7 +1321,7 @@ document.addEventListener('click', e => {
 const slug = s => norm(s).replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') || 'outfit';
 
 async function duplicate(o) {
-  const copy = { ...o, slots: { ...o.slots }, id: newId(), name: `${o.name} (copy)`, createdAt: Date.now(), image: null };
+  const copy = { ...o, slots: { ...o.slots }, extra: o.extra.map(x => ({ ...x })), id: newId(), name: `${o.name} (copy)`, createdAt: Date.now(), image: null };
   if (o.image) {   // the copy gets its own copy of the image
     try { const rec = await images.get(o.id); if (rec) { await images.put(copy.id, rec); copy.image = { v: Date.now() }; } } catch (e) {}
   }
@@ -1584,7 +1599,7 @@ function imageEditor(root, existing) {
    the gear fields suggest matching items as you type.
    ===================================================================== */
 const LIST_FOR_SLOT = { headgear: 'headgear', chest: 'chest', cloak: 'cloak', gloves: 'gloves', legs: 'legs', boots: 'boots',
-  weapon1: 'weapons', weapon2: 'weapons', shieldWeapon3: 'weapons' };
+  weapon1: 'weapons', weapon2: 'weapons', shieldWeapon3: 'weapons', extra: 'weapons' };
 const LIST_ALIASES = { head: 'headgear', helm: 'headgear', helmet: 'headgear', armor: 'chest', armour: 'chest', body: 'chest', cape: 'cloak',
   footwear: 'boots', shoes: 'boots', pants: 'legs', weapon: 'weapons' };
 // Suggestions are off until someone turns them on in the form; the choice is saved in this browser.
@@ -1715,7 +1730,8 @@ function gearSuggestions(form, onPick) {
   let db = null;
   const note = form.querySelector('[data-eqnote]');
   const fields = SLOTS.map(s => ({ s, input: form.elements['slot_' + s.key] })).filter(f => f.input);
-  fields.forEach(f => {
+  fields.forEach(setup);
+  function setup(f) {
     const { s, input } = f;
     const id = 'sg' + (++suggestSeq);
     const box = document.createElement('div');
@@ -1802,9 +1818,12 @@ function gearSuggestions(form, onPick) {
       if (listFor()) { input.setAttribute('role', 'combobox'); input.setAttribute('aria-controls', id); input.setAttribute('aria-autocomplete', 'list'); input.setAttribute('aria-expanded', 'false'); }
       else { ['role', 'aria-controls', 'aria-autocomplete', 'aria-expanded', 'aria-activedescendant'].forEach(a => input.removeAttribute(a)); }
     };
-  });
+  }
   let want = '';
   return {
+    // give a field added later (an extra slot) the same suggestions; it uses the weapons list
+    attach(input, slot) { const f = { s: slot, input }; setup(f); fields.push(f); f.sync(); },
+    detach(input) { const i = fields.findIndex(f => f.input === input); if (i >= 0) fields.splice(i, 1); },
     // switch to the equipment list for this game (or none)
     use(game) {
       want = suggestionsOn(game) ? gameSlug(game) : '';   // nothing downloads while suggestions are off for this game
@@ -1917,6 +1936,8 @@ function openForm(existing = null, presetGame = null) {
         <div class="fields">${SLOTS.filter(s => s.group === 'armour').map(slotField).join('')}</div>
         <div class="formgrp">Weapons and auxiliaries</div>
         <div class="fields">${SLOTS.filter(s => s.group === 'weapons').map(slotField).join('')}</div>
+        <div class="extras" data-extras></div>
+        <button type="button" class="btn ink small add-slot" data-addslot>${icon('plus')}Add a slot</button>
         <div class="fields" style="margin-top:16px">
           <label class="field wide"><span>Notes and special perks</span><textarea name="notes" rows="3" maxlength="4000" placeholder="e.g. Built for mobility and heavy combat">${esc(existing ? existing.notes : '')}</textarea>
             <small class="fieldhint">Press Enter or Shift + Enter for a new line. Long notes get a "See more…" link on the page.</small></label>
@@ -1930,6 +1951,31 @@ function openForm(existing = null, presetGame = null) {
   const form = o.ov.querySelector('form');
   editor = imageEditor(form.querySelector('.imgfield'), existing);
   const tagger = tagInput(form.querySelector('[data-tags]'), existing ? existing.tags : []);
+  // extra slots: up to three rows, each with a kind (Weapon, Accessory, Ring, Amulet) and a text box
+  const extrasEl = form.querySelector('[data-extras]'), addSlot = form.querySelector('[data-addslot]');
+  const extraRow = (x = { kind: 'Accessory', value: '' }) => {
+    const row = document.createElement('div');
+    row.className = 'extra-row';
+    row.innerHTML = `
+      <label class="field"><span>Slot type</span><select>${EXTRA_KINDS.map(k => `<option${k === x.kind ? ' selected' : ''}>${k}</option>`).join('')}</select></label>
+      <label class="field"><span>${icon(EXTRA_ICONS[x.kind])}<b class="extra-name">${x.kind}</b></span><input value="${esc(x.value)}" maxlength="120" placeholder="Item name"></label>
+      <button type="button" class="icon-btn extra-del" aria-label="Remove this slot">${icon('x')}</button>`;
+    extrasEl.appendChild(row);
+    const sel = row.querySelector('select'), input = row.querySelector('input');
+    const slotDef = () => ({ key: 'extra', icon: EXTRA_ICONS[sel.value], label: sel.value, group: 'weapons' });
+    sel.addEventListener('change', () => {
+      const lab = row.querySelector('.field:nth-child(2) > span');
+      lab.innerHTML = `${icon(EXTRA_ICONS[sel.value])}<b class="extra-name">${esc(sel.value)}</b>`;
+    });
+    row.querySelector('.extra-del').addEventListener('click', () => { gear.detach(input); row.remove(); syncAdd(); addSlot.focus(); });
+    gear.attach(input, slotDef());
+    syncAdd();
+    return input;
+  };
+  const syncAdd = () => {
+    const n = extrasEl.children.length;
+    addSlot.hidden = n >= MAX_EXTRA;
+  };
   const gameSel = form.elements.game, newWrap = form.querySelector('[data-newgame]');
   const gear = gearSuggestions(form, (slot, item) => {
     if (slot.group !== 'armour') return;   // weapons don't add tags
@@ -1943,6 +1989,9 @@ function openForm(existing = null, presetGame = null) {
   let newGameTimer;
   form.elements.newgame.addEventListener('input', () => { clearTimeout(newGameTimer); newGameTimer = setTimeout(() => gear.use(pickedGame()), 400); });
   gear.use(pickedGame());
+  (existing ? existing.extra : []).forEach(x => extraRow(x));
+  syncAdd();
+  addSlot.addEventListener('click', () => extraRow().focus());
   form.addEventListener('click', e => { if (e.target.closest('[data-close]')) close(); });
   (existing ? form.elements.name : form.elements.name).focus();
 
@@ -1960,6 +2009,7 @@ function openForm(existing = null, presetGame = null) {
     SLOTS.forEach(s => { slots[s.key] = f['slot_' + s.key].value.trim(); });
     const outfit = normalizeOutfit({
       id: existing ? existing.id : newId(), name, game, tags: tagger.value(), notes: f.notes.value.trim(), slots,
+      extra: [...extrasEl.querySelectorAll('.extra-row')].map(r => ({ kind: r.querySelector('select').value, value: r.querySelector('input').value.trim() })),
       createdAt: existing && norm(existing.game) === norm(game) ? existing.createdAt : Date.now(),
     });
     const submit = form.querySelector('[type="submit"]');
