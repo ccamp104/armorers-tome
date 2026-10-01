@@ -14,7 +14,7 @@ This is a fan-made site, not affiliated with any game developer. All intellectua
 - **Equipment suggestions (optional).** Turn on *Equipment suggestions* in the Forge or Edit form, and for games with an equipment list in the `data` folder (currently Crimson Desert) the gear fields suggest matching items as you type. Pick one with a tap or the arrow keys and Enter, or keep typing anything you like. Picking a Plate, Leather, Chain or Cloth armour piece also adds a tag such as *Plate Armor*, and any armour with Kuku in its name adds *Kuku Gear*. Weapons don't add tags. The switch is off by default, is remembered in each browser, and is switched off again by Reset logbook. To tag outfits saved before you turned it on, open the **?** popup and choose *Add armour tags…*. It checks every outfit's armour against the list and, after showing what it will add, tags the matches.
 - **Page actions.** Each page has download (JSON), duplicate, edit and delete buttons.
 - **Characters and tags.** Each outfit can have several tags, such as the characters who wear it. Type a name and press Enter to add it.
-- **Filters.** You can search, filter by game, and filter by character or tag.
+- **Filters.** You can search, filter by game, and filter by character or tag. On phones, search and filters open from the magnifying-glass button in the header, which shows a dot while a filter is on, and How it works, Export all and Import are in the ⋮ menu.
 - **Reset.** The **?** button's popup has a *Reset logbook…* link. After a warning, it deletes every outfit, image and added book in this browser and starts again with the example outfits. It offers to export a backup first.
 - **Backup.** Export all and Import work with JSON files, including images, and imports can either be added to your books or replace them.
 
@@ -36,7 +36,7 @@ A list can be a JSON file or a CSV spreadsheet (`data/<game>.csv`). In a spreads
 
 ### Item icons
 
-Every suggestion has a small square on the left showing the item's icon. The Crimson Desert icons are in `data/icons/crimson-desert/`: 1,043 images at 64 × 64 px, about 2 KB each and 2.1 MB in total. They come from the same fan database as the item names and are used under Pearl Abyss's Fan Content Guidelines. If an icon is missing, the square shows the slot's own symbol instead, such as a crown for head or a sword for weapons. To add icons for another game, or replace these:
+Every suggestion has a small square on the left showing the item's icon. The Crimson Desert icons are in `data/icons/crimson-desert/`: 1,042 images at 64 × 64 px, about 2 KB each and 2.1 MB in total. They come from the same fan database as the item names and are used under Pearl Abyss's Fan Content Guidelines. If an icon is missing, the square shows the slot's own symbol instead, such as a crown for head or a sword for weapons. To add icons for another game, or replace these:
 
 1. Put the icon images in `data/icons/crimson-desert/`. Small square images work best, ideally 64 × 64 px WebP files of a few KB each.
 2. Name each file as listed in the third column of `crimson-desert.json`, for example `itemicon_prefab_cd_phm_00_hel_0028_index02.webp` for Alpha Wolf Helm. These are the items' in-game icon file names, so icons taken from the game files already have the right names.
@@ -46,7 +46,7 @@ Icons load only as their rows appear in the dropdown, at most eight at a time, s
 
 `crimson-desert.csv` is a spreadsheet copy of the same list, for viewing or editing. If you edit the CSV, delete or rename `crimson-desert.json` so the page reads your spreadsheet instead.
 
-The Crimson Desert list was compiled from the fan-made [Crimson Desert Database](https://crimsondesert.gaming.tools/) for game version 2.0.0, updated 25 August 2026. It has 1,059 items: 136 headgear, 135 chest, 98 cloaks, 81 gloves, 88 boots and 521 weapons and shields. Crimson Desert has no separate leg armour, so the Legs field has no suggestions. Item names belong to Pearl Abyss.
+The Crimson Desert list was compiled from the fan-made [Crimson Desert Database](https://crimsondesert.gaming.tools/) for game version 2.0.0, updated 25 August 2026. It has 1,054 items: 135 headgear, 132 chest, 98 cloaks, 81 gloves, 88 boots and 520 weapons and shields. Items that can't actually be equipped, such as the Axiom Bracelets, Invisible Longsword and Broken Visione, are left out. Crimson Desert has no separate leg armour, so the Legs field has no suggestions. Item names belong to Pearl Abyss.
 
 ## Files
 
