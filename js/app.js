@@ -971,8 +971,14 @@ function syncBooks() {
     book.setPages(pages);
     next.push(book);
   });
-  // drop books that are no longer shown
-  bookMap.forEach((book, k) => { if (!next.includes(book)) { book.slide.remove(); bookMap.delete(k); } });
+  // Books hidden by a search or filter are only taken off the table, not thrown away, so they
+  // reappear instantly without repainting their covers. Books for games that no longer exist are dropped.
+  const games = new Set(gameList().map(norm));
+  bookMap.forEach((book, k) => {
+    if (next.includes(book)) return;
+    book.slide.remove();
+    if (!games.has(k)) bookMap.delete(k);
+  });
   books = next;
   books.forEach(b => { if (b.slide.parentNode !== stage) stage.appendChild(b.slide); });
   const keep = books.findIndex(b => norm(b.theme.name) === prevGame);
