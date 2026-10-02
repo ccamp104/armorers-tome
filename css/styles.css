@@ -657,6 +657,15 @@
   .warn-group { border-color: rgba(155, 44, 44, .35); background: rgba(155, 44, 44, .05); }
   .btn.reset-btn { color: #fff4ea; background: linear-gradient(#a93a3a, #7e2424); border-color: #c95b5b; }
   .btn.reset-btn:hover { background: linear-gradient(#b94444, #8e2a2a); }
+  .set-pick { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+  .set-pick select {
+    flex: 1 1 200px; min-width: 0; max-width: 100%;
+    padding: 7px 10px;
+    border: 1px solid rgba(59, 42, 30, .25); border-radius: 5px;
+    background: rgba(255, 255, 255, .45); color: var(--ink);
+    font-size: 16px; font-weight: 600;   /* 16px stops iPhones zooming in */
+  }
+  .set-pick select:focus { outline: none; border-color: #7c2c30; box-shadow: 0 0 0 3px rgba(124, 44, 48, .15); }
   .welcome { list-style: none; margin: 4px 0 6px; padding: 0; display: grid; gap: 10px; }
   .welcome li { display: grid; grid-template-columns: 22px 1fr; gap: 10px; align-items: start; line-height: 1.35; }
   .welcome .ic { width: 18px; height: 18px; margin-top: 2px; color: #7c2c30; }
