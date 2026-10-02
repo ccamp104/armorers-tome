@@ -251,7 +251,7 @@
   .pg.left  { padding: 6% 12% 8% 8%;  background: linear-gradient(to left,  #c2ae86 0, #e7d9ba 7%, #f1e6cc 60%, #e6d6b4 100%); }
   .fox { position: absolute; inset: 0; pointer-events: none; }
   .pg > * { flex-shrink: 0; }
-  .pg > :not(.fox):not(.pg-num) { position: relative; }
+  .pg > :not(.fox):not(.pg-num):not(.zoom-act) { position: relative; }
   .pg-top { display: flex; align-items: flex-start; justify-content: space-between; gap: .6em; min-height: 1.9em; }
   .chip {
     display: inline-block;
@@ -361,6 +361,12 @@
   .see-more:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 2px; }
   .notes-full { margin: 0; white-space: pre-line; font-style: italic; font-size: 18px; line-height: 1.5; color: var(--ink); overflow-wrap: break-word; }
   .fieldhint { font-style: italic; font-size: 14px; color: var(--ink-soft); }
+  /* enlarge button: the page's outer bottom corner, level with the page number */
+  .pg > .zoom-act { position: absolute; bottom: 1.6%; }
+  .pg.right > .zoom-act { right: 5.5%; }
+  .pg.left > .zoom-act { left: 5.5%; }
+  .card { cursor: zoom-in; }
+  .card:focus-visible { outline: 3px solid var(--gilt); outline-offset: 3px; }
   .pg-num { position: absolute; left: 0; right: 0; bottom: 2.6%; text-align: center; font-style: italic; font-size: .82em; color: var(--ink-soft); }
 
   .tp { margin: auto 0; text-align: center; display: grid; justify-items: center; gap: .5em; }
