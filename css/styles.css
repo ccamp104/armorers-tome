@@ -264,7 +264,7 @@
     font-style: italic; font-weight: 600; font-size: .86em;
     background: color-mix(in srgb, var(--accent) 7%, transparent);
   }
-  .acts { display: flex; gap: .1em; margin: -.25em -.35em 0 auto; }
+  .acts { display: flex; gap: .05em; margin: -.25em -.35em 0 auto; flex: none; }
   .act {
     width: 1.9em; height: 1.9em;
     display: grid; place-items: center;
@@ -655,6 +655,31 @@
   .welcome li { display: grid; grid-template-columns: 22px 1fr; gap: 10px; align-items: start; line-height: 1.35; }
   .welcome .ic { width: 18px; height: 18px; margin-top: 2px; color: #7c2c30; }
   .welcome b { font-weight: 700; }
+
+  /* ---------------- enlarged page ---------------- */
+  .overlay.zoom-overlay { z-index: 70; padding: 0; background: rgba(10, 5, 3, .72); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
+  .zoom-wrap { position: relative; max-width: 96vw; max-height: 96vh; animation: rise .25s cubic-bezier(.2, .8, .2, 1); }
+  .zoom-page {
+    position: absolute; inset: 0;
+    overflow-y: auto; overscroll-behavior: contain;
+    border-radius: 4px 8px 8px 4px;
+    box-shadow: 0 24px 70px rgba(0, 0, 0, .65), 4px 0 0 #ddcfae, 7px 1px 0 #cfbf9b;
+    padding: 6% 7% 8% 9%;
+  }
+  /* everything shows in full here: whole title, whole note, and bigger icons */
+  .zoom-page .pg-title { -webkit-line-clamp: unset; line-clamp: unset; display: block; }
+  .zoom-page .notes { -webkit-line-clamp: unset; line-clamp: unset; display: block; margin-top: 1em; }
+  .zoom-page .see-more { display: none; }
+  .zoom-page .pg-num { position: static; margin-top: 1.2em; }
+  .zoom-page .slots.with-icons { gap: .45em; }
+  .zoom-page .slots.with-icons li { grid-template-columns: 2.8em 5.2em 1fr; }
+  .zoom-page .gi { width: 2.8em; height: 2.8em; border-radius: .35em; }
+  .zoom-page .slots .gi .ic { width: 1.2em; height: 1.2em; }
+  .zoom-page .slots li { grid-template-columns: 1.4em 5.2em 1fr; }
+  .zoom-close { position: absolute; top: -6px; right: -6px; transform: translate(50%, -50%); width: 40px; height: 40px; border-radius: 50%; background: #2a1911; color: var(--gilt); border: 1px solid var(--gilt-line); box-shadow: 0 6px 16px rgba(0, 0, 0, .5); z-index: 2; }
+  .zoom-close:hover { background: #3a241a; color: var(--gilt); }
+  /* phones: the close button sits under the page, clear of the page's own buttons */
+  @media (max-width: 640px), (max-height: 520px) { .zoom-wrap { margin-bottom: 56px; } .zoom-close { top: auto; bottom: -50px; right: 50%; transform: translateX(50%); width: 44px; height: 44px; } }
 
   /* ---------------- enlarged image ---------------- */
   .viewer { margin: 0; display: grid; justify-items: center; gap: 12px; max-width: 100%; animation: rise .25s cubic-bezier(.2, .8, .2, 1); }
