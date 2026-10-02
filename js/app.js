@@ -535,7 +535,6 @@ function foxStyle(seed) {
 function actionsHTML(id, name) {
   const n = esc(name);
   return `<div class="acts">
-    <button type="button" class="act zoom-act" data-act="zoom" data-id="${esc(id)}" title="Enlarge page" aria-label="Enlarge ${n}">${icon('maximize-2')}</button>
     <button type="button" class="act" data-act="download" data-id="${esc(id)}" title="Download as JSON" aria-label="Download ${n}">${icon('download')}</button>
     <button type="button" class="act" data-act="duplicate" data-id="${esc(id)}" title="Duplicate" aria-label="Duplicate ${n}">${icon('copy')}</button>
     <button type="button" class="act" data-act="edit" data-id="${esc(id)}" title="Edit" aria-label="Edit ${n}">${icon('pencil')}</button>
@@ -550,7 +549,8 @@ function outfitBody(o, num, { showGame = false, theme } = {}) {
   const extraLbl = extraLabels(o.extra);
   const extras = o.extra.map((x, i) => `<li>${gearBox('extra', x.value, EXTRA_ICONS[x.kind])}<span class="lbl">${extraLbl[i]}</span><span class="val">${esc(x.value)}</span></li>`).join('');
   const armour = list('armour'), weapons = list('weapons') + extras;
-  const shown = o.tags.slice(0, 3), rest = o.tags.slice(3);
+  const maxTags = showGame ? 3 : 2;   // book pages show two tags, gallery cards three
+  const shown = o.tags.slice(0, maxTags), rest = o.tags.slice(maxTags);
   const chips = shown.map(t => `<span class="chip">${esc(t)}</span>`).join('') +
     (rest.length ? `<span class="chip more" title="${esc(rest.join(', '))}">+${rest.length}</span>` : '');
   const meta = `${showGame ? `<span class="card-game">${esc(theme ? theme.name : o.game)}</span>` : ''}${chips}`;
@@ -563,7 +563,8 @@ function outfitBody(o, num, { showGame = false, theme } = {}) {
     ${weapons ? `<div class="grp">Weapons and auxiliaries</div><ul class="slots${pageIconsOn() ? ' with-icons' : ''}">${weapons}</ul>` : ''}
     ${filled.length || o.extra.length ? '' : '<p class="none">No gear recorded on this page yet.</p>'}
     ${o.notes ? `<p class="notes">${esc(o.notes)}</p><button type="button" class="see-more" data-act="notes" data-id="${esc(o.id)}" hidden>See more…</button>` : ''}
-    <div class="pg-num">${showGame ? `${filled.length + o.extra.length} of ${SLOTS.length + o.extra.length} slots filled` : num}</div>`;
+    <div class="pg-num">${showGame ? `${filled.length + o.extra.length} of ${SLOTS.length + o.extra.length} slots filled` : num}</div>
+    ${showGame ? '' : `<button type="button" class="act zoom-act" data-act="zoom" data-id="${esc(o.id)}" title="Enlarge page" aria-label="Enlarge ${esc(o.name)}">${icon('maximize-2')}</button>`}`;
 }
 const titleBody = (theme, total, shown) => `
   <div class="fox" style="${foxStyle(hash(theme.name) + 5)}"></div>
@@ -1286,11 +1287,23 @@ function renderGallery() {
     .sort((a, b) => games.findIndex(g => norm(g) === norm(a.game)) - games.findIndex(g => norm(g) === norm(b.game)) || a.createdAt - b.createdAt);
   $('gal').innerHTML = list.map(o => {
     const theme = themeFor(o.game);
-    return `<article class="card" data-card="${esc(o.id)}" data-game="${esc(o.game)}" style="--accent:${theme.accent}"><div class="pg right">${outfitBody(o, 0, { showGame: true, theme })}</div></article>`;
+    return `<article class="card" tabindex="0" data-card="${esc(o.id)}" data-game="${esc(o.game)}" title="Enlarge" style="--accent:${theme.accent}"><div class="pg right">${outfitBody(o, 0, { showGame: true, theme })}</div></article>`;
   }).join('');
   watchGallery();
   return list.length;
 }
+$('gal').addEventListener('click', e => {
+  if (e.target.closest('button, a, input, select, textarea')) return;
+  const card = e.target.closest('.card'), o = card && store.outfits.find(x => x.id === card.dataset.card);
+  if (o) zoomPage(o);
+});
+$('gal').addEventListener('keydown', e => {
+  if ((e.key === 'Enter' || e.key === ' ') && e.target.classList.contains('card')) {
+    e.preventDefault();
+    const o = store.outfits.find(x => x.id === e.target.dataset.card);
+    if (o) zoomPage(o);
+  }
+});
 let galleryWatch = null;
 function watchGallery() {
   if (galleryWatch) galleryWatch.disconnect();
@@ -1525,7 +1538,7 @@ function zoomPage(o) {
   z.ov.addEventListener('click', e => {
     if (e.target === z.ov || e.target.closest('[data-zoomclose]')) { removeEventListener('resize', size); close(); }
   });
-  page.querySelector('.zoom-act').remove();   // already enlarged
+  const own = page.querySelector('.zoom-act'); if (own) own.remove();   // already enlarged
   hydratePortraits(page);
   gearIcons(page, o.game);
   fitTitles(page);
@@ -2256,7 +2269,7 @@ function showWelcome(fromHelp) {
     sec('layout-grid', 'Pages, gallery and filters', [
       tip('pencil', '<b>Each page\'s buttons</b>, in its top corner: download, duplicate, edit and delete.'),
       tip('image', '<b>Item icons</b> appear beside gear that matches the game\'s equipment list. Very full pages use smaller icons so every slot fits.'),
-      tip('maximize-2', '<b>Enlarge a page</b> with the arrows button in its top corner to see it, and its icons, filling the window.'),
+      tip('maximize-2', '<b>Enlarge a page</b> to see it, and its icons, filling the window: use the arrows button in a book page\'s bottom corner, or tap any card in Grid Gallery.'),
       tip('layout-grid', '<b>Grid Gallery</b> shows every outfit at once.'),
       tip('search', '<b>Search, game and tag filters</b> work in both views. On phones they open from the magnifying glass, which shows a dot while a filter is on.'),
     ]),
