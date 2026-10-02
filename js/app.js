@@ -898,10 +898,19 @@ function gameList() {
   const names = [];
   const seen = new Set();
   const add = n => { const k = norm(n); if (n && !seen.has(k)) { seen.add(k); names.push(n); } };
-  BUILTIN.forEach(b => add(b.name));
+  BUILTIN.forEach(b => { if (!builtinHidden(b.name)) add(b.name); });
   store.meta.games.forEach(g => add(g.name));
   store.outfits.slice().sort((a, b) => a.createdAt - b.createdAt).forEach(o => add(o.game));
   return names;
+}
+// Crimson Desert and Enshrouded always have a book unless it was deleted in the settings;
+// a deleted one comes back when an outfit is forged or imported for that game
+function builtinHidden(name) { return (store.meta.hidden || []).includes(norm(name)); }
+async function unhideBuiltins(names) {
+  const back = new Set(names.map(norm));
+  const hidden = store.meta.hidden || [];
+  if (!hidden.some(k => back.has(k))) return;
+  await store.putMeta({ ...store.meta, hidden: hidden.filter(k => !back.has(k)) });
 }
 const themeCache = new Map();
 function themeFor(name) {
@@ -930,7 +939,7 @@ async function ensureGameColors() {
     if (c >= PALETTE.length) c = games.length;
     games.push({ name, color: c });
   });
-  try { await store.putMeta({ games }); } catch (e) { store.meta = { games }; }
+  try { await store.putMeta({ ...store.meta, games }); } catch (e) { store.meta = { ...store.meta, games }; }
   return true;
 }
 
@@ -2166,6 +2175,7 @@ function openForm(existing = null, presetGame = null) {
   gameSel.addEventListener('change', toggleNew);
   let newGameTimer;
   form.elements.newgame.addEventListener('input', () => { clearTimeout(newGameTimer); newGameTimer = setTimeout(() => gear.use(pickedGame()), 400); });
+  newWrap.hidden = gameSel.value !== '__new';   // e.g. when every book has been deleted
   gear.use(pickedGame());
   (existing ? existing.extra : []).forEach(x => extraRow(x));
   syncAdd();
@@ -2183,6 +2193,7 @@ function openForm(existing = null, presetGame = null) {
     if (!game) { newWrap.classList.add('bad'); f.newgame.focus(); toast('Name the new game first.', true); return; }
     const match = gameList().find(g => norm(g) === norm(game));
     if (match) game = match;
+    else { const b = BUILTIN.find(x => norm(x.name) === norm(game)); if (b) game = b.name; }   // a deleted built-in book coming back
     const slots = {};
     SLOTS.forEach(s => { slots[s.key] = f['slot_' + s.key].value.trim(); });
     const outfit = normalizeOutfit({
@@ -2220,8 +2231,9 @@ function openForm(existing = null, presetGame = null) {
   });
 }
 async function ensureNewGame(name) {
-  if (BUILTIN.some(b => norm(b.name) === norm(name)) || store.meta.games.some(g => norm(g.name) === norm(name))) return;
-  await store.putMeta({ games: [...store.meta.games, { name, color: nextColor() }] });
+  if (BUILTIN.some(b => norm(b.name) === norm(name))) return unhideBuiltins([name]);
+  if (store.meta.games.some(g => norm(g.name) === norm(name))) return;
+  await store.putMeta({ ...store.meta, games: [...store.meta.games, { name, color: nextColor() }] });
 }
 $('forgeBtn').addEventListener('click', () => openForm());
 
@@ -2301,6 +2313,7 @@ $('fileInput').addEventListener('change', e => {
         await store.put(o);
       }
       if (lostPics) setTimeout(() => toast(`${lostPics} ${lostPics === 1 ? 'image' : 'images'} could not be imported.`, true), 3400);
+      await unhideBuiltins(valid.map(o => o.game));
       await ensureGameColors();
       toast(mode === 'replace' ? `Replaced the logbook with ${valid.length} imported ${valid.length === 1 ? 'outfit' : 'outfits'}` : `Added ${valid.length} imported ${valid.length === 1 ? 'outfit' : 'outfits'}`);
     } catch (err) { toast('The import stopped partway. Some outfits may not have been added.', true); }
@@ -2362,6 +2375,16 @@ function showWelcome(fromHelp) {
         <button type="button" class="btn ink small" data-settool="tags">${icon('tags')}Add armour tags…</button>
       </div>
       <div class="set-group warn-group">
+        <div class="set-head"><b>Delete a game</b><i>Remove a game's book and every outfit in it from this browser.</i></div>
+        ${(() => {
+          const gs = gameList();
+          if (!gs.length) return '<p class="formnote">There are no books to delete.</p>';
+          return `<div class="set-pick">
+            <select data-delgame aria-label="Game to delete">${gs.map(g => { const n = byGame(g).length; return `<option value="${esc(g)}">${esc(g)} (${n} ${n === 1 ? 'outfit' : 'outfits'})</option>`; }).join('')}</select>
+            <button type="button" class="btn small reset-btn" data-settool="delgame">${icon('trash-2')}Delete game…</button></div>`;
+        })()}
+      </div>
+      <div class="set-group warn-group">
         <div class="set-head"><b>Reset logbook</b><i>Delete every outfit, image and added book in this browser, and return settings to their defaults.</i></div>
         <button type="button" class="btn small reset-btn" data-settool="reset">${icon('trash-2')}Reset logbook…</button>
       </div>
@@ -2383,7 +2406,13 @@ function showWelcome(fromHelp) {
     o.ov.addEventListener('click', e => {
       if (e.target.closest('[data-done]')) return done(true);
       const t = e.target.closest('[data-settool]');
-      if (t) { done(null); t.dataset.settool === 'tags' ? tagExistingOutfits() : confirmReset(); }
+      if (t) {
+        const tool = t.dataset.settool, pick = o.ov.querySelector('[data-delgame]');
+        done(null);
+        if (tool === 'tags') tagExistingOutfits();
+        else if (tool === 'delgame') { if (pick) confirmDeleteGame(pick.value); }
+        else confirmReset();
+      }
     });
     o.ov.querySelector('.sheet-foot [data-done]').focus();
     if (!help) return;
@@ -2468,6 +2497,58 @@ async function tagExistingOutfits() {
     for (const { o, add } of changes) await store.put({ ...o, tags: [...o.tags, ...add] });
     toast(`Added armour tags to ${n} ${n === 1 ? 'outfit' : 'outfits'}`);
   } catch (e) { toast('Some tags could not be saved. Try again in a moment.', true); }
+}
+
+/* =====================================================================
+   Delete a game: removes its book and every outfit and image in it.
+   Forging or importing an outfit for that game later starts the book again,
+   with equipment suggestions back on
+   ===================================================================== */
+function confirmDeleteGame(game) {
+  const list = byGame(game), n = list.length, pics = list.filter(x => x.image).length;
+  const builtin = BUILTIN.find(b => norm(b.name) === norm(game));
+  let o;
+  const close = () => o.close();
+  o = overlay(`
+    <div class="sheet dlg danger" role="alertdialog" aria-modal="true" aria-labelledby="delGameTitle" aria-describedby="delGameWarn">
+      <div class="sheet-head"><h2 id="delGameTitle">${icon('trash-2')}Delete ${esc(game)}?</h2><button type="button" class="icon-btn" data-close aria-label="Close">${icon('x')}</button></div>
+      <div class="sheet-body">
+        <div class="warnbox" id="delGameWarn">
+          <p><b>This permanently deletes the ${esc(game)} book</b>${n ? ` and its ${n} ${n === 1 ? 'outfit' : 'outfits'}${pics ? `, with ${pics} ${pics === 1 ? 'image' : 'images'}` : ''}` : ', which has no outfits'}. It can't be undone.</p>
+          <p>Your other books aren't affected. To start this book again, forge an outfit and choose New game… then type ${builtin ? `<i>${esc(builtin.name)}</i>` : 'its name'}.${builtin ? ' It gets its own cover back, and equipment suggestions are on again.' : ''}</p>
+        </div>
+        ${n ? `<p class="formnote">If you might want these outfits later, export a backup first. You can bring it back with Import.</p>
+        <button type="button" class="btn ink" data-backup>${icon('download')}Export a backup first</button>` : ''}
+        <button type="button" class="btn big-danger" data-delete>${icon('trash-2')}Delete ${esc(game)}</button>
+      </div>
+      <div class="sheet-foot"><button type="button" class="btn ink" data-close>Cancel</button></div>
+    </div>`, close);
+  o.ov.addEventListener('click', async e => {
+    if (e.target.closest('[data-close]')) return close();
+    if (e.target.closest('[data-backup]')) return exportAllOutfits();
+    const btn = e.target.closest('[data-delete]');
+    if (!btn) return;
+    btn.disabled = true;
+    try { await deleteGame(game); close(); toast(`Deleted the ${game} book${n ? ` and its ${n} ${n === 1 ? 'outfit' : 'outfits'}` : ''}`); }
+    catch (err) { btn.disabled = false; toast('Could not delete that game. Try again in a moment.', true); }
+  });
+  o.ov.querySelector('.sheet-foot [data-close]').focus();   // the safe choice has focus
+}
+async function deleteGame(game) {
+  const k = norm(game), gone = store.outfits.filter(x => norm(x.game) === k);
+  store.outfits = store.outfits.filter(x => norm(x.game) !== k);   // all at once, so the books are rebuilt only once
+  gone.forEach(x => { if (x.image) { forgetImage(x.id); images.del(x.id).catch(() => {}); } });
+  // forget the suggestions switch, so they're on again if the game comes back
+  const m = suggestMap(), slug = gameSlug(game);
+  if (slug in m) { delete m[slug]; try { localStorage.setItem(SUGGEST_GAMES_KEY, JSON.stringify(m)); } catch (e) {} }
+  if (norm(state.game) === k) state.game = 'all';
+  const isBuiltin = BUILTIN.some(b => norm(b.name) === k);
+  const hidden = (store.meta.hidden || []).filter(x => x !== k);
+  await store.putMeta({
+    ...store.meta,
+    games: store.meta.games.filter(g => norm(g.name) !== k),   // frees its cover colour
+    hidden: isBuiltin ? [...hidden, k] : hidden,
+  });
 }
 
 /* =====================================================================
