@@ -185,6 +185,60 @@ function markLongNotes(root) {
   const cut = notes.map(n => n.scrollHeight > n.clientHeight + 1);
   notes.forEach((n, i) => { const m = n.nextElementSibling; if (m && m.classList.contains('see-more')) m.hidden = !cut[i]; });
 }
+// Item icons beside the gear on pages: on unless switched off in the ? settings
+const PAGE_ICONS_KEY = 'armorer_page_icons_v1';
+const pageIconsOn = () => { try { return localStorage.getItem(PAGE_ICONS_KEY) !== 'off'; } catch (e) { return true; } };
+const setPageIcons = on => { try { on ? localStorage.removeItem(PAGE_ICONS_KEY) : localStorage.setItem(PAGE_ICONS_KEY, 'off'); } catch (e) {} };
+// a gear row's symbol box; gearIcons() swaps in the item's icon when its name is in the game's list
+const gearBox = (key, value, ic) => pageIconsOn() ? `<span class="gi" data-slot="${key}" data-name="${esc(value)}">${icon(ic)}</span>` : icon(ic);
+const iconIndex = new WeakMap();   // equipment list -> Map of "list|name" -> icon URL
+function iconFor(db, key, name) {
+  if (!db || !db.icons || !db.icons.enabled) return '';
+  let idx = iconIndex.get(db);
+  if (!idx) {
+    idx = new Map();
+    Object.entries(db.slots).forEach(([list, items]) => items.forEach(it => { if (it.icon) idx.set(list + '|' + it.lc, 'data/' + db.icons.folder + encodeURIComponent(it.icon)); }));
+    iconIndex.set(db, idx);
+  }
+  const lc = norm(name);
+  return idx.get((LIST_FOR_SLOT[key] || key) + '|' + lc) || idx.get(key + '|' + lc) || '';
+}
+// A page with lots of gear can't fit the large icon rows. Such pages step down to medium rows,
+// then to compact rows (icons the size of the slot symbols), so every slot stays visible.
+function fitGear(root) {
+  const pages = [...root.querySelectorAll('.pg')].filter(p => p.querySelector('.slots.with-icons'));
+  pages.forEach(p => p.classList.remove('mid-gear', 'compact-gear'));
+  const tooFull = p => {
+    const lists = p.querySelectorAll('.slots'), last = lists[lists.length - 1];
+    const room = p.clientHeight - parseFloat(getComputedStyle(p).paddingBottom);
+    const notes = p.querySelector('.notes');
+    const keep = notes ? parseFloat(getComputedStyle(notes).lineHeight) * 2 + 16 : 0;   // leave two lines for notes
+    return p.clientHeight > 0 && last.offsetTop + last.offsetHeight > room - keep;
+  };
+  let full = pages.filter(tooFull);
+  full.forEach(p => p.classList.add('mid-gear'));
+  full = full.filter(tooFull);
+  full.forEach(p => { p.classList.remove('mid-gear'); p.classList.add('compact-gear'); });
+}
+// fill in item icons inside root, for a book or card of the given game; only boxes on screen are asked for
+function gearIcons(root, game) {
+  if (!root || !pageIconsOn()) return;
+  const boxes = [...root.querySelectorAll('.gi:not([data-done])')];
+  if (!boxes.length) return;
+  boxes.forEach(b => { b.dataset.done = '1'; });
+  loadEquipment(game).then(db => {
+    if (!db) return;
+    boxes.forEach(b => {
+      const src = iconFor(db, b.dataset.slot, b.dataset.name);
+      if (!src || missingIcons.has(src)) return;
+      const img = new Image();
+      img.alt = ''; img.decoding = 'async';
+      img.onload = () => { b.appendChild(img); b.classList.add('has-img'); };
+      img.onerror = () => missingIcons.add(src);
+      img.src = src;
+    });
+  });
+}
 const portraitHTML = o => !o.image ? '' :
   `<button type="button" class="portrait" data-act="view" data-id="${esc(o.id)}" title="Enlarge image" aria-label="Enlarge the image of ${esc(o.name)}"><img alt="" data-pid="${esc(o.id)}" data-v="${o.image.v}" decoding="async"></button>`;
 
@@ -491,9 +545,9 @@ function actionsHTML(id, name) {
 function outfitBody(o, num, { showGame = false, theme } = {}) {
   const filled = SLOTS.filter(s => o.slots[s.key] && o.slots[s.key].trim());
   const list = g => filled.filter(s => s.group === g).map(s =>
-    `<li>${icon(s.icon)}<span class="lbl">${s.label}</span><span class="val">${esc(o.slots[s.key])}</span></li>`).join('');
+    `<li>${gearBox(s.key, o.slots[s.key], s.icon)}<span class="lbl">${s.label}</span><span class="val">${esc(o.slots[s.key])}</span></li>`).join('');
   const extraLbl = extraLabels(o.extra);
-  const extras = o.extra.map((x, i) => `<li>${icon(EXTRA_ICONS[x.kind])}<span class="lbl">${extraLbl[i]}</span><span class="val">${esc(x.value)}</span></li>`).join('');
+  const extras = o.extra.map((x, i) => `<li>${gearBox('extra', x.value, EXTRA_ICONS[x.kind])}<span class="lbl">${extraLbl[i]}</span><span class="val">${esc(x.value)}</span></li>`).join('');
   const armour = list('armour'), weapons = list('weapons') + extras;
   const shown = o.tags.slice(0, 3), rest = o.tags.slice(3);
   const chips = shown.map(t => `<span class="chip">${esc(t)}</span>`).join('') +
@@ -504,8 +558,8 @@ function outfitBody(o, num, { showGame = false, theme } = {}) {
     <div class="pg-top"><div class="card-meta">${meta}</div>${actionsHTML(o.id, o.name)}</div>
     <div class="pg-head${o.image ? ' has-portrait' : ''}"><h3 class="pg-title">${esc(o.name)}</h3>${portraitHTML(o)}</div>
     ${RULE}
-    ${armour ? `<div class="grp">Armour and apparel</div><ul class="slots">${armour}</ul>` : ''}
-    ${weapons ? `<div class="grp">Weapons and auxiliaries</div><ul class="slots">${weapons}</ul>` : ''}
+    ${armour ? `<div class="grp">Armour and apparel</div><ul class="slots${pageIconsOn() ? ' with-icons' : ''}">${armour}</ul>` : ''}
+    ${weapons ? `<div class="grp">Weapons and auxiliaries</div><ul class="slots${pageIconsOn() ? ' with-icons' : ''}">${weapons}</ul>` : ''}
     ${filled.length || o.extra.length ? '' : '<p class="none">No gear recorded on this page yet.</p>'}
     ${o.notes ? `<p class="notes">${esc(o.notes)}</p><button type="button" class="see-more" data-act="notes" data-id="${esc(o.id)}" hidden>See more…</button>` : ''}
     <div class="pg-num">${showGame ? `${filled.length + o.extra.length} of ${SLOTS.length + o.extra.length} slots filled` : num}</div>`;
@@ -660,8 +714,8 @@ function createBook(theme, onChange) {
     sheets.forEach(sh => { sh.t = sh.target = (s > 0 && sh.k <= s) ? 1 : 0; sh.delay = 0; });
     sheets[0].drawn = NaN;
     render(true); inertPages();
-    sheets.forEach(sh => { if (sh.k > 0 && sh.vis) hydratePortraits(sh.el); });
-    hydratePortraits(base);
+    sheets.forEach(sh => { if (sh.k > 0 && sh.vis) { hydratePortraits(sh.el); gearIcons(sh.el, theme.name); } });
+    hydratePortraits(base); gearIcons(base, theme.name);
     fitNotes();
   };
 
@@ -670,6 +724,7 @@ function createBook(theme, onChange) {
   function fitNotes() {
     if (!dims.w || !bookEl.offsetWidth) return;   // hidden (e.g. Grid Gallery showing): fit later
     fitTitles(bookEl);                              // titles first, since their height moves the notes
+    fitGear(bookEl);                                // then the gear rows, which shrink on very full pages
     const notes = [...bookEl.querySelectorAll('.pg .notes')];
     if (!notes.length) return;
     const fits = notes.map(n => {
@@ -721,7 +776,7 @@ function createBook(theme, onChange) {
       // leaves buried under the stacks are hidden; only the open spread and pages next to a turning leaf are drawn
       if (k > 0) {
         const vis = move[k] || move[k - 1] || !!move[k + 1] || (sp > 0 && (k === sp || k === sp + 1));
-        if (vis !== sh.vis) { sh.vis = vis; sh.el.style.visibility = vis ? '' : 'hidden'; if (vis) hydratePortraits(sh.el); }
+        if (vis !== sh.vis) { sh.vis = vis; sh.el.style.visibility = vis ? '' : 'hidden'; if (vis) { hydratePortraits(sh.el); gearIcons(sh.el, theme.name); } }
       }
       const p = ps[k];
       if (p > 0 && p < 1) anyTurning = true;
@@ -1230,7 +1285,7 @@ function renderGallery() {
     .sort((a, b) => games.findIndex(g => norm(g) === norm(a.game)) - games.findIndex(g => norm(g) === norm(b.game)) || a.createdAt - b.createdAt);
   $('gal').innerHTML = list.map(o => {
     const theme = themeFor(o.game);
-    return `<article class="card" data-card="${esc(o.id)}" style="--accent:${theme.accent}"><div class="pg right">${outfitBody(o, 0, { showGame: true, theme })}</div></article>`;
+    return `<article class="card" data-card="${esc(o.id)}" data-game="${esc(o.game)}" style="--accent:${theme.accent}"><div class="pg right">${outfitBody(o, 0, { showGame: true, theme })}</div></article>`;
   }).join('');
   watchGallery();
   return list.length;
@@ -1240,7 +1295,7 @@ function watchGallery() {
   if (galleryWatch) galleryWatch.disconnect();
   if (!('IntersectionObserver' in window)) { hydratePortraits($('gal')); fitTitles($('gal')); return markLongNotes($('gal')); }
   galleryWatch = new IntersectionObserver(entries => entries.forEach(en => {
-    if (en.isIntersecting) { hydratePortraits(en.target); fitTitles(en.target); markLongNotes(en.target); galleryWatch.unobserve(en.target); }
+    if (en.isIntersecting) { hydratePortraits(en.target); gearIcons(en.target, en.target.dataset.game); fitTitles(en.target); markLongNotes(en.target); galleryWatch.unobserve(en.target); }
   }), { root: $('gallery'), rootMargin: '400px 0px' });
   $('gal').querySelectorAll('.card').forEach(c => galleryWatch.observe(c));
 }
@@ -2158,6 +2213,7 @@ function showWelcome(fromHelp) {
     ]),
     sec('layout-grid', 'Pages, gallery and filters', [
       tip('pencil', '<b>Each page\'s buttons</b>, in its top corner: download, duplicate, edit and delete.'),
+      tip('image', '<b>Item icons</b> appear beside gear that matches the game\'s equipment list. Very full pages use smaller icons so every slot fits.'),
       tip('layout-grid', '<b>Grid Gallery</b> shows every outfit at once.'),
       tip('search', '<b>Search, game and tag filters</b> work in both views. On phones they open from the magnifying glass, which shows a dot while a filter is on.'),
     ]),
@@ -2172,6 +2228,10 @@ function showWelcome(fromHelp) {
       <div class="set-group">
         <div class="set-head"><b>Equipment suggestions</b><i>Suggest gear from a game's equipment list as you type in the outfit form. On by default; your choice is saved in this browser.</i></div>
         <div class="set-games" data-setgames><p class="formnote">Checking which games have an equipment list…</p></div>
+      </div>
+      <div class="set-group">
+        <div class="set-head"><b>Item icons on pages</b><i>Show each item's icon beside the gear on book pages and gallery cards, for gear that matches the game's equipment list.</i></div>
+        <label class="switch compact"><input type="checkbox" data-pageicons${pageIconsOn() ? ' checked' : ''}><span class="track" aria-hidden="true"></span><span class="switch-text"><b>Show item icons</b></span></label>
       </div>
       <div class="set-group">
         <div class="set-head"><b>Armour tags</b><i>Tag outfits saved before you used suggestions, using the equipment lists.</i></div>
@@ -2203,6 +2263,11 @@ function showWelcome(fromHelp) {
     });
     o.ov.querySelector('.sheet-foot [data-done]').focus();
     if (!help) return;
+    o.ov.querySelector('[data-pageicons]').addEventListener('change', e => {
+      setPageIcons(e.target.checked);
+      refresh();
+      toast(`Item icons on pages ${e.target.checked ? 'on' : 'off'}`);
+    });
     // one switch per game that has an equipment list
     const box = o.ov.querySelector('[data-setgames]');
     const games = gameList();
@@ -2311,7 +2376,7 @@ function confirmReset() {
     if (!btn) return;
     btn.disabled = true;
     btn.lastChild.textContent = 'Resetting…';
-    try { [LS_OUTFITS, LS_META, SUGGEST_KEY, SUGGEST_GAMES_KEY, NOTES_SIZE_KEY].forEach(k => localStorage.removeItem(k)); } catch (err) {}
+    try { [LS_OUTFITS, LS_META, SUGGEST_KEY, SUGGEST_GAMES_KEY, NOTES_SIZE_KEY, PAGE_ICONS_KEY].forEach(k => localStorage.removeItem(k)); } catch (err) {}
     try { await images.clear(); } catch (err) {}
     try { sessionStorage.setItem(RESET_NOTE_KEY, '1'); } catch (err) {}
     location.reload();   // start fresh, exactly like a first visit (minus the welcome popup)
