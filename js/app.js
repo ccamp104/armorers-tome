@@ -928,7 +928,7 @@ $('moreMenu').addEventListener('click', e => {
 addEventListener('keydown', e => {
   if (e.key !== 'Escape' || document.querySelector('.overlay')) return;
   if (!$('moreMenu').hidden) { setMenuOpen(false); $('moreBtn').focus(); }
-  else if (filtersEl.classList.contains('open') && window.matchMedia('(max-width: 640px)').matches) { setFiltersOpen(false); filterBtn.focus(); }
+  else if (filtersEl.classList.contains('open') && window.matchMedia('(max-width: 640px), (max-height: 520px)').matches) { setFiltersOpen(false); filterBtn.focus(); }
 });
 let searchTimer;
 $('search').addEventListener('input', e => {
@@ -1102,7 +1102,7 @@ function sizeTome(force) {
   if (force !== true && sized && W === sized.W && full >= sized.H && full - sized.H < 220) return;
   sized = { W, H: full };
   const narrowish = W < 700 && W < (full - 64) * 1.15;
-  const reserve = narrowish ? 48 : 64;   // room for the controls under the book
+  const reserve = narrowish || full < 460 ? 48 : 64;   // room for the controls under the book (less on phones, upright or sideways)
   const H = full - reserve;
   dims.narrow = narrowish;
   if (dims.narrow) {
@@ -1116,7 +1116,7 @@ function sizeTome(force) {
     dims.closedScale = 1;
     dims.openScale = 1;
   }
-  dims.cy = dims.narrow ? H / 2 + 2 : full / 2 - 26;
+  dims.cy = H / 2 + (dims.narrow ? 2 : 6);
   gap = dims.w * 1.3;
   if (active()) active().layout(true);          // the book on show gets its cover painted first
   books.forEach(b => b !== active() && b.layout(false));
