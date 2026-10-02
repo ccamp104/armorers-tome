@@ -3,7 +3,7 @@
 /* =====================================================================
    Icons, slots and sample data
    ===================================================================== */
-const ICONS = {"axe": "<path d=\"m14 12-8.5 8.5a2.12 2.12 0 1 1-3-3L11 9\" /> <path d=\"M15 13 9 7l4-4 6 6h3a8 8 0 0 1-7 7z\" />", "book-open": "<path d=\"M12 7v14\" /> <path d=\"M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z\" />", "copy": "<rect width=\"14\" height=\"14\" x=\"8\" y=\"8\" rx=\"2\" ry=\"2\" /> <path d=\"M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2\" />", "crown": "<path d=\"M11.562 3.266a.5.5 0 0 1 .876 0L15.39 8.87a1 1 0 0 0 1.516.294L21.183 5.5a.5.5 0 0 1 .798.519l-2.834 10.246a1 1 0 0 1-.956.734H5.81a1 1 0 0 1-.957-.734L2.02 6.02a.5.5 0 0 1 .798-.519l4.276 3.664a1 1 0 0 0 1.516-.294z\" /> <path d=\"M5 21h14\" />", "download": "<path d=\"M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4\" /> <polyline points=\"7 10 12 15 17 10\" /> <line x1=\"12\" x2=\"12\" y1=\"15\" y2=\"3\" />", "feather": "<path d=\"M12.67 19a2 2 0 0 0 1.416-.588l6.154-6.172a6 6 0 0 0-8.49-8.49L5.586 9.914A2 2 0 0 0 5 11.328V18a1 1 0 0 0 1 1z\" /> <path d=\"M16 8 2 22\" /> <path d=\"M17.5 15H9\" />", "footprints": "<path d=\"M4 16v-2.38C4 11.5 2.97 10.5 3 8c.03-2.72 1.49-6 4.5-6C9.37 2 10 3.8 10 5.5c0 3.11-2 5.66-2 8.68V16a2 2 0 1 1-4 0Z\" /> <path d=\"M20 20v-2.38c0-2.12 1.03-3.12 1-5.62-.03-2.72-1.49-6-4.5-6C14.63 6 14 7.8 14 9.5c0 3.11 2 5.66 2 8.68V20a2 2 0 1 0 4 0Z\" /> <path d=\"M16 17h4\" /> <path d=\"M4 13h4\" />", "hammer": "<path d=\"m15 12-8.373 8.373a1 1 0 1 1-3-3L12 9\" /> <path d=\"m18 15 4-4\" /> <path d=\"m21.5 11.5-1.914-1.914A2 2 0 0 1 19 8.172V7l-2.26-2.26a6 6 0 0 0-4.202-1.756L9 2.96l.92.82A6.18 6.18 0 0 1 12 8.4V10l2 2h1.172a2 2 0 0 1 1.414.586L18.5 14.5\" />", "hand": "<path d=\"M18 11V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2\" /> <path d=\"M14 10V4a2 2 0 0 0-2-2a2 2 0 0 0-2 2v2\" /> <path d=\"M10 10.5V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2v8\" /> <path d=\"M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15\" />", "layout-grid": "<rect width=\"7\" height=\"7\" x=\"3\" y=\"3\" rx=\"1\" /> <rect width=\"7\" height=\"7\" x=\"14\" y=\"3\" rx=\"1\" /> <rect width=\"7\" height=\"7\" x=\"14\" y=\"14\" rx=\"1\" /> <rect width=\"7\" height=\"7\" x=\"3\" y=\"14\" rx=\"1\" />", "pencil": "<path d=\"M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z\" /> <path d=\"m15 5 4 4\" />", "plus": "<path d=\"M5 12h14\" /> <path d=\"M12 5v14\" />", "scroll": "<path d=\"M19 17V5a2 2 0 0 0-2-2H4\" /> <path d=\"M8 21h12a2 2 0 0 0 2-2v-1a1 1 0 0 0-1-1H11a1 1 0 0 0-1 1v1a2 2 0 1 1-4 0V5a2 2 0 1 0-4 0v2a1 1 0 0 0 1 1h3\" />", "search": "<circle cx=\"11\" cy=\"11\" r=\"8\" /> <path d=\"m21 21-4.3-4.3\" />", "shield-half": "<path d=\"M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z\" /> <path d=\"M12 22V2\" />", "shield": "<path d=\"M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z\" />", "shirt": "<path d=\"M20.38 3.46 16 2a4 4 0 0 1-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.47a1 1 0 0 0 .99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 0 0 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.47a2 2 0 0 0-1.34-2.23z\" />", "sword": "<polyline points=\"14.5 17.5 3 6 3 3 6 3 17.5 14.5\" /> <line x1=\"13\" x2=\"19\" y1=\"19\" y2=\"13\" /> <line x1=\"16\" x2=\"20\" y1=\"16\" y2=\"20\" /> <line x1=\"19\" x2=\"21\" y1=\"21\" y2=\"19\" />", "trash-2": "<path d=\"M3 6h18\" /> <path d=\"M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6\" /> <path d=\"M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2\" /> <line x1=\"10\" x2=\"10\" y1=\"11\" y2=\"17\" /> <line x1=\"14\" x2=\"14\" y1=\"11\" y2=\"17\" />", "upload": "<path d=\"M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4\" /> <polyline points=\"17 8 12 3 7 8\" /> <line x1=\"12\" x2=\"12\" y1=\"3\" y2=\"15\" />", "x": "<path d=\"M18 6 6 18\" /> <path d=\"m6 6 12 12\" />", "image-plus": "<path d=\"M16 5h6\" /> <path d=\"M19 2v6\" /> <path d=\"M21 11.5V19a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7.5\" /> <path d=\"m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21\" /> <circle cx=\"9\" cy=\"9\" r=\"2\" />", "zoom-in": "<circle cx=\"11\" cy=\"11\" r=\"8\" /> <line x1=\"21\" x2=\"16.65\" y1=\"21\" y2=\"16.65\" /> <line x1=\"11\" x2=\"11\" y1=\"8\" y2=\"14\" /> <line x1=\"8\" x2=\"14\" y1=\"11\" y2=\"11\" />", "zoom-out": "<circle cx=\"11\" cy=\"11\" r=\"8\" /> <line x1=\"21\" x2=\"16.65\" y1=\"21\" y2=\"16.65\" /> <line x1=\"8\" x2=\"14\" y1=\"11\" y2=\"11\" />", "image": "<rect width=\"18\" height=\"18\" x=\"3\" y=\"3\" rx=\"2\" ry=\"2\" /> <circle cx=\"9\" cy=\"9\" r=\"2\" /> <path d=\"m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21\" />", "circle-help": "<circle cx=\"12\" cy=\"12\" r=\"10\" /> <path d=\"M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3\" /> <path d=\"M12 17h.01\" />", "more-vertical": "<circle cx=\"12\" cy=\"12\" r=\"1\" /> <circle cx=\"12\" cy=\"5\" r=\"1\" /> <circle cx=\"12\" cy=\"19\" r=\"1\" />", "chevron-down": "<path d=\"m6 9 6 6 6-6\" />", "tags": "<path d=\"m15 5 6.3 6.3a2.4 2.4 0 0 1 0 3.4L17 19\" /> <path d=\"M9.586 5.586A2 2 0 0 0 8.172 5H3a1 1 0 0 0-1 1v5.172a2 2 0 0 0 .586 1.414L8.29 18.29a2.426 2.426 0 0 0 3.42 0l3.58-3.58a2.426 2.426 0 0 0 0-3.42z\" /> <circle cx=\"6.5\" cy=\"9.5\" r=\".5\" fill=\"currentColor\" />", "settings": "<path d=\"M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z\" /> <circle cx=\"12\" cy=\"12\" r=\"3\" />", "compass": "<path d=\"m16.24 7.76-1.804 5.411a2 2 0 0 1-1.265 1.265L7.76 16.24l1.804-5.411a2 2 0 0 1 1.265-1.265z\" /> <circle cx=\"12\" cy=\"12\" r=\"10\" />", "sparkles": "<path d=\"M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z\" /> <path d=\"M20 3v4\" /> <path d=\"M22 5h-4\" /> <path d=\"M4 17v2\" /> <path d=\"M5 18H3\" />", "save": "<path d=\"M15.2 3a2 2 0 0 1 1.4.6l3.8 3.8a2 2 0 0 1 .6 1.4V19a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z\" /> <path d=\"M17 21v-7a1 1 0 0 0-1-1H8a1 1 0 0 0-1 1v7\" /> <path d=\"M7 3v4a1 1 0 0 0 1 1h7\" />", "gem": "<path d=\"M6 3h12l4 6-10 13L2 9Z\" /> <path d=\"M11 3 8 9l4 13 4-13-3-6\" /> <path d=\"M2 9h20\" />", "circle-dot": "<circle cx=\"12\" cy=\"12\" r=\"10\" /> <circle cx=\"12\" cy=\"12\" r=\"1\" />"};
+const ICONS = {"axe": "<path d=\"m14 12-8.5 8.5a2.12 2.12 0 1 1-3-3L11 9\" /> <path d=\"M15 13 9 7l4-4 6 6h3a8 8 0 0 1-7 7z\" />", "book-open": "<path d=\"M12 7v14\" /> <path d=\"M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z\" />", "copy": "<rect width=\"14\" height=\"14\" x=\"8\" y=\"8\" rx=\"2\" ry=\"2\" /> <path d=\"M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2\" />", "crown": "<path d=\"M11.562 3.266a.5.5 0 0 1 .876 0L15.39 8.87a1 1 0 0 0 1.516.294L21.183 5.5a.5.5 0 0 1 .798.519l-2.834 10.246a1 1 0 0 1-.956.734H5.81a1 1 0 0 1-.957-.734L2.02 6.02a.5.5 0 0 1 .798-.519l4.276 3.664a1 1 0 0 0 1.516-.294z\" /> <path d=\"M5 21h14\" />", "download": "<path d=\"M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4\" /> <polyline points=\"7 10 12 15 17 10\" /> <line x1=\"12\" x2=\"12\" y1=\"15\" y2=\"3\" />", "feather": "<path d=\"M12.67 19a2 2 0 0 0 1.416-.588l6.154-6.172a6 6 0 0 0-8.49-8.49L5.586 9.914A2 2 0 0 0 5 11.328V18a1 1 0 0 0 1 1z\" /> <path d=\"M16 8 2 22\" /> <path d=\"M17.5 15H9\" />", "footprints": "<path d=\"M4 16v-2.38C4 11.5 2.97 10.5 3 8c.03-2.72 1.49-6 4.5-6C9.37 2 10 3.8 10 5.5c0 3.11-2 5.66-2 8.68V16a2 2 0 1 1-4 0Z\" /> <path d=\"M20 20v-2.38c0-2.12 1.03-3.12 1-5.62-.03-2.72-1.49-6-4.5-6C14.63 6 14 7.8 14 9.5c0 3.11 2 5.66 2 8.68V20a2 2 0 1 0 4 0Z\" /> <path d=\"M16 17h4\" /> <path d=\"M4 13h4\" />", "hammer": "<path d=\"m15 12-8.373 8.373a1 1 0 1 1-3-3L12 9\" /> <path d=\"m18 15 4-4\" /> <path d=\"m21.5 11.5-1.914-1.914A2 2 0 0 1 19 8.172V7l-2.26-2.26a6 6 0 0 0-4.202-1.756L9 2.96l.92.82A6.18 6.18 0 0 1 12 8.4V10l2 2h1.172a2 2 0 0 1 1.414.586L18.5 14.5\" />", "hand": "<path d=\"M18 11V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2\" /> <path d=\"M14 10V4a2 2 0 0 0-2-2a2 2 0 0 0-2 2v2\" /> <path d=\"M10 10.5V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2v8\" /> <path d=\"M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15\" />", "layout-grid": "<rect width=\"7\" height=\"7\" x=\"3\" y=\"3\" rx=\"1\" /> <rect width=\"7\" height=\"7\" x=\"14\" y=\"3\" rx=\"1\" /> <rect width=\"7\" height=\"7\" x=\"14\" y=\"14\" rx=\"1\" /> <rect width=\"7\" height=\"7\" x=\"3\" y=\"14\" rx=\"1\" />", "pencil": "<path d=\"M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z\" /> <path d=\"m15 5 4 4\" />", "plus": "<path d=\"M5 12h14\" /> <path d=\"M12 5v14\" />", "scroll": "<path d=\"M19 17V5a2 2 0 0 0-2-2H4\" /> <path d=\"M8 21h12a2 2 0 0 0 2-2v-1a1 1 0 0 0-1-1H11a1 1 0 0 0-1 1v1a2 2 0 1 1-4 0V5a2 2 0 1 0-4 0v2a1 1 0 0 0 1 1h3\" />", "search": "<circle cx=\"11\" cy=\"11\" r=\"8\" /> <path d=\"m21 21-4.3-4.3\" />", "shield-half": "<path d=\"M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z\" /> <path d=\"M12 22V2\" />", "shield": "<path d=\"M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z\" />", "shirt": "<path d=\"M20.38 3.46 16 2a4 4 0 0 1-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.47a1 1 0 0 0 .99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 0 0 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.47a2 2 0 0 0-1.34-2.23z\" />", "sword": "<polyline points=\"14.5 17.5 3 6 3 3 6 3 17.5 14.5\" /> <line x1=\"13\" x2=\"19\" y1=\"19\" y2=\"13\" /> <line x1=\"16\" x2=\"20\" y1=\"16\" y2=\"20\" /> <line x1=\"19\" x2=\"21\" y1=\"21\" y2=\"19\" />", "trash-2": "<path d=\"M3 6h18\" /> <path d=\"M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6\" /> <path d=\"M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2\" /> <line x1=\"10\" x2=\"10\" y1=\"11\" y2=\"17\" /> <line x1=\"14\" x2=\"14\" y1=\"11\" y2=\"17\" />", "upload": "<path d=\"M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4\" /> <polyline points=\"17 8 12 3 7 8\" /> <line x1=\"12\" x2=\"12\" y1=\"3\" y2=\"15\" />", "x": "<path d=\"M18 6 6 18\" /> <path d=\"m6 6 12 12\" />", "image-plus": "<path d=\"M16 5h6\" /> <path d=\"M19 2v6\" /> <path d=\"M21 11.5V19a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7.5\" /> <path d=\"m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21\" /> <circle cx=\"9\" cy=\"9\" r=\"2\" />", "zoom-in": "<circle cx=\"11\" cy=\"11\" r=\"8\" /> <line x1=\"21\" x2=\"16.65\" y1=\"21\" y2=\"16.65\" /> <line x1=\"11\" x2=\"11\" y1=\"8\" y2=\"14\" /> <line x1=\"8\" x2=\"14\" y1=\"11\" y2=\"11\" />", "zoom-out": "<circle cx=\"11\" cy=\"11\" r=\"8\" /> <line x1=\"21\" x2=\"16.65\" y1=\"21\" y2=\"16.65\" /> <line x1=\"8\" x2=\"14\" y1=\"11\" y2=\"11\" />", "image": "<rect width=\"18\" height=\"18\" x=\"3\" y=\"3\" rx=\"2\" ry=\"2\" /> <circle cx=\"9\" cy=\"9\" r=\"2\" /> <path d=\"m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21\" />", "circle-help": "<circle cx=\"12\" cy=\"12\" r=\"10\" /> <path d=\"M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3\" /> <path d=\"M12 17h.01\" />", "more-vertical": "<circle cx=\"12\" cy=\"12\" r=\"1\" /> <circle cx=\"12\" cy=\"5\" r=\"1\" /> <circle cx=\"12\" cy=\"19\" r=\"1\" />", "chevron-down": "<path d=\"m6 9 6 6 6-6\" />", "tags": "<path d=\"m15 5 6.3 6.3a2.4 2.4 0 0 1 0 3.4L17 19\" /> <path d=\"M9.586 5.586A2 2 0 0 0 8.172 5H3a1 1 0 0 0-1 1v5.172a2 2 0 0 0 .586 1.414L8.29 18.29a2.426 2.426 0 0 0 3.42 0l3.58-3.58a2.426 2.426 0 0 0 0-3.42z\" /> <circle cx=\"6.5\" cy=\"9.5\" r=\".5\" fill=\"currentColor\" />", "settings": "<path d=\"M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z\" /> <circle cx=\"12\" cy=\"12\" r=\"3\" />", "compass": "<path d=\"m16.24 7.76-1.804 5.411a2 2 0 0 1-1.265 1.265L7.76 16.24l1.804-5.411a2 2 0 0 1 1.265-1.265z\" /> <circle cx=\"12\" cy=\"12\" r=\"10\" />", "sparkles": "<path d=\"M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z\" /> <path d=\"M20 3v4\" /> <path d=\"M22 5h-4\" /> <path d=\"M4 17v2\" /> <path d=\"M5 18H3\" />", "save": "<path d=\"M15.2 3a2 2 0 0 1 1.4.6l3.8 3.8a2 2 0 0 1 .6 1.4V19a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z\" /> <path d=\"M17 21v-7a1 1 0 0 0-1-1H8a1 1 0 0 0-1 1v7\" /> <path d=\"M7 3v4a1 1 0 0 0 1 1h7\" />", "gem": "<path d=\"M6 3h12l4 6-10 13L2 9Z\" /> <path d=\"M11 3 8 9l4 13 4-13-3-6\" /> <path d=\"M2 9h20\" />", "circle-dot": "<circle cx=\"12\" cy=\"12\" r=\"10\" /> <circle cx=\"12\" cy=\"12\" r=\"1\" />", "maximize-2": "<polyline points=\"15 3 21 3 21 9\" /> <polyline points=\"9 21 3 21 3 15\" /> <line x1=\"21\" x2=\"14\" y1=\"3\" y2=\"10\" /> <line x1=\"3\" x2=\"10\" y1=\"21\" y2=\"14\" />"};
 const icon = n => `<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICONS[n] || ''}</svg>`;
 document.querySelectorAll('[data-icon]').forEach(el => el.insertAdjacentHTML('afterbegin', icon(el.dataset.icon)));
 
@@ -181,9 +181,63 @@ function fitTitles(root) {
 }
 function markLongNotes(root) {
   if (!root) return;
-  const notes = [...root.querySelectorAll('.card .notes')];
+  const notes = [...root.querySelectorAll('.card .notes, .zoom-page .notes')];
   const cut = notes.map(n => n.scrollHeight > n.clientHeight + 1);
   notes.forEach((n, i) => { const m = n.nextElementSibling; if (m && m.classList.contains('see-more')) m.hidden = !cut[i]; });
+}
+// Item icons beside the gear on pages: on unless switched off in the ? settings
+const PAGE_ICONS_KEY = 'armorer_page_icons_v1';
+const pageIconsOn = () => { try { return localStorage.getItem(PAGE_ICONS_KEY) !== 'off'; } catch (e) { return true; } };
+const setPageIcons = on => { try { on ? localStorage.removeItem(PAGE_ICONS_KEY) : localStorage.setItem(PAGE_ICONS_KEY, 'off'); } catch (e) {} };
+// a gear row's symbol box; gearIcons() swaps in the item's icon when its name is in the game's list
+const gearBox = (key, value, ic) => pageIconsOn() ? `<span class="gi" data-slot="${key}" data-name="${esc(value)}">${icon(ic)}</span>` : icon(ic);
+const iconIndex = new WeakMap();   // equipment list -> Map of "list|name" -> icon URL
+function iconFor(db, key, name) {
+  if (!db || !db.icons || !db.icons.enabled) return '';
+  let idx = iconIndex.get(db);
+  if (!idx) {
+    idx = new Map();
+    Object.entries(db.slots).forEach(([list, items]) => items.forEach(it => { if (it.icon) idx.set(list + '|' + it.lc, 'data/' + db.icons.folder + encodeURIComponent(it.icon)); }));
+    iconIndex.set(db, idx);
+  }
+  const lc = norm(name);
+  return idx.get((LIST_FOR_SLOT[key] || key) + '|' + lc) || idx.get(key + '|' + lc) || '';
+}
+// A page with lots of gear can't fit the large icon rows. Such pages step down to medium rows,
+// then to compact rows (icons the size of the slot symbols), so every slot stays visible.
+function fitGear(root) {
+  const pages = [...root.querySelectorAll('.pg')].filter(p => p.querySelector('.slots.with-icons'));
+  pages.forEach(p => p.classList.remove('mid-gear', 'compact-gear'));
+  const tooFull = p => {
+    const lists = p.querySelectorAll('.slots'), last = lists[lists.length - 1];
+    const room = p.clientHeight - parseFloat(getComputedStyle(p).paddingBottom);
+    const notes = p.querySelector('.notes');
+    const keep = notes ? parseFloat(getComputedStyle(notes).lineHeight) * 2 + 16 : 0;   // leave two lines for notes
+    return p.clientHeight > 0 && last.offsetTop + last.offsetHeight > room - keep;
+  };
+  let full = pages.filter(tooFull);
+  full.forEach(p => p.classList.add('mid-gear'));
+  full = full.filter(tooFull);
+  full.forEach(p => { p.classList.remove('mid-gear'); p.classList.add('compact-gear'); });
+}
+// fill in item icons inside root, for a book or card of the given game; only boxes on screen are asked for
+function gearIcons(root, game) {
+  if (!root || !pageIconsOn()) return;
+  const boxes = [...root.querySelectorAll('.gi:not([data-done])')];
+  if (!boxes.length) return;
+  boxes.forEach(b => { b.dataset.done = '1'; });
+  loadEquipment(game).then(db => {
+    if (!db) return;
+    boxes.forEach(b => {
+      const src = iconFor(db, b.dataset.slot, b.dataset.name);
+      if (!src || missingIcons.has(src)) return;
+      const img = new Image();
+      img.alt = ''; img.decoding = 'async';
+      img.onload = () => { b.appendChild(img); b.classList.add('has-img'); };
+      img.onerror = () => missingIcons.add(src);
+      img.src = src;
+    });
+  });
 }
 const portraitHTML = o => !o.image ? '' :
   `<button type="button" class="portrait" data-act="view" data-id="${esc(o.id)}" title="Enlarge image" aria-label="Enlarge the image of ${esc(o.name)}"><img alt="" data-pid="${esc(o.id)}" data-v="${o.image.v}" decoding="async"></button>`;
@@ -488,14 +542,16 @@ function actionsHTML(id, name) {
   </div>`;
 }
 
-function outfitBody(o, num, { showGame = false, theme } = {}) {
+function outfitBody(o, num, opts = {}) {
+  const { showGame = false, theme } = opts;
   const filled = SLOTS.filter(s => o.slots[s.key] && o.slots[s.key].trim());
   const list = g => filled.filter(s => s.group === g).map(s =>
-    `<li>${icon(s.icon)}<span class="lbl">${s.label}</span><span class="val">${esc(o.slots[s.key])}</span></li>`).join('');
+    `<li>${gearBox(s.key, o.slots[s.key], s.icon)}<span class="lbl">${s.label}</span><span class="val">${esc(o.slots[s.key])}</span></li>`).join('');
   const extraLbl = extraLabels(o.extra);
-  const extras = o.extra.map((x, i) => `<li>${icon(EXTRA_ICONS[x.kind])}<span class="lbl">${extraLbl[i]}</span><span class="val">${esc(x.value)}</span></li>`).join('');
+  const extras = o.extra.map((x, i) => `<li>${gearBox('extra', x.value, EXTRA_ICONS[x.kind])}<span class="lbl">${extraLbl[i]}</span><span class="val">${esc(x.value)}</span></li>`).join('');
   const armour = list('armour'), weapons = list('weapons') + extras;
-  const shown = o.tags.slice(0, 3), rest = o.tags.slice(3);
+  const maxTags = opts.maxTags || (showGame ? 3 : 2);   // book pages show two tags, gallery cards three
+  const shown = o.tags.slice(0, maxTags), rest = o.tags.slice(maxTags);
   const chips = shown.map(t => `<span class="chip">${esc(t)}</span>`).join('') +
     (rest.length ? `<span class="chip more" title="${esc(rest.join(', '))}">+${rest.length}</span>` : '');
   const meta = `${showGame ? `<span class="card-game">${esc(theme ? theme.name : o.game)}</span>` : ''}${chips}`;
@@ -504,11 +560,12 @@ function outfitBody(o, num, { showGame = false, theme } = {}) {
     <div class="pg-top"><div class="card-meta">${meta}</div>${actionsHTML(o.id, o.name)}</div>
     <div class="pg-head${o.image ? ' has-portrait' : ''}"><h3 class="pg-title">${esc(o.name)}</h3>${portraitHTML(o)}</div>
     ${RULE}
-    ${armour ? `<div class="grp">Armour and apparel</div><ul class="slots">${armour}</ul>` : ''}
-    ${weapons ? `<div class="grp">Weapons and auxiliaries</div><ul class="slots">${weapons}</ul>` : ''}
+    ${armour ? `<div class="grp">Armour and apparel</div><ul class="slots${pageIconsOn() ? ' with-icons' : ''}">${armour}</ul>` : ''}
+    ${weapons ? `<div class="grp">Weapons and auxiliaries</div><ul class="slots${pageIconsOn() ? ' with-icons' : ''}">${weapons}</ul>` : ''}
     ${filled.length || o.extra.length ? '' : '<p class="none">No gear recorded on this page yet.</p>'}
     ${o.notes ? `<p class="notes">${esc(o.notes)}</p><button type="button" class="see-more" data-act="notes" data-id="${esc(o.id)}" hidden>See more…</button>` : ''}
-    <div class="pg-num">${showGame ? `${filled.length + o.extra.length} of ${SLOTS.length + o.extra.length} slots filled` : num}</div>`;
+    <div class="pg-num">${showGame ? `${filled.length + o.extra.length} of ${SLOTS.length + o.extra.length} slots filled` : num}</div>
+    ${showGame ? '' : `<button type="button" class="act zoom-act" data-act="zoom" data-id="${esc(o.id)}" title="Enlarge page" aria-label="Enlarge ${esc(o.name)}">${icon('maximize-2')}</button>`}`;
 }
 const titleBody = (theme, total, shown) => `
   <div class="fox" style="${foxStyle(hash(theme.name) + 5)}"></div>
@@ -660,8 +717,8 @@ function createBook(theme, onChange) {
     sheets.forEach(sh => { sh.t = sh.target = (s > 0 && sh.k <= s) ? 1 : 0; sh.delay = 0; });
     sheets[0].drawn = NaN;
     render(true); inertPages();
-    sheets.forEach(sh => { if (sh.k > 0 && sh.vis) hydratePortraits(sh.el); });
-    hydratePortraits(base);
+    sheets.forEach(sh => { if (sh.k > 0 && sh.vis) { hydratePortraits(sh.el); gearIcons(sh.el, theme.name); } });
+    hydratePortraits(base); gearIcons(base, theme.name);
     fitNotes();
   };
 
@@ -670,6 +727,7 @@ function createBook(theme, onChange) {
   function fitNotes() {
     if (!dims.w || !bookEl.offsetWidth) return;   // hidden (e.g. Grid Gallery showing): fit later
     fitTitles(bookEl);                              // titles first, since their height moves the notes
+    fitGear(bookEl);                                // then the gear rows, which shrink on very full pages
     const notes = [...bookEl.querySelectorAll('.pg .notes')];
     if (!notes.length) return;
     const fits = notes.map(n => {
@@ -721,7 +779,7 @@ function createBook(theme, onChange) {
       // leaves buried under the stacks are hidden; only the open spread and pages next to a turning leaf are drawn
       if (k > 0) {
         const vis = move[k] || move[k - 1] || !!move[k + 1] || (sp > 0 && (k === sp || k === sp + 1));
-        if (vis !== sh.vis) { sh.vis = vis; sh.el.style.visibility = vis ? '' : 'hidden'; if (vis) hydratePortraits(sh.el); }
+        if (vis !== sh.vis) { sh.vis = vis; sh.el.style.visibility = vis ? '' : 'hidden'; if (vis) { hydratePortraits(sh.el); gearIcons(sh.el, theme.name); } }
       }
       const p = ps[k];
       if (p > 0 && p < 1) anyTurning = true;
@@ -1230,17 +1288,29 @@ function renderGallery() {
     .sort((a, b) => games.findIndex(g => norm(g) === norm(a.game)) - games.findIndex(g => norm(g) === norm(b.game)) || a.createdAt - b.createdAt);
   $('gal').innerHTML = list.map(o => {
     const theme = themeFor(o.game);
-    return `<article class="card" data-card="${esc(o.id)}" style="--accent:${theme.accent}"><div class="pg right">${outfitBody(o, 0, { showGame: true, theme })}</div></article>`;
+    return `<article class="card" tabindex="0" data-card="${esc(o.id)}" data-game="${esc(o.game)}" title="Enlarge" style="--accent:${theme.accent}"><div class="pg right">${outfitBody(o, 0, { showGame: true, theme })}</div></article>`;
   }).join('');
   watchGallery();
   return list.length;
 }
+$('gal').addEventListener('click', e => {
+  if (e.target.closest('button, a, input, select, textarea')) return;
+  const card = e.target.closest('.card'), o = card && store.outfits.find(x => x.id === card.dataset.card);
+  if (o) zoomPage(o);
+});
+$('gal').addEventListener('keydown', e => {
+  if ((e.key === 'Enter' || e.key === ' ') && e.target.classList.contains('card')) {
+    e.preventDefault();
+    const o = store.outfits.find(x => x.id === e.target.dataset.card);
+    if (o) zoomPage(o);
+  }
+});
 let galleryWatch = null;
 function watchGallery() {
   if (galleryWatch) galleryWatch.disconnect();
   if (!('IntersectionObserver' in window)) { hydratePortraits($('gal')); fitTitles($('gal')); return markLongNotes($('gal')); }
   galleryWatch = new IntersectionObserver(entries => entries.forEach(en => {
-    if (en.isIntersecting) { hydratePortraits(en.target); fitTitles(en.target); markLongNotes(en.target); galleryWatch.unobserve(en.target); }
+    if (en.isIntersecting) { hydratePortraits(en.target); gearIcons(en.target, en.target.dataset.game); fitTitles(en.target); markLongNotes(en.target); galleryWatch.unobserve(en.target); }
   }), { root: $('gallery'), rootMargin: '400px 0px' });
   $('gal').querySelectorAll('.card').forEach(c => galleryWatch.observe(c));
 }
@@ -1308,9 +1378,13 @@ document.addEventListener('click', e => {
   if (!b) return;
   e.stopPropagation();
   const id = b.dataset.id, o = store.outfits.find(x => x.id === id);
+  // editing, copying or deleting from an enlarged page closes it first, since the page will change
+  const zoomed = b.closest('.zoom-overlay');
+  if (zoomed && ['duplicate', 'edit', 'delete'].includes(b.dataset.act)) zoomed.querySelector('[data-zoomclose]').click();
   switch (b.dataset.act) {
     case 'download': if (o) outfitForExport(o).then(data => saveJSON(`outfit-${slug(o.name)}.json`, data, `Downloaded "${o.name}"`)); break;
     case 'view': if (o) viewImage(o); break;
+    case 'zoom': if (o) zoomPage(o); break;
     case 'notes': if (o) readNotes(o); break;
     case 'duplicate': if (o) duplicate(o); break;
     case 'edit': if (o) openForm(o); break;
@@ -1434,6 +1508,110 @@ function readNotes(o) {
     shown.then(() => ro.disconnect());
   }
   shown.then(v => { if (v === 'edit') openForm(o); });
+}
+
+/* =====================================================================
+   Enlarged page: one outfit's page filling the window over a blurred, dark
+   background, with bigger item icons; long content scrolls inside the page
+   ===================================================================== */
+function zoomPage(o) {
+  const theme = themeFor(o.game);
+  // On large screens an outfit with a picture opens as a spread: the page on the left, the picture
+  // large on the right. The small portrait leaves the heading, so the gear sits right under the title.
+  const split = !!o.image && innerWidth >= 900 && innerHeight >= 520;
+  let z, closed = false, picURL = '';
+  const close = () => {
+    if (closed) return;
+    closed = true;
+    removeEventListener('resize', size);
+    z.close();
+    if (picURL) URL.revokeObjectURL(picURL);
+  };
+  z = overlay(`
+    <div class="zoom-wrap${split ? ' split' : ''}" role="dialog" aria-modal="true" aria-label="${esc(o.name)}" style="--accent:${theme.accent}">
+      <div class="pg right zoom-page">${outfitBody(o, 0, { showGame: true, theme, maxTags: 99 })}</div>
+      ${split ? `<div class="pg left zoom-pic"><div class="zoom-frame"><img alt="${esc(o.name)}"></div></div>` : ''}
+      <button type="button" class="icon-btn zoom-close" data-zoomclose aria-label="Close enlarged page">${icon('x')}</button>
+    </div>`, close);
+  z.ov.classList.add('zoom-overlay');
+  const wrap = z.ov.querySelector('.zoom-wrap'), page = z.ov.querySelector('.zoom-page');
+  if (split) {
+    const head = page.querySelector('.pg-head');
+    head.classList.remove('has-portrait');
+    const small = head.querySelector('.portrait'); if (small) small.remove();
+  }
+  // Tags stay on one line: any that don't fit are folded into a "+n" chip.
+  const fitChips = () => {
+    const meta = page.querySelector('.card-meta'); if (!meta) return;
+    const chips = [...meta.querySelectorAll('.chip:not(.more)')];
+    let more = meta.querySelector('.chip.more');
+    chips.forEach(c => { c.hidden = false; });
+    if (more) more.remove();
+    let hidden = [];
+    while (meta.scrollWidth > meta.clientWidth + 1 && chips.length - hidden.length > 1) {
+      const c = chips[chips.length - 1 - hidden.length]; c.hidden = true; hidden.unshift(c.textContent);
+      if (!more) { more = document.createElement('span'); more.className = 'chip more'; meta.appendChild(more); }
+      more.textContent = '+' + hidden.length; more.title = hidden.join(', ');
+    }
+  };
+  // shrink the text, then the icons, until the whole page fits without scrolling
+  const fit = base => {
+    page.classList.remove('tight');
+    const steps = [1, 0.93, 0.86, 0.8, 0.74, 0.68];
+    for (const tight of [false, true]) {
+      page.classList.toggle('tight', tight);
+      for (const k of steps) {
+        page.style.fontSize = (base * k).toFixed(2) + 'px';
+        fitTitles(page); fitChips();
+        if (page.scrollHeight <= page.clientHeight + 1) return;
+      }
+    }
+  };
+  function size() {
+    const phone = innerWidth < 640 || innerHeight < 520;
+    if (split) {
+      // page and picture side by side, together no wider than the window
+      const PAGE = 0.8, PIC = 0.66;
+      let h = Math.min(innerHeight * 0.92, 900);
+      if (h * (PAGE + PIC) > innerWidth * 0.94) h = innerWidth * 0.94 / (PAGE + PIC);
+      wrap.style.width = h * (PAGE + PIC) + 'px';
+      wrap.style.height = h + 'px';
+      wrap.style.setProperty('--page-w', h * PAGE + 'px');
+      // the picture keeps its 3:4 shape inside the right-hand page (28px padding, plus room for its gilt frame)
+      const picW = h * PIC, fw = Math.min(picW - 56 - 28, (h - 56 - 28) * 0.75);
+      const frame = z.ov.querySelector('.zoom-frame');
+      frame.style.width = fw + 'px'; frame.style.height = fw / 0.75 + 'px';
+      return fit(h * 0.027);
+    }
+    // a page-shaped sheet on larger screens; on phones it fills the screen, since its content scrolls anyway
+    const w = phone ? innerWidth * 0.94 : Math.min(innerWidth * 0.94, (innerHeight * 0.94) * 0.725, 760);
+    const h = phone ? innerHeight * 0.94 - 56 : w / 0.725;   // phones keep room below for the close button
+    wrap.style.width = w + 'px';
+    wrap.style.height = h + 'px';
+    if (phone) { page.style.fontSize = Math.min(w * 0.042, 17).toFixed(2) + 'px'; fitChips(); }
+    else fit(w * 0.036);
+  }
+  size();
+  addEventListener('resize', size);
+  z.ov.addEventListener('click', e => {
+    if (e.target === z.ov || e.target.closest('[data-zoomclose]')) close();
+  });
+  const own = page.querySelector('.zoom-act'); if (own) own.remove();   // already enlarged
+  hydratePortraits(page);
+  gearIcons(page, o.game);
+  markLongNotes(page);
+  if (split) {
+    // the thumbnail shows straight away; the full-size picture replaces it once it has loaded
+    const img = z.ov.querySelector('.zoom-frame img');
+    thumbURL(o.id, o.image.v).then(u => { if (u && !img.src) img.src = u; });
+    images.get(o.id).then(rec => {
+      if (closed || !rec || !rec.full) return;
+      picURL = URL.createObjectURL(rec.full);
+      img.src = picURL;
+    }).catch(() => {});
+    img.addEventListener('click', () => viewImage(o));
+  }
+  z.ov.querySelector('[data-zoomclose]').focus();
 }
 
 /* =====================================================================
@@ -2158,6 +2336,8 @@ function showWelcome(fromHelp) {
     ]),
     sec('layout-grid', 'Pages, gallery and filters', [
       tip('pencil', '<b>Each page\'s buttons</b>, in its top corner: download, duplicate, edit and delete.'),
+      tip('image', '<b>Item icons</b> appear beside gear that matches the game\'s equipment list. Very full pages use smaller icons so every slot fits.'),
+      tip('maximize-2', '<b>Enlarge a page</b> to see it, and its icons, filling the window: use the arrows button in a book page\'s bottom corner, or tap any card in Grid Gallery.'),
       tip('layout-grid', '<b>Grid Gallery</b> shows every outfit at once.'),
       tip('search', '<b>Search, game and tag filters</b> work in both views. On phones they open from the magnifying glass, which shows a dot while a filter is on.'),
     ]),
@@ -2172,6 +2352,10 @@ function showWelcome(fromHelp) {
       <div class="set-group">
         <div class="set-head"><b>Equipment suggestions</b><i>Suggest gear from a game's equipment list as you type in the outfit form. On by default; your choice is saved in this browser.</i></div>
         <div class="set-games" data-setgames><p class="formnote">Checking which games have an equipment list…</p></div>
+      </div>
+      <div class="set-group">
+        <div class="set-head"><b>Item icons on pages</b><i>Show each item's icon beside the gear on book pages and gallery cards, for gear that matches the game's equipment list.</i></div>
+        <label class="switch compact"><input type="checkbox" data-pageicons${pageIconsOn() ? ' checked' : ''}><span class="track" aria-hidden="true"></span><span class="switch-text"><b>Show item icons</b></span></label>
       </div>
       <div class="set-group">
         <div class="set-head"><b>Armour tags</b><i>Tag outfits saved before you used suggestions, using the equipment lists.</i></div>
@@ -2203,6 +2387,11 @@ function showWelcome(fromHelp) {
     });
     o.ov.querySelector('.sheet-foot [data-done]').focus();
     if (!help) return;
+    o.ov.querySelector('[data-pageicons]').addEventListener('change', e => {
+      setPageIcons(e.target.checked);
+      refresh();
+      toast(`Item icons on pages ${e.target.checked ? 'on' : 'off'}`);
+    });
     // one switch per game that has an equipment list
     const box = o.ov.querySelector('[data-setgames]');
     const games = gameList();
@@ -2311,7 +2500,7 @@ function confirmReset() {
     if (!btn) return;
     btn.disabled = true;
     btn.lastChild.textContent = 'Resetting…';
-    try { [LS_OUTFITS, LS_META, SUGGEST_KEY, SUGGEST_GAMES_KEY, NOTES_SIZE_KEY].forEach(k => localStorage.removeItem(k)); } catch (err) {}
+    try { [LS_OUTFITS, LS_META, SUGGEST_KEY, SUGGEST_GAMES_KEY, NOTES_SIZE_KEY, PAGE_ICONS_KEY].forEach(k => localStorage.removeItem(k)); } catch (err) {}
     try { await images.clear(); } catch (err) {}
     try { sessionStorage.setItem(RESET_NOTE_KEY, '1'); } catch (err) {}
     location.reload();   // start fresh, exactly like a first visit (minus the welcome popup)
