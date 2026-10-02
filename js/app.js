@@ -542,14 +542,15 @@ function actionsHTML(id, name) {
   </div>`;
 }
 
-function outfitBody(o, num, { showGame = false, theme } = {}) {
+function outfitBody(o, num, opts = {}) {
+  const { showGame = false, theme } = opts;
   const filled = SLOTS.filter(s => o.slots[s.key] && o.slots[s.key].trim());
   const list = g => filled.filter(s => s.group === g).map(s =>
     `<li>${gearBox(s.key, o.slots[s.key], s.icon)}<span class="lbl">${s.label}</span><span class="val">${esc(o.slots[s.key])}</span></li>`).join('');
   const extraLbl = extraLabels(o.extra);
   const extras = o.extra.map((x, i) => `<li>${gearBox('extra', x.value, EXTRA_ICONS[x.kind])}<span class="lbl">${extraLbl[i]}</span><span class="val">${esc(x.value)}</span></li>`).join('');
   const armour = list('armour'), weapons = list('weapons') + extras;
-  const maxTags = showGame ? 3 : 2;   // book pages show two tags, gallery cards three
+  const maxTags = opts.maxTags || (showGame ? 3 : 2);   // book pages show two tags, gallery cards three
   const shown = o.tags.slice(0, maxTags), rest = o.tags.slice(maxTags);
   const chips = shown.map(t => `<span class="chip">${esc(t)}</span>`).join('') +
     (rest.length ? `<span class="chip more" title="${esc(rest.join(', '))}">+${rest.length}</span>` : '');
@@ -1515,34 +1516,101 @@ function readNotes(o) {
    ===================================================================== */
 function zoomPage(o) {
   const theme = themeFor(o.game);
-  let z, closed = false;
-  const close = () => { if (closed) return; closed = true; z.close(); };
+  // On large screens an outfit with a picture opens as a spread: the page on the left, the picture
+  // large on the right. The small portrait leaves the heading, so the gear sits right under the title.
+  const split = !!o.image && innerWidth >= 900 && innerHeight >= 520;
+  let z, closed = false, picURL = '';
+  const close = () => {
+    if (closed) return;
+    closed = true;
+    removeEventListener('resize', size);
+    z.close();
+    if (picURL) URL.revokeObjectURL(picURL);
+  };
   z = overlay(`
-    <div class="zoom-wrap" role="dialog" aria-modal="true" aria-label="${esc(o.name)}" style="--accent:${theme.accent}">
-      <div class="pg right zoom-page">${outfitBody(o, 0, { showGame: true, theme })}</div>
+    <div class="zoom-wrap${split ? ' split' : ''}" role="dialog" aria-modal="true" aria-label="${esc(o.name)}" style="--accent:${theme.accent}">
+      <div class="pg right zoom-page">${outfitBody(o, 0, { showGame: true, theme, maxTags: 99 })}</div>
+      ${split ? `<div class="pg left zoom-pic"><div class="zoom-frame"><img alt="${esc(o.name)}"></div></div>` : ''}
       <button type="button" class="icon-btn zoom-close" data-zoomclose aria-label="Close enlarged page">${icon('x')}</button>
     </div>`, close);
   z.ov.classList.add('zoom-overlay');
   const wrap = z.ov.querySelector('.zoom-wrap'), page = z.ov.querySelector('.zoom-page');
-  const size = () => {
-    // a page-shaped sheet on larger screens; on phones it fills the screen, since its content scrolls anyway
+  if (split) {
+    const head = page.querySelector('.pg-head');
+    head.classList.remove('has-portrait');
+    const small = head.querySelector('.portrait'); if (small) small.remove();
+  }
+  // Tags stay on one line: any that don't fit are folded into a "+n" chip.
+  const fitChips = () => {
+    const meta = page.querySelector('.card-meta'); if (!meta) return;
+    const chips = [...meta.querySelectorAll('.chip:not(.more)')];
+    let more = meta.querySelector('.chip.more');
+    chips.forEach(c => { c.hidden = false; });
+    if (more) more.remove();
+    let hidden = [];
+    while (meta.scrollWidth > meta.clientWidth + 1 && chips.length - hidden.length > 1) {
+      const c = chips[chips.length - 1 - hidden.length]; c.hidden = true; hidden.unshift(c.textContent);
+      if (!more) { more = document.createElement('span'); more.className = 'chip more'; meta.appendChild(more); }
+      more.textContent = '+' + hidden.length; more.title = hidden.join(', ');
+    }
+  };
+  // shrink the text, then the icons, until the whole page fits without scrolling
+  const fit = base => {
+    page.classList.remove('tight');
+    const steps = [1, 0.93, 0.86, 0.8, 0.74, 0.68];
+    for (const tight of [false, true]) {
+      page.classList.toggle('tight', tight);
+      for (const k of steps) {
+        page.style.fontSize = (base * k).toFixed(2) + 'px';
+        fitTitles(page); fitChips();
+        if (page.scrollHeight <= page.clientHeight + 1) return;
+      }
+    }
+  };
+  function size() {
     const phone = innerWidth < 640 || innerHeight < 520;
+    if (split) {
+      // page and picture side by side, together no wider than the window
+      const PAGE = 0.8, PIC = 0.66;
+      let h = Math.min(innerHeight * 0.92, 900);
+      if (h * (PAGE + PIC) > innerWidth * 0.94) h = innerWidth * 0.94 / (PAGE + PIC);
+      wrap.style.width = h * (PAGE + PIC) + 'px';
+      wrap.style.height = h + 'px';
+      wrap.style.setProperty('--page-w', h * PAGE + 'px');
+      // the picture keeps its 3:4 shape inside the right-hand page (28px padding, plus room for its gilt frame)
+      const picW = h * PIC, fw = Math.min(picW - 56 - 28, (h - 56 - 28) * 0.75);
+      const frame = z.ov.querySelector('.zoom-frame');
+      frame.style.width = fw + 'px'; frame.style.height = fw / 0.75 + 'px';
+      return fit(h * 0.027);
+    }
+    // a page-shaped sheet on larger screens; on phones it fills the screen, since its content scrolls anyway
     const w = phone ? innerWidth * 0.94 : Math.min(innerWidth * 0.94, (innerHeight * 0.94) * 0.725, 760);
     const h = phone ? innerHeight * 0.94 - 56 : w / 0.725;   // phones keep room below for the close button
     wrap.style.width = w + 'px';
     wrap.style.height = h + 'px';
-    page.style.fontSize = (phone ? Math.min(w * 0.042, 17) : w * 0.036).toFixed(2) + 'px';
-  };
+    if (phone) { page.style.fontSize = Math.min(w * 0.042, 17).toFixed(2) + 'px'; fitChips(); }
+    else fit(w * 0.036);
+  }
   size();
   addEventListener('resize', size);
   z.ov.addEventListener('click', e => {
-    if (e.target === z.ov || e.target.closest('[data-zoomclose]')) { removeEventListener('resize', size); close(); }
+    if (e.target === z.ov || e.target.closest('[data-zoomclose]')) close();
   });
   const own = page.querySelector('.zoom-act'); if (own) own.remove();   // already enlarged
   hydratePortraits(page);
   gearIcons(page, o.game);
-  fitTitles(page);
   markLongNotes(page);
+  if (split) {
+    // the thumbnail shows straight away; the full-size picture replaces it once it has loaded
+    const img = z.ov.querySelector('.zoom-frame img');
+    thumbURL(o.id, o.image.v).then(u => { if (u && !img.src) img.src = u; });
+    images.get(o.id).then(rec => {
+      if (closed || !rec || !rec.full) return;
+      picURL = URL.createObjectURL(rec.full);
+      img.src = picURL;
+    }).catch(() => {});
+    img.addEventListener('click', () => viewImage(o));
+  }
   z.ov.querySelector('[data-zoomclose]').focus();
 }
 
