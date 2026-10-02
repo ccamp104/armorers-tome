@@ -319,6 +319,24 @@
   .slots li { display: grid; grid-template-columns: 1.25em 4.9em 1fr; align-items: baseline; gap: .35em; }
   .slots .ic { width: .95em; height: .95em; color: var(--accent); opacity: .85; align-self: center; stroke-width: 1.8; }
   .slots .lbl { font-style: italic; font-size: .82em; color: var(--ink-soft); }
+  /* item icons beside the gear: a small framed square, filled in when the item is in the game's list */
+  .slots.with-icons { gap: .3em; }
+  .slots.with-icons li { grid-template-columns: 2em 4.9em 1fr; align-items: center; }
+  .gi { position: relative; width: 2em; height: 2em; display: grid; place-items: center; border-radius: .28em; border: 1px solid rgba(201, 168, 90, .75); background: #5d4b3f; color: #e8d6a8; overflow: hidden; }
+  .slots .gi .ic { width: .95em; height: .95em; color: #e8d6a8; opacity: .9; }
+  .gi img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; background: #5d4b3f; }
+  .gi.has-img > .ic { visibility: hidden; }
+  .slots.with-icons .lbl { align-self: center; }
+  /* fuller pages: medium rows */
+  .mid-gear .slots.with-icons { gap: .2em; }
+  .mid-gear .slots.with-icons li { grid-template-columns: 1.55em 4.9em 1fr; }
+  .mid-gear .gi { width: 1.55em; height: 1.55em; border-radius: .22em; }
+  .mid-gear .slots .gi .ic { width: .85em; height: .85em; }
+  /* very full pages: compact rows with icons at the size of the slot symbols */
+  .compact-gear .slots.with-icons { gap: .16em; }
+  .compact-gear .slots.with-icons li { grid-template-columns: 1.25em 4.9em 1fr; }
+  .compact-gear .gi { width: 1.15em; height: 1.15em; border-radius: .18em; border-width: 0; }
+  .compact-gear .slots .gi .ic { width: .8em; height: .8em; }
   .slots .val { font-weight: 600; font-size: .96em; line-height: 1.2; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
   .none { font-style: italic; color: var(--ink-soft); margin: 1em 0 0; }
   .notes {
