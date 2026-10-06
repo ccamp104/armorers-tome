@@ -413,6 +413,9 @@
     display: flex; align-items: flex-end; justify-content: center;
     padding-bottom: max(10px, .78em);
     clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 74%, 0 100%);
+    /* the top fades into the page, as if the ribbon comes out from between the leaves */
+    -webkit-mask-image: linear-gradient(to bottom, transparent, #000 42%);
+    mask-image: linear-gradient(to bottom, transparent, #000 42%);
     background:
       linear-gradient(90deg, rgba(214, 180, 104, .85) 0 .13em, transparent .13em calc(100% - .13em), rgba(214, 180, 104, .85) calc(100% - .13em)),
       repeating-linear-gradient(90deg, rgba(255, 255, 255, .06) 0 .07em, rgba(0, 0, 0, .07) .07em .14em),
@@ -421,7 +424,6 @@
   }
   .bookmark .rib-text { font: 700 max(9px, .66em)/1 var(--display); letter-spacing: .04em; color: #ecdca8; text-shadow: 0 1px 1px rgba(0, 0, 0, .55); white-space: nowrap; }
 
-  .pg > svg.pencil { width: 100%; height: 100%; }
   .jr { flex: 1; min-height: 0; display: flex; flex-direction: column; gap: .4em; }
   .jr-tools { display: flex; align-items: center; gap: .22em; flex-wrap: nowrap; padding-bottom: .45em; border-bottom: 1px solid rgba(59, 42, 30, .18); }
   .jr-sep { flex: 1 1 .4em; min-width: .3em; }
