@@ -4,6 +4,7 @@
    Icons, slots and sample data
    ===================================================================== */
 const ICONS = {"axe": "<path d=\"m14 12-8.5 8.5a2.12 2.12 0 1 1-3-3L11 9\" /> <path d=\"M15 13 9 7l4-4 6 6h3a8 8 0 0 1-7 7z\" />", "book-open": "<path d=\"M12 7v14\" /> <path d=\"M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z\" />", "copy": "<rect width=\"14\" height=\"14\" x=\"8\" y=\"8\" rx=\"2\" ry=\"2\" /> <path d=\"M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2\" />", "crown": "<path d=\"M11.562 3.266a.5.5 0 0 1 .876 0L15.39 8.87a1 1 0 0 0 1.516.294L21.183 5.5a.5.5 0 0 1 .798.519l-2.834 10.246a1 1 0 0 1-.956.734H5.81a1 1 0 0 1-.957-.734L2.02 6.02a.5.5 0 0 1 .798-.519l4.276 3.664a1 1 0 0 0 1.516-.294z\" /> <path d=\"M5 21h14\" />", "download": "<path d=\"M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4\" /> <polyline points=\"7 10 12 15 17 10\" /> <line x1=\"12\" x2=\"12\" y1=\"15\" y2=\"3\" />", "feather": "<path d=\"M12.67 19a2 2 0 0 0 1.416-.588l6.154-6.172a6 6 0 0 0-8.49-8.49L5.586 9.914A2 2 0 0 0 5 11.328V18a1 1 0 0 0 1 1z\" /> <path d=\"M16 8 2 22\" /> <path d=\"M17.5 15H9\" />", "footprints": "<path d=\"M4 16v-2.38C4 11.5 2.97 10.5 3 8c.03-2.72 1.49-6 4.5-6C9.37 2 10 3.8 10 5.5c0 3.11-2 5.66-2 8.68V16a2 2 0 1 1-4 0Z\" /> <path d=\"M20 20v-2.38c0-2.12 1.03-3.12 1-5.62-.03-2.72-1.49-6-4.5-6C14.63 6 14 7.8 14 9.5c0 3.11 2 5.66 2 8.68V20a2 2 0 1 0 4 0Z\" /> <path d=\"M16 17h4\" /> <path d=\"M4 13h4\" />", "hammer": "<path d=\"m15 12-8.373 8.373a1 1 0 1 1-3-3L12 9\" /> <path d=\"m18 15 4-4\" /> <path d=\"m21.5 11.5-1.914-1.914A2 2 0 0 1 19 8.172V7l-2.26-2.26a6 6 0 0 0-4.202-1.756L9 2.96l.92.82A6.18 6.18 0 0 1 12 8.4V10l2 2h1.172a2 2 0 0 1 1.414.586L18.5 14.5\" />", "hand": "<path d=\"M18 11V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2\" /> <path d=\"M14 10V4a2 2 0 0 0-2-2a2 2 0 0 0-2 2v2\" /> <path d=\"M10 10.5V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2v8\" /> <path d=\"M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15\" />", "layout-grid": "<rect width=\"7\" height=\"7\" x=\"3\" y=\"3\" rx=\"1\" /> <rect width=\"7\" height=\"7\" x=\"14\" y=\"3\" rx=\"1\" /> <rect width=\"7\" height=\"7\" x=\"14\" y=\"14\" rx=\"1\" /> <rect width=\"7\" height=\"7\" x=\"3\" y=\"14\" rx=\"1\" />", "pencil": "<path d=\"M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z\" /> <path d=\"m15 5 4 4\" />", "plus": "<path d=\"M5 12h14\" /> <path d=\"M12 5v14\" />", "scroll": "<path d=\"M19 17V5a2 2 0 0 0-2-2H4\" /> <path d=\"M8 21h12a2 2 0 0 0 2-2v-1a1 1 0 0 0-1-1H11a1 1 0 0 0-1 1v1a2 2 0 1 1-4 0V5a2 2 0 1 0-4 0v2a1 1 0 0 0 1 1h3\" />", "search": "<circle cx=\"11\" cy=\"11\" r=\"8\" /> <path d=\"m21 21-4.3-4.3\" />", "shield-half": "<path d=\"M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z\" /> <path d=\"M12 22V2\" />", "shield": "<path d=\"M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z\" />", "shirt": "<path d=\"M20.38 3.46 16 2a4 4 0 0 1-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.47a1 1 0 0 0 .99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 0 0 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.47a2 2 0 0 0-1.34-2.23z\" />", "sword": "<polyline points=\"14.5 17.5 3 6 3 3 6 3 17.5 14.5\" /> <line x1=\"13\" x2=\"19\" y1=\"19\" y2=\"13\" /> <line x1=\"16\" x2=\"20\" y1=\"16\" y2=\"20\" /> <line x1=\"19\" x2=\"21\" y1=\"21\" y2=\"19\" />", "trash-2": "<path d=\"M3 6h18\" /> <path d=\"M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6\" /> <path d=\"M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2\" /> <line x1=\"10\" x2=\"10\" y1=\"11\" y2=\"17\" /> <line x1=\"14\" x2=\"14\" y1=\"11\" y2=\"17\" />", "upload": "<path d=\"M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4\" /> <polyline points=\"17 8 12 3 7 8\" /> <line x1=\"12\" x2=\"12\" y1=\"3\" y2=\"15\" />", "x": "<path d=\"M18 6 6 18\" /> <path d=\"m6 6 12 12\" />", "image-plus": "<path d=\"M16 5h6\" /> <path d=\"M19 2v6\" /> <path d=\"M21 11.5V19a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7.5\" /> <path d=\"m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21\" /> <circle cx=\"9\" cy=\"9\" r=\"2\" />", "zoom-in": "<circle cx=\"11\" cy=\"11\" r=\"8\" /> <line x1=\"21\" x2=\"16.65\" y1=\"21\" y2=\"16.65\" /> <line x1=\"11\" x2=\"11\" y1=\"8\" y2=\"14\" /> <line x1=\"8\" x2=\"14\" y1=\"11\" y2=\"11\" />", "zoom-out": "<circle cx=\"11\" cy=\"11\" r=\"8\" /> <line x1=\"21\" x2=\"16.65\" y1=\"21\" y2=\"16.65\" /> <line x1=\"8\" x2=\"14\" y1=\"11\" y2=\"11\" />", "image": "<rect width=\"18\" height=\"18\" x=\"3\" y=\"3\" rx=\"2\" ry=\"2\" /> <circle cx=\"9\" cy=\"9\" r=\"2\" /> <path d=\"m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21\" />", "circle-help": "<circle cx=\"12\" cy=\"12\" r=\"10\" /> <path d=\"M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3\" /> <path d=\"M12 17h.01\" />", "more-vertical": "<circle cx=\"12\" cy=\"12\" r=\"1\" /> <circle cx=\"12\" cy=\"5\" r=\"1\" /> <circle cx=\"12\" cy=\"19\" r=\"1\" />", "chevron-down": "<path d=\"m6 9 6 6 6-6\" />", "tags": "<path d=\"m15 5 6.3 6.3a2.4 2.4 0 0 1 0 3.4L17 19\" /> <path d=\"M9.586 5.586A2 2 0 0 0 8.172 5H3a1 1 0 0 0-1 1v5.172a2 2 0 0 0 .586 1.414L8.29 18.29a2.426 2.426 0 0 0 3.42 0l3.58-3.58a2.426 2.426 0 0 0 0-3.42z\" /> <circle cx=\"6.5\" cy=\"9.5\" r=\".5\" fill=\"currentColor\" />", "settings": "<path d=\"M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z\" /> <circle cx=\"12\" cy=\"12\" r=\"3\" />", "compass": "<path d=\"m16.24 7.76-1.804 5.411a2 2 0 0 1-1.265 1.265L7.76 16.24l1.804-5.411a2 2 0 0 1 1.265-1.265z\" /> <circle cx=\"12\" cy=\"12\" r=\"10\" />", "sparkles": "<path d=\"M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z\" /> <path d=\"M20 3v4\" /> <path d=\"M22 5h-4\" /> <path d=\"M4 17v2\" /> <path d=\"M5 18H3\" />", "save": "<path d=\"M15.2 3a2 2 0 0 1 1.4.6l3.8 3.8a2 2 0 0 1 .6 1.4V19a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z\" /> <path d=\"M17 21v-7a1 1 0 0 0-1-1H8a1 1 0 0 0-1 1v7\" /> <path d=\"M7 3v4a1 1 0 0 0 1 1h7\" />", "gem": "<path d=\"M6 3h12l4 6-10 13L2 9Z\" /> <path d=\"M11 3 8 9l4 13 4-13-3-6\" /> <path d=\"M2 9h20\" />", "circle-dot": "<circle cx=\"12\" cy=\"12\" r=\"10\" /> <circle cx=\"12\" cy=\"12\" r=\"1\" />", "maximize-2": "<polyline points=\"15 3 21 3 21 9\" /> <polyline points=\"9 21 3 21 3 15\" /> <line x1=\"21\" x2=\"14\" y1=\"3\" y2=\"10\" /> <line x1=\"3\" x2=\"10\" y1=\"21\" y2=\"14\" />"};
+ICONS.list = '<path d="M8 6h13" /> <path d="M8 12h13" /> <path d="M8 18h13" /> <path d="M3 6h.01" /> <path d="M3 12h.01" /> <path d="M3 18h.01" />';
 const icon = n => `<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICONS[n] || ''}</svg>`;
 document.querySelectorAll('[data-icon]').forEach(el => el.insertAdjacentHTML('afterbegin', icon(el.dataset.icon)));
 
@@ -140,8 +141,16 @@ function thumbURL(id, v) {
   if (!thumbURLs.has(k)) thumbURLs.set(k, images.get(id).then(r => r && r.thumb ? URL.createObjectURL(r.thumb) : null, () => null));
   return thumbURLs.get(k);
 }
+const fullURLs = new Map();    // the same for the 450 x 600 copy, used by the journal's scrapbook page
+function fullURL(id, v) {
+  const k = id + ':' + v;
+  if (!fullURLs.has(k)) fullURLs.set(k, images.get(id).then(r => r && r.full ? URL.createObjectURL(r.full) : null, () => null));
+  return fullURLs.get(k);
+}
 function forgetImage(id) {
-  for (const [k, p] of thumbURLs) if (k.startsWith(id + ':')) { p.then(u => u && URL.revokeObjectURL(u)); thumbURLs.delete(k); }
+  [thumbURLs, fullURLs].forEach(m => {
+    for (const [k, p] of m) if (k.startsWith(id + ':')) { p.then(u => u && URL.revokeObjectURL(u)); m.delete(k); }
+  });
 }
 // fill in any portraits inside root that have not been loaded yet
 function hydratePortraits(root) {
@@ -581,6 +590,24 @@ const addBody = theme => `
   <button type="button" class="addpage" data-act="add" data-game="${esc(theme.name)}">
     ${icon('plus')}<span class="a1">Forge a new outfit</span><span class="a2">It becomes the next page of this book.</span>
   </button>`;
+// the journal's two pages: empty shells, filled in from the saved journal by hydrateJournal()
+const journalTextBody = theme => `
+  <div class="fox" style="${foxStyle(hash(theme.name) + 21)}"></div>
+  <div class="jr" data-jr-text data-game="${esc(theme.name)}" data-font="book">
+    <div class="jr-tools" role="toolbar" aria-label="Journal formatting">
+      ${Object.entries(JR_FONTS).map(([k, l]) => `<button type="button" class="jr-btn jr-f-${k}" data-jr-font="${k}" aria-pressed="false" title="${l} font">${l}</button>`).join('')}
+      <span class="jr-sep" aria-hidden="true"></span>
+      <button type="button" class="jr-btn" data-jr-cmd="bold" aria-pressed="false" title="Bold" aria-label="Bold"><b>B</b></button>
+      <button type="button" class="jr-btn" data-jr-cmd="italic" aria-pressed="false" title="Italic" aria-label="Italic"><i>I</i></button>
+      <button type="button" class="jr-btn" data-jr-cmd="underline" aria-pressed="false" title="Underline" aria-label="Underline"><u>U</u></button>
+      <button type="button" class="jr-btn" data-jr-cmd="insertUnorderedList" aria-pressed="false" title="Bulleted list" aria-label="Bulleted list">${icon('list')}</button>
+    </div>
+    <input class="jr-title" data-jr-title maxlength="40" placeholder="Journal" aria-label="Journal title" autocomplete="off" spellcheck="false">
+    <div class="jr-text" data-jr-editor contenteditable="true" role="textbox" aria-multiline="true" aria-label="Journal entry" data-placeholder="Write about your travels, plans and finds…"></div>
+  </div>`;
+const journalPicsBody = theme => `
+  <div class="fox" style="${foxStyle(hash(theme.name) + 33)}"></div>
+  <div class="jr-pics" data-jr-pics data-game="${esc(theme.name)}"></div>`;
 const blankBody = seed => `<div class="fox" style="${foxStyle(seed)}"></div><svg class="blank" viewBox="0 0 200 12" aria-hidden="true"><path d="${star(100, 6, 5.5)}" fill="#3b2a1e"/></svg>`;
 
 /* =====================================================================
@@ -643,6 +670,14 @@ function createBook(theme, onChange) {
   slide.innerHTML = `<div class="book" style="--accent:${theme.accent}"><div class="board" style="background:${theme.board}"></div><div class="base"></div></div>`;
   const bookEl = slide.querySelector('.book');
   const base = slide.querySelector('.base');
+  // the Journal bookmark: a ribbon lying across the bottom edge of the book, its tip just below it
+  const mark = document.createElement('button');
+  mark.type = 'button';
+  mark.className = 'bookmark';
+  mark.style.setProperty('--ribbon', theme.endpaper || '#4a3c2e');
+  mark.innerHTML = '<span class="rib"><span class="rib-text">Journal</span></span>';
+  bookEl.insertBefore(mark, bookEl.firstChild);
+  const markText = mark.querySelector('.rib-text');
 
   const face = (cls, inner, style = '') => `<div class="face ${cls}"${style ? ` style="${style}"` : ''}>${inner}<div class="cast"></div><div class="shade"></div></div>`;
   const wrap = (side, inner) => `<div class="pg ${side}">${inner}</div>`;
@@ -665,7 +700,14 @@ function createBook(theme, onChange) {
 
   let running = false, last = 0, waiters = [];
   let focus = 0, focusTarget = 0, bookKey = '', focusAfter = null;
-  const api = { theme, slide, spread: 0, leaves: 0, pages: [], get busy() { return running; } };
+  const api = { theme, slide, spread: 0, leaves: 0, pages: [], hasJournal: false, get busy() { return running; } };
+  api.inJournal = () => api.hasJournal && api.spread > 0 && api.spread === api.leaves;
+  function syncMark() {
+    const j = api.inJournal(), t = j ? 'Outfits' : 'Journal';
+    if (markText.textContent !== t) markText.textContent = t;
+    mark.setAttribute('aria-label', j ? `Back to the ${theme.name} outfits` : `Open the ${theme.name} journal`);
+  }
+  mark.addEventListener('click', e => { e.stopPropagation(); toggleJournal(api); });
 
   function paintCover(urgent) {
     const scale = Math.max(dims.closedScale, dims.openScale) * Math.min(2, window.devicePixelRatio || 1);
@@ -712,6 +754,7 @@ function createBook(theme, onChange) {
     const tones = ['#ddcfae', '#cfbf9b', '#c0ae88'];
     base.style.boxShadow = Array.from({ length: layers }, (_, i) => `${(i + 1) * 1.6}px ${i * .5}px 0 ${tones[i % 3]}`).join(',');
     api.leaves = L;
+    api.hasJournal = pages.some(p => p.journal);
     const s = Math.max(0, Math.min(keepSpread, L));
     api.spread = s;
     sheets.forEach(sh => { sh.t = sh.target = (s > 0 && sh.k <= s) ? 1 : 0; sh.delay = 0; });
@@ -719,6 +762,8 @@ function createBook(theme, onChange) {
     render(true); inertPages();
     sheets.forEach(sh => { if (sh.k > 0 && sh.vis) { hydratePortraits(sh.el); gearIcons(sh.el, theme.name); } });
     hydratePortraits(base); gearIcons(base, theme.name);
+    hydrateJournal(bookEl, s === L);   // the journal's text now; its pictures only once it's open
+    syncMark();
     fitNotes();
   };
 
@@ -770,6 +815,8 @@ function createBook(theme, onChange) {
       const s = dims.closedScale + (dims.openScale - dims.closedScale) * bp;
       const f = (1 - bp) + bp * focus;           // 1 = right half centred, 0 = spine centred, -1 = left half centred
       bookEl.style.transform = `translate(${-s * w / 2 * f}px, 0) scale(${s})`;
+      // the bookmark sits near the spine under the page on view: the right page (or cover), or on phones whichever page is shown
+      setStyle(mark, 'left', (22 * (dims.narrow ? f : 1)).toFixed(2) + '%');
     }
     const ps = sheets.map(sh => ease(sh.t));
     const move = sheets.map(moving);
@@ -841,11 +888,13 @@ function createBook(theme, onChange) {
     } else focus = focusTarget;
     render();
     if (busy) requestAnimationFrame(frame);
-    else { running = false; render(); inertPages(); onChange(); waiters.splice(0).forEach(fn => fn()); }
+    else { running = false; mark.classList.remove('away'); render(); inertPages(); onChange(); waiters.splice(0).forEach(fn => fn()); }
   }
   function run() {
     inertPages();
+    syncMark();
     if (!running) { running = true; last = performance.now(); requestAnimationFrame(frame); }
+    if (sheets.some(moving) || focusAfter !== null || Math.abs(focusTarget - focus) > 0.001) mark.classList.add('away');   // hidden while pages turn
     onChange();
     return new Promise(res => waiters.push(res));
   }
@@ -854,6 +903,7 @@ function createBook(theme, onChange) {
   api.goTo = (target, thenFocus) => {
     target = Math.max(0, Math.min(api.leaves, target));
     const from = api.spread;
+    if (api.hasJournal && target === api.leaves) hydrateJournal(bookEl, true);   // load its pictures while the pages turn
     if (thenFocus !== undefined && dims.narrow) focusAfter = thenFocus;
     if (target === from) return run();
     const list = [];
@@ -866,7 +916,7 @@ function createBook(theme, onChange) {
   };
   api.setFocus = f => { focusTarget = dims.narrow ? f : 0; return run(); };
   api.focusSide = () => focusTarget;
-  api.canNext = () => api.spread > 0 && api.spread < api.leaves;
+  api.canNext = () => api.spread > 0 && api.spread < api.leaves - (api.hasJournal ? 1 : 0);   // page turns stop before the journal
   api.canPrev = () => api.spread > 1;
   api.hit = (x, y) => {
     const r = bookEl.getBoundingClientRect();
@@ -891,7 +941,7 @@ function createBook(theme, onChange) {
 /* =====================================================================
    App state
    ===================================================================== */
-const state = { view: 'tome', search: '', game: 'all', tag: 'all', ready: false };
+const state = { view: 'tome', search: '', game: 'all', tag: 'all', ready: false, codexGame: null, codexSlot: 'all' };
 const $ = id => document.getElementById(id);
 
 function gameList() {
@@ -956,6 +1006,8 @@ const narrowing = () => !!norm(state.search) || state.tag !== 'all';
    Filters
    ===================================================================== */
 function renderFilters() {
+  if (state.view === 'codex') return renderCodexFilters();
+  $('search').placeholder = 'Search outfits, gear, notes or characters';
   const games = gameList();
   const sel = $('gameFilter');
   if (state.game !== 'all' && !games.some(g => norm(g) === norm(state.game))) state.game = 'all';
@@ -1006,11 +1058,14 @@ $('search').addEventListener('input', e => {
 });
 $('clearSearch').addEventListener('click', () => { clearTimeout(searchTimer); state.search = ''; $('search').value = ''; refresh(); $('search').focus(); });
 $('gameFilter').addEventListener('change', e => {
+  if (state.view === 'codex') { state.codexGame = e.target.value; state.codexSlot = 'all'; codexToTop = true; return refresh(); }
   state.game = e.target.value;
   refresh();
   if (state.view === 'tome' && state.game !== 'all') showBook(state.game);
 });
 $('tags').addEventListener('click', e => {
+  const cs = e.target.closest('[data-cslot]');
+  if (cs) { state.codexSlot = cs.dataset.cslot; codexToTop = true; return refresh(); }
   const b = e.target.closest('[data-tag]');
   if (!b) return;
   state.tag = b.dataset.tag;
@@ -1033,6 +1088,8 @@ function pagesForBook(theme) {
   list.forEach((o, i) => pages.push({ html: outfitBody(o, i + 1, { theme }), id: o.id, n: i + 1 }));
   pages.push({ html: addBody(theme), add: true });
   if (pages.length % 2 === 0) pages.push({ html: blankBody(hash(theme.name) + pages.length) });
+  // the journal spread: reached only with the bookmark, never by turning pages
+  pages.push({ html: journalTextBody(theme), journal: 'text' }, { html: journalPicsBody(theme), journal: 'pics' });
   return { pages, count: list.length };
 }
 
@@ -1119,7 +1176,8 @@ function updateTome() {
     $('closeBook').style.background = `linear-gradient(${mix(book.theme.button, '#ffffff', .12)}, ${book.theme.button})`;
     const nums = book.visiblePages().map(i => book.pages[i]).filter(p => p && p.n).map(p => p.n);
     const total = book.pages.filter(p => p.n).length;
-    $('where').textContent = !open ? '' : nums.length
+    const journal = book.visiblePages().some(i => book.pages[i] && book.pages[i].journal);
+    $('where').textContent = !open ? '' : journal ? 'Journal' : nums.length
       ? `${nums.length > 1 ? 'Outfits' : 'Outfit'} ${nums.join(' and ')} of ${total}`
       : total ? `End of the book, ${total} ${total === 1 ? 'outfit' : 'outfits'}` : 'This book is still empty';
     stage.setAttribute('aria-label', open
@@ -1210,10 +1268,23 @@ function openBook(book) {
   book.goTo(1);
 }
 $('closeBook').addEventListener('click', () => active() && active().goTo(0));
+// The bookmark: from the cover or any outfit page it turns to the journal; from the journal it turns
+// back to the last outfit (or the Forge page if the book has no outfits yet)
+function toggleJournal(book) {
+  if (book !== active() || !book.hasJournal) return;
+  if (book.inJournal()) {
+    let p = -1;
+    book.pages.forEach((pg, i) => { if (pg.id) p = i; });
+    if (p < 0) p = book.pages.findIndex(pg => pg.add);
+    return book.goTo(Math.ceil(p / 2), p % 2 ? -1 : 1);
+  }
+  if (book.spread === 0) { book.setFocus(-1); return book.goTo(book.leaves); }
+  return book.goTo(book.leaves, -1);
+}
 
 /* pointer: swipe between closed covers, tap a cover to open, tap a page to turn */
 let start = null;
-const onControl = t => t.closest('button, a, input, select, textarea, label');
+const onControl = t => t.closest('button, a, input, select, textarea, label, [contenteditable="true"], .jr-photo');
 stage.addEventListener('pointerdown', e => {
   if (e.button !== 0 || onControl(e.target)) return;
   start = { x: e.clientX, y: e.clientY, t: performance.now(), drag: false };
@@ -1276,6 +1347,7 @@ stage.addEventListener('pointercancel', e => endPointer(e, true));
 addEventListener('keydown', e => {
   if (state.view !== 'tome' || document.querySelector('.overlay')) return;
   if (e.target.closest && e.target.closest('input, select, textarea')) return;
+  if (e.target.isContentEditable) return;   // typing in the journal
   const book = active();
   if (!book) return;
   if (e.key === 'ArrowRight') { e.preventDefault(); book.spread ? forward(book) : goToBook(index + 1, 1); }
@@ -1333,9 +1405,11 @@ function refresh() {
   renderFilters();
   let shown;
   if (state.view === 'tome') shown = syncBooks();
+  else if (state.view === 'codex') shown = renderCodex();
   else shown = renderGallery();
   $('tome').hidden = state.view !== 'tome';
   $('gallery').hidden = state.view !== 'grid' || shown === 0;
+  $('codex').hidden = state.view !== 'codex';
   showEmpty(shown === 0);
   if (state.view === 'tome' && shown) requestAnimationFrame(() => { if (!sized) sizeTome(); books.forEach(b => b.fitNotes()); });
   if (pendingShow) {
@@ -1374,6 +1448,12 @@ $('emptyActions').addEventListener('click', e => {
 });
 
 document.querySelectorAll('.seg [data-view]').forEach(b => b.addEventListener('click', () => {
+  // the Item Codex opens on the game you were looking at, when that game has an equipment list
+  if (b.dataset.view === 'codex' && state.view !== 'codex') {
+    const from = state.view === 'tome' && active() ? active().theme.name : state.game !== 'all' ? state.game : null;
+    if (from) state.codexGame = from;
+    codexToTop = true;
+  }
   state.view = b.dataset.view;
   document.querySelectorAll('.seg [data-view]').forEach(x => x.setAttribute('aria-pressed', String(x === b)));
   refresh();
@@ -1844,7 +1924,7 @@ function parseEquipmentJSON(text, slug) {
   Object.entries(d.slots || {}).forEach(([list, rows]) => (rows || []).forEach(r =>
     Array.isArray(r) ? addEquipment(slots, list, r[0], r[1], r[2]) : r && addEquipment(slots, list, r.name, r.type, r.icon)));
   const ic = d.icons || {};
-  return { game: d.game || '', slots, icons: { enabled: ic.enabled === true, folder: iconFolder(ic.folder, slug) } };
+  return { game: d.game || '', source: String(d.source || ''), compiled: String(d.compiled || ''), slots, icons: { enabled: ic.enabled === true, folder: iconFolder(ic.folder, slug) } };
 }
 const iconFolder = (f, slug) => { f = String(f || `icons/${slug}/`).replace(/^\/+/, ''); return f.endsWith('/') ? f : f + '/'; };
 // a simple CSV reader: a header row with slot, name and (optionally) type, then one item per row
@@ -2086,7 +2166,8 @@ function tagInput(root, initial) {
    ===================================================================== */
 function openForm(existing = null, presetGame = null) {
   const games = gameList();
-  const current = existing ? existing.game : presetGame || (state.view === 'tome' && active() ? active().theme.name : state.game !== 'all' ? state.game : games[0]);
+  const current = existing ? existing.game : presetGame || (state.view === 'tome' && active() ? active().theme.name
+    : state.view === 'codex' && state.codexGame ? state.codexGame : state.game !== 'all' ? state.game : games[0]);
   const slotField = s => `
     <label class="field"><span>${icon(s.icon)}${s.label}</span>
       <input name="slot_${s.key}" value="${esc(existing ? existing.slots[s.key] : '')}" placeholder="${esc(s.hint)}" maxlength="120"></label>`;
@@ -2251,19 +2332,22 @@ function saveJSON(filename, data, done) {
 }
 $('exportAll').addEventListener('click', () => exportAllOutfits());
 async function exportAllOutfits() {
-  if (!store.outfits.length) return toast('There are no outfits to export yet.', true);
+  flushJournals();
+  const jn = Object.values(journalStore()).filter(raw => journalHasContent(journalFor(raw.game))).length;
+  if (!store.outfits.length && !jn) return toast('There are no outfits to export yet.', true);
   const n = store.outfits.length;
-  if (store.outfits.some(o => o.image)) toast('Preparing your export…');
+  if (store.outfits.some(o => o.image) || jn) toast('Preparing your export…');
   const outfits = [];
   for (const o of store.outfits) outfits.push(await outfitForExport(o));
+  const journalsOut = await journalsForExport();
   const now = new Date(), pad = x => String(x).padStart(2, '0');
   const stamp = `${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(now.getDate())}_${pad(now.getHours())}-${pad(now.getMinutes())}`;
   saveJSON(`armory-logbook-${stamp}.json`, {
     app: 'ArmorersTome', version: '3.2',
     exportedAt: now.toISOString(),                                   // exact moment, in UTC
     exportedAtLocal: now.toLocaleString(undefined, { dateStyle: 'full', timeStyle: 'short' }),   // your local date and time
-    outfitsCount: n, games: store.meta.games, outfits,
-  }, `Exported ${n} ${n === 1 ? 'outfit' : 'outfits'}`);
+    outfitsCount: n, games: store.meta.games, outfits, journals: journalsOut,
+  }, `Exported ${n} ${n === 1 ? 'outfit' : 'outfits'}${jn ? ` and ${jn} ${jn === 1 ? 'journal' : 'journals'}` : ''}`);
 }
 $('importAll').addEventListener('click', () => $('fileInput').click());
 $('fileInput').addEventListener('change', e => {
@@ -2272,9 +2356,10 @@ $('fileInput').addEventListener('change', e => {
   if (!file) return;
   const reader = new FileReader();
   reader.onload = async () => {
-    let list = [];
+    let list = [], jdata = null;
     try {
       const parsed = JSON.parse(reader.result);
+      if (parsed && parsed.journals && typeof parsed.journals === 'object' && !Array.isArray(parsed.journals)) jdata = parsed.journals;
       list = Array.isArray(parsed) ? parsed : parsed && Array.isArray(parsed.outfits) ? parsed.outfits : parsed && parsed.name && parsed.slots ? [parsed] : null;
       if (!list) throw new Error('format');
     } catch (err) { return toast('That file is not an Armorer\u2019s Tome JSON export.', true); }
@@ -2283,10 +2368,12 @@ $('fileInput').addEventListener('change', e => {
       pic: typeof x.image === 'string' && x.image.startsWith('data:image/') ? x.image : null,
     }));
     const valid = rows.map(r => r.o);
-    if (!valid.length) return toast('No outfits were found in that file.', true);
+    const jn = jdata ? Object.keys(jdata).length : 0;
+    if (!valid.length && !jn) return toast('No outfits were found in that file.', true);
+    const found = [valid.length ? `${valid.length} ${valid.length === 1 ? 'outfit' : 'outfits'}` : '', jn ? `${jn} ${jn === 1 ? 'journal' : 'journals'}` : ''].filter(Boolean).join(' and ');
     const mode = await dialog({
       title: 'Import outfits',
-      body: `<p>Found ${valid.length} ${valid.length === 1 ? 'outfit' : 'outfits'} in <i>${esc(file.name)}</i>. How should they join your logbook?</p>`,
+      body: `<p>Found ${found} in <i>${esc(file.name)}</i>. How should they join your logbook?</p>`,
       choices: [
         { label: 'Add to my books', detail: 'Keeps every current page and adds the imported ones after them.', value: 'merge' },
         { label: 'Replace everything', detail: 'Removes every current outfit, then adds the imported ones.', value: 'replace' },
@@ -2312,9 +2399,11 @@ $('fileInput').addEventListener('change', e => {
         } else if (pic) lostPics++;
         await store.put(o);
       }
+      if (jdata || mode === 'replace') lostPics += await importJournals(jdata, mode === 'replace');
       if (lostPics) setTimeout(() => toast(`${lostPics} ${lostPics === 1 ? 'image' : 'images'} could not be imported.`, true), 3400);
       await unhideBuiltins(valid.map(o => o.game));
       await ensureGameColors();
+      rehydrateJournals();
       toast(mode === 'replace' ? `Replaced the logbook with ${valid.length} imported ${valid.length === 1 ? 'outfit' : 'outfits'}` : `Added ${valid.length} imported ${valid.length === 1 ? 'outfit' : 'outfits'}`);
     } catch (err) { toast('The import stopped partway. Some outfits may not have been added.', true); }
   };
@@ -2351,7 +2440,9 @@ function showWelcome(fromHelp) {
       tip('pencil', '<b>Each page\'s buttons</b>, in its top corner: download, duplicate, edit and delete.'),
       tip('image', '<b>Item icons</b> appear beside gear that matches the game\'s equipment list. Very full pages use smaller icons so every slot fits.'),
       tip('maximize-2', '<b>Enlarge a page</b> to see it, and its icons, filling the window: use the arrows button in a book page\'s bottom corner, or tap any card in Grid Gallery.'),
+      tip('feather', '<b>The journal</b> at the back of each book holds your own notes and up to three pictures. Open it with the <b>Journal</b> bookmark under the book, and the same bookmark (now <b>Outfits</b>) takes you back. It saves as you type.'),
       tip('layout-grid', '<b>Grid Gallery</b> shows every outfit at once.'),
+      tip('scroll', '<b>Item Codex</b> lists every item in a game\'s equipment list, sorted by slot, with weapons grouped by type. Choose the game in the Game menu, and search by name or by type, such as Plate or Sword. Items you\'ve used show how many outfits they\'re in.'),
       tip('search', '<b>Search, game and tag filters</b> work in both views. On phones they open from the magnifying glass, which shows a dot while a filter is on.'),
     ]),
     sec('save', 'Saving and backups', [
@@ -2375,7 +2466,7 @@ function showWelcome(fromHelp) {
         <button type="button" class="btn ink small" data-settool="tags">${icon('tags')}Add armour tags…</button>
       </div>
       <div class="set-group warn-group">
-        <div class="set-head"><b>Delete a game</b><i>Remove a game's book and every outfit in it from this browser.</i></div>
+        <div class="set-head"><b>Delete a game</b><i>Remove a game's book, every outfit in it and its journal from this browser.</i></div>
         ${(() => {
           const gs = gameList();
           if (!gs.length) return '<p class="formnote">There are no books to delete.</p>';
@@ -2385,7 +2476,7 @@ function showWelcome(fromHelp) {
         })()}
       </div>
       <div class="set-group warn-group">
-        <div class="set-head"><b>Reset logbook</b><i>Delete every outfit, image and added book in this browser, and return settings to their defaults.</i></div>
+        <div class="set-head"><b>Reset logbook</b><i>Delete every outfit, journal, image and added book in this browser, and return settings to their defaults.</i></div>
         <button type="button" class="btn small reset-btn" data-settool="reset">${icon('trash-2')}Reset logbook…</button>
       </div>
     </section>`;
@@ -2500,6 +2591,425 @@ async function tagExistingOutfits() {
 }
 
 /* =====================================================================
+   Item Codex: every item in a game's equipment list, by slot, with the
+   weapons grouped by type. It reuses the search box and the Game menu;
+   the slot chips take the place of the character tags.
+   ===================================================================== */
+const CODEX_SLOTS = [
+  { key: 'headgear', label: 'Headgear', icon: 'crown' }, { key: 'chest', label: 'Chest', icon: 'shirt' },
+  { key: 'cloak', label: 'Cloak', icon: 'feather' }, { key: 'gloves', label: 'Gloves', icon: 'hand' },
+  { key: 'legs', label: 'Legs', icon: 'shield' }, { key: 'boots', label: 'Boots', icon: 'footprints' },
+  { key: 'weapons', label: 'Weapons and accessories', chip: 'Weapons', icon: 'sword' },
+];
+let codexListed = null, codexDB = null, codexSeq = 0, codexToTop = false;
+const codexGames = async () => { const g = gameList(); const has = await Promise.all(g.map(hasEquipmentList)); return g.filter((x, i) => has[i]); };
+function renderCodexFilters() {
+  $('search').placeholder = 'Search items, types or slots';
+  const sel = $('gameFilter'), listed = codexListed || [];
+  sel.innerHTML = listed.length
+    ? listed.map(g => `<option value="${esc(g)}"${norm(g) === norm(state.codexGame) ? ' selected' : ''}>${esc(g)}</option>`).join('')
+    : `<option value="">${codexListed ? 'No equipment lists' : 'Loading…'}</option>`;
+  const db = codexDB && norm(codexDB.forGame) === norm(state.codexGame) ? codexDB : null;
+  const slots = db ? CODEX_SLOTS.filter(s => (db.slots[s.key] || []).length) : [];
+  if (state.codexSlot !== 'all' && !slots.some(s => s.key === state.codexSlot)) state.codexSlot = 'all';
+  const total = slots.reduce((n, s) => n + db.slots[s.key].length, 0);
+  $('tags').innerHTML = slots.length ? `<span class="tags-label">Slot</span>` +
+    [{ key: 'all', chip: 'All', n: total }, ...slots.map(s => ({ ...s, n: db.slots[s.key].length }))].map(s =>
+      `<button type="button" class="chip-btn" data-cslot="${s.key}" aria-pressed="${s.key === state.codexSlot}">${esc(s.chip || s.label)}<span class="chip-n">${s.n.toLocaleString()}</span></button>`).join('') : '';
+  $('clearSearch').hidden = !state.search;
+  $('filterBtn').querySelector('.badge').hidden = !(norm(state.search) || state.codexSlot !== 'all');
+}
+function renderCodex() {
+  const seq = ++codexSeq, box = $('cdx');
+  (async () => {
+    const listed = await codexGames();
+    if (seq !== codexSeq || state.view !== 'codex') return;
+    codexListed = listed;
+    if (!listed.length) {
+      renderCodexFilters();
+      box.innerHTML = `<div class="cx-msg">${icon('scroll')}<p>${location.protocol === 'file:'
+        ? 'Equipment lists need the site to be opened from a web address, such as GitHub Pages.'
+        : 'None of your games has an equipment list yet, so there is nothing to show here.'}</p></div>`;
+      return;
+    }
+    const pick = listed.find(g => norm(g) === norm(state.codexGame)) || listed[0];
+    state.codexGame = pick;
+    if (!codexDB || norm(codexDB.forGame) !== norm(pick)) {
+      renderCodexFilters();
+      if (!box.querySelector('.cx-sec')) box.innerHTML = `<div class="cx-msg"><p>Opening the ${esc(pick)} equipment list…</p></div>`;
+      const db = await loadEquipment(pick);
+      if (seq !== codexSeq || state.view !== 'codex') return;
+      codexDB = db ? { ...db, forGame: pick } : null;
+    }
+    renderCodexFilters();
+    drawCodex(box);
+  })();
+  return 1;
+}
+// which items your outfits use: list|name -> number of outfits
+function codexUsage(game) {
+  const used = new Map(), add = (key, v, id, seen) => {
+    const k = key + '|' + norm(v);
+    if (!norm(v) || seen.has(k)) return;
+    seen.add(k); used.set(k, (used.get(k) || 0) + 1);
+  };
+  byGame(game).forEach(o => {
+    const seen = new Set();
+    SLOTS.forEach(sl => add(LIST_FOR_SLOT[sl.key], o.slots[sl.key], o.id, seen));
+    o.extra.forEach(x => add('weapons', x.value, o.id, seen));
+  });
+  return used;
+}
+function drawCodex(box) {
+  const db = codexDB, game = state.codexGame;
+  if (!db) { box.innerHTML = `<div class="cx-msg">${icon('scroll')}<p>The ${esc(game)} equipment list could not be opened. Check your connection and try again.</p></div>`; return; }
+  const words = norm(state.search).split(/\s+/).filter(Boolean);
+  const used = codexUsage(game);
+  const iconBase = db.icons && db.icons.enabled ? 'data/' + db.icons.folder : '';
+  const card = (s, it, showType) => {
+    const n = used.get(s.key + '|' + it.lc) || 0;
+    const src = iconBase && it.icon ? iconBase + encodeURIComponent(it.icon) : '';
+    return `<div class="cx-item${n ? ' has-used' : ''}"><span class="gi cx-gi">${icon(s.icon)}${src && !missingIcons.has(src) ? `<img src="${esc(src)}" alt="" loading="lazy" decoding="async">` : ''}</span>
+      <span class="cx-txt"><span class="cx-name">${esc(it.name)}</span>${showType && it.type ? `<span class="cx-type">${esc(it.type)}</span>` : ''}</span>
+      ${n ? `<span class="cx-used" title="Used in ${n} of your ${esc(game)} outfits">In ${n} ${n === 1 ? 'outfit' : 'outfits'}</span>` : ''}</div>`;
+  };
+  let html = '', shown = 0, total = 0;
+  CODEX_SLOTS.forEach(s => {
+    const all = db.slots[s.key] || [];
+    if (!all.length || (state.codexSlot !== 'all' && state.codexSlot !== s.key)) return;
+    total += all.length;
+    const hay = it => (it.lc + ' ' + norm(it.type) + ' ' + norm(s.label));
+    const list = all.filter(it => words.every(w => hay(it).includes(w))).sort((a, b) => a.lc.localeCompare(b.lc));
+    if (!list.length) return;
+    shown += list.length;
+    const count = words.length ? `${list.length} of ${all.length}` : `${all.length} ${all.length === 1 ? 'item' : 'items'}`;
+    let body;
+    if (s.key === 'weapons') {   // weapons are split into a sub-section for each type
+      const groups = new Map();
+      list.forEach(it => { const t = it.type || 'Other'; if (!groups.has(t)) groups.set(t, []); groups.get(t).push(it); });
+      body = [...groups.keys()].sort((a, b) => a === 'Other' ? 1 : b === 'Other' ? -1 : a.localeCompare(b)).map(t =>
+        `<div class="cx-sub"><h3>${esc(t)} <small>${groups.get(t).length}</small></h3><div class="cx-grid">${groups.get(t).map(it => card(s, it, false)).join('')}</div></div>`).join('');
+    } else body = `<div class="cx-grid">${list.map(it => card(s, it, true)).join('')}</div>`;
+    html += `<section class="cx-sec" aria-label="${esc(s.label)}"><h2>${icon(s.icon)}${esc(s.label)} <small>${count}</small></h2>${body}</section>`;
+  });
+  const all = CODEX_SLOTS.reduce((n, s) => n + (db.slots[s.key] || []).length, 0);
+  // when the list was last updated, from its "compiled" date (e.g. 2026-10-01 -> 1 October 2026)
+  const ymd = /^(\d{4})-(\d{2})-(\d{2})/.exec(db.compiled || '');
+  const updated = ymd ? new Date(+ymd[1], +ymd[2] - 1, +ymd[3]).toLocaleDateString(undefined, { day: 'numeric', month: 'long', year: 'numeric' }) : '';
+  const credit = updated ? ` Last updated ${esc(updated)}.` : '';
+  const head = `<p class="cx-head"><b>${esc(game)}</b>: ${words.length ? `${shown.toLocaleString()} of ${all.toLocaleString()} items match` : `${all.toLocaleString()} items`}.${credit}</p>`;
+  box.innerHTML = shown ? head + html
+    : head + `<div class="cx-msg"><p>No ${esc(game)} items match “${esc(state.search.trim())}”${state.codexSlot !== 'all' ? ' in this slot' : ''}.</p>
+        <button type="button" class="btn ink" data-cxclear>${icon('x')}Clear search${state.codexSlot !== 'all' ? ' and slot' : ''}</button></div>`;
+  if (codexToTop) { $('codex').scrollTop = 0; codexToTop = false; }
+}
+$('cdx').addEventListener('error', e => {   // an icon that's missing falls back to the slot's symbol
+  if (e.target.tagName === 'IMG') { missingIcons.add(e.target.getAttribute('src')); e.target.remove(); }
+}, true);
+$('cdx').addEventListener('click', e => {
+  if (!e.target.closest('[data-cxclear]')) return;
+  clearTimeout(searchTimer); state.search = ''; $('search').value = ''; state.codexSlot = 'all'; codexToTop = true; refresh();
+});
+
+/* =====================================================================
+   Journal: a two-page spread at the back of every book, reached only with
+   the bookmark. Left page: an editable title and rich text (bold, italic,
+   underline, bullet lists) in a choice of three fonts. Right page: up to
+   three pictures laid out like a scrapbook. Saved in this browser as you
+   type: the text in localStorage, the pictures in the image database.
+   ===================================================================== */
+const LS_JOURNALS = 'armorer_journals_v1';
+const JR_MAX_CHARS = 20000;
+const JR_FONTS = { book: 'Book', sans: 'Sans', hand: 'Hand' };
+// where the three pictures sit on the scrapbook page (% of the page's writing area) and how they're tilted
+const JR_SLOTS = [{ x: 3, y: 1, r: -4.5 }, { x: 51, y: 26, r: 3.5 }, { x: 9, y: 53, r: -1.8 }];
+
+let journals = null;            // game key -> { game, title, html, font, pics: [ {id, v} | null ] x3 }
+function journalStore() {
+  if (!journals) {
+    try { journals = JSON.parse(localStorage.getItem(LS_JOURNALS) || '{}'); } catch (e) { journals = {}; }
+    if (!journals || typeof journals !== 'object' || Array.isArray(journals)) journals = {};
+  }
+  return journals;
+}
+function journalFor(game) {
+  const j = journalStore()[norm(game)] || {};
+  return {
+    game: j.game || game,
+    title: typeof j.title === 'string' ? j.title : 'Journal',
+    html: typeof j.html === 'string' ? j.html : '',
+    font: JR_FONTS[j.font] ? j.font : 'book',
+    pics: [0, 1, 2].map(i => { const p = Array.isArray(j.pics) && j.pics[i]; return p && p.id ? { id: String(p.id), v: p.v || 1 } : null; }),
+  };
+}
+const richToText = html => { const t = document.createElement('template'); t.innerHTML = String(html || ''); return t.content.textContent || ''; };
+const journalHasContent = j => !!(richToText(j.html).trim() || j.pics.some(Boolean) || (j.title.trim() && j.title.trim() !== 'Journal'));
+
+let jrTimer = null, jrSaveFailed = false;
+function saveJournal(game, j, now) {
+  journalStore()[norm(game)] = { game, title: j.title, html: j.html, font: j.font, pics: j.pics };
+  clearTimeout(jrTimer);
+  if (now) flushJournals(); else jrTimer = setTimeout(flushJournals, 400);
+}
+function flushJournals() {
+  clearTimeout(jrTimer); jrTimer = null;
+  if (!journals) return;
+  try { localStorage.setItem(LS_JOURNALS, JSON.stringify(journals)); jrSaveFailed = false; }
+  catch (e) { if (!jrSaveFailed) toast('The journal could not be saved. The browser may be out of storage space.', true); jrSaveFailed = true; }
+}
+addEventListener('pagehide', flushJournals);
+document.addEventListener('visibilitychange', () => { if (document.hidden) flushJournals(); });
+// a game's journal and its pictures go when the game is deleted
+function dropJournal(game) {
+  const j = journalFor(game);
+  j.pics.forEach(p => { if (p) { forgetImage(p.id); images.del(p.id).catch(() => {}); } });
+  delete journalStore()[norm(game)];
+  flushJournals();
+}
+
+// Only simple formatting is kept: anything else pasted, dropped or imported is reduced to its text.
+const RICH_OK = new Set(['B', 'STRONG', 'I', 'EM', 'U', 'UL', 'OL', 'LI', 'BR', 'DIV', 'P']);
+const RICH_DROP = /^(SCRIPT|STYLE|TEMPLATE|IFRAME|OBJECT|EMBED|SVG|MATH|IMG|PICTURE|VIDEO|AUDIO|CANVAS|NOSCRIPT|TITLE|META|LINK|INPUT|BUTTON|SELECT|TEXTAREA|FORM)$/;
+function sanitizeRich(html) {
+  const t = document.createElement('template');
+  t.innerHTML = String(html || '');
+  const walk = node => [...node.childNodes].forEach(n => {
+    if (n.nodeType === 3) return;
+    if (n.nodeType !== 1) return n.remove();
+    const tag = n.nodeName.toUpperCase();
+    if (RICH_DROP.test(tag)) return n.remove();
+    walk(n);
+    if (!RICH_OK.has(tag)) return n.replaceWith(...n.childNodes);
+    [...n.attributes].forEach(a => n.removeAttribute(a.name));
+  });
+  walk(t.content);
+  return t.innerHTML;
+}
+
+// Fill in journal pages that were just built: the text always, the pictures only when asked
+// (they're full-size images, so they load only once the journal is opened).
+function hydrateJournal(root, withPics) {
+  if (!root) return;
+  root.querySelectorAll('[data-jr-text]:not([data-ready])').forEach(el => {
+    el.dataset.ready = '1';
+    const j = journalFor(el.dataset.game);
+    el.querySelector('[data-jr-title]').value = j.title;
+    const ed = el.querySelector('[data-jr-editor]');
+    ed.innerHTML = sanitizeRich(j.html);
+    markEmpty(ed);
+    setJournalFont(el, j.font);
+  });
+  if (withPics) root.querySelectorAll('[data-jr-pics]:not([data-ready])').forEach(renderJournalPics);
+}
+// show the journals again from storage, e.g. after an import (pages that are open get their pictures too)
+function rehydrateJournals() {
+  document.querySelectorAll('[data-jr-text][data-ready]').forEach(el => el.removeAttribute('data-ready'));
+  document.querySelectorAll('[data-jr-pics][data-ready]').forEach(renderJournalPics);
+  books.forEach(b => hydrateJournal(b.slide, b.inJournal()));
+}
+function setJournalFont(el, font) {
+  el.dataset.font = font;
+  el.querySelectorAll('[data-jr-font]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.jrFont === font)));
+}
+const markEmpty = ed => ed.classList.toggle('is-empty', !ed.textContent.trim() && !ed.querySelector('li'));
+
+function renderJournalPics(el) {
+  el.dataset.ready = '1';
+  const j = journalFor(el.dataset.game);
+  const next = j.pics.findIndex(p => !p);
+  el.innerHTML = JR_SLOTS.map((sl, i) => {
+    const p = j.pics[i], pos = `left:${sl.x}%;top:${sl.y}%;--r:${sl.r}deg;z-index:${i + 1}`;
+    if (p) return `<figure class="jr-photo" style="${pos}">
+        <button type="button" class="jr-shot" data-jr-view="${i}" aria-label="Enlarge picture ${i + 1}"><img alt="" data-jr-img="${esc(p.id)}" data-v="${p.v}"></button>
+        <span class="tape" aria-hidden="true"></span>
+        <button type="button" class="jr-del" data-jr-del="${i}" aria-label="Remove picture ${i + 1}" title="Remove picture">${icon('x')}</button>
+      </figure>`;
+    if (i === next && imagesAvailable) return `<button type="button" class="jr-add" data-jr-add="${i}" style="${pos}">${icon('image-plus')}<b>Add a picture</b><span>Up to three</span></button>`;
+    return '';
+  }).join('') + (!imagesAvailable && next >= 0 ? '<p class="jr-nopics">Pictures can\'t be saved in this browser.</p>' : '');
+  el.querySelectorAll('img[data-jr-img]').forEach(img => fullURL(img.dataset.jrImg, img.dataset.v).then(u => {
+    if (!u) return img.closest('.jr-photo').classList.add('missing');
+    img.onload = () => img.classList.add('ready');
+    img.src = u;
+  }));
+}
+
+// Add a picture: the same picker and 3:4 crop as an outfit's image
+function addJournalPicture(game, slot) {
+  let o, editor;
+  const close = () => { o.close(); if (editor) editor.dispose(); };
+  o = overlay(`
+    <div class="sheet dlg jr-dlg" role="dialog" aria-modal="true" aria-labelledby="jrPicTitle">
+      <div class="sheet-head"><h2 id="jrPicTitle">${icon('image-plus')}Add a picture to the journal</h2><button type="button" class="icon-btn" data-close aria-label="Close">${icon('x')}</button></div>
+      <div class="sheet-body">
+        <div class="imgfield"><div class="imgwrap"></div><input type="file" accept="image/*" hidden></div>
+        <p class="formnote">Pictures can't be resized once they're on the page. To change one, remove it and add it again.</p>
+      </div>
+      <div class="sheet-foot"><button type="button" class="btn ink" data-close>Cancel</button><button type="button" class="btn solid" data-save>Add to journal</button></div>
+    </div>`, close);
+  editor = imageEditor(o.ov.querySelector('.imgfield'), null);
+  o.ov.querySelector('.imgfield input[type="file"]').click();   // straight to the file picker
+  o.ov.addEventListener('click', async e => {
+    if (e.target.closest('[data-close]')) return close();
+    const btn = e.target.closest('[data-save]');
+    if (!btn) return;
+    let res;
+    try { res = await editor.result(); } catch (err) { return toast('Could not prepare that image. Try another one.', true); }
+    if (!res.rec) return toast('Choose a picture first.', true);
+    btn.disabled = true;
+    try {
+      const id = 'jr_' + newId();
+      await images.put(id, res.rec);
+      keepStorage();
+      const j = journalFor(game);
+      if (j.pics[slot]) { forgetImage(j.pics[slot].id); images.del(j.pics[slot].id).catch(() => {}); }
+      j.pics[slot] = { id, v: Date.now() };
+      saveJournal(game, j, true);
+      close();
+      document.querySelectorAll('[data-jr-pics]').forEach(el => { if (norm(el.dataset.game) === norm(game)) renderJournalPics(el); });
+    } catch (err) { btn.disabled = false; toast('Could not save the picture. The browser may be out of storage space.', true); }
+  });
+}
+async function removeJournalPicture(game, slot) {
+  const ok = await dialog({
+    title: 'Remove this picture?',
+    body: '<p>It will be taken out of the journal. This can\'t be undone.</p>',
+    actions: [{ label: 'Keep it', value: false }, { label: 'Remove picture', value: true, cls: 'warn' }],
+  });
+  if (!ok) return;
+  const j = journalFor(game), p = j.pics[slot];
+  if (!p) return;
+  j.pics[slot] = null;
+  saveJournal(game, j, true);
+  forgetImage(p.id); images.del(p.id).catch(() => {});
+  document.querySelectorAll('[data-jr-pics]').forEach(el => { if (norm(el.dataset.game) === norm(game)) renderJournalPics(el); });
+}
+
+// typing, formatting and pictures (one set of listeners for every book)
+const jrGame = el => { const g = el.closest('[data-game]'); return g ? g.dataset.game : ''; };
+function saveJournalFrom(el) {
+  const box = el.closest('[data-jr-text]'), game = box.dataset.game, j = journalFor(game);
+  const ed = box.querySelector('[data-jr-editor]');
+  j.title = box.querySelector('[data-jr-title]').value;
+  j.html = ed.innerHTML;
+  markEmpty(ed);
+  saveJournal(game, j);
+}
+document.addEventListener('input', e => {
+  if (e.target.closest && e.target.closest('[data-jr-editor], [data-jr-title]')) saveJournalFrom(e.target);
+});
+document.addEventListener('beforeinput', e => {
+  const ed = e.target.closest && e.target.closest('[data-jr-editor]');
+  if (!ed || !/^insert/.test(e.inputType) || e.inputType === 'insertFromPaste') return;
+  const sel = getSelection();
+  if (ed.textContent.length >= JR_MAX_CHARS && (!sel || sel.isCollapsed)) { e.preventDefault(); toast('The journal is full: it holds up to 20,000 characters.', true); }
+});
+document.addEventListener('paste', e => {   // pasted text arrives plain, so formatting from websites doesn't come along
+  const ed = e.target.closest && e.target.closest('[data-jr-editor]');
+  if (!ed) return;
+  e.preventDefault();
+  const sel = getSelection(), chosen = sel ? String(sel).length : 0;
+  let text = (e.clipboardData && e.clipboardData.getData('text/plain')) || '';
+  const room = JR_MAX_CHARS - ed.textContent.length + chosen;
+  if (text.length > room) { text = text.slice(0, Math.max(0, room)); toast('The journal is full: it holds up to 20,000 characters.', true); }
+  if (text) document.execCommand('insertText', false, text);
+});
+document.addEventListener('drop', e => { if (e.target.closest && e.target.closest('[data-jr-editor]')) e.preventDefault(); });
+// toolbar buttons keep the text selection instead of taking focus
+document.addEventListener('mousedown', e => { if (e.target.closest && e.target.closest('.jr-tools button')) e.preventDefault(); });
+document.addEventListener('click', e => {
+  const t = e.target.closest && e.target.closest('[data-jr-font], [data-jr-cmd], [data-jr-add], [data-jr-view], [data-jr-del]');
+  if (!t) return;
+  e.stopPropagation();
+  const game = jrGame(t);
+  if (t.dataset.jrFont) {
+    const box = t.closest('[data-jr-text]'), j = journalFor(game);
+    j.font = t.dataset.jrFont;
+    setJournalFont(box, j.font);
+    saveJournal(game, j, true);
+  } else if (t.dataset.jrCmd) {
+    const ed = t.closest('[data-jr-text]').querySelector('[data-jr-editor]');
+    const sel = getSelection();
+    if (document.activeElement !== ed || !sel.rangeCount || !ed.contains(sel.anchorNode)) {
+      ed.focus();
+      const r = document.createRange(); r.selectNodeContents(ed); r.collapse(false);
+      sel.removeAllRanges(); sel.addRange(r);
+    }
+    document.execCommand(t.dataset.jrCmd, false, null);
+    saveJournalFrom(ed);
+    syncJournalTools();
+  } else if (t.dataset.jrAdd) addJournalPicture(game, +t.dataset.jrAdd);
+  else if (t.dataset.jrDel) removeJournalPicture(game, +t.dataset.jrDel);
+  else if (t.dataset.jrView) {
+    const j = journalFor(game), p = j.pics[+t.dataset.jrView];
+    if (p) viewImage({ id: p.id, name: j.title.trim() || 'Journal' });
+  }
+});
+// the B, I, U and list buttons light up for the text the cursor is in
+function syncJournalTools() {
+  const ed = document.activeElement && document.activeElement.closest && document.activeElement.closest('[data-jr-editor]');
+  if (!ed) return;
+  ed.closest('[data-jr-text]').querySelectorAll('[data-jr-cmd]').forEach(b => {
+    let on = false;
+    try { on = document.queryCommandState(b.dataset.jrCmd); } catch (e) {}
+    b.setAttribute('aria-pressed', String(on));
+  });
+}
+document.addEventListener('selectionchange', syncJournalTools);
+document.addEventListener('focusout', e => {
+  if (e.target.closest && e.target.closest('[data-jr-editor]')) {
+    flushJournals();
+    e.target.closest('[data-jr-text]').querySelectorAll('[data-jr-cmd]').forEach(b => b.setAttribute('aria-pressed', 'false'));
+  }
+});
+
+// Export and import
+async function journalsForExport() {
+  const out = {};
+  for (const [k, raw] of Object.entries(journalStore())) {
+    const j = journalFor(raw.game || k);
+    if (!journalHasContent(j)) continue;
+    const pics = [];
+    for (const p of j.pics) {
+      let d = null;
+      if (p) { try { const rec = await images.get(p.id); if (rec && rec.full) d = await blobToDataURL(rec.full); } catch (e) {} }
+      pics.push(d);
+    }
+    out[j.game] = { title: j.title, html: sanitizeRich(j.html), font: j.font, pics };
+  }
+  return out;
+}
+// Replace: imported journals take over. Add: an imported journal fills an empty one, or its text is added
+// below yours and its pictures fill any free spaces. Returns how many pictures didn't fit or failed.
+async function importJournals(data, replace) {
+  let lost = 0;
+  if (replace) {
+    Object.values(journalStore()).forEach(raw => journalFor(raw.game).pics.forEach(p => { if (p) { forgetImage(p.id); images.del(p.id).catch(() => {}); } }));
+    journals = {};
+  }
+  for (const [game, inc] of Object.entries(data || {})) {
+    if (!game.trim() || !inc || typeof inc !== 'object') continue;
+    const name = (BUILTIN.find(b => norm(b.name) === norm(game)) || {}).name || gameList().find(g => norm(g) === norm(game)) || game.trim();
+    const cur = journalFor(name);
+    const html = sanitizeRich(inc.html), title = typeof inc.title === 'string' ? inc.title.slice(0, 40) : 'Journal';
+    const next = journalHasContent(cur)
+      ? { ...cur, html: cur.html + (richToText(html).trim() ? `<p><br></p>${title.trim() && norm(title) !== norm(cur.title) ? `<p><b>${esc(title)}</b></p>` : ''}${html}` : '') }
+      : { ...cur, title, html, font: JR_FONTS[inc.font] ? inc.font : 'book' };
+    for (const d of (Array.isArray(inc.pics) ? inc.pics : []).slice(0, 3)) {
+      if (typeof d !== 'string' || !d.startsWith('data:image/')) continue;
+      const slot = next.pics.findIndex(p => !p);
+      if (slot < 0 || !imagesAvailable) { lost++; continue; }
+      try { const id = 'jr_' + newId(); await images.put(id, await recordFromDataURL(d)); next.pics[slot] = { id, v: Date.now() }; keepStorage(); }
+      catch (e) { lost++; }
+    }
+    saveJournal(name, next, true);
+    await ensureNewGame(name);   // a journal brings its book with it
+  }
+  flushJournals();
+  return lost;
+}
+
+/* =====================================================================
    Delete a game: removes its book and every outfit and image in it.
    Forging or importing an outfit for that game later starts the book again,
    with equipment suggestions back on
@@ -2507,6 +3017,7 @@ async function tagExistingOutfits() {
 function confirmDeleteGame(game) {
   const list = byGame(game), n = list.length, pics = list.filter(x => x.image).length;
   const builtin = BUILTIN.find(b => norm(b.name) === norm(game));
+  const jr = journalHasContent(journalFor(game));
   let o;
   const close = () => o.close();
   o = overlay(`
@@ -2514,10 +3025,10 @@ function confirmDeleteGame(game) {
       <div class="sheet-head"><h2 id="delGameTitle">${icon('trash-2')}Delete ${esc(game)}?</h2><button type="button" class="icon-btn" data-close aria-label="Close">${icon('x')}</button></div>
       <div class="sheet-body">
         <div class="warnbox" id="delGameWarn">
-          <p><b>This permanently deletes the ${esc(game)} book</b>${n ? ` and its ${n} ${n === 1 ? 'outfit' : 'outfits'}${pics ? `, with ${pics} ${pics === 1 ? 'image' : 'images'}` : ''}` : ', which has no outfits'}. It can't be undone.</p>
+          <p><b>This permanently deletes the ${esc(game)} book</b>${n ? ` and its ${n} ${n === 1 ? 'outfit' : 'outfits'}${pics ? `, with ${pics} ${pics === 1 ? 'image' : 'images'}` : ''}` : jr ? '' : ', which has no outfits'}${jr ? `${n ? ',' : ''} and its journal` : ''}. It can't be undone.</p>
           <p>Your other books aren't affected. To start this book again, forge an outfit and choose New game… then type ${builtin ? `<i>${esc(builtin.name)}</i>` : 'its name'}.${builtin ? ' It gets its own cover back, and equipment suggestions are on again.' : ''}</p>
         </div>
-        ${n ? `<p class="formnote">If you might want these outfits later, export a backup first. You can bring it back with Import.</p>
+        ${n || jr ? `<p class="formnote">If you might want these outfits later, export a backup first. You can bring it back with Import.</p>
         <button type="button" class="btn ink" data-backup>${icon('download')}Export a backup first</button>` : ''}
         <button type="button" class="btn big-danger" data-delete>${icon('trash-2')}Delete ${esc(game)}</button>
       </div>
@@ -2538,6 +3049,7 @@ async function deleteGame(game) {
   const k = norm(game), gone = store.outfits.filter(x => norm(x.game) === k);
   store.outfits = store.outfits.filter(x => norm(x.game) !== k);   // all at once, so the books are rebuilt only once
   gone.forEach(x => { if (x.image) { forgetImage(x.id); images.del(x.id).catch(() => {}); } });
+  dropJournal(game);
   // forget the suggestions switch, so they're on again if the game comes back
   const m = suggestMap(), slug = gameSlug(game);
   if (slug in m) { delete m[slug]; try { localStorage.setItem(SUGGEST_GAMES_KEY, JSON.stringify(m)); } catch (e) {} }
@@ -2565,7 +3077,7 @@ function confirmReset() {
       <div class="sheet-head"><h2 id="resetTitle">${icon('trash-2')}Reset the logbook?</h2><button type="button" class="icon-btn" data-close aria-label="Close">${icon('x')}</button></div>
       <div class="sheet-body">
         <div class="warnbox" id="resetWarn">
-          <p><b>This permanently deletes every outfit saved in this browser</b>: ${n} ${n === 1 ? 'outfit' : 'outfits'}${pics ? `, ${pics} ${pics === 1 ? 'image' : 'images'}` : ''}, and any books you've added.</p>
+          <p><b>This permanently deletes every outfit saved in this browser</b>: ${n} ${n === 1 ? 'outfit' : 'outfits'}${pics ? `, ${pics} ${pics === 1 ? 'image' : 'images'}` : ''}, every journal, and any books you've added.</p>
           <p>Settings such as equipment suggestions go back to their defaults. It can't be undone. The logbook then starts again with the three example outfits.</p>
         </div>
         <p class="formnote">If you might want these outfits later, export a backup first. You can bring it back with Import.</p>
@@ -2581,7 +3093,8 @@ function confirmReset() {
     if (!btn) return;
     btn.disabled = true;
     btn.lastChild.textContent = 'Resetting…';
-    try { [LS_OUTFITS, LS_META, SUGGEST_KEY, SUGGEST_GAMES_KEY, NOTES_SIZE_KEY, PAGE_ICONS_KEY].forEach(k => localStorage.removeItem(k)); } catch (err) {}
+    clearTimeout(jrTimer); journals = null;
+    try { [LS_JOURNALS, LS_OUTFITS, LS_META, SUGGEST_KEY, SUGGEST_GAMES_KEY, NOTES_SIZE_KEY, PAGE_ICONS_KEY].forEach(k => localStorage.removeItem(k)); } catch (err) {}
     try { await images.clear(); } catch (err) {}
     try { sessionStorage.setItem(RESET_NOTE_KEY, '1'); } catch (err) {}
     location.reload();   // start fresh, exactly like a first visit (minus the welcome popup)
