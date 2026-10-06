@@ -602,8 +602,6 @@ const journalTextBody = theme => `
       ${Object.entries(JR_FONTS).map(([k, l]) => `<button type="button" class="jr-btn jr-f-${k}" data-jr-font="${k}" aria-pressed="false" title="${l} font">${l}</button>`).join('')}
       <span class="jr-sep" aria-hidden="true"></span>
       <button type="button" class="jr-btn" data-jr-cmd="bold" aria-pressed="false" title="Bold" aria-label="Bold"><b>B</b></button>
-      <button type="button" class="jr-btn" data-jr-cmd="italic" aria-pressed="false" title="Italic" aria-label="Italic"><i>I</i></button>
-      <button type="button" class="jr-btn" data-jr-cmd="underline" aria-pressed="false" title="Underline" aria-label="Underline"><u>U</u></button>
       <button type="button" class="jr-btn" data-jr-cmd="insertUnorderedList" aria-pressed="false" title="Bulleted list" aria-label="Bulleted list">${icon('list')}</button>
     </div>
     <input class="jr-title" data-jr-title maxlength="40" placeholder="Journal" aria-label="Journal title" autocomplete="off" spellcheck="false">
@@ -2845,7 +2843,7 @@ function dropJournal(game) {
 }
 
 // Only simple formatting is kept: anything else pasted, dropped or imported is reduced to its text.
-const RICH_OK = new Set(['B', 'STRONG', 'I', 'EM', 'U', 'UL', 'OL', 'LI', 'BR', 'DIV', 'P']);
+const RICH_OK = new Set(['B', 'STRONG', 'UL', 'OL', 'LI', 'BR', 'DIV', 'P']);   // bold and lists only
 const RICH_DROP = /^(SCRIPT|STYLE|TEMPLATE|IFRAME|OBJECT|EMBED|SVG|MATH|IMG|PICTURE|VIDEO|AUDIO|CANVAS|NOSCRIPT|TITLE|META|LINK|INPUT|BUTTON|SELECT|TEXTAREA|FORM)$/;
 function sanitizeRich(html) {
   const t = document.createElement('template');
@@ -2856,6 +2854,9 @@ function sanitizeRich(html) {
     const tag = n.nodeName.toUpperCase();
     if (RICH_DROP.test(tag)) return n.remove();
     walk(n);
+    // bold saved as a style (some browsers, or the phone's own text menu, do this) is kept as bold
+    const fw = n.style && n.style.fontWeight;
+    if (!RICH_OK.has(tag) && fw && (fw === 'bold' || fw === 'bolder' || +fw >= 600)) { const bEl = document.createElement('b'); bEl.append(...n.childNodes); return n.replaceWith(bEl); }
     if (!RICH_OK.has(tag)) return n.replaceWith(...n.childNodes);
     [...n.attributes].forEach(a => n.removeAttribute(a.name));
   });
@@ -2976,6 +2977,13 @@ document.addEventListener('input', e => {
   if (e.target.closest && e.target.closest('[data-jr-editor], [data-jr-title]')) saveJournalFrom(e.target);
 });
 document.addEventListener('beforeinput', e => {
+  // italic and underline aren't offered (Ctrl+I, Ctrl+U and the phone's text menu included)
+  if (/^format(Italic|Underline)$/.test(e.inputType) && e.target.closest && e.target.closest('[data-jr-editor]')) return e.preventDefault();
+}, true);
+document.addEventListener('keydown', e => {
+  if ((e.ctrlKey || e.metaKey) && /^[iu]$/i.test(e.key) && e.target.closest && e.target.closest('[data-jr-editor]')) e.preventDefault();
+});
+document.addEventListener('beforeinput', e => {
   const ed = e.target.closest && e.target.closest('[data-jr-editor]');
   if (!ed || !/^insert/.test(e.inputType) || e.inputType === 'insertFromPaste') return;
   const sel = getSelection();
@@ -3008,8 +3016,11 @@ document.addEventListener('click', e => {
     const ed = t.closest('[data-jr-text]').querySelector('[data-jr-editor]');
     const sel = getSelection();
     if (document.activeElement !== ed || !sel.rangeCount || !ed.contains(sel.anchorNode)) {
-      ed.focus();
-      const r = document.createRange(); r.selectNodeContents(ed); r.collapse(false);
+      // the tap took the selection away (phones do this): put back the last one in this journal,
+      // or if there isn't one, the end of the text
+      ed.focus({ preventScroll: true });
+      let r = jrLastRange && jrLastRange.ed === ed && ed.contains(jrLastRange.range.startContainer) ? jrLastRange.range : null;
+      if (!r) { r = document.createRange(); r.selectNodeContents(ed); r.collapse(false); }
       sel.removeAllRanges(); sel.addRange(r);
     }
     document.execCommand(t.dataset.jrCmd, false, null);
@@ -3022,8 +3033,15 @@ document.addEventListener('click', e => {
     if (p) viewImage({ id: p.id, name: j.title.trim() || 'Journal' });
   }
 });
-// the B, I, U and list buttons light up for the text the cursor is in
+// the B and list buttons light up for the text the cursor is in; the selection is remembered for the B button
+let jrLastRange = null;
 function syncJournalTools() {
+  const sel = getSelection();
+  if (sel && sel.rangeCount) {
+    const r = sel.getRangeAt(0), host = r.startContainer.nodeType === 1 ? r.startContainer : r.startContainer.parentElement;
+    const inEd = host && host.closest && host.closest('[data-jr-editor]');
+    if (inEd && inEd.contains(r.endContainer)) jrLastRange = { ed: inEd, range: r.cloneRange() };
+  }
   const ed = document.activeElement && document.activeElement.closest && document.activeElement.closest('[data-jr-editor]');
   if (!ed) return;
   ed.closest('[data-jr-text]').querySelectorAll('[data-jr-cmd]').forEach(b => {
