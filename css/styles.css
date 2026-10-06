@@ -392,6 +392,111 @@
   .addpage .a2 { font-style: italic; color: var(--ink-soft); font-size: .92em; }
   .blank { margin: auto; width: 40%; opacity: .35; }
 
+  /* ---------------- journal: the bookmark and the spread at the back of each book ---------------- */
+  /* it lies across the bottom edge of the cover or page, with just its notched tip below the book,
+     so it needs no extra room; it fades out while pages turn so a turning page never passes through it */
+  .bookmark {
+    position: absolute; bottom: -.45em; left: 22%; z-index: 3000;
+    width: max(54px, 4.3em); height: max(32px, 2.6em); margin-left: min(-27px, -2.15em);   /* never too small to read */
+    padding: 0; border: 0; background: none;
+    cursor: pointer; pointer-events: auto;
+    filter: drop-shadow(0 .1em .14em rgba(0, 0, 0, .45));
+    transition: transform .2s ease, opacity .25s ease;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .bookmark.away { opacity: 0; pointer-events: none; }
+  .bookmark:hover { transform: translateY(.12em); }
+  .bookmark:focus-visible { outline: none; }
+  .bookmark:focus-visible .rib-text { outline: 2px solid var(--gilt); outline-offset: .25em; }
+  .bookmark .rib {
+    position: absolute; inset: 0;
+    display: flex; align-items: flex-end; justify-content: center;
+    padding-bottom: max(10px, .78em);
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 74%, 0 100%);
+    background:
+      linear-gradient(90deg, rgba(214, 180, 104, .85) 0 .13em, transparent .13em calc(100% - .13em), rgba(214, 180, 104, .85) calc(100% - .13em)),
+      repeating-linear-gradient(90deg, rgba(255, 255, 255, .06) 0 .07em, rgba(0, 0, 0, .07) .07em .14em),
+      linear-gradient(90deg, rgba(0, 0, 0, .3), rgba(255, 255, 255, .12) 45%, rgba(0, 0, 0, .28)),
+      var(--ribbon);
+  }
+  .bookmark .rib-text { font: 700 max(9px, .66em)/1 var(--display); letter-spacing: .04em; color: #ecdca8; text-shadow: 0 1px 1px rgba(0, 0, 0, .55); white-space: nowrap; }
+
+  .pg > svg.pencil { width: 100%; height: 100%; }
+  .jr { flex: 1; min-height: 0; display: flex; flex-direction: column; gap: .4em; }
+  .jr-tools { display: flex; align-items: center; gap: .22em; flex-wrap: nowrap; padding-bottom: .45em; border-bottom: 1px solid rgba(59, 42, 30, .18); }
+  .jr-sep { flex: 1 1 .4em; min-width: .3em; }
+  .jr-btn {
+    flex: none; height: 2em; min-width: 2em; padding: 0 .42em;
+    display: inline-grid; place-items: center;
+    border: 1px solid rgba(59, 42, 30, .25); border-radius: .4em;
+    background: rgba(255, 255, 255, .28); color: var(--ink);
+    font: 600 .92em/1 var(--serif); cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .jr-btn:hover { background: rgba(255, 255, 255, .5); }
+  .jr-btn[aria-pressed="true"] { background: var(--accent, #7c2c30); border-color: var(--accent, #7c2c30); color: #fff4ea; }
+  .jr-btn:focus-visible { outline: 2px solid var(--accent, #7c2c30); outline-offset: 1px; }
+  .jr-btn b, .jr-btn i, .jr-btn u { font-size: 1.15em; }
+  .jr-btn .ic { width: 1.25em; height: 1.25em; }
+  .jr-f-sans { font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; font-weight: 500; font-size: .84em; }
+  .jr-f-hand { font-family: 'Caveat', 'Segoe Print', 'Bradley Hand', cursive; font-size: 1.1em; }
+  /* text inputs stay at 16px or more so iPhones don't zoom in when you start typing */
+  .jr-title {
+    width: 100%; padding: .1em 0 .2em; margin: 0;
+    border: 0; border-bottom: 1px dashed transparent; border-radius: 0;
+    background: transparent; color: var(--ink);
+    font: 600 max(16px, 1.3em)/1.25 var(--display); letter-spacing: .03em; text-align: center;
+    outline: none;
+  }
+  .jr-title:hover, .jr-title:focus { border-bottom-color: rgba(59, 42, 30, .35); }
+  .jr-title::placeholder { color: rgba(59, 42, 30, .4); }
+  .jr-text {
+    position: relative; flex: 1; min-height: 0;
+    overflow-y: auto; overscroll-behavior: contain; touch-action: pan-y;
+    -webkit-user-select: text; user-select: text;
+    padding: .15em .2em .4em .1em;
+    outline: none; cursor: text;
+    font: 500 max(16px, 1.08em)/1.5 var(--serif);
+    overflow-wrap: anywhere;
+    scrollbar-width: thin; scrollbar-color: rgba(59, 42, 30, .3) transparent;
+  }
+  .jr[data-font="sans"] .jr-text { font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; font-weight: 400; font-size: max(16px, .98em); }
+  .jr[data-font="hand"] .jr-text { font-family: 'Caveat', 'Segoe Print', 'Bradley Hand', cursive; font-weight: 500; font-size: max(19px, 1.32em); line-height: 1.32; }
+  .jr-text.is-empty::before { content: attr(data-placeholder); position: absolute; color: rgba(59, 42, 30, .42); font-style: italic; pointer-events: none; }
+  .jr-text p, .jr-text div { margin: 0; }
+  .jr-text ul, .jr-text ol { margin: .15em 0; padding-left: 1.3em; }
+
+  .jr-pics { flex: 1; min-height: 0; position: relative; }
+  .jr-photo, .jr-add { position: absolute; width: 44%; transform: rotate(var(--r)); }
+  .jr-photo { margin: 0; padding: .45em .45em 1.6em; background: #fbf6ea; box-shadow: 0 .18em .45em rgba(40, 25, 10, .35), 0 0 0 1px rgba(59, 42, 30, .1); }
+  .jr-shot { display: block; width: 100%; aspect-ratio: 3 / 4; padding: 0; border: 0; background: #d8c9ab; cursor: zoom-in; overflow: hidden; }
+  .jr-shot img { display: block; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity .3s ease; }
+  .jr-shot img.ready { opacity: 1; }
+  .jr-photo.missing .jr-shot { background: repeating-linear-gradient(45deg, #d8c9ab 0 .4em, #cdbd9c .4em .8em); }
+  .jr-photo .tape { position: absolute; left: 50%; top: -.55em; width: 3.2em; height: 1.05em; margin-left: -1.6em; transform: rotate(-3deg); background: rgba(236, 224, 186, .78); box-shadow: 0 0 0 1px rgba(150, 128, 88, .14); pointer-events: none; }
+  .jr-del {
+    position: absolute; top: -.7em; right: -.7em;
+    width: 2em; height: 2em; padding: 0; border-radius: 50%;
+    display: grid; place-items: center;
+    border: 1px solid rgba(59, 42, 30, .3); background: #fbf6ea; color: #8e2a2a;
+    box-shadow: 0 .1em .3em rgba(40, 25, 10, .3); cursor: pointer;
+  }
+  .jr-del:hover { background: #fff; color: #b02a2a; }
+  .jr-del .ic { width: 1.1em; height: 1.1em; }
+  .jr-add {
+    aspect-ratio: 3 / 4.45; padding: .5em;
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .3em;
+    border: .12em dashed rgba(59, 42, 30, .38); border-radius: .3em;
+    background: rgba(255, 255, 255, .18); color: var(--ink-soft);
+    font: italic 500 .95em/1.2 var(--serif); text-align: center; cursor: pointer;
+  }
+  .jr-add:hover { background: rgba(255, 255, 255, .4); border-color: var(--accent, #7c2c30); color: var(--ink); }
+  .jr-add:focus-visible, .jr-shot:focus-visible, .jr-del:focus-visible { outline: 2px solid var(--accent, #7c2c30); outline-offset: 2px; }
+  .jr-add .ic { width: 1.8em; height: 1.8em; color: var(--accent, #7c2c30); }
+  .jr-add b { font-style: normal; font-weight: 600; color: var(--ink); }
+  .jr-add span { font-size: .85em; }
+  .jr-nopics { position: absolute; left: 0; right: 0; bottom: 2%; margin: 0; text-align: center; font-style: italic; font-size: .85em; color: var(--ink-soft); }
+
   /* ---------------- tome controls ---------------- */
   .tnav {
     position: absolute; left: 0; right: 0; bottom: 10px;
