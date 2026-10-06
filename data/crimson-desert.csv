@@ -545,7 +545,7 @@ weapons,Aeserion Longsword,Longsword
 weapons,Aeserion Mace,Mace
 weapons,Aeserion Spear,Spear
 weapons,Aeserion Sword,Sword
-weapons,Aeserion Warhammer,Whip
+weapons,Aeserion Warhammer,Greathammer
 weapons,Air Blaster,Gauntlet
 weapons,Alabaster Curved Sword,Sword
 weapons,Alabaster Dagger,Dagger
@@ -561,14 +561,14 @@ weapons,Ancient Wood Pole,Spear
 weapons,Animal Spirit,Shield
 weapons,Anti-Caliburn Signboard,Banner pike
 weapons,Antumbra Sign,Banner pike
-weapons,Antumbra's Eye,Whip
+weapons,Antumbra's Eye,Greathammer
 weapons,Arben Greatsword,Greatsword
-weapons,Arlem Warhammer,Whip
+weapons,Arlem Warhammer,Greathammer
 weapons,Arlen Musket,Musket
-weapons,Arlen Warhammer,Whip
+weapons,Arlen Warhammer,Greathammer
 weapons,Artisan's Hand,Mace
 weapons,Artisan's Ornamented Shield,Shield
-weapons,Ashen Execution,Whip
+weapons,Ashen Execution,Greathammer
 weapons,Ator's Finger,Dagger
 weapons,Awakened Spirit,Halberd
 weapons,Balgran Shield,Shield
@@ -592,7 +592,7 @@ weapons,Bekker Hammer,Mace
 weapons,Bekker Large Shield,Shield
 weapons,Bekker Musket,Musket
 weapons,Bekker Shield,Shield
-weapons,Bekker Warhammer,Whip
+weapons,Bekker Warhammer,Greathammer
 weapons,Bismuth Cannon,Hand cannon
 weapons,Black Bears Banner Pike with Tassel,Banner pike
 weapons,Black Iron Axe,Axe
@@ -608,15 +608,15 @@ weapons,Bonepit Greataxe,Two-handed axe
 weapons,Bonepit Greathammer,Greathammer
 weapons,Bonepit Halberd,Halberd
 weapons,Bonepit Mace,Mace
-weapons,Bonepit Warhammer,Whip
+weapons,Bonepit Warhammer,Greathammer
 weapons,Bow of the Fleeting,Bow
 weapons,Brass Rose Rapier,Rapier
 weapons,Bringer of Balance,Longsword
-weapons,Cactus Warhammer,Whip
+weapons,Cactus Warhammer,Greathammer
 weapons,Caliburn's Mercy Pistol,Pistol
 weapons,Calphadean Contribution Banner Pike,Banner pike
 weapons,Celeste Halberd,Halberd
-weapons,Ceremonial Warhammer,Whip
+weapons,Ceremonial Warhammer,Greathammer
 weapons,Chillfallen Sword,Sword
 weapons,Circling Moon,Spear
 weapons,City Guard's Shield,Shield
@@ -630,14 +630,14 @@ weapons,Copper Knuckledrill,Gauntlet
 weapons,Crimson Warden's Bow,Bow
 weapons,Crow Brothers Axe,Axe
 weapons,Crow Brothers Dagger,Dagger
-weapons,Crow Brothers Warhammer,Whip
-weapons,Crow Whisperer,Whip
+weapons,Crow Brothers Warhammer,Greathammer
+weapons,Crow Whisperer,Greathammer
 weapons,Crude Club,Mace
 weapons,Dagger of Dark Pursuit,Dagger
 weapons,Damaged Medium Calphadean Banner Pike,Banner pike
 weapons,Dandelion Longsword,Longsword
 weapons,Dane Shotgun,Shotgun
-weapons,Dark Worshiper's Staff,Whip
+weapons,Dark Worshiper's Staff,Greathammer
 weapons,Darkbringer,Longsword
 weapons,Dekarr Bow,Bow
 weapons,Dekarr Dagger,Dagger
@@ -719,14 +719,14 @@ weapons,Golden Sword,Sword
 weapons,Golden Vanguard,Halberd
 weapons,Golden-Knotted Ancestral Bow,Bow
 weapons,Gorthak Greataxe,Two-handed axe
-weapons,Gorthak Warhammer,Whip
+weapons,Gorthak Warhammer,Greathammer
 weapons,Grace Rapier,Rapier
 weapons,Grasping Moon,Spear
 weapons,Greathammer of Fire,Greathammer
 weapons,Grey Wolf Bow,Bow
 weapons,Grey Wolf Wooden Shield,Shield
 weapons,Grey Wolf's Sword,Sword
-weapons,Guidance of Dark Pursuit,Whip
+weapons,Guidance of Dark Pursuit,Greathammer
 weapons,Gustav Musket,Musket
 weapons,Harkan's Spear,Spear
 weapons,Hellhounds Chopping Axe,Two-handed axe
@@ -747,7 +747,7 @@ weapons,Iris Halberd,Halberd
 weapons,Iris Longsword,Longsword
 weapons,Iris Mace,Mace
 weapons,Iris Shield,Shield
-weapons,Iris Warhammer,Whip
+weapons,Iris Warhammer,Greathammer
 weapons,Iron Fists Gauntlet,Gauntlet
 weapons,Jemel Pistol,Pistol
 weapons,Kadel Mace,Mace
@@ -843,7 +843,7 @@ weapons,Noble Man's Bow,Bow
 weapons,North Wind Shield,Shield
 weapons,North Wind Trident,Spear
 weapons,Oath Ring Shield,Shield
-weapons,Oblivion of the Past,Whip
+weapons,Oblivion of the Past,Greathammer
 weapons,Octarr's Legacy,Mace
 weapons,Odeck Hardwood Shield,Shield
 weapons,Odeck Wooden Club Mace,Mace
@@ -878,7 +878,7 @@ weapons,Rhonid Large Shield,Shield
 weapons,Righteous Verdict,Longsword
 weapons,Ring of the Earth,Axe
 weapons,Rising Arrow Shield,Shield
-weapons,Roar of the Black Bear,Whip
+weapons,Roar of the Black Bear,Greathammer
 weapons,Rogue's Mace,Mace
 weapons,Rosemond Pistol,Pistol
 weapons,Royal Guard Shield,Shield
@@ -889,8 +889,8 @@ weapons,Sacred Bamboo Stalk,Sword
 weapons,Sacred Tree Branch,Sword
 weapons,Saint's Blessing,Shield
 weapons,Saltroad Mace,Mace
-weapons,Saltroad Warhammer,Whip
-weapons,Sanguine Knell,Whip
+weapons,Saltroad Warhammer,Greathammer
+weapons,Sanguine Knell,Greathammer
 weapons,Sapling Branch,Sword
 weapons,Savage Longsword,Longsword
 weapons,Savage Sawblade,Sword
@@ -899,8 +899,8 @@ weapons,Serdin Greatsword,Greatsword
 weapons,Shackle of Might,Sword
 weapons,Shadow of the Past Pistol,Pistol
 weapons,Shadowleaf Bow,Bow
-weapons,Shadowleaf Soul Branch,Whip
-weapons,Shaman's Staff,Whip
+weapons,Shadowleaf Soul Branch,Greathammer
+weapons,Shaman's Staff,Greathammer
 weapons,Shell of the Fleeting,Shield
 weapons,Shield of a Blossoming Spring Day,Shield
 weapons,Shield of Betrayal,Shield
@@ -1004,12 +1004,12 @@ weapons,Tardik Bow,Bow
 weapons,Tardik Greataxe,Two-handed axe
 weapons,Tardik Longsword,Longsword
 weapons,Tardik Shield,Shield
-weapons,Tardik Warhammer,Whip
+weapons,Tardik Warhammer,Greathammer
 weapons,Tauria Curved Sword,Sword
 weapons,Thalwynd Hammer,Mace
 weapons,Thalwynd Large Shield,Shield
 weapons,Thalwynd Longsword,Longsword
-weapons,Thalwynd Warhammer,Whip
+weapons,Thalwynd Warhammer,Greathammer
 weapons,The Blinding Arrows Medium Banner Pike,Banner pike
 weapons,The Blinding Arrows Small Banner Pike,Banner pike
 weapons,The Grove's Thorn,Mace
@@ -1052,4 +1052,4 @@ weapons,Wolf's Fang,Sword
 weapons,World Bamboo Stalk,Sword
 weapons,World Tree Branch,Sword
 weapons,Wyvern Blaster,Gauntlet
-weapons,Zargan Warhammer,Whip
+weapons,Zargan Warhammer,Greathammer
