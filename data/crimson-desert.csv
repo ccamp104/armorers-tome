@@ -217,7 +217,6 @@ chest,Matana Leather Armor,Leather
 chest,Mistcloaked Owl Leather Armor,Leather
 chest,Mortain Chain Mail,Chain
 chest,Musket Border Guard Standard Armor,
-chest,Naira's Basic Attire,
 chest,Nibrak Cloth Armor,Cloth
 chest,Northern Fighter's Chain Mail,Chain
 chest,Oak Barrel Leather Armor,Leather
@@ -328,7 +327,6 @@ cloak,Leather Cloak of Earth's Honor,Leather
 cloak,Leather Cloak of the Fallen Kingdom,Leather
 cloak,Light of the Battlefield Cloth Cloak,Cloth
 cloak,Lizard Leather Cloak,Leather
-cloak,Naira's Cloak,
 cloak,Northern Fighter's Chain Cloak,Chain
 cloak,Odeck's Protector Plate Cloak,Plate
 cloak,Official Knight's Cloth Cloak,Cloth
@@ -417,7 +415,6 @@ gloves,Lightning Bolt Plate Gloves,Plate
 gloves,Martial Monk's Cloth Gloves,Cloth
 gloves,Master Trainer's Touch,
 gloves,Melvin Leather Gloves,Leather
-gloves,Naira's Gloves,
 gloves,Northern Fighter's Leather Gloves,Leather
 gloves,Odeck's Protector Plate Gloves,Plate
 gloves,Official Knight's Leather Gloves,Leather
@@ -495,7 +492,6 @@ boots,Low-Heeled Leather Boots,Leather
 boots,Martial Monk's Cloth Boots,Cloth
 boots,Meadows Leather Boots,Leather
 boots,Nagmore Leather Boots,Leather
-boots,Naira's Boots,
 boots,Northern Fighter's Leather Boots,Leather
 boots,Odeck's Protector Plate Boots,Plate
 boots,Official Knight's Leather Boots,Leather
@@ -693,6 +689,7 @@ weapons,Fan-Blade Greataxe,Two-handed axe
 weapons,Fated Shadow,Sword
 weapons,Finest Rhinard Cannon,Hand cannon
 weapons,Flame Knights Shield,Shield
+weapons,Flame Spear,Spear
 weapons,Freesword Halberd,Halberd
 weapons,Freesword's Shield,Shield
 weapons,Frostbone Shield,Shield
