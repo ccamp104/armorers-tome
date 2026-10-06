@@ -941,7 +941,7 @@ function createBook(theme, onChange) {
 /* =====================================================================
    App state
    ===================================================================== */
-const state = { view: 'tome', search: '', game: 'all', tag: 'all', ready: false };
+const state = { view: 'tome', search: '', game: 'all', tag: 'all', ready: false, codexGame: null, codexSlot: 'all' };
 const $ = id => document.getElementById(id);
 
 function gameList() {
@@ -1006,6 +1006,8 @@ const narrowing = () => !!norm(state.search) || state.tag !== 'all';
    Filters
    ===================================================================== */
 function renderFilters() {
+  if (state.view === 'codex') return renderCodexFilters();
+  $('search').placeholder = 'Search outfits, gear, notes or characters';
   const games = gameList();
   const sel = $('gameFilter');
   if (state.game !== 'all' && !games.some(g => norm(g) === norm(state.game))) state.game = 'all';
@@ -1056,11 +1058,14 @@ $('search').addEventListener('input', e => {
 });
 $('clearSearch').addEventListener('click', () => { clearTimeout(searchTimer); state.search = ''; $('search').value = ''; refresh(); $('search').focus(); });
 $('gameFilter').addEventListener('change', e => {
+  if (state.view === 'codex') { state.codexGame = e.target.value; state.codexSlot = 'all'; codexToTop = true; return refresh(); }
   state.game = e.target.value;
   refresh();
   if (state.view === 'tome' && state.game !== 'all') showBook(state.game);
 });
 $('tags').addEventListener('click', e => {
+  const cs = e.target.closest('[data-cslot]');
+  if (cs) { state.codexSlot = cs.dataset.cslot; codexToTop = true; return refresh(); }
   const b = e.target.closest('[data-tag]');
   if (!b) return;
   state.tag = b.dataset.tag;
@@ -1400,9 +1405,11 @@ function refresh() {
   renderFilters();
   let shown;
   if (state.view === 'tome') shown = syncBooks();
+  else if (state.view === 'codex') shown = renderCodex();
   else shown = renderGallery();
   $('tome').hidden = state.view !== 'tome';
   $('gallery').hidden = state.view !== 'grid' || shown === 0;
+  $('codex').hidden = state.view !== 'codex';
   showEmpty(shown === 0);
   if (state.view === 'tome' && shown) requestAnimationFrame(() => { if (!sized) sizeTome(); books.forEach(b => b.fitNotes()); });
   if (pendingShow) {
@@ -1441,6 +1448,12 @@ $('emptyActions').addEventListener('click', e => {
 });
 
 document.querySelectorAll('.seg [data-view]').forEach(b => b.addEventListener('click', () => {
+  // the Item Codex opens on the game you were looking at, when that game has an equipment list
+  if (b.dataset.view === 'codex' && state.view !== 'codex') {
+    const from = state.view === 'tome' && active() ? active().theme.name : state.game !== 'all' ? state.game : null;
+    if (from) state.codexGame = from;
+    codexToTop = true;
+  }
   state.view = b.dataset.view;
   document.querySelectorAll('.seg [data-view]').forEach(x => x.setAttribute('aria-pressed', String(x === b)));
   refresh();
@@ -1911,7 +1924,7 @@ function parseEquipmentJSON(text, slug) {
   Object.entries(d.slots || {}).forEach(([list, rows]) => (rows || []).forEach(r =>
     Array.isArray(r) ? addEquipment(slots, list, r[0], r[1], r[2]) : r && addEquipment(slots, list, r.name, r.type, r.icon)));
   const ic = d.icons || {};
-  return { game: d.game || '', slots, icons: { enabled: ic.enabled === true, folder: iconFolder(ic.folder, slug) } };
+  return { game: d.game || '', source: String(d.source || ''), compiled: String(d.compiled || ''), slots, icons: { enabled: ic.enabled === true, folder: iconFolder(ic.folder, slug) } };
 }
 const iconFolder = (f, slug) => { f = String(f || `icons/${slug}/`).replace(/^\/+/, ''); return f.endsWith('/') ? f : f + '/'; };
 // a simple CSV reader: a header row with slot, name and (optionally) type, then one item per row
@@ -2153,7 +2166,8 @@ function tagInput(root, initial) {
    ===================================================================== */
 function openForm(existing = null, presetGame = null) {
   const games = gameList();
-  const current = existing ? existing.game : presetGame || (state.view === 'tome' && active() ? active().theme.name : state.game !== 'all' ? state.game : games[0]);
+  const current = existing ? existing.game : presetGame || (state.view === 'tome' && active() ? active().theme.name
+    : state.view === 'codex' && state.codexGame ? state.codexGame : state.game !== 'all' ? state.game : games[0]);
   const slotField = s => `
     <label class="field"><span>${icon(s.icon)}${s.label}</span>
       <input name="slot_${s.key}" value="${esc(existing ? existing.slots[s.key] : '')}" placeholder="${esc(s.hint)}" maxlength="120"></label>`;
@@ -2428,6 +2442,7 @@ function showWelcome(fromHelp) {
       tip('maximize-2', '<b>Enlarge a page</b> to see it, and its icons, filling the window: use the arrows button in a book page\'s bottom corner, or tap any card in Grid Gallery.'),
       tip('feather', '<b>The journal</b> at the back of each book holds your own notes and up to three pictures. Open it with the <b>Journal</b> bookmark under the book, and the same bookmark (now <b>Outfits</b>) takes you back. It saves as you type.'),
       tip('layout-grid', '<b>Grid Gallery</b> shows every outfit at once.'),
+      tip('scroll', '<b>Item Codex</b> lists every item in a game\'s equipment list, sorted by slot, with weapons grouped by type. Choose the game in the Game menu, and search by name or by type, such as Plate or Sword. Items you\'ve used show how many outfits they\'re in.'),
       tip('search', '<b>Search, game and tag filters</b> work in both views. On phones they open from the magnifying glass, which shows a dot while a filter is on.'),
     ]),
     sec('save', 'Saving and backups', [
@@ -2574,6 +2589,124 @@ async function tagExistingOutfits() {
     toast(`Added armour tags to ${n} ${n === 1 ? 'outfit' : 'outfits'}`);
   } catch (e) { toast('Some tags could not be saved. Try again in a moment.', true); }
 }
+
+/* =====================================================================
+   Item Codex: every item in a game's equipment list, by slot, with the
+   weapons grouped by type. It reuses the search box and the Game menu;
+   the slot chips take the place of the character tags.
+   ===================================================================== */
+const CODEX_SLOTS = [
+  { key: 'headgear', label: 'Headgear', icon: 'crown' }, { key: 'chest', label: 'Chest', icon: 'shirt' },
+  { key: 'cloak', label: 'Cloak', icon: 'feather' }, { key: 'gloves', label: 'Gloves', icon: 'hand' },
+  { key: 'legs', label: 'Legs', icon: 'shield' }, { key: 'boots', label: 'Boots', icon: 'footprints' },
+  { key: 'weapons', label: 'Weapons and accessories', chip: 'Weapons', icon: 'sword' },
+];
+let codexListed = null, codexDB = null, codexSeq = 0, codexToTop = false;
+const codexGames = async () => { const g = gameList(); const has = await Promise.all(g.map(hasEquipmentList)); return g.filter((x, i) => has[i]); };
+function renderCodexFilters() {
+  $('search').placeholder = 'Search items, types or slots';
+  const sel = $('gameFilter'), listed = codexListed || [];
+  sel.innerHTML = listed.length
+    ? listed.map(g => `<option value="${esc(g)}"${norm(g) === norm(state.codexGame) ? ' selected' : ''}>${esc(g)}</option>`).join('')
+    : `<option value="">${codexListed ? 'No equipment lists' : 'Loading…'}</option>`;
+  const db = codexDB && norm(codexDB.forGame) === norm(state.codexGame) ? codexDB : null;
+  const slots = db ? CODEX_SLOTS.filter(s => (db.slots[s.key] || []).length) : [];
+  if (state.codexSlot !== 'all' && !slots.some(s => s.key === state.codexSlot)) state.codexSlot = 'all';
+  const total = slots.reduce((n, s) => n + db.slots[s.key].length, 0);
+  $('tags').innerHTML = slots.length ? `<span class="tags-label">Slot</span>` +
+    [{ key: 'all', chip: 'All', n: total }, ...slots.map(s => ({ ...s, n: db.slots[s.key].length }))].map(s =>
+      `<button type="button" class="chip-btn" data-cslot="${s.key}" aria-pressed="${s.key === state.codexSlot}">${esc(s.chip || s.label)}<span class="chip-n">${s.n.toLocaleString()}</span></button>`).join('') : '';
+  $('clearSearch').hidden = !state.search;
+  $('filterBtn').querySelector('.badge').hidden = !(norm(state.search) || state.codexSlot !== 'all');
+}
+function renderCodex() {
+  const seq = ++codexSeq, box = $('cdx');
+  (async () => {
+    const listed = await codexGames();
+    if (seq !== codexSeq || state.view !== 'codex') return;
+    codexListed = listed;
+    if (!listed.length) {
+      renderCodexFilters();
+      box.innerHTML = `<div class="cx-msg">${icon('scroll')}<p>${location.protocol === 'file:'
+        ? 'Equipment lists need the site to be opened from a web address, such as GitHub Pages.'
+        : 'None of your games has an equipment list yet, so there is nothing to show here.'}</p></div>`;
+      return;
+    }
+    const pick = listed.find(g => norm(g) === norm(state.codexGame)) || listed[0];
+    state.codexGame = pick;
+    if (!codexDB || norm(codexDB.forGame) !== norm(pick)) {
+      renderCodexFilters();
+      if (!box.querySelector('.cx-sec')) box.innerHTML = `<div class="cx-msg"><p>Opening the ${esc(pick)} equipment list…</p></div>`;
+      const db = await loadEquipment(pick);
+      if (seq !== codexSeq || state.view !== 'codex') return;
+      codexDB = db ? { ...db, forGame: pick } : null;
+    }
+    renderCodexFilters();
+    drawCodex(box);
+  })();
+  return 1;
+}
+// which items your outfits use: list|name -> number of outfits
+function codexUsage(game) {
+  const used = new Map(), add = (key, v, id, seen) => {
+    const k = key + '|' + norm(v);
+    if (!norm(v) || seen.has(k)) return;
+    seen.add(k); used.set(k, (used.get(k) || 0) + 1);
+  };
+  byGame(game).forEach(o => {
+    const seen = new Set();
+    SLOTS.forEach(sl => add(LIST_FOR_SLOT[sl.key], o.slots[sl.key], o.id, seen));
+    o.extra.forEach(x => add('weapons', x.value, o.id, seen));
+  });
+  return used;
+}
+function drawCodex(box) {
+  const db = codexDB, game = state.codexGame;
+  if (!db) { box.innerHTML = `<div class="cx-msg">${icon('scroll')}<p>The ${esc(game)} equipment list could not be opened. Check your connection and try again.</p></div>`; return; }
+  const words = norm(state.search).split(/\s+/).filter(Boolean);
+  const used = codexUsage(game);
+  const iconBase = db.icons && db.icons.enabled ? 'data/' + db.icons.folder : '';
+  const card = (s, it, showType) => {
+    const n = used.get(s.key + '|' + it.lc) || 0;
+    const src = iconBase && it.icon ? iconBase + encodeURIComponent(it.icon) : '';
+    return `<div class="cx-item${n ? ' has-used' : ''}"><span class="gi cx-gi">${icon(s.icon)}${src && !missingIcons.has(src) ? `<img src="${esc(src)}" alt="" loading="lazy" decoding="async">` : ''}</span>
+      <span class="cx-txt"><span class="cx-name">${esc(it.name)}</span>${showType && it.type ? `<span class="cx-type">${esc(it.type)}</span>` : ''}</span>
+      ${n ? `<span class="cx-used" title="Used in ${n} of your ${esc(game)} outfits">In ${n} ${n === 1 ? 'outfit' : 'outfits'}</span>` : ''}</div>`;
+  };
+  let html = '', shown = 0, total = 0;
+  CODEX_SLOTS.forEach(s => {
+    const all = db.slots[s.key] || [];
+    if (!all.length || (state.codexSlot !== 'all' && state.codexSlot !== s.key)) return;
+    total += all.length;
+    const hay = it => (it.lc + ' ' + norm(it.type) + ' ' + norm(s.label));
+    const list = all.filter(it => words.every(w => hay(it).includes(w))).sort((a, b) => a.lc.localeCompare(b.lc));
+    if (!list.length) return;
+    shown += list.length;
+    const count = words.length ? `${list.length} of ${all.length}` : `${all.length} ${all.length === 1 ? 'item' : 'items'}`;
+    let body;
+    if (s.key === 'weapons') {   // weapons are split into a sub-section for each type
+      const groups = new Map();
+      list.forEach(it => { const t = it.type || 'Other'; if (!groups.has(t)) groups.set(t, []); groups.get(t).push(it); });
+      body = [...groups.keys()].sort((a, b) => a === 'Other' ? 1 : b === 'Other' ? -1 : a.localeCompare(b)).map(t =>
+        `<div class="cx-sub"><h3>${esc(t)} <small>${groups.get(t).length}</small></h3><div class="cx-grid">${groups.get(t).map(it => card(s, it, false)).join('')}</div></div>`).join('');
+    } else body = `<div class="cx-grid">${list.map(it => card(s, it, true)).join('')}</div>`;
+    html += `<section class="cx-sec" aria-label="${esc(s.label)}"><h2>${icon(s.icon)}${esc(s.label)} <small>${count}</small></h2>${body}</section>`;
+  });
+  const all = CODEX_SLOTS.reduce((n, s) => n + (db.slots[s.key] || []).length, 0);
+  const credit = db.source ? ` ${esc(db.source.trim().replace(/([^.])$/, '$1.'))}` : '';
+  const head = `<p class="cx-head"><b>${esc(game)}</b>: ${words.length ? `${shown.toLocaleString()} of ${all.toLocaleString()} items match` : `${all.toLocaleString()} items`}.${credit}</p>`;
+  box.innerHTML = shown ? head + html
+    : head + `<div class="cx-msg"><p>No ${esc(game)} items match “${esc(state.search.trim())}”${state.codexSlot !== 'all' ? ' in this slot' : ''}.</p>
+        <button type="button" class="btn ink" data-cxclear>${icon('x')}Clear search${state.codexSlot !== 'all' ? ' and slot' : ''}</button></div>`;
+  if (codexToTop) { $('codex').scrollTop = 0; codexToTop = false; }
+}
+$('cdx').addEventListener('error', e => {   // an icon that's missing falls back to the slot's symbol
+  if (e.target.tagName === 'IMG') { missingIcons.add(e.target.getAttribute('src')); e.target.remove(); }
+}, true);
+$('cdx').addEventListener('click', e => {
+  if (!e.target.closest('[data-cxclear]')) return;
+  clearTimeout(searchTimer); state.search = ''; $('search').value = ''; state.codexSlot = 'all'; codexToTop = true; refresh();
+});
 
 /* =====================================================================
    Journal: a two-page spread at the back of every book, reached only with
