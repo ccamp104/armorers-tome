@@ -970,6 +970,7 @@
 
   /* ---------------- phones: one slim header row, filters fold away ---------------- */
   .phone-only, .foot-short, .fan-line { display: none; }
+  .help-version { margin: 14px 0 0; text-align: center; letter-spacing: .02em; }
   .btn .badge { position: absolute; top: 5px; right: 5px; width: 8px; height: 8px; border-radius: 50%; background: var(--gilt); box-shadow: 0 0 0 2px var(--bar-2); }
   #filterBtn { position: relative; }
   .more { position: relative; }
