@@ -2693,7 +2693,10 @@ function drawCodex(box) {
     html += `<section class="cx-sec" aria-label="${esc(s.label)}"><h2>${icon(s.icon)}${esc(s.label)} <small>${count}</small></h2>${body}</section>`;
   });
   const all = CODEX_SLOTS.reduce((n, s) => n + (db.slots[s.key] || []).length, 0);
-  const credit = db.source ? ` ${esc(db.source.trim().replace(/([^.])$/, '$1.'))}` : '';
+  // when the list was last updated, from its "compiled" date (e.g. 2026-10-01 -> 1 October 2026)
+  const ymd = /^(\d{4})-(\d{2})-(\d{2})/.exec(db.compiled || '');
+  const updated = ymd ? new Date(+ymd[1], +ymd[2] - 1, +ymd[3]).toLocaleDateString(undefined, { day: 'numeric', month: 'long', year: 'numeric' }) : '';
+  const credit = updated ? ` Last updated ${esc(updated)}.` : '';
   const head = `<p class="cx-head"><b>${esc(game)}</b>: ${words.length ? `${shown.toLocaleString()} of ${all.toLocaleString()} items match` : `${all.toLocaleString()} items`}.${credit}</p>`;
   box.innerHTML = shown ? head + html
     : head + `<div class="cx-msg"><p>No ${esc(game)} items match “${esc(state.search.trim())}”${state.codexSlot !== 'all' ? ' in this slot' : ''}.</p>
