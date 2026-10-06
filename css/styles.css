@@ -118,6 +118,8 @@
     cursor: pointer;
   }
   .seg button[aria-pressed="true"] { background: #5a1c22; color: var(--gilt); box-shadow: inset 0 0 0 1px rgba(227, 199, 127, .35); }
+  /* medium screens: the mode buttons use short names (Tome, Gallery, Codex) so the header stays on fewer rows */
+  @media (max-width: 1180px) { .seg .lx { display: none; } }
   @media (max-width: 760px) {
     .controls .lbl { display: none; }
     .btn, .seg button { padding: 0 11px; }
@@ -188,6 +190,42 @@
   /* ---------------- main areas ---------------- */
   main { flex: 1; min-height: 0; position: relative; }
   .tome { position: absolute; inset: 0; overflow: hidden; }
+  /* ---------------- Item Codex ---------------- */
+  .codex { position: absolute; inset: 0; overflow-y: auto; overscroll-behavior: contain; -webkit-overflow-scrolling: touch; padding: 14px clamp(12px, 3vw, 28px) 40px; }
+  .cdx { max-width: 1400px; margin: 0 auto; }
+  .cx-head { margin: 0 0 4px; font-style: italic; color: var(--parch-dim); font-size: 15px; }
+  .cx-head b { font-style: normal; color: var(--parch); }
+  .cx-sec { margin-top: 18px; content-visibility: auto; contain-intrinsic-size: auto 900px; }
+  .cx-sec h2 { display: flex; align-items: baseline; gap: 8px; margin: 0 0 10px; padding-bottom: 6px; border-bottom: 1px solid var(--gilt-line, rgba(227, 199, 127, .25)); font: 600 19px/1.2 var(--display); letter-spacing: .03em; color: var(--gilt); }
+  .cx-sec h2 .ic { width: 18px; height: 18px; align-self: center; }
+  .cx-sec h2 small, .cx-sub h3 small { font: italic 500 15px var(--serif); color: var(--parch-dim); letter-spacing: 0; }
+  .cx-sub { margin: 12px 0 0; }
+  .cx-sub h3 { margin: 0 0 8px; font: 600 16px/1.2 var(--serif); color: var(--parch); }
+  .cx-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 8px; }
+  .cx-item {
+    position: relative; display: flex; align-items: center; gap: 10px; min-width: 0;
+    padding: 7px 9px; border-radius: 6px;
+    background: linear-gradient(to right, #e6d6b4, #f1e6cc 30%, #ece0c2);
+    border: 1px solid rgba(201, 168, 90, .55); color: var(--ink);
+    font-size: 16px;
+  }
+  .cx-item.has-used { padding-top: 15px; }   /* room for the badge, so it never covers the name */
+  .cx-gi { flex: none; width: 48px; height: 48px; border-radius: 6px; }
+  .cx-gi > .ic { width: 22px; height: 22px; opacity: .8; }
+  .cx-gi img { border-radius: 5px; }
+  .cx-txt { display: grid; min-width: 0; }
+  .cx-name { font-weight: 700; line-height: 1.15; overflow-wrap: anywhere; }
+  .cx-type { font-style: italic; font-size: 14px; color: var(--ink-soft); }
+  .cx-used { position: absolute; top: -7px; right: -4px; padding: 1px 7px; border-radius: 999px; background: #6b2229; color: #f6e3c0; border: 1px solid var(--gilt); font: 600 12px/1.35 var(--serif); white-space: nowrap; box-shadow: 0 1px 3px rgba(0, 0, 0, .35); }
+  .cx-msg { display: grid; justify-items: center; gap: 12px; margin: 40px auto; max-width: 420px; text-align: center; color: var(--parch-dim); font-style: italic; }
+  .cx-msg p { margin: 0; }
+  .cx-msg > .ic { width: 34px; height: 34px; color: var(--gilt); }
+  .chip-n { margin-left: 5px; font-weight: 500; opacity: .7; }
+  @media (max-width: 640px) {
+    .cx-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 6px; }
+    .cx-item { gap: 8px; padding: 6px 7px; font-size: 15px; }
+    .cx-gi { width: 42px; height: 42px; }
+  }
   .gallery { position: absolute; inset: 0; overflow-y: auto; overscroll-behavior: contain; -webkit-overflow-scrolling: touch; padding: 16px clamp(12px, 3vw, 28px) 40px; }
 
   /* ---------------- carousel + book ---------------- */
