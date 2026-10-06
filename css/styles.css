@@ -234,6 +234,12 @@
   .cx-msg p { margin: 0; }
   .cx-msg > .ic { width: 34px; height: 34px; color: var(--gilt); }
   .chip-n { margin-left: 5px; font-weight: 500; opacity: .7; }
+  .tags-group { display: contents; }
+  .tags-group + .tags-group > .tags-label { margin-left: 10px; }
+  @media (max-width: 640px), (max-height: 520px) {
+    .tags-group { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; flex-basis: 100%; }
+    .tags-group + .tags-group > .tags-label { margin-left: 0; }
+  }
   /* phones: two columns, each item with its icon on top and the name underneath */
   @media (max-width: 640px) {
     .cx-grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 8px; }
