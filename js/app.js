@@ -8,6 +8,9 @@ ICONS.list = '<path d="M8 6h13" /> <path d="M8 12h13" /> <path d="M8 18h13" /> <
 const icon = n => `<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICONS[n] || ''}</svg>`;
 document.querySelectorAll('[data-icon]').forEach(el => el.insertAdjacentHTML('afterbegin', icon(el.dataset.icon)));
 
+// the site's version, set in index.html (the VERSION lines at the top); shown in the footer and the ? popup
+const APP_VERSION = ((document.querySelector('meta[name="app-version"]') || {}).content || '').trim();
+{ const fd = document.querySelector('.foot-date'); if (fd && APP_VERSION) fd.textContent = `v${APP_VERSION} · ${fd.textContent.trim()}`; }
 const SLOTS = [
   { key: 'headgear',      icon: 'crown',       label: 'Head',       group: 'armour',  hint: 'Helm, cap, hood…' },
   { key: 'chest',         icon: 'shirt',       label: 'Chest',      group: 'armour',  hint: 'Chestplate, tunic…' },
@@ -2490,6 +2493,7 @@ function showWelcome(fromHelp) {
           <p class="help-intro">A logbook for your game outfits, with one book per game. Open a section to read more.</p>
           ${guide}
           ${settings}
+          ${APP_VERSION ? `<p class="formnote help-version">Armorer's Tome, version ${esc(APP_VERSION)}</p>` : ''}
           <p class="formnote fan-line">This is a fan-made site, not affiliated with any game developer. All intellectual property and assets related to the games belong to their respective owners.</p>
         </div>
         <div class="sheet-foot"><button type="button" class="btn solid" data-done>${help ? 'Done' : 'Start browsing'}</button></div>
