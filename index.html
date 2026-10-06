@@ -6,6 +6,103 @@
 <title>Armorer's Tome</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Cinzel:wght@500;600;700&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&display=swap" rel="stylesheet">
+<!-- VERSION: when you add a feature, change the number on all three lines below (1.0 -> 1.1, and so on).
+     The ?v= part makes browsers fetch the new files straight away instead of using old saved copies. -->
+<meta name="app-version" content="1.0">
+<link rel="stylesheet" href="css/styles.css?v=1.0">
+<script defer src="js/app.js?v=1.0"></script>
+</head>
+<body>
+<header class="bar">
+  <div class="brand">
+    <div class="brand-mark" data-icon="shield"></div>
+    <div>
+      <div class="wordmark">Armorer's Tome</div>
+      <div class="brand-sub">An outfit logbook, one book per game</div>
+    </div>
+  </div>
+  <div class="controls">
+    <div class="seg" role="group" aria-label="Layout">
+      <button type="button" data-view="tome" title="Tome Mode" aria-label="Tome Mode" aria-pressed="true"><span data-icon="book-open"></span><span class="lbl">Tome<span class="lx"> Mode</span></span></button>
+      <button type="button" data-view="grid" title="Grid Gallery" aria-label="Grid Gallery" aria-pressed="false"><span data-icon="layout-grid"></span><span class="lbl"><span class="lx">Grid </span>Gallery</span></button>
+      <button type="button" data-view="codex" title="Item Codex" aria-label="Item Codex" aria-pressed="false"><span data-icon="scroll"></span><span class="lbl"><span class="lx">Item </span>Codex</span></button>
+    </div>
+    <button type="button" class="btn" id="helpBtn" title="How the tome works" aria-label="How the tome works"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg></button>
+    <button type="button" class="btn" id="exportAll" title="Export every outfit as a JSON file"><span data-icon="download"></span><span class="lbl">Export all</span></button>
+    <button type="button" class="btn" id="importAll" title="Import outfits from a JSON file"><span data-icon="upload"></span><span class="lbl">Import</span></button>
+    <input type="file" id="fileInput" accept=".json,application/json" hidden>
+    <!-- phones: search and filters fold away behind this button, and help, export and import share a menu -->
+    <button type="button" class="btn phone-only" id="filterBtn" aria-label="Search and filters" aria-expanded="false" aria-controls="filters"><span data-icon="search"></span><span class="badge" hidden></span></button>
+    <button type="button" class="btn primary" id="forgeBtn" aria-label="Forge outfit"><span data-icon="hammer"></span><span class="lbl">Forge Outfit</span></button>
+    <div class="more phone-only">
+      <button type="button" class="btn" id="moreBtn" aria-label="More" aria-haspopup="menu" aria-expanded="false" aria-controls="moreMenu"><span data-icon="more-vertical"></span></button>
+      <div class="menu" id="moreMenu" role="menu" hidden>
+        <button type="button" role="menuitem" data-proxy="helpBtn"><span data-icon="circle-help"></span>How it works</button>
+        <button type="button" role="menuitem" data-proxy="exportAll"><span data-icon="download"></span>Export all</button>
+        <button type="button" role="menuitem" data-proxy="importAll"><span data-icon="upload"></span>Import</button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="filters" id="filters" aria-label="Filters">
+  <label class="search">
+    <span data-icon="search"></span>
+    <input id="search" type="text" enterkeyhint="search" placeholder="Search outfits, gear, notes or characters" autocomplete="off">
+    <button type="button" class="icon-btn" id="clearSearch" aria-label="Clear search" hidden><span data-icon="x"></span></button>
+  </label>
+  <label class="gamepick">Game <select id="gameFilter"></select></label>
+  <div class="tags" id="tags"></div>
+</section>
+
+<main>
+  <section class="tome" id="tome">
+    <div class="stage" id="stage" role="region" aria-roledescription="carousel" aria-label="Books" tabindex="0"></div>
+    <div class="tnav" id="tnav">
+      <div class="browse">
+        <div class="hint">Swipe for another book, tap a cover to open it</div>
+        <div class="dots" id="dots"></div>
+      </div>
+      <div class="reading">
+        <div class="where" id="where"></div>
+        <button type="button" class="btn solid" id="closeBook"><span data-icon="book-open"></span>Back to cover</button>
+      </div>
+    </div>
+  </section>
+  <section class="codex" id="codex" hidden aria-label="Item Codex">
+    <div class="cdx" id="cdx"></div>
+  </section>
+  <section class="gallery" id="gallery" hidden>
+    <div class="gal" id="gal"></div>
+  </section>
+  <div class="empty" id="empty" hidden>
+    <div class="empty-card">
+      <span data-icon="scroll"></span>
+      <h2 id="emptyTitle">Opening the tome…</h2>
+      <p id="emptyText"></p>
+      <div class="row" id="emptyActions"></div>
+    </div>
+  </div>
+</main>
+
+<footer class="site-foot">
+  <!-- the version number is added in front of this date from the VERSION lines at the top -->
+  <span class="foot-date">October 2026</span>
+  <span class="foot-note"><span class="foot-long">This is a fan-made site, not affiliated with any game developer. All intellectual property and assets related to the games belong to their respective owners.</span><span class="foot-short">Fan-made site, not affiliated with any game developer.</span></span>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Armorer's Tome</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Cinzel:wght@500;600;700&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&display=swap" rel="stylesheet">
 <!-- VERSION: when you add a feature, change the number on all three lines below (1.0 -> 1.1, and so on).
      The ?v= part makes browsers fetch the new files straight away instead of using old saved copies. -->
