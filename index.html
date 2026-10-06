@@ -7,7 +7,11 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Cinzel:wght@500;600;700&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/styles.css">
+<!-- VERSION: when you add a feature, change the number on all three lines below (1.0 -> 1.1, and so on).
+     The ?v= part makes browsers fetch the new files straight away instead of using old saved copies. -->
+<meta name="app-version" content="1.0">
+<link rel="stylesheet" href="css/styles.css?v=1.0">
+<script defer src="js/app.js?v=1.0"></script>
 </head>
 <body>
 <header class="bar">
@@ -83,12 +87,11 @@
 </main>
 
 <footer class="site-foot">
-  <!-- Replace with the site version and date when versioning is added. -->
+  <!-- the version number is added in front of this date from the VERSION lines at the top -->
   <span class="foot-date">October 2026</span>
   <span class="foot-note"><span class="foot-long">This is a fan-made site, not affiliated with any game developer. All intellectual property and assets related to the games belong to their respective owners.</span><span class="foot-short">Fan-made site, not affiliated with any game developer.</span></span>
 </footer>
 
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
-<script src="js/app.js"></script>
 </body>
 </html>
