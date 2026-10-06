@@ -201,18 +201,19 @@
   .cx-sec h2 small, .cx-sub h3 small { font: italic 500 15px var(--serif); color: var(--parch-dim); letter-spacing: 0; }
   .cx-sub { margin: 12px 0 0; }
   .cx-sub h3 { margin: 0 0 8px; font: 600 16px/1.2 var(--serif); color: var(--parch); }
-  .cx-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 8px; }
+  .cx-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 10px; }
   .cx-item {
-    position: relative; display: flex; align-items: center; gap: 10px; min-width: 0;
-    padding: 7px 9px; border-radius: 6px;
+    position: relative; display: flex; align-items: center; gap: 12px; min-width: 0;
+    padding: 8px 10px; border-radius: 6px;
     background: linear-gradient(to right, #e6d6b4, #f1e6cc 30%, #ece0c2);
     border: 1px solid rgba(201, 168, 90, .55); color: var(--ink);
     font-size: 16px;
   }
   .cx-item.has-used { padding-top: 15px; }   /* room for the badge, so it never covers the name */
-  .cx-gi { flex: none; width: 48px; height: 48px; border-radius: 6px; }
-  .cx-gi > .ic { width: 22px; height: 22px; opacity: .8; }
-  .cx-gi img { border-radius: 5px; }
+  /* the icons are shown at 64px, the size of the icon files, so they stay sharp */
+  .cx-item .cx-gi { flex: none; width: 64px; height: 64px; border-radius: 7px; }
+  .cx-item .cx-gi > .ic { width: 28px; height: 28px; opacity: .8; }
+  .cx-item .cx-gi img { border-radius: 6px; }
   .cx-txt { display: grid; min-width: 0; }
   .cx-name { font-weight: 700; line-height: 1.15; overflow-wrap: anywhere; }
   .cx-type { font-style: italic; font-size: 14px; color: var(--ink-soft); }
@@ -221,10 +222,11 @@
   .cx-msg p { margin: 0; }
   .cx-msg > .ic { width: 34px; height: 34px; color: var(--gilt); }
   .chip-n { margin-left: 5px; font-weight: 500; opacity: .7; }
+  /* phones: two columns, each item with its icon on top and the name underneath */
   @media (max-width: 640px) {
-    .cx-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 6px; }
-    .cx-item { gap: 8px; padding: 6px 7px; font-size: 15px; }
-    .cx-gi { width: 42px; height: 42px; }
+    .cx-grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 8px; }
+    .cx-item { flex-direction: column; justify-content: flex-start; gap: 6px; padding: 10px 8px 9px; font-size: 15px; text-align: center; }
+    .cx-item .cx-gi { width: 64px; height: 64px; }
   }
   .gallery { position: absolute; inset: 0; overflow-y: auto; overscroll-behavior: contain; -webkit-overflow-scrolling: touch; padding: 16px clamp(12px, 3vw, 28px) 40px; }
 
