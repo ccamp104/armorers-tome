@@ -20,8 +20,9 @@
   </div>
   <div class="controls">
     <div class="seg" role="group" aria-label="Layout">
-      <button type="button" data-view="tome" aria-pressed="true"><span data-icon="book-open"></span><span class="lbl">Tome Mode</span></button>
-      <button type="button" data-view="grid" aria-pressed="false"><span data-icon="layout-grid"></span><span class="lbl">Grid Gallery</span></button>
+      <button type="button" data-view="tome" title="Tome Mode" aria-label="Tome Mode" aria-pressed="true"><span data-icon="book-open"></span><span class="lbl">Tome<span class="lx"> Mode</span></span></button>
+      <button type="button" data-view="grid" title="Grid Gallery" aria-label="Grid Gallery" aria-pressed="false"><span data-icon="layout-grid"></span><span class="lbl"><span class="lx">Grid </span>Gallery</span></button>
+      <button type="button" data-view="codex" title="Item Codex" aria-label="Item Codex" aria-pressed="false"><span data-icon="scroll"></span><span class="lbl"><span class="lx">Item </span>Codex</span></button>
     </div>
     <button type="button" class="btn" id="helpBtn" title="How the tome works" aria-label="How the tome works"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg></button>
     <button type="button" class="btn" id="exportAll" title="Export every outfit as a JSON file"><span data-icon="download"></span><span class="lbl">Export all</span></button>
@@ -64,6 +65,9 @@
         <button type="button" class="btn solid" id="closeBook"><span data-icon="book-open"></span>Back to cover</button>
       </div>
     </div>
+  </section>
+  <section class="codex" id="codex" hidden aria-label="Item Codex">
+    <div class="cdx" id="cdx"></div>
   </section>
   <section class="gallery" id="gallery" hidden>
     <div class="gal" id="gal"></div>
