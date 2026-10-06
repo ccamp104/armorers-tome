@@ -593,7 +593,6 @@ const addBody = theme => `
 // the journal's two pages: empty shells, filled in from the saved journal by hydrateJournal()
 const journalTextBody = theme => `
   <div class="fox" style="${foxStyle(hash(theme.name) + 21)}"></div>
-  ${pencilMarks(hash(theme.name) + 3)}
   <div class="jr" data-jr-text data-game="${esc(theme.name)}" data-font="book">
     <div class="jr-tools" role="toolbar" aria-label="Journal formatting">
       ${Object.entries(JR_FONTS).map(([k, l]) => `<button type="button" class="jr-btn jr-f-${k}" data-jr-font="${k}" aria-pressed="false" title="${l} font">${l}</button>`).join('')}
@@ -608,7 +607,6 @@ const journalTextBody = theme => `
   </div>`;
 const journalPicsBody = theme => `
   <div class="fox" style="${foxStyle(hash(theme.name) + 33)}"></div>
-  ${pencilMarks(hash(theme.name) + 11)}
   <div class="jr-pics" data-jr-pics data-game="${esc(theme.name)}"></div>`;
 const blankBody = seed => `<div class="fox" style="${foxStyle(seed)}"></div><svg class="blank" viewBox="0 0 200 12" aria-hidden="true"><path d="${star(100, 6, 5.5)}" fill="#3b2a1e"/></svg>`;
 
@@ -2650,42 +2648,6 @@ function sanitizeRich(html) {
   });
   walk(t.content);
   return t.innerHTML;
-}
-
-// Faint, abstract pencil marks for a well-used page: smudges, hatching, loose loops and stray strokes.
-// Each book gets its own arrangement from its name, so no two journals look alike.
-const pencilCache = new Map();
-function pencilMarks(seed) {
-  if (pencilCache.has(seed)) return pencilCache.get(seed);
-  const r = rng(seed), f = n => n.toFixed(1);
-  const edge = () => r() < 0.5 ? 2 + r() * 16 : 82 + r() * 16;      // near the left or right margin
-  let smudge = '', lines = '';
-  for (let i = 0; i < 4; i++) {
-    smudge += `<ellipse cx="${f(r() * 100)}" cy="${f(8 + r() * 124)}" rx="${f(5 + r() * 11)}" ry="${f(1.6 + r() * 3.5)}" transform="rotate(${f(r() * 60 - 30)} 50 70)" fill="url(#pm-s${seed})" opacity="${(0.25 + r() * 0.35).toFixed(2)}"/>`;
-  }
-  for (let i = 0; i < 2; i++) {                                         // hatching patches
-    const x = edge(), y = 6 + r() * 126, a = r() * 50 - 25, n = 4 + Math.floor(r() * 5), len = 3 + r() * 4;
-    let d = '';
-    for (let k = 0; k < n; k++) d += `M${f(k * 0.9)} ${f(r() * 0.8)}l${f(len * 0.35)} ${f(-len)}`;
-    lines += `<path d="${d}" transform="translate(${f(x)} ${f(y)}) rotate(${f(a)})" stroke-width=".22"/>`;
-  }
-  for (let i = 0; i < 2; i++) {                                         // loose looping scribbles
-    const x = edge(), y = 8 + r() * 120, s = 0.9 + r() * 1.2;
-    let d = `M${f(x)} ${f(y)}`;
-    for (let k = 0; k < 4; k++) d += `c${f(s)} ${f(-s)} ${f(s * 2)} ${f(s * 0.8)} ${f(s * 0.6)} ${f(s * 1.4)}s${f(-s * 1.6)} ${f(-s)} ${f(s * 0.3)} ${f(-s * 0.4)}`;
-    lines += `<path d="${d}" stroke-width=".16" opacity=".5"/>`;
-  }
-  for (let i = 0; i < 4; i++) {                                         // stray strokes
-    const x = r() * 90 + 3, y = r() * 130 + 4, dx = (r() - 0.5) * 26, dy = (r() - 0.5) * 6;
-    lines += `<path d="M${f(x)} ${f(y)}q${f(dx / 2)} ${f(dy - 1.5)} ${f(dx)} ${f(dy)}" stroke-width="${(0.12 + r() * 0.14).toFixed(2)}"/>`;
-  }
-  const cx = edge(), cy = 10 + r() * 118;                               // one faint, unfinished circle
-  lines += `<path d="M${f(cx + 4)} ${f(cy)}a4 3.6 0 1 1 -1.2 -2.6" stroke-width=".18" opacity=".7"/>`;
-  const svg = `<svg class="fox pencil" viewBox="0 0 100 140" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-    <defs><radialGradient id="pm-s${seed}"><stop offset="0" stop-color="#4d4842" stop-opacity=".16"/><stop offset="1" stop-color="#4d4842" stop-opacity="0"/></radialGradient></defs>
-    ${smudge}<g fill="none" stroke="#4d4842" stroke-linecap="round" opacity=".42">${lines}</g></svg>`;
-  pencilCache.set(seed, svg);
-  return svg;
 }
 
 // Fill in journal pages that were just built: the text always, the pictures only when asked
