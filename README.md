@@ -64,3 +64,7 @@ css/styles.css   all styling
 js/app.js        books, animation, storage, forms, import and export
 data/            optional equipment lists, one per game
 ```
+
+## Version number
+
+The version (starting at **1.0**) is set at the top of `index.html`, on three lines marked `VERSION`: the `app-version` line and the `?v=` on the stylesheet and script links. When you add a feature, change the number on all three (1.0 → 1.1, and so on; 2.0 for a big overhaul). The app shows it in the footer and at the bottom of the **?** popup. The `?v=` part makes browsers fetch the new files straight away instead of using old saved copies. Small fixes don't need a new number; GitHub Pages lets browsers reuse files for about 10 minutes, so those still reach everyone shortly after upload.
