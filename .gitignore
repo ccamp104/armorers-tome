@@ -1,0 +1,4 @@
+   # Created by the Android build; never commit these
+   node_modules/
+   www/
+   android/
