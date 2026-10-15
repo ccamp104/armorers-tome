@@ -82,7 +82,7 @@ jobs:
           PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
           VERSION_NAME: ${{ steps.www.outputs.version }}
         run: |
-          BT="$ANDROID_HOME/build-tools/$(ls "$ANDROID_HOME/build-tools" | sort -V | tail -n 1)"
+          BT="$ANDROID_HOME/build-tools/36.0.0"   # the version this was tested with (installed above)
           echo "Using build tools: $BT"
           echo "$KEY" | base64 -d > "$RUNNER_TEMP/release.keystore"
           UNSIGNED=$(ls android/app/build/outputs/apk/release/*-unsigned.apk | head -n 1)
@@ -92,7 +92,8 @@ jobs:
           "$BT/apksigner" sign --ks "$RUNNER_TEMP/release.keystore" --ks-key-alias armorerstome \
             --ks-pass env:PASSWORD --key-pass env:PASSWORD --out "dist/$NAME" "$RUNNER_TEMP/aligned.apk"
           rm -f "$RUNNER_TEMP/release.keystore"
-          "$BT/apksigner" verify --print-certs "dist/$NAME" | grep -E "Signer #1 certificate (DN|SHA-256)"
+          "$BT/apksigner" verify "dist/$NAME"   # stops the build if the signature isn't valid
+          "$BT/apksigner" verify --print-certs "dist/$NAME" | grep -iE "certificate (DN|SHA-256)" || true
           echo "apk=dist/$NAME" >> "$GITHUB_OUTPUT"
           echo "name=$NAME" >> "$GITHUB_OUTPUT"
           ls -lh dist
