@@ -1,0 +1,22 @@
+{
+  "appId": "com.armorerstome.app",
+  "appName": "Armorer's Tome",
+  "webDir": "www",
+  "backgroundColor": "#1e140f",
+  "android": {
+    "backgroundColor": "#1e140f"
+  },
+  "plugins": {
+    "SystemBars": {
+      "insetsHandling": "native",
+      "style": "DARK",
+      "initialViewportFitValueHint": "cover"
+    },
+    "SplashScreen": {
+      "launchShowDuration": 500,
+      "launchAutoHide": true,
+      "backgroundColor": "#1e140f",
+      "showSpinner": false
+    }
+  }
+}

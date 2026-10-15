@@ -1,0 +1,24 @@
+{
+  "name": "armorers-tome",
+  "private": true,
+  "description": "Build tools for the Armorer's Tome Android app. The website does not use any of this.",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "build:www": "node app/build-www.mjs",
+    "patch:android": "node app/patch-android.mjs"
+  },
+  "dependencies": {
+    "@capacitor/android": "8.5.2",
+    "@capacitor/app": "8.1.1",
+    "@capacitor/core": "8.5.2",
+    "@capacitor/filesystem": "8.1.3",
+    "@capacitor/share": "8.0.2",
+    "@capacitor/splash-screen": "8.0.2"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "8.5.2",
+    "sharp": "0.35.4"
+  }
+}
