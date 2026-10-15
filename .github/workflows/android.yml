@@ -1,0 +1,128 @@
+# Builds the Armorer's Tome Android app (.apk) from the website files in this repo.
+# Start it from: Actions → "Android: build app" → Run workflow.
+# Needs the repository secrets ANDROID_KEYSTORE_BASE64 and ANDROID_KEYSTORE_PASSWORD (see app/README.md).
+#
+# Version name comes from <meta name="app-version"> in index.html; version code is this workflow's
+# run number, so every build counts up and installs over the previous one.
+
+name: "Android: build app"
+
+on:
+  workflow_dispatch:
+    inputs:
+      publish_release:
+        description: "Publish a GitHub Release with the .apk (anyone with the link can download it)"
+        type: boolean
+        default: true
+
+permissions:
+  contents: write   # needed to publish the Release
+
+concurrency:
+  group: android-build
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    env:
+      VERSION_CODE: ${{ github.run_number }}
+    steps:
+      - name: Check the signing secrets are set
+        env:
+          KEY: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+          PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+        run: |
+          if [ -z "$KEY" ] || [ -z "$PASSWORD" ]; then
+            echo "::error::Missing ANDROID_KEYSTORE_BASE64 or ANDROID_KEYSTORE_PASSWORD. Run the one-off 'Android: create signing key' workflow first (see app/README.md)."
+            exit 1
+          fi
+
+      - name: Get the repo files
+        uses: actions/checkout@v7.0.1
+
+      - name: Set up Node
+        uses: actions/setup-node@v7.0.0
+        with:
+          node-version: '22'
+          cache: npm
+
+      - name: Set up Java
+        uses: actions/setup-java@v6.0.1
+        with:
+          distribution: temurin
+          java-version: '21'
+
+      - name: Install the build tools
+        run: |
+          npm ci --no-audit --no-fund
+          yes | "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" --licenses > /dev/null || true
+          "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" "platforms;android-36" "build-tools;35.0.0" "build-tools;36.0.0" > /dev/null
+
+      - name: Make the app's copy of the website
+        id: www
+        run: node app/build-www.mjs
+
+      - name: Create the Android project
+        run: |
+          npx cap add android
+          node app/patch-android.mjs
+        env:
+          VERSION_NAME: ${{ steps.www.outputs.version }}
+
+      - name: Build the app
+        working-directory: android
+        run: ./gradlew assembleRelease --no-daemon --console=plain
+
+      - name: Sign the app
+        id: sign
+        env:
+          KEY: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+          PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+          VERSION_NAME: ${{ steps.www.outputs.version }}
+        run: |
+          BT="$ANDROID_HOME/build-tools/$(ls "$ANDROID_HOME/build-tools" | sort -V | tail -n 1)"
+          echo "Using build tools: $BT"
+          echo "$KEY" | base64 -d > "$RUNNER_TEMP/release.keystore"
+          UNSIGNED=$(ls android/app/build/outputs/apk/release/*-unsigned.apk | head -n 1)
+          NAME="armorers-tome-${VERSION_NAME}-build${VERSION_CODE}.apk"
+          mkdir -p dist
+          "$BT/zipalign" -P 16 -f 4 "$UNSIGNED" "$RUNNER_TEMP/aligned.apk"
+          "$BT/apksigner" sign --ks "$RUNNER_TEMP/release.keystore" --ks-key-alias armorerstome \
+            --ks-pass env:PASSWORD --key-pass env:PASSWORD --out "dist/$NAME" "$RUNNER_TEMP/aligned.apk"
+          rm -f "$RUNNER_TEMP/release.keystore"
+          "$BT/apksigner" verify --print-certs "dist/$NAME" | grep -E "Signer #1 certificate (DN|SHA-256)"
+          echo "apk=dist/$NAME" >> "$GITHUB_OUTPUT"
+          echo "name=$NAME" >> "$GITHUB_OUTPUT"
+          ls -lh dist
+
+      - name: Keep the .apk with this run
+        uses: actions/upload-artifact@v7.0.1
+        with:
+          name: ${{ steps.sign.outputs.name }}
+          path: ${{ steps.sign.outputs.apk }}
+          if-no-files-found: error
+          retention-days: 30
+
+      - name: Publish a GitHub Release
+        if: ${{ inputs.publish_release }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+          VERSION_NAME: ${{ steps.www.outputs.version }}
+        run: |
+          TAG="android-v${VERSION_NAME}-build${VERSION_CODE}"
+          gh release create "$TAG" "${{ steps.sign.outputs.apk }}" \
+            --target "$GITHUB_SHA" \
+            --title "Armorer's Tome for Android ${VERSION_NAME} (build ${VERSION_CODE})" \
+            --notes "Android app built from the website files at commit ${GITHUB_SHA:0:7}. To install, open the .apk on your phone and allow installing from this source when asked. Updates install over the previous version and keep your outfits."
+
+      - name: Summary
+        env:
+          VERSION_NAME: ${{ steps.www.outputs.version }}
+        run: |
+          {
+            echo "### Armorer's Tome ${VERSION_NAME} (build ${VERSION_CODE})"
+            echo "- File: \`${{ steps.sign.outputs.name }}\` (in **Artifacts** below)"
+            if [ "${{ inputs.publish_release }}" = "true" ]; then echo "- Also published under **Releases**"; fi
+          } >> "$GITHUB_STEP_SUMMARY"
