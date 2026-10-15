@@ -1,0 +1,74 @@
+# ONE-OFF: creates the signing key for the Android app. Run it once, ever.
+#
+# Before running: add a repository secret named ANDROID_KEYSTORE_PASSWORD
+# (Settings → Secrets and variables → Actions → New repository secret).
+# Use a long random password from a password manager, and keep a copy of it offline.
+#
+# Then: Actions → "Android: create signing key (one-off)" → Run workflow.
+# Download the "android-signing-key" artifact from the run, then follow app/README.md.
+# The workflow refuses to run if the key secret already exists, so it can't replace your key by accident.
+
+name: "Android: create signing key (one-off)"
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  create-key:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Check this hasn't been done already
+        env:
+          EXISTING_KEY: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+          PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+        run: |
+          if [ -n "$EXISTING_KEY" ]; then
+            echo "::error::The ANDROID_KEYSTORE_BASE64 secret already exists. A new key would stop app updates installing, so this workflow will not make one."
+            exit 1
+          fi
+          if [ -z "$PASSWORD" ]; then
+            echo "::error::Add the ANDROID_KEYSTORE_PASSWORD repository secret first (see the notes at the top of this file)."
+            exit 1
+          fi
+          if [ ${#PASSWORD} -lt 16 ]; then
+            echo "::error::ANDROID_KEYSTORE_PASSWORD should be at least 16 characters, because the key file is downloadable by anyone signed in to GitHub until you delete the artifact."
+            exit 1
+          fi
+
+      - name: Set up Java
+        uses: actions/setup-java@v6.0.1
+        with:
+          distribution: temurin
+          java-version: '21'
+
+      - name: Create the key
+        env:
+          PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+        run: |
+          mkdir out
+          keytool -genkeypair -v \
+            -keystore out/armorers-tome-release.keystore -storetype PKCS12 \
+            -alias armorerstome -keyalg RSA -keysize 4096 -validity 36500 \
+            -dname "CN=Armorers Tome, O=Armorers Tome" \
+            -storepass:env PASSWORD -keypass:env PASSWORD
+          base64 -w 0 out/armorers-tome-release.keystore > out/keystore-base64.txt
+          cat > out/READ-ME.txt <<'TXT'
+          armorers-tome-release.keystore  - your Android signing key. Keep this file and its password
+                                            safe and offline (for example on a USB stick and in a password manager).
+          keystore-base64.txt             - the same key as text. Paste its whole contents into a new
+                                            repository secret named ANDROID_KEYSTORE_BASE64.
+          Key alias: armorerstome. The key password is the same as ANDROID_KEYSTORE_PASSWORD.
+          After downloading, delete this artifact from the workflow run page.
+          TXT
+          keytool -list -keystore out/armorers-tome-release.keystore -storepass:env PASSWORD | tail -n 3
+
+      - name: Upload the key (delete this artifact after downloading)
+        uses: actions/upload-artifact@v7.0.1
+        with:
+          name: android-signing-key
+          path: out/
+          retention-days: 1
